@@ -16,6 +16,7 @@ config = {
     "use_proto_plus": True,
 }
 
+print(f"DEBUG client_id='{config['client_id'][:12]}...' secret='{config['client_secret'][:6]}...' login_id='{config['login_customer_id']}' token='{config['developer_token'][:6]}...'")
 client = GoogleAdsClient.load_from_dict(config)
 
 query = """
