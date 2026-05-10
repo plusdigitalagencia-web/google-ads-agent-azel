@@ -25,23 +25,23 @@ def get_client():
 def micros_to_brl(micros):
     return micros / 1_000_000
 
-def days_to_date_clause(days):
-    valid = {7: "LAST_7_DAYS", 14: "LAST_14_DAYS", 30: "LAST_30_DAYS", 90: "LAST_90_DAYS"}
-    if days == 0:
-        return "THIS_MONTH"
-    if days in valid:
-        return valid[days]
+def build_date_filter(days):
     from datetime import date, timedelta
+    literals = {7: "LAST_7_DAYS", 14: "LAST_14_DAYS", 30: "LAST_30_DAYS", 90: "LAST_90_DAYS"}
+    if days == 0:
+        return "segments.date DURING THIS_MONTH"
+    if days in literals:
+        return f"segments.date DURING {literals[days]}"
     end = date.today()
-    start = end - timedelta(days=days)
-    return f"BETWEEN '{start}' AND '{end}'"
+    start = end - timedelta(days=days - 1)
+    return f"segments.date BETWEEN '{start}' AND '{end}'"
 
 def read_metrics(customer_id, days=30):
     client = get_client()
     service = client.get_service("GoogleAdsService")
 
-    date_clause = days_to_date_clause(days)
-    label = "Este mês" if days == 0 else f"Últimos {days} dias"
+    date_filter = build_date_filter(days)
+    label = "Maio 2026 (até hoje)" if days == 0 else f"Últimos {days} dias"
 
     query = f"""
         SELECT
@@ -60,7 +60,7 @@ def read_metrics(customer_id, days=30):
             metrics.search_impression_share,
             metrics.all_conversions
         FROM campaign
-        WHERE segments.date DURING {date_clause}
+        WHERE {date_filter}
         AND campaign.status != 'REMOVED'
         ORDER BY metrics.cost_micros DESC
     """
