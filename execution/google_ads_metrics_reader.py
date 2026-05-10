@@ -25,9 +25,23 @@ def get_client():
 def micros_to_brl(micros):
     return micros / 1_000_000
 
+def days_to_date_clause(days):
+    valid = {7: "LAST_7_DAYS", 14: "LAST_14_DAYS", 30: "LAST_30_DAYS", 90: "LAST_90_DAYS"}
+    if days == 0:
+        return "THIS_MONTH"
+    if days in valid:
+        return valid[days]
+    from datetime import date, timedelta
+    end = date.today()
+    start = end - timedelta(days=days)
+    return f"BETWEEN '{start}' AND '{end}'"
+
 def read_metrics(customer_id, days=30):
     client = get_client()
     service = client.get_service("GoogleAdsService")
+
+    date_clause = days_to_date_clause(days)
+    label = "Este mês" if days == 0 else f"Últimos {days} dias"
 
     query = f"""
         SELECT
@@ -46,7 +60,7 @@ def read_metrics(customer_id, days=30):
             metrics.search_impression_share,
             metrics.all_conversions
         FROM campaign
-        WHERE segments.date DURING LAST_{days}_DAYS
+        WHERE segments.date DURING {date_clause}
         AND campaign.status != 'REMOVED'
         ORDER BY metrics.cost_micros DESC
     """
@@ -70,7 +84,7 @@ def read_metrics(customer_id, days=30):
     total_conversions_value = 0
 
     print(f"\n{'='*80}")
-    print(f"MÉTRICAS DE CAMPANHAS — Conta {customer_id} | Últimos {days} dias")
+    print(f"MÉTRICAS DE CAMPANHAS — Conta {customer_id} | {label}")
     print(f"{'='*80}\n")
 
     channel_map = {
