@@ -9,7 +9,7 @@ import urllib.request
 import urllib.parse
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(override=True)
 
 CLIENT_ID = os.getenv("GOOGLE_ADS_CLIENT_ID")
 CLIENT_SECRET = os.getenv("GOOGLE_ADS_CLIENT_SECRET")

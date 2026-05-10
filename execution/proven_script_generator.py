@@ -57,7 +57,7 @@ except ImportError:
 
 # Load environment variables
 if DEPS_AVAILABLE:
-    load_dotenv()
+    load_dotenv(override=True)
 
 
 ARCHETYPES = {

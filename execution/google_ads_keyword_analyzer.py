@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
-load_dotenv()
+load_dotenv(override=True)
 
 def get_client():
     return GoogleAdsClient.load_from_dict({

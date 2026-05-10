@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
-load_dotenv()
+load_dotenv(override=True)
 
 config = {
     "developer_token": os.getenv("GOOGLE_ADS_DEVELOPER_TOKEN", "").strip(),
