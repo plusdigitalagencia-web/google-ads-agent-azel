@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "google-ads": {
+      "command": "node",
+      "args": [
+        "/Users/azelcastromacedo/Downloads/Work Azel /Trabalhos Antigravity/SKILLs/creative-system-package/execution/mcp_google_ads_server.js"
+      ]
+    }
+  }
+}

@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: google-ads-mcp
+    runtime: docker
+    plan: free
+    envVars:
+      - key: GOOGLE_ADS_DEVELOPER_TOKEN
+        sync: false
+      - key: GOOGLE_ADS_CLIENT_ID
+        sync: false
+      - key: GOOGLE_ADS_CLIENT_SECRET
+        sync: false
+      - key: GOOGLE_ADS_REFRESH_TOKEN
+        sync: false
+      - key: GOOGLE_ADS_LOGIN_CUSTOMER_ID
+        sync: false
+      - key: GOOGLE_ADS_MCC_ASSSUCAR
+        sync: false
+      - key: GOOGLE_ADS_MCC_DUOSFERA
+        sync: false
+      - key: GOOGLE_ADS_MCC_DATAKNOW
+        sync: false

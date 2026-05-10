@@ -1,0 +1,29 @@
+# Credenciais e segredos — NUNCA subir para o GitHub
+.env
+credentials.json
+token.json
+*.json.bak
+
+# Arquivos temporários
+.tmp/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Claude
+.claude/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Logs
+*.log
+logs/
