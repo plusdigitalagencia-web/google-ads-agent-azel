@@ -177,7 +177,7 @@ function createServer() {
 
     if (name === "get_campaign_metrics") {
       output = runScript("google_ads_metrics_reader.py",
-        ["--customer-id", customerId, "--days", String(args.days || 30)], mcc);
+        ["--customer-id", customerId, "--days", String(args.days ?? 30)], mcc);
     } else if (name === "analyze_keywords") {
       output = runScript("google_ads_keyword_analyzer.py",
         ["--customer-id", customerId, "--days", String(args.days || 30)], mcc);
