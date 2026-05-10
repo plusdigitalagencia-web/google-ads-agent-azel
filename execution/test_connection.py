@@ -7,11 +7,11 @@ from google.ads.googleads.errors import GoogleAdsException
 load_dotenv()
 
 config = {
-    "developer_token": os.getenv("GOOGLE_ADS_DEVELOPER_TOKEN"),
-    "client_id": os.getenv("GOOGLE_ADS_CLIENT_ID"),
-    "client_secret": os.getenv("GOOGLE_ADS_CLIENT_SECRET"),
-    "refresh_token": os.getenv("GOOGLE_ADS_REFRESH_TOKEN"),
-    "login_customer_id": os.getenv("GOOGLE_ADS_LOGIN_CUSTOMER_ID"),
+    "developer_token": os.getenv("GOOGLE_ADS_DEVELOPER_TOKEN", "").strip(),
+    "client_id": os.getenv("GOOGLE_ADS_CLIENT_ID", "").strip(),
+    "client_secret": os.getenv("GOOGLE_ADS_CLIENT_SECRET", "").strip(),
+    "refresh_token": os.getenv("GOOGLE_ADS_REFRESH_TOKEN", "").strip(),
+    "login_customer_id": os.getenv("GOOGLE_ADS_LOGIN_CUSTOMER_ID", "").strip(),
     "use_proto_plus": True,
 }
 
