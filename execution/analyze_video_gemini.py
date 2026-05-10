@@ -21,6 +21,7 @@ from pathlib import Path
 from datetime import datetime
 
 from dotenv import load_dotenv
+load_dotenv("/etc/secrets/.env", override=True)
 load_dotenv(override=True)
 
 from google import genai

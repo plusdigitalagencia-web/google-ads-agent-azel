@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
+load_dotenv("/etc/secrets/.env", override=True)
 load_dotenv(override=True)
 
 def get_client():

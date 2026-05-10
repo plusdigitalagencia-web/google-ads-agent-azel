@@ -33,7 +33,8 @@ from pathlib import Path
 
 try:
     from dotenv import load_dotenv
-    load_dotenv(override=True)
+    load_dotenv("/etc/secrets/.env", override=True)
+load_dotenv(override=True)
 except ImportError:
     pass
 

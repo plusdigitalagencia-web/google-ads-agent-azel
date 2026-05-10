@@ -57,7 +57,8 @@ except ImportError:
 
 # Load environment variables
 if DEPS_AVAILABLE:
-    load_dotenv(override=True)
+    load_dotenv("/etc/secrets/.env", override=True)
+load_dotenv(override=True)
 
 
 ARCHETYPES = {
