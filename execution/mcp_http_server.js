@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 /**
  * MCP HTTP Server para Google Ads — versão para deploy na nuvem (Render).
- * Expõe as mesmas ferramentas do servidor local via SSE/HTTP.
+ * Usa StreamableHTTP transport (protocolo atual do claude.ai).
  */
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
-import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
+import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
 import { execFileSync } from "child_process";
 import express from "express";
@@ -114,7 +114,7 @@ function createServer() {
           type: "object",
           properties: {
             account_name: { type: "string" },
-            days: { type: "number", description: "Período em dias (padrão: 30)" },
+            days: { type: "number" },
           },
           required: ["account_name"],
         },
@@ -127,7 +127,7 @@ function createServer() {
           properties: {
             account_name: { type: "string" },
             days: { type: "number" },
-            min_cost: { type: "number", description: "Custo mínimo em R$ para candidato a negativa (padrão: 10)" },
+            min_cost: { type: "number" },
           },
           required: ["account_name"],
         },
@@ -163,8 +163,7 @@ function createServer() {
     const { name, arguments: args } = request.params;
 
     if (name === "list_accounts") {
-      const output = runScript("test_connection.py", []);
-      return { content: [{ type: "text", text: output }] };
+      return { content: [{ type: "text", text: runScript("test_connection.py", []) }] };
     }
 
     const account = resolveAccount(args.account_name || "");
@@ -179,20 +178,16 @@ function createServer() {
     if (name === "get_campaign_metrics") {
       output = runScript("google_ads_metrics_reader.py",
         ["--customer-id", customerId, "--days", String(args.days || 30)], mcc);
-
     } else if (name === "analyze_keywords") {
       output = runScript("google_ads_keyword_analyzer.py",
         ["--customer-id", customerId, "--days", String(args.days || 30)], mcc);
-
     } else if (name === "analyze_search_terms") {
       output = runScript("google_ads_search_terms.py",
         ["--customer-id", customerId, "--days", String(args.days || 30),
          "--min-cost", String(args.min_cost || 10)], mcc);
-
     } else if (name === "audit_ads") {
       output = runScript("google_ads_ad_auditor.py",
         ["--customer-id", customerId, "--type", args.type || "all"], mcc);
-
     } else if (name === "get_keyword_ideas") {
       output = runScript("google_ads_keyword_analyzer.py",
         ["--customer-id", customerId, "--new-ideas", ...(args.keywords || [])], mcc);
@@ -204,32 +199,19 @@ function createServer() {
   return server;
 }
 
-// HTTP / SSE
 const app = express();
 app.use(express.json());
 
-const transports = {};
-
-app.get("/sse", async (req, res) => {
-  const transport = new SSEServerTransport("/messages", res);
-  transports[transport.sessionId] = transport;
-
-  res.on("close", () => {
-    delete transports[transport.sessionId];
+// StreamableHTTP — protocolo atual do claude.ai
+app.all("/mcp", async (req, res) => {
+  const transport = new StreamableHTTPServerTransport({
+    sessionIdGenerator: undefined, // stateless — mais simples e compatível
   });
 
   const server = createServer();
   await server.connect(transport);
-});
-
-app.post("/messages", async (req, res) => {
-  const sessionId = req.query.sessionId;
-  const transport = transports[sessionId];
-  if (transport) {
-    await transport.handlePostMessage(req, res);
-  } else {
-    res.status(400).json({ error: "Sessão não encontrada" });
-  }
+  await transport.handleRequest(req, res, req.body);
+  await server.close();
 });
 
 app.get("/health", (_, res) => res.json({ status: "ok", service: "google-ads-mcp" }));
@@ -237,5 +219,5 @@ app.get("/health", (_, res) => res.json({ status: "ok", service: "google-ads-mcp
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Google Ads MCP Server rodando na porta ${PORT}`);
-  console.log(`SSE endpoint: http://localhost:${PORT}/sse`);
+  console.log(`MCP endpoint: https://google-ads-mcp-i085.onrender.com/mcp`);
 });
