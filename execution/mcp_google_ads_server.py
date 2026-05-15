@@ -29,9 +29,6 @@ ACCOUNTS = {
     "quick power": ("4520811474", "2694906582"),
     "shineray": ("3604927656", "2694906582"),
     "chez france": ("8882189559", "2564865113"),
-    "speedmais": ("6081418993", "2694906582"),
-    "speed mais": ("6081418993", "2694906582"),
-    "speedmais grafica": ("6081418993", "2694906582"),
 }
 
 def run_script(script: str, args: list[str]) -> str:
