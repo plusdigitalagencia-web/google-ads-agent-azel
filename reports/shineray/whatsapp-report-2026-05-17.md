@@ -145,11 +145,11 @@ O adset `01/Advantage+ Maranhão Estado + Concorrentes` (R$7.388 nos últimos 7 
 
 | Anomalia | Detalhes | Avaliação |
 |---|---|---|
-| Fadiga criativa no criativo dominante | `06/Vd/tofu/ - primeira moto` com flag `has_ad_creative_fatigue` e CTR bad trend -11,88% | 🔴 CRÍTICO — 51,5% do budget |
+| Fadiga criativa no criativo dominante | `06/Vd/tofu/ - primeira moto` com flag `has_ad_creative_fatigue` e CTR bad trend -14,32% | 🔴 CRÍTICO — 51,5% do budget |
 | Campanha [08] CBO com sub-entrega | Budget R$200/dia não sendo entregue; CPM +27,6% | ⚠️ ATENÇÃO — algoritmo travado sem criativo saudável |
 | CTR trend RUIM no adset principal | Adset `01/Advantage+ Maranhão` com CTR -14,32% de variação | 🔴 CRÍTICO |
 | Campanha [01.1] criada e pausada em 6 dias | Novo clone de Andromeda criado em 11/mai, pausado — CPM médio R$8,37 | 🟡 NORMAL — teste encerrado |
-| Nenhum erro de entrega detectado | `ads_get_errors` retornou sem erros bloqueantes | ✅ OK |
+| **🔴 ERRO: WhatsApp Number ausente** | Campanha inativa `120244668510990777` → Anúncio `120244937843080777`: *"Missing WhatsApp Number: This ad could not be delivered because it does not have a valid WhatsApp number."* Se a campanha for reativada, o anúncio não entregará. | 🔴 BLOQUEANTE — corrigir antes de reativar |
 | Sem anomalias de sinal detectadas | `ads_insights_anomaly_signal` sem alertas automáticos da Meta | ✅ OK |
 
 ---
@@ -163,6 +163,21 @@ O adset `01/Advantage+ Maranhão Estado + Concorrentes` (R$7.388 nos últimos 7 
 | ⚠️ 3 | **Verificar no Business Suite o CPA real das conversas** da campanha [01] Andromeda nos últimos 7 dias e confirmar se está acima de R$6,00 | [01] Andromeda | A API não retornou CPA neste ciclo. Decisão de escalar ou frear depende da confirmação do CPA atual | Diagnóstico completo para calibrar o orçamento | **Hoje** |
 | ⚠️ 4 | **Testar novo público** no adset `03/Semelhantes Todos` da [08] CBO com audiência de lookalike mais específica (ex: compradores de motos 150–200cc vs lookalike geral) | [08] CBO | CPM explodiu +40% no público atual — sinal de saturação do segmento | Redução de CPM, reativação do adset com custo eficiente | **Em 24h** |
 | 🟡 5 | **Avaliar reativação** dos adsets `04/Sugestão Concorrentes` e `05/Sugestão Motocicletas` da campanha [01.1] dentro da campanha [01] Andromeda (sem abrir nova campanha) | [01] Andromeda | Estes adsets tiveram CPM razoável (R$7,39–9,63) e podem ser aproveitados como variação de audiência dentro da estrutura já saudável da [01] | Diversificação de audiência e redução de dependência de um único adset | **Esta semana** |
+
+---
+
+## 8. Opportunity Score da Conta
+
+**Score: 93 / 100** — Conta altamente otimizada.
+
+| # | Recomendação Meta | Entidade | Lift Estimado | Impacto no Score |
+|---|---|---|---|---|
+| 1 | **Ativar A+/Standard Enhancements Bundle** — variações automáticas de texto, sobreposições e mídia flexível | Anúncios `120252178894210777` e `120252217245680777` | -3% custo por resultado | **+4 pontos** |
+| 2 | **Configurar eventos de compras via WhatsApp** (Conversions API de mensagens) e usar meta "Maximizar compras via mensagens" | Conta toda | -24% custo por compra | +1 ponto |
+| 3 | **Adicionar vídeo 9:16 vertical com áudio para Reels** | Ad set `04/Semelhantes Todos Novos Maio` | -8% CPR | +1 ponto |
+| 4 | **Usar Gen AI para criar variações de imagem** com fotos de produto/lifestyle | Anúncio `img - sua primeira conquista` | +10% CTR | +1 ponto |
+
+> A recomendação mais valiosa é o **A+/Standard Enhancements** (+4 pontos, -3% CPR) — pode ser ativada diretamente no Gerenciador de Anúncios em menos de 5 minutos.
 
 ---
 
