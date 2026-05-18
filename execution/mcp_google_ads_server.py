@@ -29,7 +29,16 @@ ACCOUNTS = {
     "quick power": ("4520811474", "2694906582"),
     "shineray": ("3604927656", "2694906582"),
     "chez france": ("8882189559", "2564865113"),
+    # Duosfera MCC (7118682168) — adicionar contas aqui quando necessário
+    # DataKnow MCC (2319759276)
+    "nordika": ("6182489345", "2319759276"),
 }
+
+# MCC IDs disponíveis:
+# Plus Digital Agência: 2694906582
+# ASSUCAR MCC:          2564865113
+# Agência Duosfera MCC: 7118682168
+# DataKnow:             2319759276
 
 def run_script(script: str, args: list[str]) -> str:
     result = subprocess.run(
