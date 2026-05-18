@@ -1,0 +1,33 @@
+name: Shineray Meta Ads Report
+
+on:
+  schedule:
+    - cron: "0 10 * * 1,5"  # Segunda e Sexta as 07:00 BRT (10:00 UTC)
+  workflow_dispatch:
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Gerar relatorio
+        env:
+          META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
+          META_APP_ID: ${{ secrets.META_APP_ID }}
+          META_APP_SECRET: ${{ secrets.META_APP_SECRET }}
+        run: python scripts/shineray_meta_report.py
+
+      - name: Commit e push
+        run: |
+          git config user.name "Shineray Bot"
+          git config user.email "bot@plusdigital.com.br"
+          git add reports/shineray/meta-report-*.md
+          git diff --staged --quiet || git commit -m "Relatorio Meta Ads Shineray - $(date +'%Y-%m-%d')"
+          git push
