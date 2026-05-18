@@ -47,6 +47,7 @@ const ACCOUNTS = {
   "parma":           { id: "3355440327", mcc: "2319759276" },
   "sciente":         { id: "3679830725", mcc: "2319759276" },
   "spartan":         { id: "9559342501", mcc: "2319759276" },
+  "nordika":         { id: "6182489345", mcc: "2319759276" },
 };
 
 function resolveAccount(name) {
