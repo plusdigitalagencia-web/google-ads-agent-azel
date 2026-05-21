@@ -63,6 +63,7 @@ def fetch_campaign_metrics(service, customer_id, start, end):
         FROM campaign
         WHERE segments.date BETWEEN '{start}' AND '{end}'
         AND campaign.status != 'REMOVED'
+        AND metrics.impressions > 0
         ORDER BY metrics.cost_micros DESC
     """
     response = service.search(customer_id=customer_id, query=query)
