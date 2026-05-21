@@ -1,0 +1,48 @@
+name: Relatório Semanal — Nordika Aires
+
+on:
+  schedule:
+    - cron: "0 12 * * 1"  # toda segunda-feira às 9h (horário de Brasília = 12h UTC)
+  workflow_dispatch:       # permite rodar manualmente pelo GitHub
+
+jobs:
+  gerar-relatorio:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependências
+        run: |
+          pip install google-ads python-dotenv
+
+      - name: Gerar relatório
+        env:
+          GOOGLE_ADS_DEVELOPER_TOKEN: ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
+          GOOGLE_ADS_CLIENT_ID: ${{ secrets.GOOGLE_ADS_CLIENT_ID }}
+          GOOGLE_ADS_CLIENT_SECRET: ${{ secrets.GOOGLE_ADS_CLIENT_SECRET }}
+          GOOGLE_ADS_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}
+          GOOGLE_ADS_LOGIN_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_LOGIN_CUSTOMER_ID }}
+        run: |
+          WEEK=$(date +%Y-semana-%V)
+          OUTPUT="reports/nordika/relatorio-${WEEK}.md"
+          python execution/weekly_report_generator.py \
+            --customer-id 6182489345 \
+            --mcc-id 2319759276 \
+            --days 7 \
+            --output "$OUTPUT"
+          echo "OUTPUT_FILE=$OUTPUT" >> $GITHUB_ENV
+
+      - name: Commitar relatório no repositório
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add "${{ env.OUTPUT_FILE }}"
+          git diff --cached --quiet || git commit -m "relatorio: nordika semana $(date +%Y-%V)"
+          git push
