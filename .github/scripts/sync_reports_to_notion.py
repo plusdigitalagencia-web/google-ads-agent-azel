@@ -164,8 +164,7 @@ def extract_campaigns(content, platform):
     """
     campaigns, seen = [], set()
 
-    for line in content.split("
-"):
+    for line in content.split("\n"):
         name = None
 
         # Formato 1: linha de tabela com 🟢/ATIVA
