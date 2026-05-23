@@ -134,7 +134,7 @@ def aggregate_campaigns(rows):
         campaigns.append({
             "name": c.name,
             "channel": channel_map.get(c.advertising_channel_type.name, c.advertising_channel_type.name),
-            "status": "🟢 ATIVA" if c.status.name == "ENABLED" else "⏸️ PAUSADA",
+            "status": "ATIVA" if c.status.name == "ENABLED" else "PAUSADA",
             "cost": cost, "clicks": m.clicks, "impressions": m.impressions,
             "ctr": m.ctr * 100, "cpc": cpc,
             "conversions": m.conversions, "cpa": cpa,
@@ -152,13 +152,14 @@ def generate_report(customer_id, mcc_id, client_name, currency):
     cur_start, cur_end = date_range(7, 1)
     prev_start, prev_end = date_range(14, 8)
 
-    def fmt(v): return format_currency(v, currency)
+    def fmt(v):
+        return format_currency(v, currency)
 
     try:
-        cur_rows  = fetch_campaign_metrics(service, customer_id, cur_start, cur_end)
+        cur_rows = fetch_campaign_metrics(service, customer_id, cur_start, cur_end)
         prev_rows = fetch_campaign_metrics(service, customer_id, prev_start, prev_end)
         search_rows = fetch_search_terms(service, customer_id, cur_start, cur_end)
-        kw_rows   = fetch_keywords(service, customer_id, cur_start, cur_end)
+        kw_rows = fetch_keywords(service, customer_id, cur_start, cur_end)
     except GoogleAdsException as ex:
         errors = [e.message for e in ex.failure.errors]
         raise RuntimeError(f"Google Ads API error: {'; '.join(errors)}")
@@ -171,26 +172,26 @@ def generate_report(customer_id, mcc_id, client_name, currency):
     generated_at = date.today().strftime("%d/%m/%Y")
 
     lines = [
-        f"# Relatório Google Ads — {client_name}",
+        f"# Relatorio Google Ads -- {client_name}",
         f"",
-        f"**Período analisado:** {week_label}  ",
-        f"**Semana anterior:** {prev_label}  ",
-        f"**Conta:** {customer_id}  ",
+        f"**Periodo analisado:** {week_label}",
+        f"**Semana anterior:** {prev_label}",
+        f"**Conta:** {customer_id}",
         f"**Gerado em:** {generated_at}",
         f"",
         f"---",
         f"",
         f"## Resumo da Semana",
         f"",
-        f"| Métrica | Semana Atual | Semana Anterior | Variação |",
+        f"| Metrica | Semana Atual | Semana Anterior | Variacao |",
         f"|---|---|---|---|",
-        f"| Gasto total | {fmt(cur['cost'])} | {fmt(prev['cost'])} | {pct_change(cur['cost'], prev['cost']) or '—'} |",
-        f"| Cliques | {cur['clicks']:,} | {prev['clicks']:,} | {pct_change(cur['clicks'], prev['clicks']) or '—'} |",
-        f"| Impressões | {cur['impressions']:,} | {prev['impressions']:,} | {pct_change(cur['impressions'], prev['impressions']) or '—'} |",
-        f"| CTR | {cur['ctr']:.2f}% | {prev['ctr']:.2f}% | {pct_change(cur['ctr'], prev['ctr']) or '—'} |",
-        f"| CPC médio | {fmt(cur['cpc'])} | {fmt(prev['cpc'])} | {pct_change(cur['cpc'], prev['cpc']) or '—'} |",
-        f"| Conversões | {cur['conversions']:.1f} | {prev['conversions']:.1f} | {pct_change(cur['conversions'], prev['conversions']) or '—'} |",
-        f"| CPA | {fmt(cur['cpa'])} | {fmt(prev['cpa'])} | {pct_change(cur['cpa'], prev['cpa']) or '—'} |",
+        f"| Gasto total | {fmt(cur['cost'])} | {fmt(prev['cost'])} | {pct_change(cur['cost'], prev['cost']) or '--'} |",
+        f"| Cliques | {cur['clicks']:,} | {prev['clicks']:,} | {pct_change(cur['clicks'], prev['clicks']) or '--'} |",
+        f"| Impressoes | {cur['impressions']:,} | {prev['impressions']:,} | {pct_change(cur['impressions'], prev['impressions']) or '--'} |",
+        f"| CTR | {cur['ctr']:.2f}% | {prev['ctr']:.2f}% | {pct_change(cur['ctr'], prev['ctr']) or '--'} |",
+        f"| CPC medio | {fmt(cur['cpc'])} | {fmt(prev['cpc'])} | {pct_change(cur['cpc'], prev['cpc']) or '--'} |",
+        f"| Conversoes | {cur['conversions']:.1f} | {prev['conversions']:.1f} | {pct_change(cur['conversions'], prev['conversions']) or '--'} |",
+        f"| CPA | {fmt(cur['cpa'])} | {fmt(prev['cpa'])} | {pct_change(cur['cpa'], prev['cpa']) or '--'} |",
         f"",
         f"---",
         f"",
@@ -199,21 +200,21 @@ def generate_report(customer_id, mcc_id, client_name, currency):
     ]
 
     if not campaigns:
-        lines.append("_Nenhuma campanha com dados no período._
-")
+        lines.append("_Nenhuma campanha com dados no periodo._")
     else:
         for camp in campaigns:
+            status_icon = "ATIVA" if camp['status'] == "ATIVA" else "PAUSADA"
             lines += [
-                f"### {camp['name']} `{camp['channel']}` `{camp['status']}`",
+                f"### {camp['name']} | {camp['channel']} | {status_icon}",
                 f"",
-                f"| Métrica | Valor |",
+                f"| Metrica | Valor |",
                 f"|---|---|",
                 f"| Gasto | {fmt(camp['cost'])} |",
                 f"| Cliques | {camp['clicks']:,} |",
-                f"| Impressões | {camp['impressions']:,} |",
+                f"| Impressoes | {camp['impressions']:,} |",
                 f"| CTR | {camp['ctr']:.2f}% |",
-                f"| CPC médio | {fmt(camp['cpc'])} |",
-                f"| Conversões | {camp['conversions']:.1f} |",
+                f"| CPC medio | {fmt(camp['cpc'])} |",
+                f"| Conversoes | {camp['conversions']:.1f} |",
                 f"| CPA | {fmt(camp['cpa'])} |",
                 f"",
             ]
@@ -223,7 +224,7 @@ def generate_report(customer_id, mcc_id, client_name, currency):
         f"",
         f"## Palavras-chave Ativas",
         f"",
-        f"| Palavra-chave | Tipo | Campanha | Cliques | Gasto | Conversões | CTR |",
+        f"| Palavra-chave | Tipo | Campanha | Cliques | Gasto | Conversoes | CTR |",
         f"|---|---|---|---|---|---|---|",
     ]
 
@@ -234,11 +235,11 @@ def generate_report(customer_id, mcc_id, client_name, currency):
         cost = micros(m.cost_micros)
         match = match_map.get(kw.match_type.name, kw.match_type.name)
         lines.append(
-            f"| `{kw.text}` | {match} | {row.campaign.name} | {m.clicks:,} | {fmt(cost)} | {m.conversions:.1f} | {m.ctr*100:.2f}% |"
+            f"| {kw.text} | {match} | {row.campaign.name} | {m.clicks:,} | {fmt(cost)} | {m.conversions:.1f} | {m.ctr*100:.2f}% |"
         )
 
     if not kw_rows:
-        lines.append("_Nenhuma palavra-chave com dados no período._")
+        lines.append("_Nenhuma palavra-chave com dados no periodo._")
 
     lines += [
         f"",
@@ -246,10 +247,9 @@ def generate_report(customer_id, mcc_id, client_name, currency):
         f"",
         f"## Termos de Pesquisa",
         f"",
-        f"### Termos com gasto e zero conversão ⚠️",
-        f"_Candidatos a palavra-chave negativa_",
+        f"### Termos com gasto e zero conversao",
         f"",
-        f"| Termo pesquisado | Campanha | Cliques | Gasto | CTR |",
+        f"| Termo | Campanha | Cliques | Gasto | CTR |",
         f"|---|---|---|---|---|",
     ]
 
@@ -259,13 +259,13 @@ def generate_report(customer_id, mcc_id, client_name, currency):
             m = row.metrics
             lines.append(f"| {row.search_term_view.search_term} | {row.campaign.name} | {m.clicks:,} | {fmt(micros(m.cost_micros))} | {m.ctr*100:.2f}% |")
     else:
-        lines.append("_Nenhum termo com desperdício identificado no período._")
+        lines.append("_Nenhum termo com desperdicio identificado._")
 
     lines += [
         f"",
-        f"### Todos os termos do período",
+        f"### Todos os termos do periodo",
         f"",
-        f"| Termo pesquisado | Campanha | Cliques | Gasto | Conversões | CTR |",
+        f"| Termo | Campanha | Cliques | Gasto | Conversoes | CTR |",
         f"|---|---|---|---|---|---|",
     ]
 
@@ -274,17 +274,16 @@ def generate_report(customer_id, mcc_id, client_name, currency):
         lines.append(f"| {row.search_term_view.search_term} | {row.campaign.name} | {m.clicks:,} | {fmt(micros(m.cost_micros))} | {m.conversions:.1f} | {m.ctr*100:.2f}% |")
 
     if not search_rows:
-        lines.append("_Nenhum termo de pesquisa encontrado no período._")
+        lines.append("_Nenhum termo de pesquisa encontrado no periodo._")
 
     lines += [
         f"",
         f"---",
         f"",
-        f"_Relatório gerado automaticamente via GitHub Actions + Google Ads API | Plus Digital_",
+        f"_Relatorio gerado automaticamente via GitHub Actions + Google Ads API | Plus Digital_",
     ]
 
-    return "
-".join(lines)
+    return "\n".join(lines)
 
 
 if __name__ == "__main__":
@@ -301,4 +300,4 @@ if __name__ == "__main__":
     with open(args.output, "w", encoding="utf-8") as f:
         f.write(report)
 
-    print(f"Relatório salvo em: {args.output}")
+    print(f"Relatorio salvo em: {args.output}")
