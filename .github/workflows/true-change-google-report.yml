@@ -46,5 +46,12 @@ jobs:
           git config user.name "True Change Bot"
           git config user.email "bot@plusdigital.com.br"
           git add "${{ env.OUTPUT_FILE }}"
-          git diff --cached --quiet || git commit -m "Relatorio Google Ads True Change - $(date +%Y-%m-%d)"
+          git commit -m "Relatorio Google Ads True Change - $(date +%Y-%m-%d %H:%M)" --allow-empty
           git push
+
+      - name: Acionar sync Notion
+        run: |
+          curl -s -X POST "https://api.github.com/repos/${{ github.repository }}/actions/workflows/sync-relatorios-notion.yml/dispatches" \
+            -H "Authorization: token ${{ secrets.GH_PAT }}" \
+            -H "Content-Type: application/json" \
+            -d '{"ref":"main"}'
