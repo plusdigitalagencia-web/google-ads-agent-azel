@@ -1,6 +1,6 @@
 """
 Generates a weekly Markdown report for a Google Ads account.
-Usage: python3 weekly_report_generator.py --customer-id CUSTOMER_ID --mcc-id MCC_ID --output FILE.md
+Usage: python3 weekly_report_generator.py --customer-id CUSTOMER_ID --mcc-id MCC_ID --output FILE.md [--client-name NAME] [--currency BRL|COP]
 """
 import os
 import argparse
@@ -28,8 +28,10 @@ def micros(value):
     return value / 1_000_000
 
 
-def cop(value):
-    return f"COP {value:,.0f}"
+def format_currency(value, currency="BRL"):
+    if currency == "COP":
+        return f"COP {value:,.0f}"
+    return f"R$ {value:,.2f}"
 
 
 def pct_change(current, previous):
@@ -132,7 +134,7 @@ def aggregate_campaigns(rows):
         campaigns.append({
             "name": c.name,
             "channel": channel_map.get(c.advertising_channel_type.name, c.advertising_channel_type.name),
-            "status": "Ativa" if c.status.name == "ENABLED" else "Pausada",
+            "status": "🟢 ATIVA" if c.status.name == "ENABLED" else "⏸️ PAUSADA",
             "cost": cost, "clicks": m.clicks, "impressions": m.impressions,
             "ctr": m.ctr * 100, "cpc": cpc,
             "conversions": m.conversions, "cpa": cpa,
@@ -143,19 +145,20 @@ def aggregate_campaigns(rows):
     return campaigns, totals
 
 
-def generate_report(customer_id, mcc_id):
+def generate_report(customer_id, mcc_id, client_name, currency):
     client = get_client(mcc_id)
     service = client.get_service("GoogleAdsService")
 
-    # Períodos
-    cur_start, cur_end = date_range(7, 1)    # últimos 7 dias
-    prev_start, prev_end = date_range(14, 8)  # 7 dias anteriores
+    cur_start, cur_end = date_range(7, 1)
+    prev_start, prev_end = date_range(14, 8)
+
+    def fmt(v): return format_currency(v, currency)
 
     try:
-        cur_rows = fetch_campaign_metrics(service, customer_id, cur_start, cur_end)
+        cur_rows  = fetch_campaign_metrics(service, customer_id, cur_start, cur_end)
         prev_rows = fetch_campaign_metrics(service, customer_id, prev_start, prev_end)
         search_rows = fetch_search_terms(service, customer_id, cur_start, cur_end)
-        kw_rows = fetch_keywords(service, customer_id, cur_start, cur_end)
+        kw_rows   = fetch_keywords(service, customer_id, cur_start, cur_end)
     except GoogleAdsException as ex:
         errors = [e.message for e in ex.failure.errors]
         raise RuntimeError(f"Google Ads API error: {'; '.join(errors)}")
@@ -168,7 +171,7 @@ def generate_report(customer_id, mcc_id):
     generated_at = date.today().strftime("%d/%m/%Y")
 
     lines = [
-        f"# Relatório Semanal Google Ads — Nordika Aires",
+        f"# Relatório Google Ads — {client_name}",
         f"",
         f"**Período analisado:** {week_label}  ",
         f"**Semana anterior:** {prev_label}  ",
@@ -181,13 +184,13 @@ def generate_report(customer_id, mcc_id):
         f"",
         f"| Métrica | Semana Atual | Semana Anterior | Variação |",
         f"|---|---|---|---|",
-        f"| Gasto total | {cop(cur['cost'])} | {cop(prev['cost'])} | {pct_change(cur['cost'], prev['cost']) or '—'} |",
+        f"| Gasto total | {fmt(cur['cost'])} | {fmt(prev['cost'])} | {pct_change(cur['cost'], prev['cost']) or '—'} |",
         f"| Cliques | {cur['clicks']:,} | {prev['clicks']:,} | {pct_change(cur['clicks'], prev['clicks']) or '—'} |",
         f"| Impressões | {cur['impressions']:,} | {prev['impressions']:,} | {pct_change(cur['impressions'], prev['impressions']) or '—'} |",
         f"| CTR | {cur['ctr']:.2f}% | {prev['ctr']:.2f}% | {pct_change(cur['ctr'], prev['ctr']) or '—'} |",
-        f"| CPC médio | {cop(cur['cpc'])} | {cop(prev['cpc'])} | {pct_change(cur['cpc'], prev['cpc']) or '—'} |",
+        f"| CPC médio | {fmt(cur['cpc'])} | {fmt(prev['cpc'])} | {pct_change(cur['cpc'], prev['cpc']) or '—'} |",
         f"| Conversões | {cur['conversions']:.1f} | {prev['conversions']:.1f} | {pct_change(cur['conversions'], prev['conversions']) or '—'} |",
-        f"| CPA | {cop(cur['cpa'])} | {cop(prev['cpa'])} | {pct_change(cur['cpa'], prev['cpa']) or '—'} |",
+        f"| CPA | {fmt(cur['cpa'])} | {fmt(prev['cpa'])} | {pct_change(cur['cpa'], prev['cpa']) or '—'} |",
         f"",
         f"---",
         f"",
@@ -196,7 +199,8 @@ def generate_report(customer_id, mcc_id):
     ]
 
     if not campaigns:
-        lines.append("_Nenhuma campanha com dados no período._\n")
+        lines.append("_Nenhuma campanha com dados no período._
+")
     else:
         for camp in campaigns:
             lines += [
@@ -204,17 +208,16 @@ def generate_report(customer_id, mcc_id):
                 f"",
                 f"| Métrica | Valor |",
                 f"|---|---|",
-                f"| Gasto | {cop(camp['cost'])} |",
+                f"| Gasto | {fmt(camp['cost'])} |",
                 f"| Cliques | {camp['clicks']:,} |",
                 f"| Impressões | {camp['impressions']:,} |",
                 f"| CTR | {camp['ctr']:.2f}% |",
-                f"| CPC médio | {cop(camp['cpc'])} |",
+                f"| CPC médio | {fmt(camp['cpc'])} |",
                 f"| Conversões | {camp['conversions']:.1f} |",
-                f"| CPA | {cop(camp['cpa'])} |",
+                f"| CPA | {fmt(camp['cpa'])} |",
                 f"",
             ]
 
-    # Análise de Palavras-chave
     lines += [
         f"---",
         f"",
@@ -231,13 +234,12 @@ def generate_report(customer_id, mcc_id):
         cost = micros(m.cost_micros)
         match = match_map.get(kw.match_type.name, kw.match_type.name)
         lines.append(
-            f"| `{kw.text}` | {match} | {row.campaign.name} | {m.clicks:,} | {cop(cost)} | {m.conversions:.1f} | {m.ctr*100:.2f}% |"
+            f"| `{kw.text}` | {match} | {row.campaign.name} | {m.clicks:,} | {fmt(cost)} | {m.conversions:.1f} | {m.ctr*100:.2f}% |"
         )
 
     if not kw_rows:
         lines.append("_Nenhuma palavra-chave com dados no período._")
 
-    # Análise de Termos de Pesquisa
     lines += [
         f"",
         f"---",
@@ -251,20 +253,11 @@ def generate_report(customer_id, mcc_id):
         f"|---|---|---|---|---|",
     ]
 
-    waste_terms = []
-    for row in search_rows:
-        m = row.metrics
-        cost = micros(m.cost_micros)
-        if cost > 0 and m.conversions == 0 and m.clicks >= 3:
-            waste_terms.append(row)
-
+    waste_terms = [r for r in search_rows if micros(r.metrics.cost_micros) > 0 and r.metrics.conversions == 0 and r.metrics.clicks >= 3]
     if waste_terms:
         for row in waste_terms:
             m = row.metrics
-            cost = micros(m.cost_micros)
-            lines.append(
-                f"| {row.search_term_view.search_term} | {row.campaign.name} | {m.clicks:,} | {cop(cost)} | {m.ctr*100:.2f}% |"
-            )
+            lines.append(f"| {row.search_term_view.search_term} | {row.campaign.name} | {m.clicks:,} | {fmt(micros(m.cost_micros))} | {m.ctr*100:.2f}% |")
     else:
         lines.append("_Nenhum termo com desperdício identificado no período._")
 
@@ -278,10 +271,7 @@ def generate_report(customer_id, mcc_id):
 
     for row in search_rows:
         m = row.metrics
-        cost = micros(m.cost_micros)
-        lines.append(
-            f"| {row.search_term_view.search_term} | {row.campaign.name} | {m.clicks:,} | {cop(cost)} | {m.conversions:.1f} | {m.ctr*100:.2f}% |"
-        )
+        lines.append(f"| {row.search_term_view.search_term} | {row.campaign.name} | {m.clicks:,} | {fmt(micros(m.cost_micros))} | {m.conversions:.1f} | {m.ctr*100:.2f}% |")
 
     if not search_rows:
         lines.append("_Nenhum termo de pesquisa encontrado no período._")
@@ -290,10 +280,11 @@ def generate_report(customer_id, mcc_id):
         f"",
         f"---",
         f"",
-        f"_Relatório gerado automaticamente via GitHub Actions + Google Ads API_",
+        f"_Relatório gerado automaticamente via GitHub Actions + Google Ads API | Plus Digital_",
     ]
 
-    return "\n".join(lines)
+    return "
+".join(lines)
 
 
 if __name__ == "__main__":
@@ -301,9 +292,11 @@ if __name__ == "__main__":
     parser.add_argument("--customer-id", required=True)
     parser.add_argument("--mcc-id", required=True)
     parser.add_argument("--output", required=True)
+    parser.add_argument("--client-name", default="Nordika Aires")
+    parser.add_argument("--currency", default="COP", choices=["BRL", "COP"])
     args = parser.parse_args()
 
-    report = generate_report(args.customer_id, args.mcc_id)
+    report = generate_report(args.customer_id, args.mcc_id, args.client_name, args.currency)
 
     with open(args.output, "w", encoding="utf-8") as f:
         f.write(report)
