@@ -31,6 +31,8 @@ jobs:
           python execution/weekly_report_generator.py \
             --customer-id 9063582846 \
             --mcc-id 2564865113 \
+            --client-name "True Change Tecnologia" \
+            --currency BRL \
             --output "$OUTPUT"
           echo "OUTPUT_FILE=$OUTPUT" >> $GITHUB_ENV
       - name: Commit e push
