@@ -13,22 +13,34 @@ GH_HEADERS = {"Authorization": f"token {GH_TOKEN}", "Accept": "application/vnd.g
 REPO_URL = "https://github.com/plusdigitalagencia-web/google-ads-agent-azel"
 REPO     = "plusdigitalagencia-web/google-ads-agent-azel"
 
+# link_clients  → recebem link do relatório
+# camp_routing  → dicionário {keyword_no_nome: [page_ids]} para campanhas
+#                 se vazio, usa link_clients para campanhas também
 CLIENT_MAP = {
-    "shineray": [
-        {"notion_id": "3690e07d-daa5-819a-9c43-d4f8542270f7", "nome": "Shineray Maranhão"},
-    ],
-    "dra-cejana-dr-bruno": [
-        {"notion_id": "3690e07d-daa5-81a1-a2bf-e6257bc4847d", "nome": "Dra. Cejana"},
-        {"notion_id": "3690e07d-daa5-8156-8ced-d09c352160b2", "nome": "Dr. Bruno"},
-    ],
-    "chez-france": [
-        {"notion_id": "3690e07d-daa5-81d1-afeb-eef8b4193324", "nome": "Chez France"},
-    ],
-    "speed": [
-        {"notion_id": "3690e07d-daa5-81de-8601-dbb6a9457d69", "nome": "SpeedMais Gráfica"},
-    ],
-    "hoteligy":  [],
-    "nordika":   [],
+    "shineray": {
+        "link_clients": [{"notion_id": "3690e07d-daa5-819a-9c43-d4f8542270f7", "nome": "Shineray Maranhão"}],
+        "camp_routing": {},
+    },
+    "dra-cejana-dr-bruno": {
+        "link_clients": [
+            {"notion_id": "3690e07d-daa5-81a1-a2bf-e6257bc4847d", "nome": "Dra. Cejana"},
+            {"notion_id": "3690e07d-daa5-8156-8ced-d09c352160b2", "nome": "Dr. Bruno"},
+        ],
+        "camp_routing": {
+            "cejana": [{"notion_id": "3690e07d-daa5-81a1-a2bf-e6257bc4847d", "nome": "Dra. Cejana"}],
+            "bruno":  [{"notion_id": "3690e07d-daa5-8156-8ced-d09c352160b2", "nome": "Dr. Bruno"}],
+        },
+    },
+    "chez-france": {
+        "link_clients": [{"notion_id": "3690e07d-daa5-81d1-afeb-eef8b4193324", "nome": "Chez France"}],
+        "camp_routing": {},
+    },
+    "speed": {
+        "link_clients": [{"notion_id": "3690e07d-daa5-81de-8601-dbb6a9457d69", "nome": "SpeedMais Gráfica"}],
+        "camp_routing": {},
+    },
+    "hoteligy": {"link_clients": [], "camp_routing": {}},
+    "nordika":  {"link_clients": [], "camp_routing": {}},
 }
 
 # ── Notion helpers ─────────────────────────────────────────────────────────────
@@ -48,25 +60,25 @@ def notion_delete(block_id):
     req = urllib.request.Request(
         f"https://api.notion.com/v1/blocks/{block_id}",
         headers=NOTION_HEADERS, method="DELETE")
-    with urllib.request.urlopen(req): pass
+    try:
+        with urllib.request.urlopen(req): pass
+    except: pass
 
 def get_page_blocks(page_id):
-    return notion_get(f"https://api.notion.com/v1/blocks/{page_id}/children?page_size=100").get("results", [])
+    return notion_get(
+        f"https://api.notion.com/v1/blocks/{page_id}/children?page_size=100"
+    ).get("results", [])
 
 def find_section(blocks, keyword):
-    """Retorna (heading_id, last_block_id, [block_ids entre heading e próximo divider/heading])"""
     in_section = False
-    inner_ids = []
-    heading_id = None
-    last_id = None
+    inner_ids, last_id, heading_id = [], None, None
     for b in blocks:
         btype = b["type"]
         if btype == "heading_2":
             text = b.get("heading_2", {}).get("rich_text", [])
             title = text[0].get("plain_text", "") if text else ""
             if keyword in title:
-                in_section = True
-                heading_id = b["id"]
+                in_section, heading_id = True, b["id"]
                 continue
             elif in_section:
                 break
@@ -77,7 +89,7 @@ def find_section(blocks, keyword):
             last_id = b["id"]
     return heading_id, last_id, inner_ids
 
-# ── Adicionar link do relatório ────────────────────────────────────────────────
+# ── Report link ────────────────────────────────────────────────────────────────
 
 def add_report_link(page_id, file_name, file_path):
     blocks = get_page_blocks(page_id)
@@ -98,33 +110,25 @@ def add_report_link(page_id, file_name, file_path):
     result = notion_patch(f"https://api.notion.com/v1/blocks/{page_id}/children", body)
     return bool(result.get("results"))
 
-# ── Extrair campanhas do relatório ─────────────────────────────────────────────
+# ── Campaign extraction ────────────────────────────────────────────────────────
 
 def detect_platform(filename):
     fn = filename.lower()
-    if "meta" in fn or "whatsapp" in fn:  return "Meta Ads"
-    if "google" in fn:                     return "Google Ads"
+    if "meta" in fn or "whatsapp" in fn: return "Meta Ads"
+    if "google" in fn:                   return "Google Ads"
     return "Google Ads + Meta Ads"
 
 def extract_campaigns(content, platform):
-    """Extrai campanhas ATIVAS do markdown do relatório"""
-    campaigns = []
-    seen = set()
-    lines = content.split("\n")
-    for line in lines:
+    campaigns, seen = [], set()
+    for line in content.split("\n"):
         if "|" not in line: continue
-        if re.search(r"-{3,}", line): continue          # separador
+        if re.search(r"-{3,}", line): continue
         cells = [c.strip() for c in line.split("|") if c.strip()]
         if not cells: continue
         row = " ".join(cells)
-        # Só campanhas ativas
-        is_active = "🟢" in row or "ATIVA" in row.upper() or "ACTIVE" in row.upper()
-        if not is_active: continue
-        # Nome = primeiro cell com conteúdo real (ignora células de cabeçalho)
-        name = cells[0]
-        # Limpar ID numérico entre parênteses
-        name = re.sub(r"\(\d{10,}\)", "", name).strip()
-        # Ignorar linhas de cabeçalho
+        if not ("🟢" in row or "ATIVA" in row.upper() or "ACTIVE" in row.upper()):
+            continue
+        name = re.sub(r"\(\d{10,}\)", "", cells[0]).strip()
         if any(kw in name.lower() for kw in ["campanha", "camp.", "nome", "status"]): continue
         if name in seen or len(name) < 3: continue
         seen.add(name)
@@ -136,52 +140,40 @@ def fetch_file_content(file_path):
     req = urllib.request.Request(url, headers=GH_HEADERS)
     try:
         with urllib.request.urlopen(req) as r:
-            data = json.loads(r.read())
-            return base64.b64decode(data["content"]).decode("utf-8")
+            return base64.b64decode(json.loads(r.read())["content"]).decode("utf-8")
     except Exception as e:
-        print(f"    Erro ao ler arquivo do GitHub: {e}"); return ""
+        print(f"    Erro ao ler arquivo: {e}"); return ""
 
-# ── Atualizar seção Campanhas no Notion ────────────────────────────────────────
+# ── Update Campanhas section ───────────────────────────────────────────────────
 
-def update_campaigns(page_id, campaigns, client_name):
+def update_campaigns(page_id, campaigns):
     blocks = get_page_blocks(page_id)
     _, last_id, inner_ids = find_section(blocks, "Campanhas")
     if not last_id:
-        print(f"    Seção Campanhas não encontrada em {page_id[:8]}"); return False
+        print(f"    Seção Campanhas não encontrada"); return False
 
-    # Deletar bullets antigos da seção (exceto o callout modelo)
     for bid in inner_ids:
         block = next((b for b in blocks if b["id"] == bid), None)
         if block and block["type"] == "bulleted_list_item":
-            try: notion_delete(bid)
-            except: pass
+            notion_delete(bid)
 
-    # Recarregar blocks após deleção
     blocks = get_page_blocks(page_id)
     _, last_id, _ = find_section(blocks, "Campanhas")
-    if not last_id:
-        return False
+    if not last_id: return False
 
     today = datetime.now().strftime("%d/%m/%Y")
     month = datetime.now().strftime("%m/%Y")
-
-    new_blocks = []
-    # Linha de atualização
-    new_blocks.append({"object": "block", "type": "bulleted_list_item",
-        "bulleted_list_item": {"rich_text": [
-            {"type": "text", "text": {"content": f"🔄 Atualizado em {today} — campanhas ativas em {month}"},
-             "annotations": {"italic": True, "color": "gray"}}
-        ]}})
-    # Uma linha por campanha ativa
+    new_blocks = [
+        {"object": "block", "type": "bulleted_list_item",
+         "bulleted_list_item": {"rich_text": [
+             {"type": "text", "text": {"content": f"🔄 Atualizado em {today} — campanhas ativas em {month}"},
+              "annotations": {"italic": True, "color": "gray"}}]}}
+    ]
     for c in campaigns:
-        icon = "🟢"
         new_blocks.append({"object": "block", "type": "bulleted_list_item",
             "bulleted_list_item": {"rich_text": [
-                {"type": "text", "text": {"content": f"{icon} {c['plataforma']}  |  {c['nome']}  |  Ativa"}}
+                {"type": "text", "text": {"content": f"🟢 {c['plataforma']}  |  {c['nome']}  |  Ativa"}}
             ]}})
-
-    if not new_blocks:
-        return False
 
     result = notion_patch(
         f"https://api.notion.com/v1/blocks/{page_id}/children",
@@ -207,32 +199,48 @@ def main():
         folder, file_name = parts[1], parts[-1]
         if "." not in file_name: continue
 
-        clients = CLIENT_MAP.get(folder, [])
-        if not clients:
+        config = CLIENT_MAP.get(folder)
+        if not config:
             print(f"  Pasta '{folder}' sem mapeamento"); continue
 
-        platform = detect_platform(file_name)
-        content  = fetch_file_content(file_path)
+        platform  = detect_platform(file_name)
+        content   = fetch_file_content(file_path)
         campaigns = extract_campaigns(content, platform) if content else []
 
-        print(f"  Plataforma: {platform} | Campanhas ativas encontradas: {len(campaigns)}")
-        for c in campaigns:
-            print(f"    → {c['nome']}")
+        print(f"  [{folder}] {file_name} | {platform} | {len(campaigns)} campanhas ativas")
 
-        for client in clients:
-            pid   = client["notion_id"]
-            nome  = client["nome"]
+        # 1. Link do relatório → todos os clientes da pasta
+        for client in config["link_clients"]:
+            ok = add_report_link(client["notion_id"], file_name, file_path)
+            print(f"  {'✅' if ok else '❌'} Link → {client['nome']}")
 
-            # 1. Link do relatório
-            ok_link = add_report_link(pid, file_name, file_path)
-            print(f"  {'✅' if ok_link else '❌'} Link relatório → {nome}")
+        # 2. Campanhas → roteamento por nome do arquivo
+        if campaigns:
+            fn_lower = file_name.lower()
+            camp_routing = config.get("camp_routing", {})
 
-            # 2. Campanhas (só atualiza se encontrou campanhas no relatório)
-            if campaigns:
-                ok_camp = update_campaigns(pid, campaigns, nome)
-                print(f"  {'✅' if ok_camp else '❌'} Campanhas atualizadas → {nome} ({len(campaigns)} ativas)")
+            if camp_routing:
+                # Pasta compartilhada: rotear pelo keyword no nome do arquivo
+                matched = False
+                for keyword, clients in camp_routing.items():
+                    if keyword in fn_lower:
+                        for client in clients:
+                            ok = update_campaigns(client["notion_id"], campaigns)
+                            print(f"  {'✅' if ok else '❌'} Campanhas → {client['nome']} ({len(campaigns)} ativas)")
+                        matched = True
+                        break
+                if not matched:
+                    # Sem match de keyword: atualiza todos
+                    for client in config["link_clients"]:
+                        ok = update_campaigns(client["notion_id"], campaigns)
+                        print(f"  {'✅' if ok else '❌'} Campanhas → {client['nome']} ({len(campaigns)} ativas)")
             else:
-                print(f"  ⚠️  Nenhuma campanha ativa extraída do relatório — seção Campanhas mantida")
+                # Pasta exclusiva: atualiza todos os clientes
+                for client in config["link_clients"]:
+                    ok = update_campaigns(client["notion_id"], campaigns)
+                    print(f"  {'✅' if ok else '❌'} Campanhas → {client['nome']} ({len(campaigns)} ativas)")
+        else:
+            print(f"  ⚠️  Nenhuma campanha ativa extraída — seção Campanhas mantida")
 
 if __name__ == "__main__":
     main()
