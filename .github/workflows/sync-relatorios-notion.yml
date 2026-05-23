@@ -1,4 +1,4 @@
-name: 📊 Sync Relatórios → Notion
+name: Sync Relatorios Notion
 
 on:
   push:
@@ -6,6 +6,7 @@ on:
       - "reports/**"
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   sync:
@@ -17,11 +18,15 @@ jobs:
 
       - name: Detectar arquivos alterados
         run: |
-          git diff --name-only HEAD~1 HEAD | grep "^reports/" > changed_files.txt || true
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            git diff --name-only HEAD~1 HEAD | grep "^reports/" > changed_files.txt || true
+          else
+            git diff --name-only HEAD~1 HEAD | grep "^reports/" > changed_files.txt || true
+          fi
           echo "Arquivos detectados:"
           cat changed_files.txt
 
-      - name: Instalar dependências
+      - name: Instalar dependencias
         run: pip install requests
 
       - name: Sincronizar com Notion
