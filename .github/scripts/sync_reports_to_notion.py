@@ -104,12 +104,8 @@ def find_section(blocks, keyword):
 
 def add_report_link(page_id, file_name, file_path):
     blocks = get_page_blocks(page_id)
-    _, _, bullet_ids = find_section(blocks, "Relat")
 
-    # Ancora = último bullet da seção (ou o callout se não houver bullets ainda)
-    _, callout_id, relat_bullets = find_section(blocks, "Relat")
-
-    # Buscar o último bloco da seção de Relatórios para inserir depois
+    # Buscar o último bloco da seção de Relatórios
     in_section = False
     last_id = None
     for b in blocks:
@@ -154,20 +150,38 @@ def detect_platform(filename):
     return "Google Ads"
 
 def extract_campaigns(content, platform):
+    """Extrai campanhas ativas do relatório. Suporta dois formatos:
+    1. Tabela: | Nome | 🟢 ATIVA | ...
+    2. Heading: ### 🟢 Nome da Campanha
+    """
     campaigns, seen = [], set()
+
     for line in content.split("\n"):
-        if "|" not in line: continue
-        if re.search(r"-{3,}", line): continue
-        cells = [c.strip() for c in line.split("|") if c.strip()]
-        if not cells: continue
-        row = " ".join(cells)
-        if not ("🟢" in row or "ATIVA" in row.upper() or "ACTIVE" in row.upper()):
-            continue
-        name = re.sub(r"\(\d{10,}\)", "", cells[0]).strip()
-        if any(kw in name.lower() for kw in ["campanha", "camp.", "nome", "status"]): continue
-        if name in seen or len(name) < 3: continue
-        seen.add(name)
-        campaigns.append({"nome": name[:70], "plataforma": platform})
+        name = None
+
+        # Formato 1: linha de tabela com 🟢/ATIVA
+        if "|" in line and not re.search(r"-{3,}", line):
+            cells = [c.strip() for c in line.split("|") if c.strip()]
+            if cells:
+                row = " ".join(cells)
+                if "🟢" in row or "ATIVA" in row.upper() or "ACTIVE" in row.upper():
+                    candidate = re.sub(r"\(\d{10,}\)", "", cells[0]).strip()
+                    if not any(kw in candidate.lower() for kw in ["campanha", "camp.", "nome", "status"]):
+                        name = candidate
+
+        # Formato 2: heading ### 🟢 Nome
+        elif re.match(r"^#{1,4}\s+🟢", line):
+            candidate = re.sub(r"^#{1,4}\s+🟢\s*", "", line).strip()
+            # Pegar só a parte antes de " —" ou " |"
+            for sep in [" —", " |", " –"]:
+                if sep in candidate:
+                    candidate = candidate.split(sep)[0].strip()
+            name = candidate
+
+        if name and len(name) >= 3 and name not in seen:
+            seen.add(name)
+            campaigns.append({"nome": name[:70], "plataforma": platform})
+
     return campaigns
 
 def fetch_file_content(file_path):
@@ -192,8 +206,7 @@ def update_campaigns(page_id, campaigns):
     for bid in bullet_ids:
         notion_delete(bid)
 
-    # Âncora fixa: o callout do cabeçalho (sempre presente, nunca deletado)
-    # Se não houver callout, usa o heading como âncora
+    # Âncora fixa: callout (sempre presente, nunca deletado)
     anchor_id = callout_id or heading_id
 
     today = datetime.now().strftime("%d/%m/%Y")
