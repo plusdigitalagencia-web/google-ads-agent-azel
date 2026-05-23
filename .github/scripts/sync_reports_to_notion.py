@@ -37,6 +37,14 @@ CLIENT_MAP = {
         "camp_routing": {},
     },
     "hoteligy": {"link_clients": [], "camp_routing": {}},
+    "true-change": {
+        "link_clients": [{"notion_id": "3690e07d-daa5-811b-be8b-f57d50b7838c", "nome": "True Change Tecnologia"}],
+        "camp_routing": {},
+    },
+    "clinica-familiar": {
+        "link_clients": [{"notion_id": "3690e07d-daa5-812b-996b-f66f0db06969", "nome": "Clínica Assistência Familiar"}],
+        "camp_routing": {},
+    },
     "nordika":  {"link_clients": [], "camp_routing": {}},
 }
 
@@ -156,7 +164,8 @@ def extract_campaigns(content, platform):
     """
     campaigns, seen = [], set()
 
-    for line in content.split("\n"):
+    for line in content.split("
+"):
         name = None
 
         # Formato 1: linha de tabela com 🟢/ATIVA
