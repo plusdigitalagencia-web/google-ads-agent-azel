@@ -27,4 +27,5 @@ jobs:
       - name: Sincronizar com Notion
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python3 .github/scripts/sync_reports_to_notion.py
