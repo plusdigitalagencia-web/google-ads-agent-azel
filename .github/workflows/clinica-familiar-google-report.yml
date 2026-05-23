@@ -13,12 +13,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Instalar dependências
+
+      - name: Instalar dependencias
         run: pip install google-ads python-dotenv
-      - name: Gerar relatório
+
+      - name: Gerar relatorio
         env:
           GOOGLE_ADS_DEVELOPER_TOKEN: ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
           GOOGLE_ADS_CLIENT_ID: ${{ secrets.GOOGLE_ADS_CLIENT_ID }}
@@ -31,14 +36,15 @@ jobs:
           python execution/weekly_report_generator.py \
             --customer-id 3715471664 \
             --mcc-id 2564865113 \
-            --client-name "Clínica Assistência Familiar" \
+            --client-name "Clinica Assistencia Familiar" \
             --currency BRL \
             --output "$OUTPUT"
           echo "OUTPUT_FILE=$OUTPUT" >> $GITHUB_ENV
+
       - name: Commit e push
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "Clinica Familiar Bot"
+          git config user.email "bot@plusdigital.com.br"
           git add "${{ env.OUTPUT_FILE }}"
-          git diff --cached --quiet || git commit -m "Relatório Google Ads Clínica Familiar - $(date +%Y-%m-%d)"
+          git diff --cached --quiet || git commit -m "Relatorio Google Ads Clinica Familiar - $(date +%Y-%m-%d)"
           git push
