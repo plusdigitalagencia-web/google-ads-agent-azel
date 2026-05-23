@@ -13,9 +13,6 @@ GH_HEADERS = {"Authorization": f"token {GH_TOKEN}", "Accept": "application/vnd.g
 REPO_URL = "https://github.com/plusdigitalagencia-web/google-ads-agent-azel"
 REPO     = "plusdigitalagencia-web/google-ads-agent-azel"
 
-# link_clients  → recebem link do relatório
-# camp_routing  → dicionário {keyword_no_nome: [page_ids]} para campanhas
-#                 se vazio, usa link_clients para campanhas também
 CLIENT_MAP = {
     "shineray": {
         "link_clients": [{"notion_id": "3690e07d-daa5-819a-9c43-d4f8542270f7", "nome": "Shineray Maranhão"}],
@@ -57,12 +54,18 @@ def notion_patch(url, body):
         return json.loads(r.read())
 
 def notion_delete(block_id):
+    """Arquiva (deleta) um bloco via PATCH archived=true."""
+    data = json.dumps({"archived": True}).encode()
     req = urllib.request.Request(
         f"https://api.notion.com/v1/blocks/{block_id}",
-        headers=NOTION_HEADERS, method="DELETE")
+        data=data, headers=NOTION_HEADERS, method="PATCH")
     try:
-        with urllib.request.urlopen(req): pass
-    except: pass
+        with urllib.request.urlopen(req):
+            pass
+        return True
+    except Exception as e:
+        print(f"    Aviso: falha ao deletar bloco {block_id[:8]}: {e}")
+        return False
 
 def get_page_blocks(page_id):
     return notion_get(
@@ -70,32 +73,64 @@ def get_page_blocks(page_id):
     ).get("results", [])
 
 def find_section(blocks, keyword):
+    """Retorna (heading_id, callout_id, bullet_ids) da seção com keyword."""
     in_section = False
-    inner_ids, last_id, heading_id = [], None, None
+    heading_id = None
+    callout_id = None
+    bullet_ids = []
+
     for b in blocks:
         btype = b["type"]
         if btype == "heading_2":
             text = b.get("heading_2", {}).get("rich_text", [])
             title = text[0].get("plain_text", "") if text else ""
             if keyword in title:
-                in_section, heading_id = True, b["id"]
+                in_section = True
+                heading_id = b["id"]
                 continue
             elif in_section:
                 break
         if btype == "divider" and in_section:
             break
         if in_section:
-            inner_ids.append(b["id"])
-            last_id = b["id"]
-    return heading_id, last_id, inner_ids
+            if btype == "callout" and callout_id is None:
+                callout_id = b["id"]
+            elif btype == "bulleted_list_item":
+                bullet_ids.append(b["id"])
+
+    return heading_id, callout_id, bullet_ids
 
 # ── Report link ────────────────────────────────────────────────────────────────
 
 def add_report_link(page_id, file_name, file_path):
     blocks = get_page_blocks(page_id)
-    _, last_id, _ = find_section(blocks, "Relat")
+    _, _, bullet_ids = find_section(blocks, "Relat")
+
+    # Ancora = último bullet da seção (ou o callout se não houver bullets ainda)
+    _, callout_id, relat_bullets = find_section(blocks, "Relat")
+
+    # Buscar o último bloco da seção de Relatórios para inserir depois
+    in_section = False
+    last_id = None
+    for b in blocks:
+        btype = b["type"]
+        if btype == "heading_2":
+            text = b.get("heading_2", {}).get("rich_text", [])
+            title = text[0].get("plain_text", "") if text else ""
+            if "Relat" in title:
+                in_section = True
+                last_id = b["id"]
+                continue
+            elif in_section:
+                break
+        if btype == "divider" and in_section:
+            break
+        if in_section:
+            last_id = b["id"]
+
     if not last_id:
         print(f"    Seção Relatórios não encontrada"); return False
+
     today = datetime.now().strftime("%d/%m/%Y")
     github_url = f"{REPO_URL}/blob/main/{file_path}"
     body = {
@@ -116,7 +151,7 @@ def detect_platform(filename):
     fn = filename.lower()
     if "meta" in fn or "whatsapp" in fn: return "Meta Ads"
     if "google" in fn:                   return "Google Ads"
-    return "Google Ads + Meta Ads"
+    return "Google Ads"
 
 def extract_campaigns(content, platform):
     campaigns, seen = [], set()
@@ -148,25 +183,26 @@ def fetch_file_content(file_path):
 
 def update_campaigns(page_id, campaigns):
     blocks = get_page_blocks(page_id)
-    _, last_id, inner_ids = find_section(blocks, "Campanhas")
-    if not last_id:
+    heading_id, callout_id, bullet_ids = find_section(blocks, "Campanhas")
+
+    if not heading_id:
         print(f"    Seção Campanhas não encontrada"); return False
 
-    for bid in inner_ids:
-        block = next((b for b in blocks if b["id"] == bid), None)
-        if block and block["type"] == "bulleted_list_item":
-            notion_delete(bid)
+    # Deletar todos os bullets existentes
+    for bid in bullet_ids:
+        notion_delete(bid)
 
-    blocks = get_page_blocks(page_id)
-    _, last_id, _ = find_section(blocks, "Campanhas")
-    if not last_id: return False
+    # Âncora fixa: o callout do cabeçalho (sempre presente, nunca deletado)
+    # Se não houver callout, usa o heading como âncora
+    anchor_id = callout_id or heading_id
 
     today = datetime.now().strftime("%d/%m/%Y")
     month = datetime.now().strftime("%m/%Y")
     new_blocks = [
         {"object": "block", "type": "bulleted_list_item",
          "bulleted_list_item": {"rich_text": [
-             {"type": "text", "text": {"content": f"🔄 Atualizado em {today} — campanhas ativas em {month}"},
+             {"type": "text", "text": {
+                 "content": f"🔄 Atualizado em {today} — campanhas ativas em {month}"},
               "annotations": {"italic": True, "color": "gray"}}]}}
     ]
     for c in campaigns:
@@ -177,7 +213,7 @@ def update_campaigns(page_id, campaigns):
 
     result = notion_patch(
         f"https://api.notion.com/v1/blocks/{page_id}/children",
-        {"after": last_id, "children": new_blocks}
+        {"after": anchor_id, "children": new_blocks}
     )
     return bool(result.get("results"))
 
@@ -220,7 +256,6 @@ def main():
             camp_routing = config.get("camp_routing", {})
 
             if camp_routing:
-                # Pasta compartilhada: rotear pelo keyword no nome do arquivo
                 matched = False
                 for keyword, clients in camp_routing.items():
                     if keyword in fn_lower:
@@ -230,12 +265,10 @@ def main():
                         matched = True
                         break
                 if not matched:
-                    # Sem match de keyword: atualiza todos
                     for client in config["link_clients"]:
                         ok = update_campaigns(client["notion_id"], campaigns)
                         print(f"  {'✅' if ok else '❌'} Campanhas → {client['nome']} ({len(campaigns)} ativas)")
             else:
-                # Pasta exclusiva: atualiza todos os clientes
                 for client in config["link_clients"]:
                     ok = update_campaigns(client["notion_id"], campaigns)
                     print(f"  {'✅' if ok else '❌'} Campanhas → {client['nome']} ({len(campaigns)} ativas)")
