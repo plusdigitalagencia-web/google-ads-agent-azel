@@ -1,0 +1,33 @@
+name: Cejana Meta Ads Report
+
+on:
+  schedule:
+    - cron: "0 10 * * 1,5"  # Segunda e Sexta às 07:00 BRT (10:00 UTC)
+  workflow_dispatch:
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Gerar relatorio
+        env:
+          META_ACCESS_TOKEN: ${{ secrets.CEJANA_META_ACCESS_TOKEN }}
+          META_APP_ID: ${{ secrets.CEJANA_META_APP_ID }}
+          META_APP_SECRET: ${{ secrets.CEJANA_META_APP_SECRET }}
+        run: python scripts/cejana_meta_report.py
+
+      - name: Commit e push
+        run: |
+          git config user.name "Cejana Bot"
+          git config user.email "bot@plusdigital.com.br"
+          git add reports/cejana/meta-report-*.md
+          git diff --staged --quiet || git commit -m "Relatorio Meta Ads Cejana - $(date +'%Y-%m-%d')"
+          git push
