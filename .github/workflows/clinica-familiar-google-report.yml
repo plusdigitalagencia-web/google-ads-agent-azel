@@ -31,6 +31,8 @@ jobs:
           python execution/weekly_report_generator.py \
             --customer-id 3715471664 \
             --mcc-id 2564865113 \
+            --client-name "Clínica Assistência Familiar" \
+            --currency BRL \
             --output "$OUTPUT"
           echo "OUTPUT_FILE=$OUTPUT" >> $GITHUB_ENV
       - name: Commit e push
