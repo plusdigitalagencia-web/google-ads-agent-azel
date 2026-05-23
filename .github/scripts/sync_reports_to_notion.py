@@ -158,9 +158,10 @@ def detect_platform(filename):
     return "Google Ads"
 
 def extract_campaigns(content, platform):
-    """Extrai campanhas ativas do relatório. Suporta dois formatos:
+    """Extrai campanhas ativas do relatório. Suporta três formatos:
     1. Tabela: | Nome | 🟢 ATIVA | ...
     2. Heading: ### 🟢 Nome da Campanha
+    3. Heading com pipe: ### Nome | Search | ATIVA
     """
     campaigns, seen = [], set()
 
@@ -168,12 +169,14 @@ def extract_campaigns(content, platform):
         name = None
 
         # Formato 1: linha de tabela com 🟢/ATIVA
+        # Também captura headings: ### Nome | Search | ATIVA
         if "|" in line and not re.search(r"-{3,}", line):
             cells = [c.strip() for c in line.split("|") if c.strip()]
             if cells:
                 row = " ".join(cells)
                 if "🟢" in row or "ATIVA" in row.upper() or "ACTIVE" in row.upper():
                     candidate = re.sub(r"\(\d{10,}\)", "", cells[0]).strip()
+                    candidate = re.sub(r"^#+\s*", "", candidate).strip()
                     if not any(kw in candidate.lower() for kw in ["campanha", "camp.", "nome", "status"]):
                         name = candidate
 
