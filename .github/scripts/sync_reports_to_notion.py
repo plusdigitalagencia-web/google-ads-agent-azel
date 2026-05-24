@@ -45,6 +45,10 @@ CLIENT_MAP = {
         "link_clients": [{"notion_id": "3690e07d-daa5-812b-996b-f66f0db06969", "nome": "Clínica Assistência Familiar"}],
         "camp_routing": {},
     },
+    "delikata": {
+        "link_clients": [{"notion_id": "36a0e07d-daa5-808e-8e55-dfc5ce5d2265", "nome": "Delikata"}],
+        "camp_routing": {},
+    },
     "nordika":  {"link_clients": [], "camp_routing": {}},
 }
 
