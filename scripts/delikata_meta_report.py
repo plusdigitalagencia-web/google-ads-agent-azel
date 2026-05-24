@@ -73,7 +73,7 @@ for camp in data.get("data", []):
     total_purchases += int(purchases)
     total_revenue   += revenue
 
-    lines.append(f"## {name}")
+    lines.append(f"## 🟢 {name}")
     lines.append(f"| Métrica | Valor |")
     lines.append(f"|---|---|")
     lines.append(f"| Status | {status} ROAS {roas:.2f}x |")

@@ -50,7 +50,7 @@ for camp in data.get("data", []):
     total_conv  += conv
     cpr = spend / conv if conv > 0 else 0
     status = "🟢" if cpr < 15 else ("🟡" if cpr < 30 else "🔴")
-    lines.append(f"## {name}")
+    lines.append(f"## 🟢 {name}")
     lines.append(f"| Métrica | Valor |")
     lines.append(f"|---|---|")
     lines.append(f"| Gasto | R${spend:.2f} |")
