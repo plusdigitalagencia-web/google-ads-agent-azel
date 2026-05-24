@@ -1,9 +1,24 @@
 import os, json, urllib.request
 from datetime import datetime, timedelta
 
-TOKEN   = os.environ["DELIKATA_META_ACCESS_TOKEN"]
-ACCOUNT = "act_532861400590268"
-BASE    = "https://graph.facebook.com/v25.0"
+TOKEN      = os.environ["DELIKATA_META_ACCESS_TOKEN"]
+APP_ID     = os.environ["DELIKATA_META_APP_ID"]
+APP_SECRET = os.environ["DELIKATA_META_APP_SECRET"]
+ACCOUNT    = "act_532861400590268"
+BASE       = "https://graph.facebook.com/v25.0"
+
+def refresh_token(token):
+    """Troca token curto por token de longa duração (60 dias)."""
+    url = (f"{BASE}/oauth/access_token?grant_type=fb_exchange_token"
+           f"&client_id={APP_ID}&client_secret={APP_SECRET}&fb_exchange_token={token}")
+    try:
+        res = urllib.request.urlopen(url)
+        return json.loads(res.read()).get("access_token", token)
+    except Exception as e:
+        print(f"  Token refresh falhou ({e}), usando token original")
+        return token
+
+TOKEN = refresh_token(TOKEN)
 
 def api_get(path, extra=""):
     url = f"{BASE}{path}?access_token={TOKEN}{extra}"
