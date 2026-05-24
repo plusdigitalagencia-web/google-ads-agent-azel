@@ -1,0 +1,46 @@
+name: Delikata Meta Ads Report
+
+on:
+  schedule:
+    - cron: "0 10 * * 1,5"   # Segunda e Sexta 07:00 BRT
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Gerar relatorio
+        env:
+          DELIKATA_META_ACCESS_TOKEN: ${{ secrets.DELIKATA_META_ACCESS_TOKEN }}
+          DELIKATA_META_APP_ID: ${{ secrets.DELIKATA_META_APP_ID }}
+          DELIKATA_META_APP_SECRET: ${{ secrets.DELIKATA_META_APP_SECRET }}
+        run: |
+          mkdir -p reports/delikata
+          python scripts/delikata_meta_report.py
+
+      - name: Commit e push
+        run: |
+          git config user.name "Delikata Bot"
+          git config user.email "bot@plusdigital.com.br"
+          OUTPUT="reports/delikata/meta-report-$(date +%Y-%m-%d).md"
+          git add "$OUTPUT"
+          git commit -m "Relatorio Meta Ads Delikata - $(date '+%Y-%m-%d %H:%M')" --allow-empty
+          git push
+
+      - name: Acionar sync Notion
+        run: |
+          curl -s -X POST "https://api.github.com/repos/${{ github.repository }}/actions/workflows/sync-relatorios-notion.yml/dispatches" \
+            -H "Authorization: token ${{ secrets.GH_PAT }}" \
+            -H "Content-Type: application/json" \
+            -d '{"ref":"main"}'
