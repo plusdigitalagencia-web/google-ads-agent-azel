@@ -29,8 +29,7 @@ data     = fetch(since, until)
 data_ant = fetch(since_ant, until_ant)
 
 report_date = today.strftime("%Y-%m-%d")
-lines = [f"# Relatório Meta Ads — Dra. Cejana", f"**Período:** {since} a {until} | Plus Digital
-"]
+lines = [f"# Relatório Meta Ads — Dra. Cejana", f"**Período:** {since} a {until} | Plus Digital", ""]
 
 total_spend = 0
 total_conv  = 0
@@ -71,6 +70,5 @@ lines.append(f"*Gerado automaticamente | Plus Digital | {today.strftime('%d/%m/%
 os.makedirs("reports/cejana", exist_ok=True)
 path = f"reports/cejana/meta-report-{report_date}.md"
 with open(path, "w") as f:
-    f.write("
-".join(lines))
+    f.write("\n".join(lines))
 print(f"Relatório salvo: {path}")
