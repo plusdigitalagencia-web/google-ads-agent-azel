@@ -36,6 +36,7 @@ jobs:
           OUTPUT="reports/delikata/meta-report-$(date +%Y-%m-%d).md"
           git add "$OUTPUT"
           git commit -m "Relatorio Meta Ads Delikata - $(date '+%Y-%m-%d %H:%M')" --allow-empty
+          git pull --rebase origin main
           git push
 
       - name: Acionar sync Notion
