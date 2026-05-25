@@ -18,15 +18,13 @@ CLIENT_MAP = {
         "link_clients": [{"notion_id": "3690e07d-daa5-819a-9c43-d4f8542270f7", "nome": "Shineray Maranhão"}],
         "camp_routing": {},
     },
-    "dra-cejana-dr-bruno": {
-        "link_clients": [
-            {"notion_id": "3690e07d-daa5-81a1-a2bf-e6257bc4847d", "nome": "Dra. Cejana"},
-            {"notion_id": "3690e07d-daa5-8156-8ced-d09c352160b2", "nome": "Dr. Bruno"},
-        ],
-        "camp_routing": {
-            "cejana": [{"notion_id": "3690e07d-daa5-81a1-a2bf-e6257bc4847d", "nome": "Dra. Cejana"}],
-            "bruno":  [{"notion_id": "3690e07d-daa5-8156-8ced-d09c352160b2", "nome": "Dr. Bruno"}],
-        },
+    "cejana": {
+        "link_clients": [{"notion_id": "3690e07d-daa5-81a1-a2bf-e6257bc4847d", "nome": "Dra. Cejana"}],
+        "camp_routing": {},
+    },
+    "bruno": {
+        "link_clients": [{"notion_id": "3690e07d-daa5-8156-8ced-d09c352160b2", "nome": "Dr. Bruno"}],
+        "camp_routing": {},
     },
     "chez-france": {
         "link_clients": [{"notion_id": "3690e07d-daa5-81d1-afeb-eef8b4193324", "nome": "Chez France"}],
@@ -265,7 +263,8 @@ def main():
 
         config = CLIENT_MAP.get(folder)
         if not config:
-            print(f"  Pasta '{folder}' sem mapeamento"); continue
+            print(f"  ❌ ERRO: pasta '{folder}' não tem mapeamento no CLIENT_MAP — adicione antes de rodar novamente")
+            raise SystemExit(1)
 
         platform  = detect_platform(file_name)
         content   = fetch_file_content(file_path)
