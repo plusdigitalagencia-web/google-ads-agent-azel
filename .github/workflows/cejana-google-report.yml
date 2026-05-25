@@ -1,0 +1,57 @@
+name: Cejana Google Ads Report
+
+on:
+  schedule:
+    - cron: "0 10 * * 1,5"  # Segunda e Sexta às 07:00 BRT (10:00 UTC)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependencias
+        run: pip install google-ads python-dotenv
+
+      - name: Gerar relatorio
+        env:
+          GOOGLE_ADS_DEVELOPER_TOKEN: ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
+          GOOGLE_ADS_CLIENT_ID: ${{ secrets.GOOGLE_ADS_CLIENT_ID }}
+          GOOGLE_ADS_CLIENT_SECRET: ${{ secrets.GOOGLE_ADS_CLIENT_SECRET }}
+          GOOGLE_ADS_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}
+        run: |
+          OUTPUT="reports/cejana/google-cejana-report-$(date +%Y-%m-%d).md"
+          mkdir -p reports/cejana
+          python execution/weekly_report_generator.py \
+            --customer-id 2470198472 \
+            --mcc-id 2694906582 \
+            --client-name "Dra Cejana" \
+            --currency BRL \
+            --output "$OUTPUT"
+          echo "OUTPUT_FILE=$OUTPUT" >> $GITHUB_ENV
+
+      - name: Commit e push
+        run: |
+          git config user.name "Cejana Bot"
+          git config user.email "bot@plusdigital.com.br"
+          git add "${{ env.OUTPUT_FILE }}"
+          git commit -m "Relatorio Google Ads Cejana - $(date +%Y-%m-%d %H:%M)" --allow-empty
+          git pull --rebase origin main
+          git push
+
+      - name: Acionar sync Notion
+        run: |
+          curl -s -X POST "https://api.github.com/repos/${{ github.repository }}/actions/workflows/sync-relatorios-notion.yml/dispatches" \
+            -H "Authorization: token ${{ secrets.GH_PAT }}" \
+            -H "Content-Type: application/json" \
+            -d '{"ref":"main"}'
