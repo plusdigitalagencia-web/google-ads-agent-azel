@@ -1,5 +1,5 @@
 # Relatório Aprovações Leaper — Shineray Maranhão
-**Data:** 25/05/2026 13:58 | **Conta:** 1057721942577752 | Plus Digital
+**Data:** 25/05/2026 14:09 | **Conta:** 1057721942577752 | Plus Digital
 
 ## Resumo Geral
 | Origem | Leads | % |
@@ -41,4 +41,4 @@
 - 1 leads — 02/Consórcio Mix
 
 ---
-*Gerado automaticamente via Leaper | Plus Digital | 25/05/2026 13:58*
+*Gerado automaticamente via Leaper | Plus Digital | 25/05/2026 14:09*
