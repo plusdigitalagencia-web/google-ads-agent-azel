@@ -29,6 +29,8 @@ ACCOUNTS = {
     "quick power": ("4520811474", "2694906582"),
     "shineray": ("3604927656", "2694906582"),
     "chez france": ("8882189559", "2564865113"),
+    "speedmais": ("6081418993", "2564865113"),
+    "speed": ("6081418993", "2564865113"),
     # Duosfera MCC (7118682168) — adicionar contas aqui quando necessário
     # DataKnow MCC (2319759276)
     "nordika": ("6182489345", "2319759276"),
