@@ -47,7 +47,7 @@ CLIENT_MAP = {
         "link_clients": [{"notion_id": "36a0e07d-daa5-808e-8e55-dfc5ce5d2265", "nome": "Delikata"}],
         "camp_routing": {},
     },
-    "nordika":  {"link_clients": [], "camp_routing": {}},
+    "nordika":  {"link_clients": [{"notion_id": "36d0e07d-daa5-80ef-a10d-ffb7b16d424f", "nome": "Nordika"}], "camp_routing": {}},
 }
 
 # ── Notion helpers ─────────────────────────────────────────────────────────────
