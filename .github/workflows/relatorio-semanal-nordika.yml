@@ -2,7 +2,7 @@ name: Relatório Semanal — Nordika Aires
 
 on:
   schedule:
-    - cron: "0 12 * * 1"  # toda segunda-feira às 9h (horário de Brasília = 12h UTC)
+    - cron: "0 12 * * 1,5"  # toda segunda e sexta às 9h (horário de Brasília = 12h UTC)
   workflow_dispatch:       # permite rodar manualmente pelo GitHub
 
 permissions:
