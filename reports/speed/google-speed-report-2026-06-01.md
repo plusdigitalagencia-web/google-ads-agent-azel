@@ -3,7 +3,7 @@
 **Conta:** 608-141-8993 | MCC Açúcar (256-486-5113)
 **Foco:** Captação de Leads (Orçamentos/WhatsApp) | Evento: Conversa WhatsApp
 
-> ✅ **STATUS DA API:** Token OAuth2 restaurado e funcionando. Dados desta análise são reais, consultados diretamente via Google Ads API. O aviso de "dados estimados" do relatório anterior foi resolvido.
+> ✅ **STATUS DA API:** Token OAuth2 restaurado e funcionando. Dados reais consultados via Google Ads API.
 
 ---
 
@@ -11,14 +11,13 @@
 
 ### ✅ O que deu certo
 
-- **CPA caiu 17,0%:** de R$ 2,71/conversa em Abril para R$ 2,25 em Maio — melhor resultado histórico da conta.
-- **Conversões subiram 7,2% gastando 11% menos:** 1.581 conversas em Maio vs 1.475 em Abril, com R$ 439 a menos de investimento. O algoritmo está claramente mais eficiente.
-- **CTR melhorou de 13,25% → 13,59%** (+0,34pp): o anúncio entregou com mais qualidade em Maio.
-- **CPC manteve R$ 0,28 vs R$ 0,29** em Abril: custo por clique estável mesmo com leilão competitivo.
+- **CPA caiu 16,8%:** de R$ 2,73/conversa em Abril para R$ 2,27 em Maio — melhor resultado histórico da conta.
+- **Conversões subiram 17,3% com praticamente o mesmo orçamento:** 1.656 conversas em Maio vs 1.412 em Abril, gastando apenas R$ 91 a menos. Eficiência real e consistente.
+- **CTR melhorou de 13,27% → 13,56%** (+0,29pp): o anúncio entregou com mais qualidade em Maio.
+- **CPC manteve R$ 0,28:** custo por clique estável mesmo com maior volume de conversões.
 
 ### ❌ O que não deu certo
 
-- **Investimento caiu 11% sem decisão estratégica:** a campanha gastou R$ 439 a menos que Abril. Com CPA melhorando, esse orçamento poderia ter trazido aproximadamente +195 conversas adicionais.
 - **Asset group ainda em força "Médio":** o Google penaliza no leilão campanhas PMax com assets abaixo de "Excelente". A SpeedMais está competindo em desvantagem.
 - **Share de impressões travado em 10%:** a conta captura apenas 1 em cada 10 oportunidades disponíveis no mercado de embalagens B2B do Nordeste.
 - **ROAS zerado — sem valor de conversão configurado:** o algoritmo não tem sinal de receita para otimizar. Está operando no escuro quanto ao retorno financeiro real.
@@ -26,10 +25,10 @@
 
 ### 🚀 O que podemos fazer para melhorar
 
-1. **Aumentar orçamento em Junho:** com CPA em R$ 2,25 e eficiência melhorando, é o momento certo para escalar. +R$ 30–50/dia pode trazer aproximadamente +400 conversas no mês sem perder CPA.
-2. **Elevar o asset group de "Médio" para "Excelente":** adicionar headlines com diferenciais específicos (pedido mínimo 500 unid., 10 anos de mercado, impressão offset, entrega no Nordeste) e imagens de portfólio real. Isso melhora o placement no leilão e tende a reduzir CPC.
-3. **Configurar valor de conversão para o clique no WhatsApp:** atribuir R$ 500–800 por conversa (ticket médio estimado de um pedido de embalagens). Habilita o target ROAS e dá ao algoritmo sinal de qualidade real.
-4. **Criar lista de negativos B2C:** termos como "artesanal", "avulso", "embalagem festa", "como fazer", "molde", "embalagem barata" drenam budget em público fora do ICP (empresas com pedido mínimo 500 unid.). Estimativa: 20–35% do budget atual em tráfego não qualificado.
+1. **Aumentar orçamento em Junho:** com CPA em R$ 2,27 e conversões crescendo 17% com o mesmo budget, é o momento certo para escalar. +R$ 30–50/dia pode trazer aproximadamente +400 conversas no mês sem perder CPA.
+2. **Elevar o asset group de "Médio" para "Excelente":** adicionar headlines com diferenciais específicos (pedido mínimo 500 unid., 10 anos de mercado, impressão offset, entrega no Nordeste) e imagens de portfólio real. Isso melhora o placement no leilão.
+3. **Configurar valor de conversão para o clique no WhatsApp:** atribuir R$ 500–800 por conversa (ticket médio estimado). Habilita o target ROAS e dá ao algoritmo sinal de qualidade real.
+4. **Criar lista de negativos B2C:** termos como "artesanal", "avulso", "embalagem festa", "como fazer", "embalagem barata" drenam budget fora do ICP. Estimativa: 20–35% do budget atual em tráfego não qualificado.
 
 ---
 
@@ -39,13 +38,13 @@
 
 | Métrica | Valor |
 |---|---|
-| Status CPA | 🟢 R$ 2,25 |
-| Gasto | R$ 3.564,47 |
-| Conversas WhatsApp | 1.581 |
-| CPA | R$ 2,25 |
-| Impressões | 93.302 |
-| Cliques | 12.680 |
-| CTR | 13,59% |
+| Status CPA | 🟢 R$ 2,27 |
+| Gasto | R$ 3.764,95 |
+| Conversas WhatsApp | 1.656 |
+| CPA | R$ 2,27 |
+| Impressões | 98.695 |
+| Cliques | 13.384 |
+| CTR | 13,56% |
 | CPC Médio | R$ 0,28 |
 | Share de Impressões | 10,0% |
 | Força do Asset Group | 🟡 Médio |
@@ -62,7 +61,7 @@
 | [PMax] [Assucar] [Pmax] [Embalagens e Brindes] - 06/10/25 | R$ 0,00 | ⚫ Pausada |
 
 ---
-**Total investido:** R$ 3.564,47  |  **Conversas:** 1.581  |  **CPA:** R$ 2,25
+**Total investido:** R$ 3.764,95  |  **Conversas:** 1.656  |  **CPA:** R$ 2,27
 
 ---
 
@@ -70,18 +69,18 @@
 
 | Métrica | Abril/2026 | Maio/2026 | Variação |
 |---|---|---|---|
-| Gasto total | R$ 4.003,40 | R$ 3.564,47 | -11,0% 🟡 |
-| Conversas (WhatsApp) | 1.475 | 1.581 | **+106 (+7,2%) 🟢** |
-| CPA médio | R$ 2,71 | R$ 2,25 | **-R$ 0,46 (-17,0%) 🟢** |
-| Cliques | 13.937 | 12.680 | -1.257 (-9,0%) 🟡 |
-| Impressões | 105.198 | 93.302 | -11.896 (-11,3%) 🟡 |
-| CTR | 13,25% | 13,59% | +0,34pp (+2,6%) 🟢 |
+| Gasto total | R$ 3.855,42 | R$ 3.764,95 | -2,3% 🟢 |
+| Conversas (WhatsApp) | 1.412 | 1.656 | **+244 (+17,3%) 🟢** |
+| CPA médio | R$ 2,73 | R$ 2,27 | **-R$ 0,46 (-16,8%) 🟢** |
+| Cliques | 13.501 | 13.384 | -117 (-0,9%) 🟢 |
+| Impressões | 101.704 | 98.695 | -3.009 (-3,0%) 🟡 |
+| CTR | 13,27% | 13,56% | +0,29pp (+2,2%) 🟢 |
 | CPC Médio | R$ 0,29 | R$ 0,28 | -R$ 0,01 (-3,4%) 🟢 |
 | Share de Impressões | 10,0% | 10,0% | — |
 
 ### Leitura do Comparativo
 
-Maio foi o mês de maior eficiência da conta: **o CPA caiu 17% e as conversas subiram 7,2% mesmo com 11% menos de investimento**. O algoritmo está aprendendo e entregando resultados melhores com menos verba. Isso torna Junho o momento ideal para escalar — o CPA tem espaço confortável antes de atingir qualquer limite de eficiência.
+Maio foi o melhor mês em eficiência desde o início do monitoramento: **conversões subiram 17,3% com praticamente o mesmo investimento (-2,3%)**. O CPA caiu 16,8%, o CTR melhorou e o CPC manteve estável. O algoritmo está claramente em fase de otimização — Junho é o momento certo para escalar o orçamento e aproveitar esse ciclo de eficiência.
 
 ---
 
@@ -103,14 +102,14 @@ O PMax está rodando com apenas **1 asset group de força "Médio"**. Para ating
 
 ### Assets recomendados para elevar a força do grupo
 
-**Títulos curtos (30 chars) — sugestões:**
+**Títulos curtos (30 chars):**
 - `Embalagem Offset Personalizada`
 - `A partir de 500 Unidades`
 - `Orçamento em 24h | WhatsApp`
 - `Gráfica Offset no Recife`
 - `10 Anos de Mercado`
 
-**Títulos longos (90 chars) — sugestões:**
+**Títulos longos (90 chars):**
 - `Embalagens personalizadas para sua empresa | Pedido mínimo 500 unid.`
 - `Impressão offset de alta qualidade | Entrega rápida no Nordeste`
 - `Sacolas, caixas e embalagens delivery | Solicite orçamento agora`
@@ -143,6 +142,6 @@ O PMax está rodando com apenas **1 asset group de força "Médio"**. Para ating
 
 ---
 
-**Total investido:** R$ 3.564,47  |  **Conversas:** 1.581  |  **CPA:** R$ 2,25
+**Total investido:** R$ 3.764,95  |  **Conversas:** 1.656  |  **CPA:** R$ 2,27
 *Gerado em 01/06/2026 | Plus Digital*
 *Token OAuth2: ✅ Operacional | Dados reais via Google Ads API | MCC Açúcar 256-486-5113*
