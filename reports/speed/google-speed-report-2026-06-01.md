@@ -11,16 +11,16 @@
 
 ### ✅ O que deu certo
 
-- **CPA caiu 17,6%:** de R$ 2,73/conversa em Abril para R$ 2,25 em Maio — melhor resultado histórico da conta.
-- **Conversões subiram 13,1% gastando menos:** 1.571 conversas em Maio vs 1.389 em Abril, com R$ 244 a menos de investimento. O algoritmo está otimizando melhor.
-- **CTR melhorou de 13,16% → 13,57%** (+0,41pp): o anúncio continua com força de entrega e sem sinais de fadiga.
-- **CPC caiu de R$ 0,29 → R$ 0,28:** leve melhora na eficiência de custo por clique.
+- **CPA caiu 17,0%:** de R$ 2,71/conversa em Abril para R$ 2,25 em Maio — melhor resultado histórico da conta.
+- **Conversões subiram 7,2% gastando 11% menos:** 1.581 conversas em Maio vs 1.475 em Abril, com R$ 439 a menos de investimento. O algoritmo está claramente mais eficiente.
+- **CTR melhorou de 13,25% → 13,59%** (+0,34pp): o anúncio entregou com mais qualidade em Maio.
+- **CPC manteve R$ 0,28 vs R$ 0,29** em Abril: custo por clique estável mesmo com leilão competitivo.
 
 ### ❌ O que não deu certo
 
-- **Investimento caiu 6,5% sem decisão estratégica:** a campanha gastou R$ 244 a menos que Abril. Com o CPA melhorando, esse orçamento poderia ter gerado ~109 conversas adicionais.
+- **Investimento caiu 11% sem decisão estratégica:** a campanha gastou R$ 439 a menos que Abril. Com CPA melhorando, esse orçamento poderia ter trazido aproximadamente +195 conversas adicionais.
 - **Asset group ainda em força "Médio":** o Google penaliza no leilão campanhas PMax com assets abaixo de "Excelente". A SpeedMais está competindo em desvantagem.
-- **Share de impressões travado em 10%:** a conta está capturando apenas 1 em cada 10 oportunidades disponíveis no mercado de embalagens B2B do Nordeste.
+- **Share de impressões travado em 10%:** a conta captura apenas 1 em cada 10 oportunidades disponíveis no mercado de embalagens B2B do Nordeste.
 - **ROAS zerado — sem valor de conversão configurado:** o algoritmo não tem sinal de receita para otimizar. Está operando no escuro quanto ao retorno financeiro real.
 - **1 única campanha ativa:** toda a conta depende de um único PMax, sem diversificação de canal ou teste A/B.
 
@@ -40,12 +40,12 @@
 | Métrica | Valor |
 |---|---|
 | Status CPA | 🟢 R$ 2,25 |
-| Gasto | R$ 3.541,36 |
-| Conversas WhatsApp | 1.571 |
+| Gasto | R$ 3.564,47 |
+| Conversas WhatsApp | 1.581 |
 | CPA | R$ 2,25 |
-| Impressões | 92.680 |
-| Cliques | 12.577 |
-| CTR | 13,57% |
+| Impressões | 93.302 |
+| Cliques | 12.680 |
+| CTR | 13,59% |
 | CPC Médio | R$ 0,28 |
 | Share de Impressões | 10,0% |
 | Força do Asset Group | 🟡 Médio |
@@ -62,7 +62,7 @@
 | [PMax] [Assucar] [Pmax] [Embalagens e Brindes] - 06/10/25 | R$ 0,00 | ⚫ Pausada |
 
 ---
-**Total investido:** R$ 3.541,36  |  **Conversas:** 1.571  |  **CPA:** R$ 2,25
+**Total investido:** R$ 3.564,47  |  **Conversas:** 1.581  |  **CPA:** R$ 2,25
 
 ---
 
@@ -70,20 +70,18 @@
 
 | Métrica | Abril/2026 | Maio/2026 | Variação |
 |---|---|---|---|
-| Gasto total | R$ 3.785,68 | R$ 3.541,36 | -6,5% 🟡 |
-| Conversas (WhatsApp) | 1.389 | 1.571 | **+182 (+13,1%) 🟢** |
-| CPA médio | R$ 2,73 | R$ 2,25 | **-R$ 0,48 (-17,6%) 🟢** |
-| Cliques | 13.195 | 12.577 | -618 (-4,7%) 🟡 |
-| Impressões | 100.295 | 92.680 | -7.615 (-7,6%) 🟡 |
-| CTR | 13,16% | 13,57% | +0,41pp (+3,1%) 🟢 |
+| Gasto total | R$ 4.003,40 | R$ 3.564,47 | -11,0% 🟡 |
+| Conversas (WhatsApp) | 1.475 | 1.581 | **+106 (+7,2%) 🟢** |
+| CPA médio | R$ 2,71 | R$ 2,25 | **-R$ 0,46 (-17,0%) 🟢** |
+| Cliques | 13.937 | 12.680 | -1.257 (-9,0%) 🟡 |
+| Impressões | 105.198 | 93.302 | -11.896 (-11,3%) 🟡 |
+| CTR | 13,25% | 13,59% | +0,34pp (+2,6%) 🟢 |
 | CPC Médio | R$ 0,29 | R$ 0,28 | -R$ 0,01 (-3,4%) 🟢 |
 | Share de Impressões | 10,0% | 10,0% | — |
 
-> **Nota metodológica:** "Abril" corresponde ao delta entre os últimos 60 dias e os últimos 30 dias (período aproximado 02/04–01/05). Para comparativo exato por calendário, o relatório do mês de Abril pode ser consultado no GitHub.
-
 ### Leitura do Comparativo
 
-Maio foi o melhor mês em eficiência desde o início do monitoramento: **o CPA caiu 17,6% com volume de conversas subindo 13,1%**. A queda em cliques e impressões não é preocupante — o algoritmo aprendeu a ser mais seletivo na entrega. O ponto de alerta é o orçamento menor que Abril: como o CPA está excelente, o momento ideal para escalar é agora.
+Maio foi o mês de maior eficiência da conta: **o CPA caiu 17% e as conversas subiram 7,2% mesmo com 11% menos de investimento**. O algoritmo está aprendendo e entregando resultados melhores com menos verba. Isso torna Junho o momento ideal para escalar — o CPA tem espaço confortável antes de atingir qualquer limite de eficiência.
 
 ---
 
@@ -145,6 +143,6 @@ O PMax está rodando com apenas **1 asset group de força "Médio"**. Para ating
 
 ---
 
-**Total investido:** R$ 3.541,36  |  **Conversas:** 1.571  |  **CPA:** R$ 2,25
+**Total investido:** R$ 3.564,47  |  **Conversas:** 1.581  |  **CPA:** R$ 2,25
 *Gerado em 01/06/2026 | Plus Digital*
 *Token OAuth2: ✅ Operacional | Dados reais via Google Ads API | MCC Açúcar 256-486-5113*
