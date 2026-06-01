@@ -4,6 +4,33 @@
 
 ---
 
+## 🧭 Resumo Executivo
+
+### ✅ O que deu certo
+
+- **Cidades Bahia entregou o melhor CPL da conta:** R$12,50 por lead — resultado excelente para B2B de atacado. O criativo está funcionando e o público das cidades da Bahia está receptivo.
+- **CTR da Bahia melhorou:** subiu de 2,74% → 2,96% (+8%), mostrando que o anúncio ainda tem força e não está em fadiga.
+- **Investimento mantido estável:** gasto quase idêntico ao de Abril (-1,5%), sem desperdício de verba.
+- **Duas campanhas ativas com leads chegando:** a conta está funcionando e gerando volume mês a mês.
+
+### ❌ O que não deu certo
+
+- **Volume de leads caiu 15%:** passamos de 91 leads em Abril para 77 em Maio com o mesmo orçamento. A queda não é de investimento — é de performance.
+- **CPL médio subiu 16%:** foi de R$19,50 para R$22,69. Ainda aceitável para B2B, mas a tendência de alta é um sinal de alerta.
+- **CTR da campanha principal caindo:** Melhores Públicos Histórico caiu de 3,56% → 3,03% (-15%). O público está vendo o anúncio, mas clicando menos — sinal claro de início de fadiga criativa.
+- **CPM da Bahia subiu 12,6%:** leilão mais caro em Maio nas cidades-alvo. Ainda compensado pelo CTR, mas precisa de atenção se continuar subindo.
+
+### 🚀 O que podemos fazer para melhorar
+
+1. **Renovar o criativo da campanha principal (prioridade alta):** o CTR caindo sem queda de CPM indica que o problema é o anúncio, não o público. Um novo criativo com hook diferente pode recuperar o CTR para os 3,5% de Abril e consequentemente reduzir o CPL.
+2. **Escalar a campanha Cidades Bahia:** CPL de R$12,50 é muito bom. Aumentar o budget dessa campanha é o caminho mais rápido para trazer mais leads sem aumentar o CPL médio da conta.
+3. **Expandir para novas cidades do Nordeste:** se Bahia está funcionando bem, vale testar Sergipe, Paraíba, Rio Grande do Norte e Piauí com campanhas separadas para avaliar o potencial de cada praça.
+4. **Criar público LookAlike dos leads gerados:** usar a base de leads já convertidos para criar um público semelhante na campanha de Melhores Públicos. Tende a melhorar a qualidade e reduzir o CPL.
+
+---
+
+## 📋 Campanhas Ativas
+
 ## 🟢 [Assucar] [Revendedor] [Lead] Melhores públicos Histórico] - 07/07/25
 
 | Métrica | Valor |
@@ -16,7 +43,6 @@
 | Cliques | 810 |
 | CTR | 3,03% |
 | CPM | R$54,07 |
-| Frequência | — |
 
 ## 🟢 [Assucar] [Revendedor] [Lead] Cidades Bahia - 07/08
 
@@ -30,7 +56,6 @@
 | Cliques | 183 |
 | CTR | 2,96% |
 | CPM | R$48,45 |
-| Frequência | — |
 
 ---
 **Total investido:** R$1.747,40  |  **Leads totais:** 77  |  **CPL médio:** R$22,69
@@ -56,26 +81,6 @@
 | Melhores Públicos Histórico | 63 | 53 | **-10 (-15,9%)** | R$23,40 | R$27,31 | **+R$3,91 (+16,7%)** |
 | Cidades Bahia | 28 | 24 | **-4 (-14,3%)** | R$10,72 | R$12,50 | **+R$1,78 (+16,6%)** |
 | **TOTAL** | **91** | **77** | **-14 (-15,4%)** | **R$19,50** | **R$22,69** | **+R$3,19 (+16,4%)** |
-
----
-
-## 🔍 Diagnóstico e Insights
-
-### O que aconteceu em Maio
-O budget foi praticamente idêntico ao de Abril (-1,5%), então **a queda não é de investimento — é de performance**.
-As duas campanhas caíram em proporção similar (~15%), o que sugere um fator comum: possivelmente sazonalidade ou saturação do público.
-
-### Análise por campanha
-
-**Melhores Públicos Histórico**
-- CTR caiu de 3,56% → 3,03% (-15%) com CPM estável — sinal de **início de fadiga criativa**: o público está vendo o anúncio mas clicando menos
-- CPL subiu 16,7% (R$23,40 → R$27,31) — ainda dentro de um patamar aceitável para B2B, mas em tendência de alta
-- Frequência elevada pode estar contribuindo para a queda de engajamento
-
-**Cidades Bahia**
-- CTR melhorou (2,74% → 2,96%) — o criativo ainda está performando bem
-- CPM subiu 12,6% — leilão mais competitivo nas cidades da Bahia em Maio
-- CPL de R$12,50 continua sendo excelente — **melhor campanha da conta**
 
 ---
 
