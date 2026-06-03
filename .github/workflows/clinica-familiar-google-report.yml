@@ -51,7 +51,13 @@ jobs:
           fi
           OUTPUT="reports/clinica-familiar/google-clinica-familiar-report-${SUFFIX}.md"
           mkdir -p reports/clinica-familiar
-          python execution/weekly_report_generator.py             --customer-id 3715471664             --mcc-id 2564865113             --client-name "Clinica Assistencia Familiar"             --currency BRL             --output "$OUTPUT"             $DATE_ARGS
+          python execution/weekly_report_generator.py \
+            --customer-id 3715471664 \
+            --mcc-id 2564865113 \
+            --client-name "Clinica Assistencia Familiar" \
+            --currency BRL \
+            --output "$OUTPUT" \
+            $DATE_ARGS
           echo "OUTPUT_FILE=$OUTPUT" >> $GITHUB_ENV
 
       - name: Commit e push
@@ -59,9 +65,13 @@ jobs:
           git config user.name "Clinica Familiar Bot"
           git config user.email "bot@plusdigital.com.br"
           git add "${{ env.OUTPUT_FILE }}"
-          git commit -m "Relatorio Google Ads Clinica Familiar - $(date +%Y-%m-%d %H:%M)" --allow-empty
+          git commit -m "Relatorio Google Ads Clinica Familiar - $(date +%Y-%m-%d)" --allow-empty
+          git pull --rebase origin main
           git push
 
       - name: Acionar sync Notion
         run: |
-          curl -s -X POST "https://api.github.com/repos/${{ github.repository }}/actions/workflows/sync-relatorios-notion.yml/dispatches"             -H "Authorization: token ${{ secrets.GH_PAT }}"             -H "Content-Type: application/json"             -d '{"ref":"main"}'
+          curl -s -X POST "https://api.github.com/repos/${{ github.repository }}/actions/workflows/sync-relatorios-notion.yml/dispatches" \
+            -H "Authorization: token ${{ secrets.GH_PAT }}" \
+            -H "Content-Type: application/json" \
+            -d '{"ref":"main"}'
