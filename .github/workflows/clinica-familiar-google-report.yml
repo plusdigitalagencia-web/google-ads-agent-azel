@@ -4,6 +4,15 @@ on:
   schedule:
     - cron: "0 10 * * 1,5"
   workflow_dispatch:
+    inputs:
+      start_date:
+        description: "Data inicial (YYYY-MM-DD)"
+        required: false
+        default: ""
+      end_date:
+        description: "Data final (YYYY-MM-DD)"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -31,14 +40,18 @@ jobs:
           GOOGLE_ADS_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}
           GOOGLE_ADS_LOGIN_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_LOGIN_CUSTOMER_ID }}
         run: |
-          OUTPUT="reports/clinica-familiar/google-clinica-familiar-report-$(date +%Y-%m-%d).md"
+          START="${{ github.event.inputs.start_date }}"
+          END="${{ github.event.inputs.end_date }}"
+          if [ -n "$START" ] && [ -n "$END" ]; then
+            DATE_ARGS="--start-date $START --end-date $END"
+            SUFFIX="${START}-to-${END}"
+          else
+            DATE_ARGS=""
+            SUFFIX="$(date +%Y-%m-%d)"
+          fi
+          OUTPUT="reports/clinica-familiar/google-clinica-familiar-report-${SUFFIX}.md"
           mkdir -p reports/clinica-familiar
-          python execution/weekly_report_generator.py \
-            --customer-id 3715471664 \
-            --mcc-id 2564865113 \
-            --client-name "Clinica Assistencia Familiar" \
-            --currency BRL \
-            --output "$OUTPUT"
+          python execution/weekly_report_generator.py             --customer-id 3715471664             --mcc-id 2564865113             --client-name "Clinica Assistencia Familiar"             --currency BRL             --output "$OUTPUT"             $DATE_ARGS
           echo "OUTPUT_FILE=$OUTPUT" >> $GITHUB_ENV
 
       - name: Commit e push
@@ -51,7 +64,4 @@ jobs:
 
       - name: Acionar sync Notion
         run: |
-          curl -s -X POST "https://api.github.com/repos/${{ github.repository }}/actions/workflows/sync-relatorios-notion.yml/dispatches" \
-            -H "Authorization: token ${{ secrets.GH_PAT }}" \
-            -H "Content-Type: application/json" \
-            -d '{"ref":"main"}'
+          curl -s -X POST "https://api.github.com/repos/${{ github.repository }}/actions/workflows/sync-relatorios-notion.yml/dispatches"             -H "Authorization: token ${{ secrets.GH_PAT }}"             -H "Content-Type: application/json"             -d '{"ref":"main"}'
