@@ -33,6 +33,7 @@ ACCOUNTS = {
     "speed": ("6081418993", "2564865113"),
     "clinica assistencia familiar": ("3715471664", "2564865113"),
     "clinica familiar": ("3715471664", "2564865113"),
+    "clínica assistência familiar": ("3715471664", "2564865113"),
     # Duosfera MCC (7118682168) — adicionar contas aqui quando necessário
     # DataKnow MCC (2319759276)
     "nordika": ("6182489345", "2319759276"),
