@@ -324,12 +324,20 @@ def ad_strength_label(name):
 
 # ── Report generation ────────────────────────────────────────────────────────
 
-def generate_report(customer_id, mcc_id, client_name, currency):
+def generate_report(customer_id, mcc_id, client_name, currency, start_date=None, end_date=None):
     client = get_client(mcc_id)
     service = client.get_service("GoogleAdsService")
 
-    cur_start, cur_end = date_range(7, 1)
-    prev_start, prev_end = date_range(14, 8)
+    if start_date and end_date:
+        from datetime import datetime
+        cur_start = datetime.strptime(start_date, "%Y-%m-%d").date()
+        cur_end = datetime.strptime(end_date, "%Y-%m-%d").date()
+        period_days = (cur_end - cur_start).days + 1
+        prev_end = cur_start - timedelta(days=1)
+        prev_start = prev_end - timedelta(days=period_days - 1)
+    else:
+        cur_start, cur_end = date_range(7, 1)
+        prev_start, prev_end = date_range(14, 8)
 
     def fmt(v): return format_currency(v, currency)
 
@@ -530,11 +538,15 @@ if __name__ == "__main__":
     parser.add_argument("--output", required=True)
     parser.add_argument("--client-name", default="Nordika Aires")
     parser.add_argument("--currency", default="COP", choices=["BRL", "COP", "EUR", "USD"])
+    parser.add_argument("--start-date", default=None, help="Data inicial YYYY-MM-DD (opcional)")
+    parser.add_argument("--end-date", default=None, help="Data final YYYY-MM-DD (opcional)")
     args = parser.parse_args()
 
-    report = generate_report(args.customer_id, args.mcc_id, args.client_name, args.currency)
+    report = generate_report(args.customer_id, args.mcc_id, args.client_name, args.currency,
+                             args.start_date, args.end_date)
 
     with open(args.output, "w", encoding="utf-8") as f:
         f.write(report)
 
     print(f"Relatorio salvo em: {args.output}")
+
