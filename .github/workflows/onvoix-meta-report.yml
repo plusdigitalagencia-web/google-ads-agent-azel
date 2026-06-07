@@ -19,6 +19,6 @@ jobs:
 
       - name: Gerar relatorio Meta Ads Onvoix
         env:
-          ONVOIX_META_TOKEN: ${{ secrets.ONVOIX_META_TOKEN }}
+          ONVOIX_META_TOKEN: ${{ secrets.LEBLON_META_TOKEN }}
           GH_PAT: ${{ secrets.GH_PAT }}
         run: python scripts/onvoix_meta_report.py
