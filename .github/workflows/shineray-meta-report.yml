@@ -28,7 +28,8 @@ jobs:
         run: |
           git config user.name "Shineray Bot"
           git config user.email "bot@plusdigital.com.br"
-          git add reports/shineray/meta-report-*.md
+          git add reports/shineray/
           git diff --staged --quiet || git commit -m "Relatorio Meta Ads Shineray - $(date +'%Y-%m-%d')"
           git pull --rebase origin main
           git push
+
