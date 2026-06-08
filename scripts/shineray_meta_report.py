@@ -320,6 +320,13 @@ for acc in ACCOUNTS:
 # ==================================================
 # MONTAR RELATÓRIO FINAL
 # ==================================================
+MONTH_FOLDER = {
+    1: "janeiro", 2: "fevereiro", 3: "marco", 4: "abril",
+    5: "maio", 6: "junho", 7: "julho", 8: "agosto",
+    9: "setembro", 10: "outubro", 11: "novembro", 12: "dezembro",
+}
+month_dir = MONTH_FOLDER[today.month]
+
 report_date_str = now.strftime("%d/%m/%Y %H:%M")
 report = f"""# Relatório Meta Ads WhatsApp — Shineray Maranhão
 📅 **{report_date_str} (BRT)** | Período: {cur['since']} a {cur['until']} | Plus Digital Agência
@@ -331,11 +338,10 @@ report = f"""# Relatório Meta Ads WhatsApp — Shineray Maranhão
 *Filosofia Andromeda: CPR ideal <R$3,00 | atenção R$3,00–R$5,50 | crítico >R$5,50*
 """
 
-# Salvar
-report_filename = f"reports/shineray/meta-report-{today}.md"
-os.makedirs("reports/shineray", exist_ok=True)
+# Salvar na pasta do mês
+report_filename = f"reports/shineray/{month_dir}/meta-report-{today}.md"
+os.makedirs(f"reports/shineray/{month_dir}", exist_ok=True)
 with open(report_filename, "w", encoding="utf-8") as f:
     f.write(report)
 
 print(f"[OK] Relatório salvo: {report_filename}")
-print(f"[OK] Gasto total: R${sum(r['spend'] for acc_section in [parse(fetch_insights(token, acc['id'], cur, 'campaign')) for acc in ACCOUNTS] for r in acc_section):.2f}")
