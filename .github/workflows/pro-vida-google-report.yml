@@ -2,7 +2,6 @@ name: Pro Vida Google Ads Report
 
 on:
   schedule:
-    - cron: "0 10 * * 1,5"    # Segunda e Sexta 07:00 BRT
     - cron: "0 10 30 * *"     # Dia 30 de cada mês 07:00 BRT — relatório mensal completo
   workflow_dispatch:
     inputs:
