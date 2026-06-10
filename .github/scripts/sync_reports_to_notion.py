@@ -52,6 +52,11 @@ CLIENT_MAP = {
         "camp_routing": {},
     },
     "nordika":  {"link_clients": [{"notion_id": "36d0e07d-daa5-80ef-a10d-ffb7b16d424f", "nome": "Nordika"}], "camp_routing": {}},
+    # ── Duosfera ──────────────────────────────────────────────────────────────────
+    "dr-lincoln":  {"link_clients": [], "camp_routing": {}},
+    "dra-renata":  {"link_clients": [], "camp_routing": {}},
+    "wm-maquinas": {"link_clients": [], "camp_routing": {}},
+    "pro-vida":    {"link_clients": [], "camp_routing": {}},
 }
 
 # ── Notion helpers ─────────────────────────────────────────────────────────────
@@ -262,7 +267,7 @@ def main():
     for file_path in changed:
         parts = file_path.split("/")
         if len(parts) < 3: continue
-        folder, file_name = parts[1], parts[-1]
+        folder, file_name = parts[-2], parts[-1]
         if "." not in file_name: continue
 
         config = CLIENT_MAP.get(folder)

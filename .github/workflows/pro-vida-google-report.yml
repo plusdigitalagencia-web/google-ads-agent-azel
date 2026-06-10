@@ -1,0 +1,77 @@
+name: Pro Vida Google Ads Report
+
+on:
+  schedule:
+    - cron: "0 10 * * 1,5"
+  workflow_dispatch:
+    inputs:
+      start_date:
+        description: "Data inicial (YYYY-MM-DD)"
+        required: false
+        default: ""
+      end_date:
+        description: "Data final (YYYY-MM-DD)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependencias
+        run: pip install google-ads python-dotenv
+
+      - name: Gerar relatorio
+        env:
+          GOOGLE_ADS_DEVELOPER_TOKEN: ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
+          GOOGLE_ADS_CLIENT_ID: ${{ secrets.GOOGLE_ADS_CLIENT_ID }}
+          GOOGLE_ADS_CLIENT_SECRET: ${{ secrets.GOOGLE_ADS_CLIENT_SECRET }}
+          GOOGLE_ADS_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}
+          GOOGLE_ADS_LOGIN_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_LOGIN_CUSTOMER_ID }}
+        run: |
+          START="${{ github.event.inputs.start_date }}"
+          END="${{ github.event.inputs.end_date }}"
+          if [ -n "$START" ] && [ -n "$END" ]; then
+            DATE_ARGS="--start-date $START --end-date $END"
+            SUFFIX="${START}-to-${END}"
+          else
+            DATE_ARGS=""
+            SUFFIX="$(date +%Y-%m-%d)"
+          fi
+          OUTPUT="reports/DUOSFERA/pro-vida/google-pro-vida-report-${SUFFIX}.md"
+          mkdir -p reports/DUOSFERA/pro-vida
+          python execution/weekly_report_generator.py \
+            --customer-id 5981473421 \
+            --mcc-id 7118682168 \
+            --client-name "Pro Vida Sociedade Medica" \
+            --currency BRL \
+            --output "$OUTPUT" \
+            $DATE_ARGS
+          echo "OUTPUT_FILE=$OUTPUT" >> $GITHUB_ENV
+
+      - name: Commit e push
+        run: |
+          git config user.name "Pro Vida Bot"
+          git config user.email "bot@plusdigital.com.br"
+          git add "${{ env.OUTPUT_FILE }}"
+          git commit -m "Relatorio Google Ads Pro Vida - $(date +%Y-%m-%d)" --allow-empty
+          git pull --rebase origin main
+          git push
+
+      - name: Acionar sync Notion
+        run: |
+          curl -s -X POST "https://api.github.com/repos/${{ github.repository }}/actions/workflows/sync-relatorios-notion.yml/dispatches" \
+            -H "Authorization: token ${{ secrets.GH_PAT }}" \
+            -H "Content-Type: application/json" \
+            -d '{"ref":"main"}'
