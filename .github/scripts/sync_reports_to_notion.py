@@ -53,10 +53,13 @@ CLIENT_MAP = {
     },
     "nordika":  {"link_clients": [{"notion_id": "36d0e07d-daa5-80ef-a10d-ffb7b16d424f", "nome": "Nordika"}], "camp_routing": {}},
     # ── Duosfera ──────────────────────────────────────────────────────────────────
-    "dr-lincoln":  {"link_clients": [], "camp_routing": {}},
-    "dra-renata":  {"link_clients": [], "camp_routing": {}},
-    "wm-maquinas": {"link_clients": [], "camp_routing": {}},
-    "pro-vida":    {"link_clients": [], "camp_routing": {}},
+    "dr-lincoln":      {"link_clients": [], "camp_routing": {}},
+    "dra-renata":      {"link_clients": [], "camp_routing": {}},
+    "wm-maquinas":     {"link_clients": [], "camp_routing": {}},
+    "pro-vida":        {"link_clients": [], "camp_routing": {}},
+    "barbara-braga":   {"link_clients": [], "camp_routing": {}},
+    "dra-isabela":     {"link_clients": [], "camp_routing": {}},
+    "duosfera-digital":{"link_clients": [], "camp_routing": {}},
 }
 
 # ── Notion helpers ─────────────────────────────────────────────────────────────

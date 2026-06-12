@@ -1,0 +1,24 @@
+name: Dra Fernanda Meta Ads - Relatorio Semanal
+
+on:
+  schedule:
+    - cron: '0 10 * * 1'  # toda segunda-feira as 07:00 BRT (10:00 UTC)
+  workflow_dispatch:       # permite rodar manualmente pelo GitHub
+
+jobs:
+  generate-report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Gerar relatorio Meta Ads Dra Fernanda
+        env:
+          DUOSFERA_META_TOKEN: ${{ secrets.DUOSFERA_META_TOKEN }}
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: python scripts/dra_fernanda_meta_report.py
