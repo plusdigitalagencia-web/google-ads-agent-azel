@@ -33,7 +33,7 @@ jobs:
           GOOGLE_ADS_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}
           GOOGLE_ADS_LOGIN_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_LOGIN_CUSTOMER_ID }}
         run: |
-          OUTPUT="reports/nordika/relatorio-$(date +%Y-%d-%m).md"
+          OUTPUT="reports/data-know/nordika/relatorio-$(date +%Y-%d-%m).md"
           python execution/weekly_report_generator.py \
             --customer-id 6182489345 \
             --mcc-id 2319759276 \
