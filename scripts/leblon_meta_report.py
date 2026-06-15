@@ -225,8 +225,7 @@ for camp in camp_curr:
 A("---")
 A("TOKEN EXPIRA EM 05/08/2026 - renovar antes dessa data.")
 
-report="
-".join(L)
+report="\n".join(L)
 filepath=f"reports/leblon-real-estate/meta-report-{today.strftime('%Y-%m-%d')}.md"
 api_url=f"https://api.github.com/repos/{GITHUB_REPO}/contents/{filepath}"
 req=urllib.request.Request(api_url,headers={"Authorization":f"token {GITHUB_TOKEN}"})
