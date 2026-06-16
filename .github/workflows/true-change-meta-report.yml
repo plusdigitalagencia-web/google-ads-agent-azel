@@ -2,8 +2,8 @@ name: True Change Meta Ads Report
 
 on:
   schedule:
-    - cron: "0 10 10 * *"   # Dia 10 de cada mês às 07:00 BRT
     - cron: "0 10 15 * *"   # Dia 15 de cada mês às 07:00 BRT
+    - cron: "0 10 30 * *"   # Dia 30 de cada mês às 07:00 BRT
   workflow_dispatch:
     inputs:
       until_date:
