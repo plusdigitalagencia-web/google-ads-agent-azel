@@ -2,8 +2,14 @@ name: Decore Meta Ads Report
 
 on:
   schedule:
+    - cron: "0 10 15 * *"   # Dia 15 de cada mês às 07:00 BRT
     - cron: "0 10 30 * *"   # Dia 30 de cada mês às 07:00 BRT
   workflow_dispatch:
+    inputs:
+      until_date:
+        description: 'Data final do período (YYYY-MM-DD). Padrão: data de hoje.'
+        required: false
+        default: ''
 
 permissions:
   contents: write
@@ -23,6 +29,7 @@ jobs:
       - name: Gerar relatorio
         env:
           DECORE_META_ACCESS_TOKEN: ${{ secrets.DECORE_META_ACCESS_TOKEN }}
+          UNTIL_DATE: ${{ github.event.inputs.until_date }}
         run: |
           mkdir -p reports/decore
           python scripts/decore_meta_report.py

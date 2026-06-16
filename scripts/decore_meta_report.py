@@ -26,7 +26,7 @@ def val_lead(actions):
 today      = datetime.now()
 year, month = today.year, today.month
 since      = f"{year}-{month:02d}-01"
-until      = today.strftime("%Y-%m-%d")
+until      = os.environ.get("UNTIL_DATE") or today.strftime("%Y-%m-%d")
 if month == 1:
     prev_year, prev_month = year - 1, 12
 else:
