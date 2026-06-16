@@ -1,0 +1,51 @@
+name: Chez France Meta Ads Report
+
+on:
+  schedule:
+    - cron: "0 10 15 * *"   # Dia 15 de cada mês às 07:00 BRT
+    - cron: "0 10 30 * *"   # Dia 30 de cada mês às 07:00 BRT
+  workflow_dispatch:
+    inputs:
+      until_date:
+        description: 'Data final do período (YYYY-MM-DD). Padrão: data de hoje.'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Gerar relatorio
+        env:
+          CHEZ_FRANCE_META_ACCESS_TOKEN: ${{ secrets.CHEZ_FRANCE_META_ACCESS_TOKEN }}
+          UNTIL_DATE: ${{ github.event.inputs.until_date }}
+        run: |
+          mkdir -p reports/chez-france/meta
+          python scripts/chez_france_meta_report.py
+
+      - name: Commit e push
+        run: |
+          git config user.name "Chez France Bot"
+          git config user.email "bot@plusdigital.com.br"
+          git add reports/chez-france/meta/
+          git commit -m "Relatorio Meta Ads Chez France - $(date '+%Y-%m-%d %H:%M')" --allow-empty
+          git pull --rebase origin main
+          git push
+
+      - name: Acionar sync Notion
+        run: |
+          curl -s -X POST "https://api.github.com/repos/${{ github.repository }}/actions/workflows/sync-relatorios-notion.yml/dispatches" \
+            -H "Authorization: token ${{ secrets.GH_PAT }}" \
+            -H "Content-Type: application/json" \
+            -d '{"ref":"main"}'
