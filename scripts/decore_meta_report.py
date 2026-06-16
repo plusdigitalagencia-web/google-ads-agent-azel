@@ -128,7 +128,7 @@ for c in camp_meta:
             nao_deu.append(f"CPM de **{c['name'][:40]}** subiu {d:.0f}% — leilão mais caro.")
 
 # Melhorias automáticas
-if best["cpl"] > 0 and best["cpl"] < 20:
+if camp_meta and best["cpl"] > 0 and best["cpl"] < 20:
     melhorias.append(f"**Escalar {best['name'][:40]}:** CPL de R${best['cpl']:.2f} justifica aumento de budget.")
 for c in camp_meta:
     if c["prev_ctr"] > 0 and (c["ctr"] - c["prev_ctr"]) / c["prev_ctr"] < -0.10:
