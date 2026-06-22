@@ -7,7 +7,7 @@ Roda toda segunda via GitHub Actions as 07:00 BRT
 Token expira: 05/08/2026
 """
 import os, urllib.request, urllib.error, urllib.parse
-import json, datetime, base64
+import json, datetime, base64, time
 
 TOKEN        = os.environ["LEBLON_META_TOKEN"]
 GITHUB_TOKEN = os.environ["GH_PAT"]
@@ -423,17 +423,34 @@ A("TOKEN EXPIRA EM 05/08/2026 - renovar antes dessa data.")
 
 report   = "\n".join(L)
 filepath = f"reports/data-know/leblon-real-estate/meta-report-{today.strftime('%Y-%m-%d')}.md"
-api_url  = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{filepath}"
-req = urllib.request.Request(api_url, headers={"Authorization": f"token {GITHUB_TOKEN}"})
-try:
-    sha = json.loads(urllib.request.urlopen(req).read()).get("sha","")
-except: sha = ""
-payload = {"message": f"feat: relatorio Meta Ads Leblon {today.strftime('%Y-%m-%d')}", "content": base64.b64encode(report.encode()).decode()}
-if sha: payload["sha"] = sha
-req = urllib.request.Request(api_url, data=json.dumps(payload).encode(),
-    headers={"Authorization": f"token {GITHUB_TOKEN}", "Content-Type": "application/json"}, method="PUT")
-try:
-    urllib.request.urlopen(req)
-    print(f"Relatorio salvo: https://github.com/{GITHUB_REPO}/blob/main/{filepath}")
-except urllib.error.HTTPError as e:
-    print(f"Erro ao salvar: {e.read().decode()}")
+
+def save_to_github(filepath, content_str, commit_msg):
+    api_url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{filepath}"
+    encoded = base64.b64encode(content_str.encode()).decode()
+    for attempt in range(5):
+        req = urllib.request.Request(api_url, headers={"Authorization": f"token {GITHUB_TOKEN}"})
+        try:
+            sha = json.loads(urllib.request.urlopen(req).read()).get("sha", "")
+        except:
+            sha = ""
+        payload = {"message": commit_msg, "content": encoded}
+        if sha:
+            payload["sha"] = sha
+        req = urllib.request.Request(api_url, data=json.dumps(payload).encode(),
+            headers={"Authorization": f"token {GITHUB_TOKEN}", "Content-Type": "application/json"}, method="PUT")
+        try:
+            urllib.request.urlopen(req)
+            print(f"Relatorio salvo: https://github.com/{GITHUB_REPO}/blob/main/{filepath}")
+            return
+        except urllib.error.HTTPError as e:
+            err = e.read().decode()
+            if e.code == 409 and attempt < 4:
+                wait = (attempt + 1) * 15
+                print(f"Conflito SHA (tentativa {attempt+1}/5) - aguardando {wait}s...")
+                time.sleep(wait)
+            else:
+                print(f"Erro ao salvar: {err}")
+                raise SystemExit(1)
+
+
+save_to_github(filepath, report, f"feat: relatorio Meta Ads Leblon {today.strftime('%Y-%m-%d')}")
