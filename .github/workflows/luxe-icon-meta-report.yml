@@ -2,7 +2,7 @@ name: Luxe Icon Meta Ads - Relatorio Semanal
 
 on:
   schedule:
-    - cron: '0 10 * * 1'  # toda segunda-feira as 07:00 BRT (10:00 UTC)
+    - cron: '5 10 * * 1'  # toda segunda-feira as 07:05 BRT (10:05 UTC)
   workflow_dispatch:
 
 jobs:
@@ -22,3 +22,4 @@ jobs:
           LUXE_ICON_META_TOKEN: ${{ secrets.LUXE_ICON_META_TOKEN }}
           GH_PAT: ${{ secrets.GH_PAT }}
         run: python scripts/luxe_icon_meta_report.py
+
