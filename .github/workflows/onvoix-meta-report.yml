@@ -2,7 +2,7 @@ name: Onvoix Meta Ads - Relatorio Semanal
 
 on:
   schedule:
-    - cron: '0 10 * * 1'  # toda segunda-feira as 07:00 BRT (10:00 UTC)
+    - cron: '10 10 * * 1'  # toda segunda-feira as 07:10 BRT (10:10 UTC)
   workflow_dispatch:       # permite rodar manualmente pelo GitHub
 
 jobs:
@@ -22,3 +22,4 @@ jobs:
           ONVOIX_META_TOKEN: ${{ secrets.LEBLON_META_TOKEN }}
           GH_PAT: ${{ secrets.GH_PAT }}
         run: python scripts/onvoix_meta_report.py
+
