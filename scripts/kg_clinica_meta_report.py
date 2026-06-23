@@ -16,7 +16,7 @@ BASE         = "https://graph.facebook.com/v25.0"
 GITHUB_REPO  = "plusdigitalagencia-web/google-ads-agent-azel"
 CLIENT_NAME  = "KG Clinica"
 CURRENCY     = "€"
-BUDGET_EST   = 0  # definir com o cliente — 0 desativa pacing
+BUDGET_EST   = 600  # EUR/mes
 
 today    = datetime.date.today()
 p1_end   = today - datetime.timedelta(days=1)
