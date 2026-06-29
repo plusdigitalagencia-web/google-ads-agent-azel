@@ -1,0 +1,35 @@
+name: Dispatcher — Relatórios Segunda-feira
+
+on:
+  schedule:
+    - cron: '50 9 * * 1'  # toda segunda 06:50 BRT (09:50 UTC) — aciona antes dos horários individuais
+  workflow_dispatch:       # trigger externo via API (cron-job.org, Make, manual)
+
+jobs:
+  dispatch-reports:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Keepalive — commit semanal para manter repo ativo
+        run: |
+          git config user.name "dispatcher-bot"
+          git config user.email "dispatcher-bot@users.noreply.github.com"
+          echo "$(date -u +%Y-%m-%d)" > .github/keepalive.txt
+          git add .github/keepalive.txt
+          git diff --cached --quiet || git commit -m "chore: keepalive $(date -u +%Y-%m-%d)"
+          git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/plusdigitalagencia-web/google-ads-agent-azel.git HEAD:main
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Disparar todos os relatórios de segunda
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: python scripts/dispatcher_segunda.py
