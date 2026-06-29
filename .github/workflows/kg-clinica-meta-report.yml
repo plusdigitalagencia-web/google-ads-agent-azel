@@ -1,9 +1,7 @@
 name: KG Clinica - Relatorio Semanal Meta Ads
 
 on:
-  schedule:
-    - cron: '10 10 * * 1'  # toda segunda-feira as 07:10 BRT (10:10 UTC)
-  workflow_dispatch:       # permite rodar manualmente pelo GitHub
+  workflow_dispatch:       # acionado pelo dispatcher-segunda.yml ou manualmente
 
 jobs:
   generate-report:
