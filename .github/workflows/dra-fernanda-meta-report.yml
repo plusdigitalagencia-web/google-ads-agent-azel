@@ -1,9 +1,7 @@
 name: Dra Fernanda Meta Ads - Relatorio Semanal
 
 on:
-  schedule:
-    - cron: '0 10 * * 1'  # toda segunda-feira as 07:00 BRT (10:00 UTC)
-  workflow_dispatch:       # permite rodar manualmente pelo GitHub
+  workflow_dispatch:       # acionado pelo dispatcher-segunda.yml ou manualmente
 
 jobs:
   generate-report:
