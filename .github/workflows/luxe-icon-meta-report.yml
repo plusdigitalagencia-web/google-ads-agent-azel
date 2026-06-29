@@ -1,8 +1,6 @@
 name: Luxe Icon Meta Ads - Relatorio Semanal
 
 on:
-  schedule:
-    - cron: '5 10 * * 1'  # toda segunda-feira as 07:05 BRT (10:05 UTC)
   workflow_dispatch:
 
 jobs:
