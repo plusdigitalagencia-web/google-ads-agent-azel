@@ -2,17 +2,17 @@
 """
 LRS Safety - Relatorio Semanal Meta Ads (7 Modulos)
 SOP: data-know/SOP-analise-meta-ads.md
-Conta: act_LRS_PLACEHOLDER | Moeda: BRL | Sao Paulo capital e Grande SP
+Conta: act_574789065003576 | Moeda: BRL | Sao Paulo capital e Grande SP
 Roda toda segunda via GitHub Actions as 07:10 BRT
 Token: LRS_SAFETY_META_TOKEN | App Meta: 687818438366946
-ACAO PENDENTE: substituir act_LRS_PLACEHOLDER pelo ID real da conta Meta Ads
+Conta ativa desde 06/07/2026
 """
 import os, urllib.request, urllib.error, urllib.parse
 import json, datetime, base64, time
 
 TOKEN        = os.environ["LRS_SAFETY_META_TOKEN"]
 GITHUB_TOKEN = os.environ["GH_PAT"]
-ACCOUNT      = "act_LRS_PLACEHOLDER"  # ATUALIZAR com ID real da conta Meta Ads
+ACCOUNT      = "act_574789065003576"  # Atualizado em 06/07/2026
 BASE         = "https://graph.facebook.com/v25.0"
 GITHUB_REPO  = "plusdigitalagencia-web/google-ads-agent-azel"
 CLIENT_NAME  = "LRS Safety"
