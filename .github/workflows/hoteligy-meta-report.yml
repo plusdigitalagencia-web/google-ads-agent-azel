@@ -17,6 +17,6 @@ jobs:
 
       - name: Gerar relatorio Meta Ads Hoteligy
         env:
-          HOTELIGY_META_TOKEN: ${{ secrets.HOTELIGY_META_TOKEN }}
+          HOTELIGY_META_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
           GH_PAT: ${{ secrets.GH_PAT }}
         run: python scripts/hoteligy_meta_report.py
