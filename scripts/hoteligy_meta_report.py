@@ -2,17 +2,16 @@
 """
 Hoteligy - Relatorio Semanal Meta Ads (7 Modulos)
 SOP: data-know/SOP-analise-meta-ads.md
-Conta: act_HOTELIGY_PLACEHOLDER | Moeda: EUR | Global (Espanha, Portugal, LATAM)
+Conta: act_51307638 | Moeda: EUR | Global (Espanha, Portugal, LATAM)
 Roda toda segunda via GitHub Actions as 07:10 BRT
 Token: HOTELIGY_META_TOKEN | App Meta: 687818438366946
-ACAO PENDENTE: substituir act_HOTELIGY_PLACEHOLDER pelo ID real da conta Meta Ads
 """
 import os, urllib.request, urllib.error, urllib.parse
 import json, datetime, base64, time
 
 TOKEN        = os.environ["HOTELIGY_META_TOKEN"]
 GITHUB_TOKEN = os.environ["GH_PAT"]
-ACCOUNT      = "act_HOTELIGY_PLACEHOLDER"  # ATUALIZAR com ID real da conta Meta Ads
+ACCOUNT      = "act_51307638"
 BASE         = "https://graph.facebook.com/v25.0"
 GITHUB_REPO  = "plusdigitalagencia-web/google-ads-agent-azel"
 CLIENT_NAME  = "Hoteligy"
