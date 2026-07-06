@@ -4,7 +4,7 @@ Hoteligy - Relatorio Semanal Meta Ads (7 Modulos)
 SOP: data-know/SOP-analise-meta-ads.md
 Conta: act_51307638 | Moeda: EUR | Global (Espanha, Portugal, LATAM)
 Roda toda segunda via GitHub Actions as 07:10 BRT
-Token: HOTELIGY_META_TOKEN | App Meta: 687818438366946
+Token: reaproveita secret META_ACCESS_TOKEN (app Agencia Digital Nexus, expira ~14/08/2026)
 """
 import os, urllib.request, urllib.error, urllib.parse
 import json, datetime, base64, time
