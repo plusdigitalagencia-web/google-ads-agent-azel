@@ -1,0 +1,24 @@
+name: Alcala Homes - Relatorio Semanal Meta Ads
+
+on:
+  schedule:
+    - cron: '10 10 * * 1'
+  workflow_dispatch:
+
+jobs:
+  generate-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Gerar relatorio Meta Ads Alcala Homes
+        env:
+          ALCALA_META_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: python scripts/alcala_homes_meta_report.py
+
