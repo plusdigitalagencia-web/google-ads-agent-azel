@@ -30,7 +30,7 @@ def micros(value):
 
 def format_currency(value, currency="BRL"):
     if currency == "COP": return f"COP {value:,.0f}"
-    if currency == "EUR": return f"€{value:,.2f}"
+    if currency == "EUR": return f"\u20ac{value:,.2f}"
     if currency == "USD": return f"US$ {value:,.2f}"
     return f"R$ {value:,.2f}"
 
@@ -39,16 +39,16 @@ def safe_pct(value):
     """Format impression share safely — returns '—' for unavailable/NaN values."""
     try:
         v = float(value)
-        if v <= 0 or v != v: return "—"
+        if v <= 0 or v != v: return "\u2014"
         return f"{v * 100:.1f}%"
     except Exception:
-        return "—"
+        return "\u2014"
 
 
 def pct_change(current, previous):
     if previous == 0: return None
     change = ((current - previous) / previous) * 100
-    arrow = "↑" if change >= 0 else "↓"
+    arrow = "\u2191" if change >= 0 else "\u2193"
     return f"{arrow} {change:+.1f}%"
 
 
@@ -59,7 +59,7 @@ def date_range(days_ago_start, days_ago_end):
     return start, end
 
 
-# ── Query functions ──────────────────────────────────────────────────────────
+# \u2500\u2500 Query functions \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
 
 def fetch_campaign_metrics(service, customer_id, start, end):
     query = f"""
@@ -225,7 +225,7 @@ def fetch_search_terms(service, customer_id, start, end):
     return list(service.search(customer_id=customer_id, query=query))
 
 
-# ── Aggregation helpers ──────────────────────────────────────────────────────
+# \u2500\u2500 Aggregation helpers \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
 
 def aggregate_campaigns(rows):
     totals = {"cost": 0, "clicks": 0, "impressions": 0, "conversions": 0, "conversions_value": 0, "all_conversions": 0}
@@ -295,7 +295,7 @@ def aggregate_devices(rows):
 
 
 def build_qs_map(qs_rows):
-    quality_labels = {"BELOW_AVERAGE": "⬇ Abaixo", "AVERAGE": "→ Médio", "ABOVE_AVERAGE": "⬆ Acima", "UNKNOWN": "—"}
+    quality_labels = {"BELOW_AVERAGE": "\u2b07 Abaixo", "AVERAGE": "\u2192 Medio", "ABOVE_AVERAGE": "\u2b06 Acima", "UNKNOWN": "\u2014"}
     qs_map = {}
     for row in qs_rows:
         kw = row.ad_group_criterion
@@ -303,26 +303,122 @@ def build_qs_map(qs_rows):
         qs = kw.quality_info.quality_score
         qs_map[key] = {
             "qs": qs if qs > 0 else None,
-            "creative": quality_labels.get(kw.quality_info.creative_quality_score.name, "—"),
-            "landing": quality_labels.get(kw.quality_info.post_click_quality_score.name, "—"),
-            "ctr_exp": quality_labels.get(kw.quality_info.search_predicted_ctr.name, "—"),
+            "creative": quality_labels.get(kw.quality_info.creative_quality_score.name, "\u2014"),
+            "landing": quality_labels.get(kw.quality_info.post_click_quality_score.name, "\u2014"),
+            "ctr_exp": quality_labels.get(kw.quality_info.search_predicted_ctr.name, "\u2014"),
         }
     return qs_map
 
 
 def qs_icon(score):
-    if score is None: return "—"
-    if score >= 7: return f"🟢 {score}"
-    if score >= 4: return f"🟡 {score}"
-    return f"🔴 {score}"
+    if score is None: return "\u2014"
+    if score >= 7: return f"\U0001f7e2 {score}"
+    if score >= 4: return f"\U0001f7e1 {score}"
+    return f"\U0001f534 {score}"
 
 
 def ad_strength_label(name):
-    labels = {"POOR": "🔴 Fraco", "AVERAGE": "🟡 Regular", "GOOD": "🟢 Bom", "EXCELLENT": "⭐ Excelente"}
-    return labels.get(name, "—")
+    labels = {"POOR": "\U0001f534 Fraco", "AVERAGE": "\U0001f7e1 Regular", "GOOD": "\U0001f7e2 Bom", "EXCELLENT": "\u2b50 Excelente"}
+    return labels.get(name, "\u2014")
 
 
-# ── Report generation ────────────────────────────────────────────────────────
+def build_resumo_executivo(campaigns, cur, prev, qs_map, waste_count, waste_cost, currency):
+    """Generates the qualitative Resumo Executivo block (what worked, what didn't, recommendations)."""
+    def fmt(v): return format_currency(v, currency)
+
+    positives = []
+    negatives = []
+    recommendations = []
+
+    conv_change = ((cur["conversions"] - prev["conversions"]) / prev["conversions"] * 100) if prev["conversions"] > 0 else None
+    cpa_change = ((cur["cpa"] - prev["cpa"]) / prev["cpa"] * 100) if prev["cpa"] > 0 and cur["cpa"] > 0 else None
+    ctr_change = ((cur["ctr"] - prev["ctr"]) / prev["ctr"] * 100) if prev["ctr"] > 0 else None
+    cost_change = ((cur["cost"] - prev["cost"]) / prev["cost"] * 100) if prev["cost"] > 0 else None
+
+    # Conversions trend
+    if conv_change is not None:
+        if conv_change > 10:
+            positives.append(f"Convers\u00f5es subiram {conv_change:+.1f}% ({prev['conversions']:.1f} \u2192 {cur['conversions']:.1f})")
+        elif conv_change < -10:
+            negatives.append(f"Convers\u00f5es ca\u00edram {abs(conv_change):.1f}% ({prev['conversions']:.1f} \u2192 {cur['conversions']:.1f})")
+
+    # CPA trend
+    if cpa_change is not None:
+        if cpa_change < -10:
+            positives.append(f"CPA melhorou {abs(cpa_change):.1f}% ({fmt(prev['cpa'])} \u2192 {fmt(cur['cpa'])})")
+        elif cpa_change > 15:
+            negatives.append(f"CPA aumentou {cpa_change:+.1f}% ({fmt(prev['cpa'])} \u2192 {fmt(cur['cpa'])})")
+
+    # CTR trend
+    if ctr_change is not None and abs(ctr_change) > 15:
+        if ctr_change > 0:
+            positives.append(f"CTR melhorou {ctr_change:+.1f}% ({prev['ctr']:.2f}% \u2192 {cur['ctr']:.2f}%)")
+        else:
+            negatives.append(f"CTR caiu {abs(ctr_change):.1f}% ({prev['ctr']:.2f}% \u2192 {cur['ctr']:.2f}%) \u2014 poss\u00edvel fadiga de an\u00fancios")
+            recommendations.append("Renovar criativos/headlines dos an\u00fancios \u2014 CTR em queda indica fadiga")
+
+    # ROAS
+    if cur["roas"] > 0:
+        roas_change = ((cur["roas"] - prev["roas"]) / prev["roas"] * 100) if prev["roas"] > 0 else None
+        suffix = f" ({roas_change:+.1f}% vs per\u00edodo anterior)" if roas_change is not None else ""
+        if cur["roas"] >= 3:
+            positives.append(f"ROAS consolidado saud\u00e1vel: {cur['roas']:.2f}x{suffix}")
+        elif cur["roas"] < 1.5:
+            negatives.append(f"ROAS abaixo de 1.5x ({cur['roas']:.2f}x) \u2014 custo supera receita gerada")
+            recommendations.append("Revisar estrat\u00e9gia de lances e segmenta\u00e7\u00e3o \u2014 ROAS abaixo do m\u00ednimo saud\u00e1vel")
+
+    # Best/worst campaign by CPA
+    active_conv = [c for c in campaigns if c["status"] == "ATIVA" and c["conversions"] > 0]
+    if active_conv:
+        best = min(active_conv, key=lambda x: x["cpa"])
+        positives.append(f"Melhor CPA: **{best['name']}** \u2192 {fmt(best['cpa'])} ({best['conversions']:.1f} conv.)")
+        if len(active_conv) > 1:
+            worst = max(active_conv, key=lambda x: x["cpa"])
+            if worst["name"] != best["name"] and cur["cpa"] > 0 and worst["cpa"] > cur["cpa"] * 1.5:
+                gap = (worst["cpa"] - cur["cpa"]) / cur["cpa"] * 100
+                negatives.append(f"CPA mais alto: **{worst['name']}** \u2192 {fmt(worst['cpa'])} ({gap:+.0f}% acima da m\u00e9dia da conta)")
+                recommendations.append(f"Otimizar lances em **{worst['name']}** para reduzir CPA")
+
+    # Quality Score
+    low_qs = [kw for kw, info in qs_map.items() if info.get("qs") is not None and info["qs"] <= 3]
+    good_qs = [kw for kw, info in qs_map.items() if info.get("qs") is not None and info["qs"] >= 7]
+    if good_qs:
+        positives.append(f"{len(good_qs)} keyword(s) com Quality Score \u2265 7 (boa relev\u00e2ncia)")
+    if low_qs:
+        sample = ", ".join(f"\"{k}\"" for k in low_qs[:3])
+        negatives.append(f"{len(low_qs)} keyword(s) com QS \u2264 3: {sample}")
+        recommendations.append(f"Revisar ou pausar keywords com QS \u2264 3: {sample}")
+
+    # Wasted spend
+    if waste_count > 0:
+        recommendations.append(f"Adicionar {waste_count} termo(s) como negativas \u2014 desperd\u00edcio estimado de {fmt(waste_cost)}")
+
+    # General trends
+    if conv_change is not None and conv_change < -15:
+        recommendations.append("Revisar criativos e p\u00e1ginas de destino \u2014 queda expressiva de convers\u00f5es no per\u00edodo")
+    if cpa_change is not None and cpa_change > 20:
+        recommendations.append("Ajustar estrat\u00e9gia de lance \u2014 CPA crescendo acima do esperado")
+
+    if not positives:
+        positives.append("Per\u00edodo est\u00e1vel \u2014 sem varia\u00e7\u00f5es positivas expressivas a destacar")
+    if not negatives:
+        negatives.append("Sem alertas cr\u00edticos identificados no per\u00edodo")
+    if not recommendations:
+        recommendations.append("Manter estrat\u00e9gia atual e acompanhar tend\u00eancia nas pr\u00f3ximas semanas")
+
+    block = ["## \U0001f9ed Resumo Executivo", "", "### \u2705 O que deu certo"]
+    for p in positives:
+        block.append(f"- {p}")
+    block += ["", "### \u274c O que n\u00e3o deu certo"]
+    for n in negatives:
+        block.append(f"- {n}")
+    block += ["", "### \U0001f680 O que podemos fazer para melhorar"]
+    for i, r in enumerate(recommendations, 1):
+        block.append(f"{i}. {r}")
+    return block
+
+
+# \u2500\u2500 Report generation \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
 
 def generate_report(customer_id, mcc_id, client_name, currency, start_date=None, end_date=None):
     client = get_client(mcc_id)
@@ -355,6 +451,11 @@ def generate_report(customer_id, mcc_id, client_name, currency, start_date=None,
     devices = aggregate_devices(device_rows)
     qs_map = build_qs_map(qs_rows)
 
+    # Compute waste terms early (used both in Resumo Executivo and in the search terms section)
+    waste_terms = [r for r in search_rows if micros(r.metrics.cost_micros) > 0 and r.metrics.conversions == 0 and r.metrics.clicks >= 3]
+    waste_count = len(waste_terms)
+    waste_cost = sum(micros(r.metrics.cost_micros) for r in waste_terms)
+
     week_label = f"{cur_start.strftime('%d/%m/%Y')} a {cur_end.strftime('%d/%m/%Y')}"
     prev_label = f"{prev_start.strftime('%d/%m/%Y')} a {prev_end.strftime('%d/%m/%Y')}"
     generated_at = date.today().strftime("%d/%m/%Y")
@@ -362,12 +463,20 @@ def generate_report(customer_id, mcc_id, client_name, currency, start_date=None,
     match_map = {"EXACT": "Exata", "PHRASE": "Frase", "BROAD": "Ampla"}
 
     lines = [
-        f"# Relatorio Google Ads — {client_name}",
+        f"# Relatorio Google Ads \u2014 {client_name}",
         f"",
         f"**Periodo analisado:** {week_label}",
         f"**Semana anterior:** {prev_label}",
         f"**Conta:** {customer_id}",
         f"**Gerado em:** {generated_at}",
+        f"",
+        f"---",
+        f"",
+    ]
+
+    # \u2500\u2500 Resumo Executivo (what worked / what didn't / recommendations) \u2500\u2500\u2500\u2500\u2500\u2500
+    lines += build_resumo_executivo(campaigns, cur, prev, qs_map, waste_count, waste_cost, currency)
+    lines += [
         f"",
         f"---",
         f"",
@@ -389,7 +498,7 @@ def generate_report(customer_id, mcc_id, client_name, currency, start_date=None,
 
     if cur["all_conversions"] > cur["conversions"]:
         diff = cur["all_conversions"] - cur["conversions"]
-        lines.append(f"| Micro-conversoes | +{diff:.1f} (total {cur['all_conversions']:.1f}) | — | — |")
+        lines.append(f"| Micro-conversoes | +{diff:.1f} (total {cur['all_conversions']:.1f}) | \u2014 | \u2014 |")
 
     lines += ["", "---", "", "## Campanhas", ""]
 
@@ -397,7 +506,7 @@ def generate_report(customer_id, mcc_id, client_name, currency, start_date=None,
         lines.append("_Nenhuma campanha com dados no periodo._")
     else:
         for camp in campaigns:
-            status_icon = "🟢 ATIVA" if camp["status"] == "ATIVA" else "⏸ PAUSADA"
+            status_icon = "\U0001f7e2 ATIVA" if camp["status"] == "ATIVA" else "\u23f8 PAUSADA"
             lines += [
                 f"### {camp['name']} | {camp['channel']} | {status_icon}",
                 f"",
@@ -424,7 +533,7 @@ def generate_report(customer_id, mcc_id, client_name, currency, start_date=None,
                 ]
             lines.append("")
 
-    # ── Dispositivos ──────────────────────────────────────────────────────────
+    # \u2500\u2500 Dispositivos \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
     lines += ["---", "", "## Breakdown por Dispositivo", ""]
     if devices:
         lines += [
@@ -438,7 +547,7 @@ def generate_report(customer_id, mcc_id, client_name, currency, start_date=None,
     else:
         lines.append("_Sem dados de dispositivo no periodo._")
 
-    # ── Grupos de anúncios ────────────────────────────────────────────────────
+    # \u2500\u2500 Grupos de an\u00fancios \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
     lines += ["", "---", "", "## Grupos de Anuncios", ""]
     if adgroup_rows:
         lines += [
@@ -455,7 +564,7 @@ def generate_report(customer_id, mcc_id, client_name, currency, start_date=None,
     else:
         lines.append("_Sem dados de grupos de anuncios no periodo._")
 
-    # ── Anúncios ativos ───────────────────────────────────────────────────────
+    # \u2500\u2500 An\u00fancios ativos \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
     lines += ["", "---", "", "## Anuncios Ativos", ""]
     if ad_rows:
         lines += [
@@ -478,7 +587,7 @@ def generate_report(customer_id, mcc_id, client_name, currency, start_date=None,
     else:
         lines.append("_Sem dados de anuncios no periodo._")
 
-    # ── Palavras-chave ────────────────────────────────────────────────────────
+    # \u2500\u2500 Palavras-chave \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
     lines += [
         "", "---", "", "## Palavras-chave Ativas", "",
         "| Palavra-chave | Tipo | QS | CTR exp. | Anuncio | Pag. dest. | Campanha | Cliques | Gasto | Conv. | CTR |",
@@ -491,23 +600,22 @@ def generate_report(customer_id, mcc_id, client_name, currency, start_date=None,
         match = match_map.get(kw.match_type.name, kw.match_type.name)
         qs_info = qs_map.get(kw.text.lower().strip(), {})
         qs_display = qs_icon(qs_info.get("qs"))
-        ctr_exp = qs_info.get("ctr_exp", "—")
-        ad_quality = qs_info.get("creative", "—")
-        landing_quality = qs_info.get("landing", "—")
+        ctr_exp = qs_info.get("ctr_exp", "\u2014")
+        ad_quality = qs_info.get("creative", "\u2014")
+        landing_quality = qs_info.get("landing", "\u2014")
         lines.append(
             f"| {kw.text} | {match} | {qs_display} | {ctr_exp} | {ad_quality} | {landing_quality} | {row.campaign.name} | {m.clicks:,} | {fmt(cost)} | {m.conversions:.1f} | {m.ctr * 100:.2f}% |"
         )
     if not kw_rows:
         lines.append("_Nenhuma palavra-chave com dados no periodo._")
 
-    # ── Termos de pesquisa ────────────────────────────────────────────────────
+    # \u2500\u2500 Termos de pesquisa \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
     lines += [
         "", "---", "", "## Termos de Pesquisa", "",
         "### Termos com gasto e zero conversao (candidatos a negativa)", "",
         "| Termo | Campanha | Cliques | Gasto | CTR |",
         "|---|---|---|---|---|",
     ]
-    waste_terms = [r for r in search_rows if micros(r.metrics.cost_micros) > 0 and r.metrics.conversions == 0 and r.metrics.clicks >= 3]
     if waste_terms:
         for row in waste_terms:
             m = row.metrics
@@ -549,4 +657,3 @@ if __name__ == "__main__":
         f.write(report)
 
     print(f"Relatorio salvo em: {args.output}")
-
