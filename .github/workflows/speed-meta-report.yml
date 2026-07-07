@@ -6,6 +6,10 @@ on:
     - cron: "0 10 30 * *"   # Dia 30 de cada mês às 07:00 BRT
   workflow_dispatch:
     inputs:
+      since_date:
+        description: 'Data inicial do período (YYYY-MM-DD). Padrão: 01 do mês.'
+        required: false
+        default: ''
       until_date:
         description: 'Data final do período (YYYY-MM-DD). Padrão: data de hoje.'
         required: false
@@ -29,9 +33,14 @@ jobs:
       - name: Gerar relatorio
         env:
           META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
+          SINCE_DATE: ${{ github.event.inputs.since_date }}
           UNTIL_DATE: ${{ github.event.inputs.until_date }}
         run: |
-          MES_NUM=$(date +%-m)
+          if [ -n "${{ github.event.inputs.since_date }}" ]; then
+            MES_NUM=$(echo "${{ github.event.inputs.since_date }}" | cut -d'-' -f2 | sed 's/^0//')
+          else
+            MES_NUM=$(date +%-m)
+          fi
           case $MES_NUM in
             1) MES="janeiro" ;; 2) MES="fevereiro" ;; 3) MES="marco" ;;
             4) MES="abril" ;; 5) MES="maio" ;; 6) MES="junho" ;;
