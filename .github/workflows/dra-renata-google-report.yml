@@ -45,12 +45,27 @@ jobs:
           if [ -n "$START" ] && [ -n "$END" ]; then
             DATE_ARGS="--start-date $START --end-date $END"
             SUFFIX="${START}-to-${END}"
+            REF_DATE="$END"
           else
-            DATE_ARGS=""
+            # Sem inputs manuais: cron mensal do dia 30 -> relatorio do mes corrente completo (dia 01 ao dia 30/31)
+            REF_DATE="$(date +%Y-%m-%d)"
+            START="$(date +%Y-%m)-01"
+            END="$REF_DATE"
+            DATE_ARGS="--start-date $START --end-date $END"
             SUFFIX="$(date +%Y-%m-%d)"
           fi
-          OUTPUT="reports/DUOSFERA/dra-renata/google-dra-renata-report-${SUFFIX}.md"
-          mkdir -p reports/DUOSFERA/dra-renata
+
+          MONTH_NUM=$(echo "$REF_DATE" | cut -d- -f2)
+          YEAR2=$(echo "$REF_DATE" | cut -d- -f1 | cut -c3-4)
+          case $MONTH_NUM in
+            01) MES="jan";; 02) MES="fev";; 03) MES="mar";; 04) MES="abr";;
+            05) MES="mai";; 06) MES="jun";; 07) MES="jul";; 08) MES="ago";;
+            09) MES="set";; 10) MES="out";; 11) MES="nov";; 12) MES="dez";;
+          esac
+          MES_PASTA="${MES}-${YEAR2}"
+
+          OUTPUT="reports/DUOSFERA/dra-renata/${MES_PASTA}/google-dra-renata-report-${SUFFIX}.md"
+          mkdir -p "reports/DUOSFERA/dra-renata/${MES_PASTA}"
           python execution/weekly_report_generator.py \
             --customer-id 3511852091 \
             --mcc-id 7118682168 \
@@ -68,10 +83,3 @@ jobs:
           git commit -m "Relatorio Google Ads Dra Renata - $(date +%Y-%m-%d)" --allow-empty
           git pull --rebase origin main
           git push
-
-      - name: Acionar sync Notion
-        run: |
-          curl -s -X POST "https://api.github.com/repos/${{ github.repository }}/actions/workflows/sync-relatorios-notion.yml/dispatches" \
-            -H "Authorization: token ${{ secrets.GH_PAT }}" \
-            -H "Content-Type: application/json" \
-            -d '{"ref":"main"}'
