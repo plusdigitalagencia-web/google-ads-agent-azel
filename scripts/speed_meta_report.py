@@ -225,8 +225,8 @@ lines += [
     f"*Gerado automaticamente | Plus Digital | {today.strftime('%d/%m/%Y')}*",
 ]
 
-os.makedirs("reports/speed", exist_ok=True)
-path = f"reports/speed/meta-speed-report-{report_date}.md"
-with open(path, "w") as f:
+output_file = os.environ.get("OUTPUT_FILE", f"reports/ASSUCAR/speed/meta-speed-report-{report_date}.md")
+os.makedirs(os.path.dirname(output_file), exist_ok=True)
+with open(output_file, "w") as f:
     f.write("\n".join(lines))
-print(f"Relatório salvo: {path}")
+print(f"Relatório salvo: {output_file}")
