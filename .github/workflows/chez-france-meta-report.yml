@@ -31,14 +31,14 @@ jobs:
           CHEZ_FRANCE_META_ACCESS_TOKEN: ${{ secrets.CHEZ_FRANCE_META_ACCESS_TOKEN }}
           UNTIL_DATE: ${{ github.event.inputs.until_date }}
         run: |
-          mkdir -p reports/chez-france/meta
+          mkdir -p reports/ASSUCAR/chez-france/meta
           python scripts/chez_france_meta_report.py
 
       - name: Commit e push
         run: |
           git config user.name "Chez France Bot"
           git config user.email "bot@plusdigital.com.br"
-          git add reports/chez-france/meta/
+          git add reports/ASSUCAR/chez-france/meta/
           git commit -m "Relatorio Meta Ads Chez France - $(date '+%Y-%m-%d %H:%M')" --allow-empty
           git pull --rebase origin main
           git push
