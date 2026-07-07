@@ -2,7 +2,7 @@ name: Dra Renata Google Ads Report
 
 on:
   schedule:
-    - cron: "0 10 30 * *"     # Dia 30 de cada mês 07:00 BRT — relatório mensal completo
+    - cron: "0 10 1 * *"     # Dia 1 de cada mês 07:00 BRT — relatório do mês anterior completo
   workflow_dispatch:
     inputs:
       start_date:
@@ -47,12 +47,12 @@ jobs:
             SUFFIX="${START}-to-${END}"
             REF_DATE="$END"
           else
-            # Sem inputs manuais: cron mensal do dia 30 -> relatorio do mes corrente completo (dia 01 ao dia 30/31)
-            REF_DATE="$(date +%Y-%m-%d)"
-            START="$(date +%Y-%m)-01"
+            # Sem inputs manuais: cron do dia 1 -> relatorio do mes anterior completo (dia 01 ao ultimo dia)
+            REF_DATE="$(date -d 'yesterday' +%Y-%m-%d)"
+            START="$(date -d "$REF_DATE" +%Y-%m)-01"
             END="$REF_DATE"
             DATE_ARGS="--start-date $START --end-date $END"
-            SUFFIX="$(date +%Y-%m-%d)"
+            SUFFIX="$REF_DATE"
           fi
 
           MONTH_NUM=$(echo "$REF_DATE" | cut -d- -f2)
