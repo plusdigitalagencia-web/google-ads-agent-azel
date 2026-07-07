@@ -106,7 +106,9 @@ function createServer() {
           type: "object",
           properties: {
             account_name: { type: "string", description: "Nome da conta (ex: 'Chez France')" },
-            days: { type: "number", description: "Período em dias (padrão: 30)" },
+            days: { type: "number", description: "Período em dias (padrão: 30). Ignorado se start_date e end_date forem informados." },
+            start_date: { type: "string", description: "Data início YYYY-MM-DD. Use com end_date para período exato." },
+            end_date: { type: "string", description: "Data fim YYYY-MM-DD. Use com start_date para período exato." },
           },
           required: ["account_name"],
         },
@@ -180,8 +182,13 @@ function createServer() {
     let output = "";
 
     if (name === "get_campaign_metrics") {
-      output = runScript("google_ads_metrics_reader.py",
-        ["--customer-id", customerId, "--days", String(args.days ?? 30)], mcc);
+      const metricsArgs = ["--customer-id", customerId];
+      if (args.start_date && args.end_date) {
+        metricsArgs.push("--start-date", args.start_date, "--end-date", args.end_date);
+      } else {
+        metricsArgs.push("--days", String(args.days ?? 30));
+      }
+      output = runScript("google_ads_metrics_reader.py", metricsArgs, mcc);
     } else if (name === "analyze_keywords") {
       output = runScript("google_ads_keyword_analyzer.py",
         ["--customer-id", customerId, "--days", String(args.days || 30)], mcc);

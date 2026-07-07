@@ -25,8 +25,10 @@ def get_client():
 def micros_to_brl(micros):
     return micros / 1_000_000
 
-def build_date_filter(days):
+def build_date_filter(days=30, start_date=None, end_date=None):
     from datetime import date, timedelta
+    if start_date and end_date:
+        return f"segments.date BETWEEN '{start_date}' AND '{end_date}'"
     literals = {7: "LAST_7_DAYS", 14: "LAST_14_DAYS", 30: "LAST_30_DAYS", 90: "LAST_90_DAYS"}
     if days == 0:
         return "segments.date DURING THIS_MONTH"
@@ -36,12 +38,17 @@ def build_date_filter(days):
     start = end - timedelta(days=days - 1)
     return f"segments.date BETWEEN '{start}' AND '{end}'"
 
-def read_metrics(customer_id, days=30):
+def read_metrics(customer_id, days=30, start_date=None, end_date=None):
     client = get_client()
     service = client.get_service("GoogleAdsService")
 
-    date_filter = build_date_filter(days)
-    label = "Maio 2026 (até hoje)" if days == 0 else f"Últimos {days} dias"
+    date_filter = build_date_filter(days, start_date, end_date)
+    if start_date and end_date:
+        label = f"{start_date} a {end_date}"
+    elif days == 0:
+        label = "Mês atual (até hoje)"
+    else:
+        label = f"Últimos {days} dias"
 
     query = f"""
         SELECT
@@ -133,5 +140,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--customer-id", required=True, help="Google Ads customer ID (sem traços)")
     parser.add_argument("--days", type=int, default=30, help="Período em dias (padrão: 30)")
+    parser.add_argument("--start-date", help="Data início (YYYY-MM-DD)")
+    parser.add_argument("--end-date", help="Data fim (YYYY-MM-DD)")
     args = parser.parse_args()
-    read_metrics(args.customer_id, args.days)
+    read_metrics(args.customer_id, args.days, args.start_date, args.end_date)
