@@ -2,7 +2,8 @@ name: Clinica Familiar Google Ads Report
 
 on:
   schedule:
-    - cron: "0 10 * * 1,5"
+    - cron: "0 10 15 * *"   # Dia 15 de cada mês às 07:00 BRT
+    - cron: "0 10 30 * *"   # Dia 30 de cada mês às 07:00 BRT
   workflow_dispatch:
     inputs:
       start_date:
@@ -46,8 +47,12 @@ jobs:
             DATE_ARGS="--start-date $START --end-date $END"
             SUFFIX="${START}-to-${END}"
           else
-            DATE_ARGS=""
-            SUFFIX="$(date +%Y-%m-%d)"
+            YEAR=$(date +%Y)
+            MONTH=$(date +%m)
+            START_DATE="${YEAR}-${MONTH}-01"
+            END_DATE=$(date +%Y-%m-%d)
+            DATE_ARGS="--start-date $START_DATE --end-date $END_DATE"
+            SUFFIX="${START_DATE}-to-${END_DATE}"
           fi
           OUTPUT="reports/ASSUCAR/clinica-familiar/google-clinica-familiar-report-${SUFFIX}.md"
           mkdir -p reports/ASSUCAR/clinica-familiar
