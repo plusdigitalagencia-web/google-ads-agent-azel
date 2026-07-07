@@ -43,20 +43,25 @@ jobs:
         run: |
           START="${{ github.event.inputs.start_date }}"
           END="${{ github.event.inputs.end_date }}"
-          MES_NUM=$(date +%-m)
+          if [ -n "$START" ] && [ -n "$END" ]; then
+            DATE_ARGS="--start-date $START --end-date $END"
+            SUFFIX="${START}-to-${END}"
+            MES_NUM=$(echo $START | cut -d'-' -f2 | sed 's/^0//')
+          else
+            YEAR=$(date +%Y)
+            MONTH=$(date +%m)
+            START_DATE="${YEAR}-${MONTH}-01"
+            END_DATE=$(date +%Y-%m-%d)
+            DATE_ARGS="--start-date $START_DATE --end-date $END_DATE"
+            SUFFIX="${START_DATE}-to-${END_DATE}"
+            MES_NUM=$(date +%-m)
+          fi
           case $MES_NUM in
-            1) MES="janeiro" ;; 2) MES="fevereiro" ;; 3) MES="março" ;;
+            1) MES="janeiro" ;; 2) MES="fevereiro" ;; 3) MES="marco" ;;
             4) MES="abril" ;; 5) MES="maio" ;; 6) MES="junho" ;;
             7) MES="julho" ;; 8) MES="agosto" ;; 9) MES="setembro" ;;
             10) MES="outubro" ;; 11) MES="novembro" ;; 12) MES="dezembro" ;;
           esac
-          if [ -n "$START" ] && [ -n "$END" ]; then
-            DATE_ARGS="--start-date $START --end-date $END"
-            SUFFIX="${START}-to-${END}"
-          else
-            DATE_ARGS=""
-            SUFFIX="$(date +%Y-%m-%d)"
-          fi
           OUTPUT="reports/ASSUCAR/chez-france/google/${MES}/google-chezfrance-report-${SUFFIX}.md"
           mkdir -p "reports/ASSUCAR/chez-france/google/${MES}"
           python execution/weekly_report_generator.py \
