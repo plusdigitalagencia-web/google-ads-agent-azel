@@ -31,6 +31,7 @@ ACCOUNTS = {
     "chez france": ("8882189559", "2564865113"),
     "speedmais": ("6081418993", "2564865113"),
     "speed": ("6081418993", "2564865113"),
+    "true change": ("9063582846", "2564865113"),
     "clinica assistencia familiar": ("3715471664", "2564865113"),
     "clinica familiar": ("3715471664", "2564865113"),
     "clínica assistência familiar": ("3715471664", "2564865113"),

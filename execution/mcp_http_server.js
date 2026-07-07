@@ -31,6 +31,8 @@ const ACCOUNTS = {
   "shineray":        { id: "3604927656", mcc: "2694906582" },
   "chez france":     { id: "8882189559", mcc: "2564865113" },
   "speedmais":       { id: "6081418993", mcc: "2564865113" },
+  "true change":     { id: "9063582846", mcc: "2564865113" },
+  "clinica assistencia familiar": { id: "3715471664", mcc: "2564865113" },
   "aquino lopes":    { id: "9480555388", mcc: "7118682168" },
   "dna renata":      { id: "3511852091", mcc: "7118682168" },
   "dr lincoln":      { id: "5490318966", mcc: "7118682168" },
