@@ -10,8 +10,8 @@
 | Metrica | Atual | Anterior | Variacao |
 |---|---|---|---|
 | Gasto | R$500.75 | R$0.00 | --- |
-| Leads | 0 | 0 | --- |
-| CPL medio | --- | --- | --- |
+| Conversas | 31 | 0 | --- |
+| C/Conv medio | R$16.15 | --- | --- |
 | Impressoes | 5,694 | 0 | --- |
 | Cliques | 148 | 0 | --- |
 | CTR medio | 2.60% | 0.00% | --- |
@@ -22,20 +22,20 @@
 
 ## Modulo 1 - Auditoria de Campanhas
 
-| Campanha | Gasto | CTR | CPM | Freq | Leads | CPL | Status |
+| Campanha | Gasto | CTR | CPM | Freq | Conversas | C/Conv | Status |
 |---|---|---|---|---|---|---|---|
-| [Duosfera] [Agendamento] [ WPP] - 11/06 | R$500.75 | 2.60% | R$87.94 | 1.94 | 0 | --- | CRITICO |
+| [Duosfera] [Agendamento] [ WPP] - 11/06 | R$500.75 | 2.60% | R$87.94 | 1.94 | 31 | R$16.15 | OK |
 
 ### Analise por Anuncio
 
 #### Campanha: [Duosfera] [Agendamento] [ WPP] - 11/06
 
-| Anuncio | Gasto | CTR | CPM | Freq | Leads | CPL | Status |
+| Anuncio | Gasto | CTR | CPM | Freq | Conversas | C/Conv | Status |
 |---|---|---|---|---|---|---|---|
-| VD2 - Derretimento Facial | R$387.30 | 2.48% | R$96.20 | 1.80 | 0 | --- | CRITICO |
-| VD1 - Autocuidado não é luxo | R$49.94 | 3.69% | R$96.97 | 1.47 | 0 | --- | CRITICO |
-| Carrosel 1 - Imagine entrar em uma con | R$37.90 | 1.79% | R$52.13 | 1.46 | 0 | --- | CRITICO |
-| Carrosel 2 - Tem gente que chega no co | R$25.61 | 3.76% | R$60.12 | 1.23 | 0 | --- | CRITICO |
+| Carrosel 2 - Tem gente que chega no co VENCEDOR | R$25.61 | 3.76% | R$60.12 | 1.23 | 4 | R$6.40 | OK |
+| VD1 - Autocuidado não é luxo | R$49.94 | 3.69% | R$96.97 | 1.47 | 5 | R$9.99 | OK |
+| Carrosel 1 - Imagine entrar em uma con | R$37.90 | 1.79% | R$52.13 | 1.46 | 2 | R$18.95 | OK |
+| VD2 - Derretimento Facial | R$387.30 | 2.48% | R$96.20 | 1.80 | 20 | R$19.37 | OK |
 
 ---
 
@@ -62,33 +62,30 @@ Status: ACELERADO
 
 | Pri | Acao | Impacto | Prazo |
 |---|---|---|---|
-| CRITICO | Pausar 'Carrosel 1 - Imagine entrar ' (R$38, 0 leads) | Liberar budget | Imediato |
-| CRITICO | Pausar 'VD1 - Autocuidado não é luxo' (R$50, 0 leads) | Liberar budget | Imediato |
-| CRITICO | Pausar 'VD2 - Derretimento Facial' (R$387, 0 leads) | Liberar budget | Imediato |
+| 1 | Monitorar - sem acoes criticas identificadas | --- | --- |
 
 ---
 
 ## RESUMO FINAL PARA TRELLO
 
 Meta Ads Dra. Isabela Gomes - 07/07/2026
-Gasto: R$500.75 | Leads: 0 | CPL: --- (--- vs semana anterior)
+Gasto: R$500.75 | Conversas: 31 | C/Conv: R$16.15 (--- vs semana anterior)
 
 ---
 
 CAMPANHA: [Duosfera] [Agendamento] [ WPP] - 11/06
 
 O QUE ESTA FUNCIONANDO:
-- 0 leads gerados no periodo
+- Criativo "Carrosel 2 - Tem gente que chega no cons" - CTR 3.76% | C/Conv R$6.40
 - Frequencia em 1.94 - publico sem saturacao
 
 O QUE NAO ESTA FUNCIONANDO:
-- "Carrosel 1 - Imagine entrar em uma consu" - R$37.90 gastos com 0 leads
-- "Carrosel 2 - Tem gente que chega no cons" - R$25.61 gastos com 0 leads
+- Sem problemas criticos identificados
 
 CRIATIVO VENCEDOR:
-- A definir
+- Carrosel 2 - Tem gente que chega no cons - CTR 3.76% | C/Conv R$6.40
 
 O QUE PRECISA SER FEITO:
-- Pausar criativos sem resultado que consomem budget
+- Dar mais budget para o criativo vencedor escalar
 
 ---
