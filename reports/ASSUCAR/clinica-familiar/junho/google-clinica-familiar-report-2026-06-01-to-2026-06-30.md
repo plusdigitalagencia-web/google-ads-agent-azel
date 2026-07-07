@@ -7,6 +7,23 @@
 
 ---
 
+## 🧭 Resumo Executivo
+
+### ✅ O que deu certo
+- Melhor CPA: **[Assucar] [Search] [Lead] - 31/10/2025** → R$ 7.46 (144.0 conv.)
+- 1 keyword(s) com Quality Score ≥ 7 (boa relevância)
+
+### ❌ O que não deu certo
+- Conversões caíram 20.0% (180.0 → 144.0)
+- 2 keyword(s) com QS ≤ 3: "psiquiatra", "clínico geral"
+
+### 🚀 O que podemos fazer para melhorar
+1. Revisar ou pausar keywords com QS ≤ 3: "psiquiatra", "clínico geral"
+2. Adicionar 3 termo(s) como negativas — desperdício estimado de R$ 19.45
+3. Revisar criativos e páginas de destino — queda expressiva de conversões no período
+
+---
+
 ## Resumo da Semana
 
 | Metrica | Semana Atual | Semana Anterior | Variacao |
@@ -76,7 +93,7 @@
 |---|---|---|---|---|---|---|---|---|---|---|
 | Psiquiatra | Ampla | 🔴 3 | ⬇ Abaixo | ⬆ Acima | ⬇ Abaixo | [Assucar] [Search] [Lead] - 31/10/2025 | 334 | R$ 753.85 | 101.0 | 9.22% |
 | Clínico geral | Ampla | 🔴 3 | ⬇ Abaixo | ⬆ Acima | ⬇ Abaixo | [Assucar] [Search] [Lead] - 31/10/2025 | 104 | R$ 193.73 | 27.0 | 8.86% |
-| psiquiatra cabo de santo agostinho | Ampla | 🟢 7 | ⬆ Acima | → Médio | → Médio | [Assucar] [Search] [Lead] - 31/10/2025 | 73 | R$ 126.95 | 16.0 | 10.04% |
+| psiquiatra cabo de santo agostinho | Ampla | 🟢 7 | ⬆ Acima | → Medio | → Medio | [Assucar] [Search] [Lead] - 31/10/2025 | 73 | R$ 126.95 | 16.0 | 10.04% |
 
 ---
 
