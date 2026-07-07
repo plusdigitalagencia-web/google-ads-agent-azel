@@ -31,15 +31,23 @@ jobs:
           META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
           UNTIL_DATE: ${{ github.event.inputs.until_date }}
         run: |
-          mkdir -p reports/ASSUCAR/speed
+          MES_NUM=$(date +%-m)
+          case $MES_NUM in
+            1) MES="janeiro" ;; 2) MES="fevereiro" ;; 3) MES="marco" ;;
+            4) MES="abril" ;; 5) MES="maio" ;; 6) MES="junho" ;;
+            7) MES="julho" ;; 8) MES="agosto" ;; 9) MES="setembro" ;;
+            10) MES="outubro" ;; 11) MES="novembro" ;; 12) MES="dezembro" ;;
+          esac
+          mkdir -p "reports/ASSUCAR/speed/${MES}"
+          export OUTPUT_FILE="reports/ASSUCAR/speed/${MES}/meta-speed-report-$(date +%Y-%m-%d).md"
           python scripts/speed_meta_report.py
+          echo "OUTPUT_FILE=$OUTPUT_FILE" >> $GITHUB_ENV
 
       - name: Commit e push
         run: |
           git config user.name "SpeedMais Bot"
           git config user.email "bot@plusdigital.com.br"
-          OUTPUT="reports/ASSUCAR/speed/meta-speed-report-$(date +%Y-%m-%d).md"
-          git add "$OUTPUT"
+          git add "${{ env.OUTPUT_FILE }}"
           git commit -m "Relatorio Meta Ads SpeedMais - $(date '+%Y-%m-%d %H:%M')" --allow-empty
           git pull --rebase origin main
           git push
