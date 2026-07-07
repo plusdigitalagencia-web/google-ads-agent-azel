@@ -49,8 +49,8 @@ jobs:
             DATE_ARGS=""
             SUFFIX="$(date +%Y-%m-%d)"
           fi
-          OUTPUT="reports/clinica-familiar/google-clinica-familiar-report-${SUFFIX}.md"
-          mkdir -p reports/clinica-familiar
+          OUTPUT="reports/ASSUCAR/clinica-familiar/google-clinica-familiar-report-${SUFFIX}.md"
+          mkdir -p reports/ASSUCAR/clinica-familiar
           python execution/weekly_report_generator.py \
             --customer-id 3715471664 \
             --mcc-id 2564865113 \
