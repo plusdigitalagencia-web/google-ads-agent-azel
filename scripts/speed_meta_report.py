@@ -25,8 +25,11 @@ def val_lead(actions):
 
 today      = datetime.now()
 year, month = today.year, today.month
-since      = f"{year}-{month:02d}-01"
 until      = os.environ.get("UNTIL_DATE") or today.strftime("%Y-%m-%d")
+since      = os.environ.get("SINCE_DATE") or f"{year}-{month:02d}-01"
+# If since is from a different month than today, use that month for prev comparison
+_since_dt  = datetime.strptime(since, "%Y-%m-%d")
+year, month = _since_dt.year, _since_dt.month
 if month == 1:
     prev_year, prev_month = year - 1, 12
 else:
