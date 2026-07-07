@@ -80,7 +80,7 @@ A(f"# Relatorio Meta Ads - Duosfera Digital")
 A(f"**Periodo atual:** {p1_start.strftime('%d/%m/%Y')} a {p1_end.strftime('%d/%m/%Y')}")
 A(f"**Periodo anterior:** {p2_start.strftime('%d/%m/%Y')} a {p2_end.strftime('%d/%m/%Y')}")
 A(f"**Gerado em:** {today.strftime('%d/%m/%Y')} | **Conta:** {ACCOUNT}")
-A(); A("---"); A()
+A(""); A("---"); A("")
 
 A("## Resumo Executivo"); A()
 A("| Metrica | Atual | Anterior | Variacao |")
