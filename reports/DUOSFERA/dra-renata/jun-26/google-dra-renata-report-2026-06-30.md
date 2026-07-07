@@ -161,3 +161,33 @@
 ---
 
 _Relatorio gerado automaticamente via GitHub Actions + Google Ads API | Plus Digital_
+
+---
+
+## RESUMO FINAL PARA TRELLO
+
+Google Ads Dra Renata Correa - 06/07/2026
+Gasto: R$ 1,150.97 | Conversoes: 140.5 | CPA: R$ 8.19 (↓ -49.5% vs periodo anterior)
+
+---
+
+CAMPANHA: [01] [Duosfera] [Search] 21/04/26
+
+O QUE ESTA FUNCIONANDO:
+- Palavra-chave "mulheres urologistas" - CTR 10.00% | CPA R$ 4.39 (3.0 conversoes)
+
+O QUE NAO ESTA FUNCIONANDO:
+- Termo "urologista pediátrico" - R$ 12.81 gastos sem conversao
+- Termo "urologista niteroi" - R$ 10.87 gastos sem conversao
+- Palavra-chave "urologistas mulheres" com Quality Score baixo (QS 3)
+- Palavra-chave "urologista feminina" com Quality Score baixo (QS 1)
+- 60.1% de impressoes perdidas por rank (lance/anuncio mal posicionado)
+
+PALAVRA-CHAVE VENCEDORA:
+- mulheres urologistas - CTR 10.00% | CPA R$ 4.39
+
+O QUE PRECISA SER FEITO:
+- Negativar os termos de desperdicio listados acima
+- Revisar anuncio/pagina de destino das palavras-chave com QS baixo
+- Aumentar lance ou melhorar Quality Score para reduzir a perda por rank
+- Escalar a palavra-chave vencedora (aumentar lance/orcamento)
