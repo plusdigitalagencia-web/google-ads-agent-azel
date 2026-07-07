@@ -2,8 +2,8 @@ name: True Change Google Ads Report
 
 on:
   schedule:
-    - cron: "0 10 15 * *"   # Dia 15 de cada mês às 07:00 BRT
-    - cron: "0 10 30 * *"   # Dia 30 de cada mês às 07:00 BRT
+    - cron: "0 10 15 * *"   # Dia 15 de cada mês 07:00 BRT — parcial do mes corrente (01 ao 15)
+    - cron: "0 10 1 * *"    # Dia 1 de cada mês 07:00 BRT — mes anterior completo (01 ao ultimo dia)
   workflow_dispatch:
     inputs:
       start_date:
@@ -46,17 +46,32 @@ jobs:
           if [ -n "$START" ] && [ -n "$END" ]; then
             DATE_ARGS="--start-date $START --end-date $END"
             SUFFIX="${START}-to-${END}"
+            REF_DATE="$END"
+          elif [ "$(date +%-d)" = "1" ]; then
+            # Disparo do dia 1 -> mes anterior completo (01 ao ultimo dia, sem cortar dia 31)
+            REF_DATE="$(date -d 'yesterday' +%Y-%m-%d)"
+            START_DATE="$(date -d "$REF_DATE" +%Y-%m)-01"
+            END_DATE="$REF_DATE"
+            DATE_ARGS="--start-date $START_DATE --end-date $END_DATE"
+            SUFFIX="${START_DATE}-to-${END_DATE}"
           else
-            YEAR=$(date +%Y)
-            MONTH=$(date +%m)
-            DAY=$(date +%-d)
-            START_DATE="${YEAR}-${MONTH}-01"
-            END_DATE=$(date +%Y-%m-%d)
+            # Disparo do dia 15 -> parcial do mes corrente (01 ao 15)
+            REF_DATE="$(date +%Y-%m-%d)"
+            START_DATE="$(date +%Y-%m)-01"
+            END_DATE="$REF_DATE"
             DATE_ARGS="--start-date $START_DATE --end-date $END_DATE"
             SUFFIX="${START_DATE}-to-${END_DATE}"
           fi
-          OUTPUT="reports/ASSUCAR/true-change/google-true-change-report-${SUFFIX}.md"
-          mkdir -p reports/ASSUCAR/true-change
+
+          MONTH_NUM=$(echo "$REF_DATE" | cut -d- -f2)
+          case $MONTH_NUM in
+            01) MES="janeiro";; 02) MES="fevereiro";; 03) MES="marco";; 04) MES="abril";;
+            05) MES="maio";; 06) MES="junho";; 07) MES="julho";; 08) MES="agosto";;
+            09) MES="setembro";; 10) MES="outubro";; 11) MES="novembro";; 12) MES="dezembro";;
+          esac
+
+          OUTPUT="reports/ASSUCAR/true-change/google/${MES}/google-true-change-report-${SUFFIX}.md"
+          mkdir -p "reports/ASSUCAR/true-change/google/${MES}"
           python execution/weekly_report_generator.py \
             --customer-id 9063582846 \
             --mcc-id 2564865113 \
