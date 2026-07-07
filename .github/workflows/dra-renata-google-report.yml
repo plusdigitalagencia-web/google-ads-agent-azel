@@ -66,7 +66,7 @@ jobs:
 
           OUTPUT="reports/DUOSFERA/dra-renata/${MES_PASTA}/google-dra-renata-report-${SUFFIX}.md"
           mkdir -p "reports/DUOSFERA/dra-renata/${MES_PASTA}"
-          python execution/weekly_report_generator.py \
+          python execution/weekly_report_generator_duosfera.py \
             --customer-id 3511852091 \
             --mcc-id 7118682168 \
             --client-name "Dra Renata Correa" \
