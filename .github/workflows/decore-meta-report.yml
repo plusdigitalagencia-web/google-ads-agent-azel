@@ -31,14 +31,14 @@ jobs:
           DECORE_META_ACCESS_TOKEN: ${{ secrets.DECORE_META_ACCESS_TOKEN }}
           UNTIL_DATE: ${{ github.event.inputs.until_date }}
         run: |
-          mkdir -p reports/decore
+          mkdir -p reports/ASSUCAR/decore
           python scripts/decore_meta_report.py
 
       - name: Commit e push
         run: |
           git config user.name "Decore Bot"
           git config user.email "bot@plusdigital.com.br"
-          OUTPUT="reports/decore/meta-report-$(date +%Y-%m-%d).md"
+          OUTPUT="reports/ASSUCAR/decore/meta-report-$(date +%Y-%m-%d).md"
           git add "$OUTPUT"
           git commit -m "Relatorio Meta Ads Decore - $(date '+%Y-%m-%d %H:%M')" --allow-empty
           git pull --rebase origin main
