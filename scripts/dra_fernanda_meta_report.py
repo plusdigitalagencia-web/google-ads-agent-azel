@@ -92,7 +92,7 @@ A(f"**Periodo anterior:** {p2_start.strftime('%d/%m/%Y')} a {p2_end.strftime('%d
 A(f"**Gerado em:** {today.strftime('%d/%m/%Y')} | **Conta:** {ACCOUNT}")
 A(""); A("---"); A("")
 
-A("## Resumo Executivo"); A()
+A("## Resumo Executivo"); A("")
 A("| Metrica | Atual | Anterior | Variacao |")
 A("|---|---|---|---|")
 A(f"| Gasto | R${curr['spend']:.2f} | R${prev['spend']:.2f} | {pct(curr['spend'],prev['spend'])} |")
@@ -103,10 +103,10 @@ A(f"| Cliques | {int(curr['clicks'])} | {int(prev['clicks'])} | {pct(curr['click
 A(f"| CTR medio | {curr['avg_ctr']:.2f}% | {prev['avg_ctr']:.2f}% | {pct(curr['avg_ctr'],prev['avg_ctr'])} |")
 A(f"| CPM medio | R${curr['avg_cpm']:.2f} | R${prev['avg_cpm']:.2f} | {pct(curr['avg_cpm'],prev['avg_cpm'])} |")
 A(f"| Frequencia | {curr['avg_freq']:.2f} | {prev['avg_freq']:.2f} | {pct(curr['avg_freq'],prev['avg_freq'])} |")
-A()
+A("")
 
-A("---"); A()
-A("## Modulo 1 - Auditoria de Campanhas"); A()
+A("---"); A("")
+A("## Modulo 1 - Auditoria de Campanhas"); A("")
 A("| Campanha | Gasto | CTR | CPM | Freq | Leads | CPL | Status |")
 A("|---|---|---|---|---|---|---|---|")
 avg_cpl=curr["cpl_val"]
@@ -116,15 +116,15 @@ for r in sorted(camp_curr, key=lambda x:float(x.get("spend",0)),reverse=True):
     st="OK" if (l>0 and c<=avg_cpl*1.2) else ("ATENCAO" if l>0 else "CRITICO")
     fw=" FREQ-ALTA" if freq>=2.5 else ""
     A(f"| {r.get('campaign_name','---')} | R${sp:.2f} | {float(r.get('ctr',0)):.2f}% | R${float(r.get('cpm',0)):.2f} | {freq:.2f}{fw} | {int(l)} | {cpl_str(sp,l)} | {st} |")
-A()
+A("")
 
-A("### Analise por Anuncio"); A()
+A("### Analise por Anuncio"); A("")
 camps_map={}
 for r in ad_curr:
     camps_map.setdefault(r.get("campaign_name","Sem campanha"),[]).append(r)
 
 for cname,ads in camps_map.items():
-    A(f"#### Campanha: {cname}"); A()
+    A(f"#### Campanha: {cname}"); A("")
     A("| Anuncio | Gasto | CTR | CPM | Freq | Leads | CPL | Status |")
     A("|---|---|---|---|---|---|---|---|")
     cs=sum(float(r.get("spend",0)) for r in ads)
@@ -142,16 +142,16 @@ for cname,ads in camps_map.items():
         st=("OK" if c<=acpl*1.2 else ("ATENCAO" if c<=acpl*1.5 else "CRITICO")) if l>0 else ("CRITICO" if sp>20 else "SEM-GASTO")
         fw=" FREQ-ALTA" if freq>=3.0 else ""
         A(f"| {r.get('ad_name','---')[:38]}{star} | R${sp:.2f} | {float(r.get('ctr',0)):.2f}% | R${float(r.get('cpm',0)):.2f} | {freq:.2f}{fw} | {int(l)} | {cpl_str(sp,l)} | {st} |")
-    A()
+    A("")
 
-A("---"); A()
-A("## Modulo 4 - Pacing Monitor"); A()
+A("---"); A("")
+A("## Modulo 4 - Pacing Monitor"); A("")
 A(f"Dia {dias_mes} de {last_day} ({pct_mes:.0f}% do mes). Gasto semanal: R${curr['spend']:.2f}")
 A(f"Projecao mensal: R${curr['spend']/7*30:.0f} | Budget: R${budget_est}")
-A(f"Status: {pacing_st}"); A()
+A(f"Status: {pacing_st}"); A("")
 
-A("---"); A()
-A("## Modulo 5 - Fadiga de Criativos"); A()
+A("---"); A("")
+A("## Modulo 5 - Fadiga de Criativos"); A("")
 A("| Anuncio | Freq | CTR | Status | Recomendacao |")
 A("|---|---|---|---|---|")
 for r in sorted(ad_curr,key=lambda x:float(x.get("frequency",0)),reverse=True):
@@ -160,10 +160,10 @@ for r in sorted(ad_curr,key=lambda x:float(x.get("frequency",0)),reverse=True):
     st="FADIGA" if freq>=3.5 else ("ATENCAO" if freq>=2.5 else "OK")
     rec="Pausar" if freq>=3.5 else ("Novo criativo" if freq>=2.5 else "Manter")
     A(f"| {r.get('ad_name','---')[:35]} | {freq:.2f} | {float(r.get('ctr',0)):.2f}% | {st} | {rec} |")
-A()
+A("")
 
-A("---"); A()
-A("## Plano de Acao"); A()
+A("---"); A("")
+A("## Plano de Acao"); A("")
 A("| Pri | Acao | Impacto | Prazo |")
 A("|---|---|---|---|")
 acts=[]
@@ -188,13 +188,13 @@ if not acts:
     acts.append("| 1 | Monitorar - sem acoes criticas identificadas | --- | --- |")
 for i,a in enumerate(acts[:5],1):
     A(a)
-A()
+A("")
 
-A("---"); A()
-A("## RESUMO FINAL PARA TRELLO"); A()
+A("---"); A("")
+A("## RESUMO FINAL PARA TRELLO"); A("")
 A(f"Meta Ads Dra. Fernanda Guimaraes - {today.strftime('%d/%m/%Y')}")
 A(f"Gasto: R${curr['spend']:.2f} | Leads: {int(curr['leads'])} | CPL: {cpl_str(curr['spend'],curr['leads'])} ({pct(curr['cpl_val'],prev['cpl_val']) if curr['leads'] and prev['leads'] else '---'} vs semana anterior)")
-A()
+A("")
 
 for camp in camp_curr:
     cn=camp.get("campaign_name","Campanha")
@@ -203,8 +203,8 @@ for camp in camp_curr:
     ads_wl=sorted([r for r in camp_ads if leads(r)>0],key=lambda r:float(r.get("spend",0))/leads(r))
     ads_nl=[r for r in camp_ads if leads(r)==0 and float(r.get("spend",0))>20]
     best=ads_wl[0] if ads_wl else None
-    A(f"---"); A()
-    A(f"CAMPANHA: {cn}"); A()
+    A(f"---"); A("")
+    A(f"CAMPANHA: {cn}"); A("")
     A("O QUE ESTA FUNCIONANDO:")
     if best:
         bl=leads(best);bc=float(best.get("spend",0))/bl
@@ -212,25 +212,25 @@ for camp in camp_curr:
     else:
         A(f"- {int(l)} leads gerados no periodo")
     if freq<2.0: A(f"- Frequencia em {freq:.2f} - publico sem saturacao")
-    A()
+    A("")
     A("O QUE NAO ESTA FUNCIONANDO:")
     if ads_nl:
         for bad in ads_nl[:2]:
             A(f"- \"{bad.get('ad_name','?')[:40]}\" - R${float(bad.get('spend',0)):.2f} gastos com 0 leads")
     if freq>=2.5: A(f"- Frequencia em {freq:.2f} - risco de fadiga")
     if not ads_nl and freq<2.5: A("- Sem problemas criticos identificados")
-    A()
+    A("")
     A("CRIATIVO VENCEDOR:")
     if best:
         bl=leads(best);bc=float(best.get("spend",0))/bl
         A(f"- {best.get('ad_name','?')[:40]} - CTR {float(best.get('ctr',0)):.2f}% | CPL R${bc:.2f}")
     else: A("- A definir")
-    A()
+    A("")
     A("O QUE PRECISA SER FEITO:")
     if ads_nl: A("- Pausar criativos sem resultado que consomem budget")
     if best: A("- Dar mais budget para o criativo vencedor escalar")
     if freq>=2.5: A("- Criar novo criativo antes da frequencia atingir 3.5")
-    A()
+    A("")
 
 A("---")
 
