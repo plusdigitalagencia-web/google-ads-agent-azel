@@ -14,11 +14,21 @@ BASE         = "https://graph.facebook.com/v25.0"
 GITHUB_REPO  = "plusdigitalagencia-web/google-ads-agent-azel"
 
 today    = datetime.date.today()
-mes      = today.strftime("%b-%y").lower()   # ex: jun-26
-p1_end   = today - datetime.timedelta(days=1)
-p1_start = today - datetime.timedelta(days=7)
-p2_end   = today - datetime.timedelta(days=8)
-p2_start = today - datetime.timedelta(days=14)
+_rs, _re, _ps, _pe = os.environ.get("REPORT_START",""), os.environ.get("REPORT_END",""), os.environ.get("REPORT_PREV_START",""), os.environ.get("REPORT_PREV_END","")
+if _rs and _re and _ps and _pe:
+    p1_start = datetime.date.fromisoformat(_rs)
+    p1_end   = datetime.date.fromisoformat(_re)
+    p2_start = datetime.date.fromisoformat(_ps)
+    p2_end   = datetime.date.fromisoformat(_pe)
+    mes      = p1_end.strftime("%b-%y").lower()
+    suffix   = f"{p1_start.isoformat()}_a_{p1_end.isoformat()}"
+else:
+    p1_end   = today - datetime.timedelta(days=1)
+    p1_start = today - datetime.timedelta(days=7)
+    p2_end   = today - datetime.timedelta(days=8)
+    p2_start = today - datetime.timedelta(days=14)
+    mes      = today.strftime("%b-%y").lower()   # ex: jun-26
+    suffix   = today.strftime("%Y-%m-%d")
 
 def fetch(since, until, level="campaign"):
     fields = "campaign_name,adset_name,ad_name,spend,clicks,impressions,reach,cpm,ctr,frequency,actions,cost_per_action_type"
@@ -80,7 +90,7 @@ A(f"# Relatorio Meta Ads - Dra. Fernanda Guimaraes")
 A(f"**Periodo atual:** {p1_start.strftime('%d/%m/%Y')} a {p1_end.strftime('%d/%m/%Y')}")
 A(f"**Periodo anterior:** {p2_start.strftime('%d/%m/%Y')} a {p2_end.strftime('%d/%m/%Y')}")
 A(f"**Gerado em:** {today.strftime('%d/%m/%Y')} | **Conta:** {ACCOUNT}")
-A(); A("---"); A()
+A(""); A("---"); A("")
 
 A("## Resumo Executivo"); A()
 A("| Metrica | Atual | Anterior | Variacao |")
@@ -225,7 +235,7 @@ for camp in camp_curr:
 A("---")
 
 report="\n".join(L)
-filepath=f"reports/DUOSFERA/dra-fernanda/{mes}/meta-dra-fernanda-report-{today.strftime('%Y-%m-%d')}.md"
+filepath=f"reports/DUOSFERA/dra-fernanda/{mes}/meta-dra-fernanda-report-{suffix}.md"
 api_url=f"https://api.github.com/repos/{GITHUB_REPO}/contents/{filepath}"
 req=urllib.request.Request(api_url,headers={"Authorization":f"token {GITHUB_TOKEN}"})
 try:
