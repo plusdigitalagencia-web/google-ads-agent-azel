@@ -57,8 +57,8 @@ jobs:
             DATE_ARGS=""
             SUFFIX="$(date +%Y-%m-%d)"
           fi
-          OUTPUT="reports/chez-france/google/${MES}/google-chezfrance-report-${SUFFIX}.md"
-          mkdir -p "reports/chez-france/google/${MES}"
+          OUTPUT="reports/ASSUCAR/chez-france/google/${MES}/google-chezfrance-report-${SUFFIX}.md"
+          mkdir -p "reports/ASSUCAR/chez-france/google/${MES}"
           python execution/weekly_report_generator.py \
             --customer-id 8882189559 \
             --mcc-id 2564865113 \
