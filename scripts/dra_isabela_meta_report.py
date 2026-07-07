@@ -46,9 +46,9 @@ def fetch(since, until, level="campaign"):
         print(f"Erro {level}: {e}")
         return []
 
-def leads(row):
+def conversas(row):
     for x in row.get("actions", []):
-        if x.get("action_type") in ("lead", "leadgen_other"):
+        if x.get("action_type") == "onsite_conversion.messaging_conversation_started_7d":
             return float(x.get("value", 0))
     return 0.0
 
@@ -61,15 +61,15 @@ def pct(a, b):
     return f"{'+'if v>0 else ''}{v:.1f}%"
 
 def totals(data):
-    t = dict(spend=0,impressions=0,clicks=0,leads=0,cpm_s=0,ctr_s=0,freq_s=0,n=0)
+    t = dict(spend=0,impressions=0,clicks=0,conversas=0,cpm_s=0,ctr_s=0,freq_s=0,n=0)
     for r in data:
         t["spend"]+=float(r.get("spend",0)); t["impressions"]+=int(r.get("impressions",0))
-        t["clicks"]+=int(r.get("clicks",0)); t["leads"]+=leads(r)
+        t["clicks"]+=int(r.get("clicks",0)); t["conversas"]+=conversas(r)
         t["cpm_s"]+=float(r.get("cpm",0)); t["ctr_s"]+=float(r.get("ctr",0))
         t["freq_s"]+=float(r.get("frequency",0)); t["n"]+=1
     n=t["n"] or 1
     t.update(avg_cpm=t["cpm_s"]/n, avg_ctr=t["ctr_s"]/n, avg_freq=t["freq_s"]/n)
-    t["cpl_val"]=t["spend"]/t["leads"] if t["leads"] else 0
+    t["cpl_val"]=t["spend"]/t["conversas"] if t["conversas"] else 0
     return t
 
 print("Buscando dados Meta Ads Dra. Isabela...")
@@ -97,8 +97,8 @@ A("## Resumo Executivo"); A("")
 A("| Metrica | Atual | Anterior | Variacao |")
 A("|---|---|---|---|")
 A(f"| Gasto | R${curr['spend']:.2f} | R${prev['spend']:.2f} | {pct(curr['spend'],prev['spend'])} |")
-A(f"| Leads | {int(curr['leads'])} | {int(prev['leads'])} | {pct(curr['leads'],prev['leads'])} |")
-A(f"| CPL medio | {cpl_str(curr['spend'],curr['leads'])} | {cpl_str(prev['spend'],prev['leads'])} | {pct(curr['cpl_val'],prev['cpl_val']) if curr['leads'] and prev['leads'] else '---'} |")
+A(f"| Conversas | {int(curr['conversas'])} | {int(prev['conversas'])} | {pct(curr['conversas'],prev['conversas'])} |")
+A(f"| C/Conv medio | {cpl_str(curr['spend'],curr['conversas'])} | {cpl_str(prev['spend'],prev['conversas'])} | {pct(curr['cpl_val'],prev['cpl_val']) if curr['conversas'] and prev['conversas'] else '---'} |")
 A(f"| Impressoes | {int(curr['impressions']):,} | {int(prev['impressions']):,} | {pct(curr['impressions'],prev['impressions'])} |")
 A(f"| Cliques | {int(curr['clicks'])} | {int(prev['clicks'])} | {pct(curr['clicks'],prev['clicks'])} |")
 A(f"| CTR medio | {curr['avg_ctr']:.2f}% | {prev['avg_ctr']:.2f}% | {pct(curr['avg_ctr'],prev['avg_ctr'])} |")
@@ -108,11 +108,11 @@ A("")
 
 A("---"); A("")
 A("## Modulo 1 - Auditoria de Campanhas"); A("")
-A("| Campanha | Gasto | CTR | CPM | Freq | Leads | CPL | Status |")
+A("| Campanha | Gasto | CTR | CPM | Freq | Conversas | C/Conv | Status |")
 A("|---|---|---|---|---|---|---|---|")
 avg_cpl=curr["cpl_val"]
 for r in sorted(camp_curr, key=lambda x:float(x.get("spend",0)),reverse=True):
-    l=leads(r);sp=float(r.get("spend",0));c=sp/l if l else 0
+    l=conversas(r);sp=float(r.get("spend",0));c=sp/l if l else 0
     freq=float(r.get("frequency",0))
     st="OK" if (l>0 and c<=avg_cpl*1.2) else ("ATENCAO" if l>0 else "CRITICO")
     fw=" FREQ-ALTA" if freq>=2.5 else ""
@@ -126,16 +126,16 @@ for r in ad_curr:
 
 for cname,ads in camps_map.items():
     A(f"#### Campanha: {cname}"); A("")
-    A("| Anuncio | Gasto | CTR | CPM | Freq | Leads | CPL | Status |")
+    A("| Anuncio | Gasto | CTR | CPM | Freq | Conversas | C/Conv | Status |")
     A("|---|---|---|---|---|---|---|---|")
     cs=sum(float(r.get("spend",0)) for r in ads)
-    cl=sum(leads(r) for r in ads)
+    cl=sum(conversas(r) for r in ads)
     acpl=cs/cl if cl else 0
-    with_l=sorted([r for r in ads if leads(r)>0],key=lambda r:float(r.get("spend",0))/leads(r))
-    no_l=sorted([r for r in ads if leads(r)==0],key=lambda r:float(r.get("spend",0)),reverse=True)
+    with_l=sorted([r for r in ads if conversas(r)>0],key=lambda r:float(r.get("spend",0))/conversas(r))
+    no_l=sorted([r for r in ads if conversas(r)==0],key=lambda r:float(r.get("spend",0)),reverse=True)
     best_found=False
     for r in with_l+no_l:
-        l=leads(r);sp=float(r.get("spend",0));c=sp/l if l else 0
+        l=conversas(r);sp=float(r.get("spend",0));c=sp/l if l else 0
         freq=float(r.get("frequency",0))
         star=""
         if l>0 and not best_found:
@@ -170,15 +170,15 @@ A("|---|---|---|---|")
 acts=[]
 nm=today+datetime.timedelta(days=(7-today.weekday()))
 for r in ad_curr:
-    sp=float(r.get("spend",0));l=leads(r)
+    sp=float(r.get("spend",0));l=conversas(r)
     if sp>30 and l==0:
-        acts.append(f"| CRITICO | Pausar '{r.get('ad_name','?')[:28]}' (R${sp:.0f}, 0 leads) | Liberar budget | Imediato |")
+        acts.append(f"| CRITICO | Pausar '{r.get('ad_name','?')[:28]}' (R${sp:.0f}, 0 conversas) | Liberar budget | Imediato |")
 for r in ad_curr:
-    l=leads(r);sp=float(r.get("spend",0))
+    l=conversas(r);sp=float(r.get("spend",0))
     if l>0:
         c=sp/l
         if c>avg_cpl*2 and sp>50:
-            acts.append(f"| ATENCAO | Revisar '{r.get('ad_name','?')[:26]}' (CPL R${c:.0f} vs media R${avg_cpl:.0f}) | Reduzir CPL | {nm.strftime('%d/%m')} |")
+            acts.append(f"| ATENCAO | Revisar '{r.get('ad_name','?')[:26]}' (C/Conv R${c:.0f} vs media R${avg_cpl:.0f}) | Reduzir C/Conv | {nm.strftime('%d/%m')} |")
 for r in ad_curr:
     freq=float(r.get("frequency",0));sp=float(r.get("spend",0))
     if freq>=3.5 and sp>5:
@@ -194,37 +194,37 @@ A("")
 A("---"); A("")
 A("## RESUMO FINAL PARA TRELLO"); A("")
 A(f"Meta Ads Dra. Isabela Gomes - {today.strftime('%d/%m/%Y')}")
-A(f"Gasto: R${curr['spend']:.2f} | Leads: {int(curr['leads'])} | CPL: {cpl_str(curr['spend'],curr['leads'])} ({pct(curr['cpl_val'],prev['cpl_val']) if curr['leads'] and prev['leads'] else '---'} vs semana anterior)")
+A(f"Gasto: R${curr['spend']:.2f} | Conversas: {int(curr['conversas'])} | C/Conv: {cpl_str(curr['spend'],curr['conversas'])} ({pct(curr['cpl_val'],prev['cpl_val']) if curr['conversas'] and prev['conversas'] else '---'} vs semana anterior)")
 A("")
 
 for camp in camp_curr:
     cn=camp.get("campaign_name","Campanha")
-    sp=float(camp.get("spend",0));l=leads(camp);freq=float(camp.get("frequency",0))
+    sp=float(camp.get("spend",0));l=conversas(camp);freq=float(camp.get("frequency",0))
     camp_ads=[r for r in ad_curr if r.get("campaign_name")==cn]
-    ads_wl=sorted([r for r in camp_ads if leads(r)>0],key=lambda r:float(r.get("spend",0))/leads(r))
-    ads_nl=[r for r in camp_ads if leads(r)==0 and float(r.get("spend",0))>20]
+    ads_wl=sorted([r for r in camp_ads if conversas(r)>0],key=lambda r:float(r.get("spend",0))/conversas(r))
+    ads_nl=[r for r in camp_ads if conversas(r)==0 and float(r.get("spend",0))>20]
     best=ads_wl[0] if ads_wl else None
     A(f"---"); A("")
     A(f"CAMPANHA: {cn}"); A("")
     A("O QUE ESTA FUNCIONANDO:")
     if best:
-        bl=leads(best);bc=float(best.get("spend",0))/bl
-        A(f"- Criativo \"{best.get('ad_name','?')[:40]}\" - CTR {float(best.get('ctr',0)):.2f}% | CPL R${bc:.2f}")
+        bl=conversas(best);bc=float(best.get("spend",0))/bl
+        A(f"- Criativo \"{best.get('ad_name','?')[:40]}\" - CTR {float(best.get('ctr',0)):.2f}% | C/Conv R${bc:.2f}")
     else:
-        A(f"- {int(l)} leads gerados no periodo")
+        A(f"- {int(l)} conversas geradas no periodo")
     if freq<2.0: A(f"- Frequencia em {freq:.2f} - publico sem saturacao")
     A("")
     A("O QUE NAO ESTA FUNCIONANDO:")
     if ads_nl:
         for bad in ads_nl[:2]:
-            A(f"- \"{bad.get('ad_name','?')[:40]}\" - R${float(bad.get('spend',0)):.2f} gastos com 0 leads")
+            A(f"- \"{bad.get('ad_name','?')[:40]}\" - R${float(bad.get('spend',0)):.2f} gastos com 0 conversas")
     if freq>=2.5: A(f"- Frequencia em {freq:.2f} - risco de fadiga")
     if not ads_nl and freq<2.5: A("- Sem problemas criticos identificados")
     A("")
     A("CRIATIVO VENCEDOR:")
     if best:
-        bl=leads(best);bc=float(best.get("spend",0))/bl
-        A(f"- {best.get('ad_name','?')[:40]} - CTR {float(best.get('ctr',0)):.2f}% | CPL R${bc:.2f}")
+        bl=conversas(best);bc=float(best.get("spend",0))/bl
+        A(f"- {best.get('ad_name','?')[:40]} - CTR {float(best.get('ctr',0)):.2f}% | C/Conv R${bc:.2f}")
     else: A("- A definir")
     A("")
     A("O QUE PRECISA SER FEITO:")
