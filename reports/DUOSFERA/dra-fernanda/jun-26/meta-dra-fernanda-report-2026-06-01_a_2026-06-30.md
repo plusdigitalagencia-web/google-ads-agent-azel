@@ -10,8 +10,8 @@
 | Metrica | Atual | Anterior | Variacao |
 |---|---|---|---|
 | Gasto | R$878.58 | R$0.00 | --- |
-| Leads | 0 | 0 | --- |
-| CPL medio | --- | --- | --- |
+| Conversas | 42 | 0 | --- |
+| C/Conv medio | R$20.92 | --- | --- |
 | Impressoes | 40,699 | 0 | --- |
 | Cliques | 961 | 0 | --- |
 | CTR medio | 2.37% | 0.00% | --- |
@@ -22,28 +22,28 @@
 
 ## Modulo 1 - Auditoria de Campanhas
 
-| Campanha | Gasto | CTR | CPM | Freq | Leads | CPL | Status |
+| Campanha | Gasto | CTR | CPM | Freq | Conversas | C/Conv | Status |
 |---|---|---|---|---|---|---|---|
-| [Duosfera] [ Agendamento] [WPP] - 11/06 | R$618.80 | 2.47% | R$34.09 | 2.21 | 0 | --- | CRITICO |
-| [DuosFera] [Engajamento] - 11/06 | R$259.78 | 2.28% | R$11.52 | 1.93 | 0 | --- | CRITICO |
+| [Duosfera] [ Agendamento] [WPP] - 11/06 | R$618.80 | 2.47% | R$34.09 | 2.21 | 41 | R$15.09 | OK |
+| [DuosFera] [Engajamento] - 11/06 | R$259.78 | 2.28% | R$11.52 | 1.93 | 1 | R$259.78 | ATENCAO |
 
 ### Analise por Anuncio
 
 #### Campanha: [DuosFera] [Engajamento] - 11/06
 
-| Anuncio | Gasto | CTR | CPM | Freq | Leads | CPL | Status |
+| Anuncio | Gasto | CTR | CPM | Freq | Conversas | C/Conv | Status |
 |---|---|---|---|---|---|---|---|
-| Carrosel - A experiência médica me deu | R$228.30 | 2.28% | R$11.02 | 1.84 | 0 | --- | CRITICO |
+| Carrosel - A experiência médica me deu VENCEDOR | R$228.30 | 2.28% | R$11.02 | 1.84 | 1 | R$228.30 | OK |
 | VD1 - Você tenta fazer a mesma dieta d | R$26.76 | 2.35% | R$16.10 | 1.25 | 0 | --- | CRITICO |
 | Carrosel - Por que uma cardiologista d | R$4.72 | 1.16% | R$27.44 | 1.16 | 0 | --- | SEM-GASTO |
 
 #### Campanha: [Duosfera] [ Agendamento] [WPP] - 11/06
 
-| Anuncio | Gasto | CTR | CPM | Freq | Leads | CPL | Status |
+| Anuncio | Gasto | CTR | CPM | Freq | Conversas | C/Conv | Status |
 |---|---|---|---|---|---|---|---|
-| VD1 - A primeira consulta não é só sob | R$565.72 | 2.47% | R$33.39 | 2.09 | 0 | --- | CRITICO |
-| Carrosel 1 - "Dra, eu não mudei nada n | R$30.53 | 2.95% | R$47.48 | 1.52 | 0 | --- | CRITICO |
-| Carrosel 2 - O Fervolução não é só sob | R$22.55 | 1.94% | R$39.84 | 1.65 | 0 | --- | CRITICO |
+| Carrosel 2 - O Fervolução não é só sob VENCEDOR | R$22.55 | 1.94% | R$39.84 | 1.65 | 3 | R$7.52 | OK |
+| Carrosel 1 - "Dra, eu não mudei nada n | R$30.53 | 2.95% | R$47.48 | 1.52 | 2 | R$15.27 | OK |
+| VD1 - A primeira consulta não é só sob | R$565.72 | 2.47% | R$33.39 | 2.09 | 36 | R$15.71 | OK |
 
 ---
 
@@ -72,50 +72,47 @@ Status: ACELERADO
 
 | Pri | Acao | Impacto | Prazo |
 |---|---|---|---|
-| CRITICO | Pausar 'Carrosel - A experiência méd' (R$228, 0 leads) | Liberar budget | Imediato |
-| CRITICO | Pausar 'Carrosel 1 - "Dra, eu não mu' (R$31, 0 leads) | Liberar budget | Imediato |
-| CRITICO | Pausar 'VD1 - A primeira consulta nã' (R$566, 0 leads) | Liberar budget | Imediato |
+| ATENCAO | Revisar 'Carrosel - A experiência m' (C/Conv R$228 vs media R$21) | Reduzir C/Conv | 13/07 |
 
 ---
 
 ## RESUMO FINAL PARA TRELLO
 
 Meta Ads Dra. Fernanda Guimaraes - 07/07/2026
-Gasto: R$878.58 | Leads: 0 | CPL: --- (--- vs semana anterior)
+Gasto: R$878.58 | Conversas: 42 | C/Conv: R$20.92 (--- vs semana anterior)
 
 ---
 
 CAMPANHA: [DuosFera] [Engajamento] - 11/06
 
 O QUE ESTA FUNCIONANDO:
-- 0 leads gerados no periodo
+- Criativo "Carrosel - A experiência médica me deu a" - CTR 2.28% | C/Conv R$228.30
 - Frequencia em 1.93 - publico sem saturacao
 
 O QUE NAO ESTA FUNCIONANDO:
-- "VD1 - Você tenta fazer a mesma dieta de " - R$26.76 gastos com 0 leads
-- "Carrosel - A experiência médica me deu a" - R$228.30 gastos com 0 leads
+- "VD1 - Você tenta fazer a mesma dieta de " - R$26.76 gastos com 0 conversas
 
 CRIATIVO VENCEDOR:
-- A definir
+- Carrosel - A experiência médica me deu a - CTR 2.28% | C/Conv R$228.30
 
 O QUE PRECISA SER FEITO:
 - Pausar criativos sem resultado que consomem budget
+- Dar mais budget para o criativo vencedor escalar
 
 ---
 
 CAMPANHA: [Duosfera] [ Agendamento] [WPP] - 11/06
 
 O QUE ESTA FUNCIONANDO:
-- 0 leads gerados no periodo
+- Criativo "Carrosel 2 - O Fervolução não é só sobre" - CTR 1.94% | C/Conv R$7.52
 
 O QUE NAO ESTA FUNCIONANDO:
-- "Carrosel 1 - "Dra, eu não mudei nada na " - R$30.53 gastos com 0 leads
-- "Carrosel 2 - O Fervolução não é só sobre" - R$22.55 gastos com 0 leads
+- Sem problemas criticos identificados
 
 CRIATIVO VENCEDOR:
-- A definir
+- Carrosel 2 - O Fervolução não é só sobre - CTR 1.94% | C/Conv R$7.52
 
 O QUE PRECISA SER FEITO:
-- Pausar criativos sem resultado que consomem budget
+- Dar mais budget para o criativo vencedor escalar
 
 ---
