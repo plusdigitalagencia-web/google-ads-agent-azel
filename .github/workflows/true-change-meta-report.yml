@@ -31,14 +31,14 @@ jobs:
           TRUE_CHANGE_META_ACCESS_TOKEN: ${{ secrets.TRUE_CHANGE_META_ACCESS_TOKEN }}
           UNTIL_DATE: ${{ github.event.inputs.until_date }}
         run: |
-          mkdir -p reports/true-change/meta
+          mkdir -p reports/ASSUCAR/true-change/meta
           python scripts/true_change_meta_report.py
 
       - name: Commit e push
         run: |
           git config user.name "True Change Bot"
           git config user.email "bot@plusdigital.com.br"
-          git add reports/true-change/meta/
+          git add reports/ASSUCAR/true-change/meta/
           git commit -m "Relatorio Meta Ads True Change - $(date '+%Y-%m-%d %H:%M')" --allow-empty
           git pull --rebase origin main
           git push
