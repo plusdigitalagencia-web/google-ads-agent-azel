@@ -1,7 +1,24 @@
 name: Dra Isabela Meta Ads - Relatorio Semanal
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:       # acionado pelo dispatcher-segunda.yml ou manualmente
+    inputs:
+      report_start:
+        description: "Periodo atual - data inicial (YYYY-MM-DD)"
+        required: false
+        default: ""
+      report_end:
+        description: "Periodo atual - data final (YYYY-MM-DD)"
+        required: false
+        default: ""
+      report_prev_start:
+        description: "Periodo anterior - data inicial (YYYY-MM-DD)"
+        required: false
+        default: ""
+      report_prev_end:
+        description: "Periodo anterior - data final (YYYY-MM-DD)"
+        required: false
+        default: ""
 
 jobs:
   generate-report:
@@ -19,4 +36,8 @@ jobs:
         env:
           DUOSFERA_META_TOKEN: ${{ secrets.DUOSFERA_META_TOKEN }}
           GH_PAT: ${{ secrets.GH_PAT }}
+          REPORT_START: ${{ github.event.inputs.report_start }}
+          REPORT_END: ${{ github.event.inputs.report_end }}
+          REPORT_PREV_START: ${{ github.event.inputs.report_prev_start }}
+          REPORT_PREV_END: ${{ github.event.inputs.report_prev_end }}
         run: python scripts/dra_isabela_meta_report.py
