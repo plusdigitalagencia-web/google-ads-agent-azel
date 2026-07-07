@@ -31,8 +31,8 @@ jobs:
           GOOGLE_ADS_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}
           GOOGLE_ADS_LOGIN_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_LOGIN_CUSTOMER_ID }}
         run: |
-          OUTPUT="reports/true-change/google-true-change-report-$(date +%Y-%m-%d).md"
-          mkdir -p reports/true-change
+          OUTPUT="reports/ASSUCAR/true-change/google-true-change-report-$(date +%Y-%m-%d).md"
+          mkdir -p reports/ASSUCAR/true-change
           python execution/weekly_report_generator.py \
             --customer-id 9063582846 \
             --mcc-id 2564865113 \
