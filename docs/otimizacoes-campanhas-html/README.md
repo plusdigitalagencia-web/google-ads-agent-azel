@@ -1,5 +1,13 @@
 # Otimizações Campanhas HTML
 
-- [Chez France](<Chez France/>) — E-commerce de vinhos franceses — Google Ads 888-218-9559
+Relatórios de diagnóstico de campanhas, organizados por cliente. Clique numa linha abaixo para ver os relatórios publicados (abre a página renderizada, fora do navegador de código do GitHub).
 
-Repositório: google-ads-agent-azel · branch main
+| Cliente | Relatórios |
+|---|---|
+| **Chez France** | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/otimizacoes-campanhas-html/Chez%20France/) |
+
+> Pasta a criar quando o próximo cliente for confirmado.
+
+---
+
+Índice geral publicado: https://plusdigitalagencia-web.github.io/google-ads-agent-azel/otimizacoes-campanhas-html/
