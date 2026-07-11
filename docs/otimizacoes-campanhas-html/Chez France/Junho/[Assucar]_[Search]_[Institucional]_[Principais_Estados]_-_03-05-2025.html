@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[Assucar] [Search] [Institucional] [Principais Estados]</title>
+<style>
+  :root {
+    --ground: #f4f7f5;
+    --panel: #ffffff;
+    --panel-2: #eaf1ee;
+    --border: #d7e0dc;
+    --ink: #142320;
+    --ink-dim: #4b5b56;
+    --ink-faint: #7c8b86;
+    --accent: #157567;
+    --accent-ink: #0d4b42;
+    --accent-soft: #dcefe9;
+    --good: #1f7a52;
+    --good-soft: #e1f3ea;
+    --warn: #8a5a13;
+    --warn-soft: #faf0dc;
+    --fail: #a3261f;
+    --fail-soft: #fbe6e4;
+    --nd: #5b6864;
+    --nd-soft: #e9edeb;
+    --font-sans: -apple-system, "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Consolas, monospace;
+  }
+
+  :root[data-theme="dark"] {
+    --ground: #0c1614; --panel: #121e1b; --panel-2: #16221f; --border: #24322e;
+    --ink: #e7efec; --ink-dim: #a9b8b3; --ink-faint: #7c8b86;
+    --accent: #37bfa8; --accent-ink: #b7ece1; --accent-soft: #17332d;
+    --good: #4ecb95; --good-soft: #17332a; --warn: #e0b25b; --warn-soft: #362a12;
+    --fail: #ec7972; --fail-soft: #3a1917; --nd: #93a19c; --nd-soft: #1b2624;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0c1614; --panel: #121e1b; --panel-2: #16221f; --border: #24322e;
+      --ink: #e7efec; --ink-dim: #a9b8b3; --ink-faint: #7c8b86;
+      --accent: #37bfa8; --accent-ink: #b7ece1; --accent-soft: #17332d;
+      --good: #4ecb95; --good-soft: #17332a; --warn: #e0b25b; --warn-soft: #362a12;
+      --fail: #ec7972; --fail-soft: #3a1917; --nd: #93a19c; --nd-soft: #1b2624;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--font-sans); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  .page { max-width: 880px; margin: 0 auto; padding: 48px 24px 80px; display: flex; flex-direction: column; gap: 32px; }
+  header.masthead { display: flex; flex-direction: column; gap: 10px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+  .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  h1.slug { font-family: var(--font-mono); font-size: clamp(18px, 3.4vw, 27px); font-weight: 600; margin: 0; color: var(--ink); word-break: break-word; text-wrap: balance; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13.5px; color: var(--ink-dim); }
+  .meta-row b { color: var(--ink); font-weight: 600; }
+  h2.section-title { font-size: 15px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 14px; }
+
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .kpi { background: var(--panel); padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 6px; }
+  .kpi .label { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-faint); font-weight: 600; }
+  .kpi .value { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 21px; font-weight: 600; color: var(--ink); }
+  .kpi .value.flag { color: var(--fail); }
+  .kpi .value.good { color: var(--good); }
+
+  .callout { background: var(--accent-soft); border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border)); border-radius: 10px; padding: 20px 22px; display: flex; flex-direction: column; gap: 8px; }
+  .callout .callout-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--accent-ink); }
+  .callout p { margin: 0; font-size: 15px; color: var(--ink); }
+  .callout p + p { margin-top: 2px; }
+  .callout b.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; }
+  table { width: 100%; border-collapse: collapse; background: var(--panel); font-size: 13px; }
+  thead th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint); font-weight: 600; padding: 10px 14px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  tbody td { padding: 9px 14px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  tbody tr:last-child td { border-bottom: none; }
+  td.label-cell { font-family: var(--font-sans); }
+  td.num { text-align: right; }
+
+  .pill { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; padding: 3px 9px; border-radius: 20px; white-space: nowrap; }
+  .pill.pass { color: var(--good); background: var(--good-soft); }
+  .pill.warn { color: var(--warn); background: var(--warn-soft); }
+  .pill.fail { color: var(--fail); background: var(--fail-soft); }
+  .pill.nd   { color: var(--nd);   background: var(--nd-soft); }
+
+  .note { border: 1px dashed var(--border); border-radius: 10px; padding: 16px 18px; font-size: 13.5px; color: var(--ink-dim); background: var(--panel-2); }
+  .note b { color: var(--ink); }
+
+  ol.recs { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  ol.recs li { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 14px 16px; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; font-size: 14.5px; }
+  ol.recs .n { font-family: var(--font-mono); font-weight: 700; color: var(--accent); }
+  ol.recs b { color: var(--ink); }
+  ol.recs span.body { color: var(--ink-dim); }
+
+  .chip-list { display: flex; flex-wrap: wrap; gap: 7px; }
+  .chip { font-family: var(--font-mono); font-size: 12px; padding: 5px 10px; background: var(--fail-soft); color: var(--fail); border-radius: 6px; }
+  .chip.brand { background: var(--nd-soft); color: var(--nd); }
+
+  footer { border-top: 1px solid var(--border); padding-top: 18px; font-size: 12.5px; color: var(--ink-faint); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+  a { color: var(--accent); }
+  @media (max-width: 520px) { .pill { justify-self: start; } }
+</style>
+</head>
+<body>
+<div class="page" style="padding-bottom:0; gap:8px;"><span class="eyebrow" style="font-family:var(--font-mono); font-size:12px; color:var(--ink-faint);"><a href="../../" style="color:var(--accent); text-decoration:none;">Otimizações Campanhas HTML</a> / <a href="../" style="color:var(--accent); text-decoration:none;">Chez France</a> / <a href="./" style="color:var(--accent); text-decoration:none;">Junho/2026</a></span></div>
+
+<div class="page">
+
+  <header class="masthead">
+    <span class="eyebrow">Google Ads &middot; Search &middot; Chez France</span>
+    <h1 class="slug">[Assucar] [Search] [Institucional] [Principais Estados] - 03/05/2025</h1>
+    <div class="meta-row">
+      <span><b>Conta:</b> Chez France (888-218-9559) · MCC Açúcar</span>
+      <span><b>Período:</b> 01/06/2026 – 30/06/2026</span>
+      <span><b>Status:</b> ENABLED</span>
+    </div>
+  </header>
+
+  <section>
+    <h2 class="section-title">Métricas do período</h2>
+    <div class="kpi-grid">
+      <div class="kpi"><span class="label">Gasto</span><span class="value">R$ 1.316,49</span></div>
+      <div class="kpi"><span class="label">Impressões</span><span class="value">2.593</span></div>
+      <div class="kpi"><span class="label">Cliques</span><span class="value">650</span></div>
+      <div class="kpi"><span class="label">CTR</span><span class="value">25,07%</span></div>
+      <div class="kpi"><span class="label">CPC</span><span class="value">R$ 2,03</span></div>
+      <div class="kpi"><span class="label">Conversões</span><span class="value good">35,15</span></div>
+      <div class="kpi"><span class="label">CPA</span><span class="value">R$ 37,45</span></div>
+      <div class="kpi"><span class="label">ROAS</span><span class="value good">14,66x</span></div>
+    </div>
+  </section>
+
+  <section class="callout">
+    <span class="callout-title">Achado principal</span>
+    <p>Em junho, <b class="num">18,5%</b> do gasto (<b class="num">R$ 242,95</b> de R$ 1.316,49) foi em termos de pesquisa com zero conversão — puxado por correspondência ampla em "Chez France" e "chez france vinhos" ativando buscas de marcas de terceiros (Argentina, Chile, Itália, Portugal) e apps/concorrentes de vinho.</p>
+    <p>Desde a auditoria de 60 dias feita em 09/07, <b>4 keywords novas foram adicionadas</b> à campanha: <code>vivino</code>, <code>evino</code>, <code>wine vinho</code> e <code>grand cru vinho</code> — as duas primeiras são apps/concorrentes diretos de vinho, ainda sem impressão registrada. Vale confirmar se essa adição foi intencional.</p>
+  </section>
+
+  <section>
+    <h2 class="section-title">Keywords ativas (8 — 4 novas desde a última auditoria)</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Keyword</th><th>Tipo</th><th class="num">Gasto</th><th class="num">Cliques</th><th class="num">Conv.</th><th class="num">CPA</th><th class="num">QS</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Chez France</td><td>Ampla</td><td class="num">R$707,20</td><td class="num">413</td><td class="num">21,5</td><td class="num">R$32,96</td><td class="num">9</td></tr>
+          <tr><td class="label-cell">chez france vinhos</td><td>Ampla</td><td class="num">R$310,56</td><td class="num">45</td><td class="num">1,0</td><td class="num">R$310,56</td><td class="num">8</td></tr>
+          <tr><td class="label-cell">chez france vinhos</td><td>Exata</td><td class="num">R$190,99</td><td class="num">114</td><td class="num">9,4</td><td class="num">R$20,29</td><td class="num">8</td></tr>
+          <tr><td class="label-cell">Chezfrance</td><td>Ampla</td><td class="num">R$107,74</td><td class="num">78</td><td class="num">3,3</td><td class="num">R$32,80</td><td class="num">9</td></tr>
+          <tr><td class="label-cell">vivino <span class="pill fail">novo · concorrente</span></td><td>Ampla</td><td class="num">R$0,00</td><td class="num">0</td><td class="num">—</td><td class="num">—</td><td class="num">1</td></tr>
+          <tr><td class="label-cell">evino <span class="pill fail">novo · concorrente</span></td><td>Ampla</td><td class="num">R$0,00</td><td class="num">0</td><td class="num">—</td><td class="num">—</td><td class="num">3</td></tr>
+          <tr><td class="label-cell">wine vinho <span class="pill warn">novo</span></td><td>Ampla</td><td class="num">R$0,00</td><td class="num">0</td><td class="num">—</td><td class="num">—</td><td class="num">4</td></tr>
+          <tr><td class="label-cell">grand cru vinho <span class="pill warn">novo</span></td><td>Frase</td><td class="num">R$0,00</td><td class="num">0</td><td class="num">—</td><td class="num">—</td><td class="num">3</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Termos de pesquisa sem conversão (17 termos, R$ 242,95)</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Termo</th><th class="num">Cliques</th><th class="num">Gasto</th><th>Classificação</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">chezfrance com br</td><td class="num">15</td><td class="num">R$37,67</td><td><span class="pill nd">Marca — investigar tracking</span></td></tr>
+          <tr><td class="label-cell">chez de france</td><td class="num">7</td><td class="num">R$35,26</td><td><span class="pill nd">Marca (typo) — investigar</span></td></tr>
+          <tr><td class="label-cell">cupom chez france</td><td class="num">1</td><td class="num">R$29,99</td><td><span class="pill nd">Marca</span></td></tr>
+          <tr><td class="label-cell">vinhos alma única</td><td class="num">1</td><td class="num">R$29,12</td><td><span class="pill fail">Chile</span></td></tr>
+          <tr><td class="label-cell">angelica zapata</td><td class="num">1</td><td class="num">R$20,05</td><td><span class="pill fail">Argentina</span></td></tr>
+          <tr><td class="label-cell">alma única</td><td class="num">1</td><td class="num">R$16,76</td><td><span class="pill fail">Chile</span></td></tr>
+          <tr><td class="label-cell">vinho brunello di montalcino</td><td class="num">1</td><td class="num">R$14,83</td><td><span class="pill fail">Itália</span></td></tr>
+          <tr><td class="label-cell">la grupa malbec</td><td class="num">1</td><td class="num">R$14,28</td><td><span class="pill fail">Argentina</span></td></tr>
+          <tr><td class="label-cell">reconvexo vinícola</td><td class="num">1</td><td class="num">R$11,93</td><td><span class="pill fail">Brasil</span></td></tr>
+          <tr><td class="label-cell">chez france vinho</td><td class="num">2</td><td class="num">R$6,86</td><td><span class="pill nd">Marca</span></td></tr>
+          <tr><td class="label-cell">grand cru vinhos</td><td class="num">1</td><td class="num">R$6,29</td><td><span class="pill pass">Termo francês (produto real)</span></td></tr>
+          <tr><td class="label-cell">vinho santa rita</td><td class="num">1</td><td class="num">R$5,72</td><td><span class="pill fail">Chile</span></td></tr>
+          <tr><td class="label-cell">vinho taylor's port</td><td class="num">1</td><td class="num">R$5,06</td><td><span class="pill fail">Portugal</span></td></tr>
+          <tr><td class="label-cell">le club chez france</td><td class="num">1</td><td class="num">R$4,37</td><td><span class="pill nd">Marca</span></td></tr>
+          <tr><td class="label-cell">hennessy</td><td class="num">1</td><td class="num">R$3,37</td><td><span class="pill pass">Cognac francês (produto real)</span></td></tr>
+          <tr><td class="label-cell">www chezfrance com br</td><td class="num">1</td><td class="num">R$1,37</td><td><span class="pill nd">Marca</span></td></tr>
+          <tr><td class="label-cell">chez franc</td><td class="num">1</td><td class="num">R$0,01</td><td><span class="pill nd">Marca (typo)</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Lista de negativas sugeridas (8 termos, R$ 117,75)</h2>
+    <div class="chip-list">
+      <span class="chip">[vinhos alma única]</span>
+      <span class="chip">[angelica zapata]</span>
+      <span class="chip">[alma única]</span>
+      <span class="chip">[vinho brunello di montalcino]</span>
+      <span class="chip">[la grupa malbec]</span>
+      <span class="chip">[reconvexo vinícola]</span>
+      <span class="chip">[vinho santa rita]</span>
+      <span class="chip">[vinho taylor's port]</span>
+    </div>
+  </section>
+
+  <div class="note">
+    <b>Método:</b> dados vieram de consulta GAQL direta à Google Ads API (biblioteca Python <code>google-ads</code>, credenciais da MCC Açúcar), não da tool MCP <code>analyze_search_terms</code> — essa tool está com bug conhecido nos 4 servidores Render da agência e retorna vazio (ver CLAUDE.md principal). Período filtrado por <code>segments.date BETWEEN</code>, já que <code>LAST_N_DAYS</code> não aceita valores arbitrários no GAQL.
+  </div>
+
+  <section>
+    <h2 class="section-title">Recomendações priorizadas</h2>
+    <ol class="recs">
+      <li><span class="n">1</span><span><b>Confirmar se "evino" e "vivino" foram adicionadas de propósito</b> — <span class="body">são um app de avaliação de vinhos (vivino) e um concorrente direto de e-commerce de vinho (evino). Ainda não geraram impressão, mas valem confirmação antes de deixar rodar.</span></span></li>
+      <li><span class="n">2</span><span><b>Adicionar as 8 negativas listadas acima</b> — <span class="body">todas são marcas de vinho de outros países (Argentina, Chile, Itália, Portugal, Brasil), fora do posicionamento de vinhos franceses da Chez France. Recupera R$117,75/mês nesse volume.</span></span></li>
+      <li><span class="n">3</span><span><b>Investigar "chezfrance com br" e "chez de france"</b> — <span class="body">maiores itens de gasto sem conversão do mês (R$37,67 e R$35,26), mas são buscas de marca — provável problema de tracking/atribuição, não de targeting. Não negativar sem checar antes.</span></span></li>
+      <li><span class="n">4</span><span><b>Manter "grand cru vinhos" e "hennessy"</b> — <span class="body">são produtos franceses reais que a Chez France vende; zero conversão em 1 clique não justifica negativar ainda, monitorar no próximo período.</span></span></li>
+    </ol>
+  </section>
+
+  <footer>
+    <span>Fonte: Google Ads API direta (search_term_view, keyword_view) · Conta Chez France 888-218-9559</span>
+    <span>Gerado em 10/07/2026 · Nunca altera nada na conta — apenas diagnóstico</span>
+  </footer>
+
+</div>
+</body>
+</html>
