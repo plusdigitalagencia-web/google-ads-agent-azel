@@ -1,5 +1,11 @@
 # Chez France
 
-- [Junho/2026](Junho/) — 2 campanhas: Institucional, PMax Le Club
+Relatórios de diagnóstico de campanhas da Chez France, organizados por mês. Clique numa linha abaixo para ver os relatórios publicados (abre a página renderizada, fora do navegador de código do GitHub).
 
-Conta Google Ads 888-218-9559 · MCC Açúcar 256-486-5113
+| Mês | Relatórios |
+|---|---|
+| **Junho/2026** | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/otimizacoes-campanhas-html/Chez%20France/Junho/) |
+
+---
+
+Índice geral publicado: https://plusdigitalagencia-web.github.io/google-ads-agent-azel/otimizacoes-campanhas-html/Chez%20France/
