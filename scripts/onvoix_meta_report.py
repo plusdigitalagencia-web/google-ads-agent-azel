@@ -220,25 +220,53 @@ O objetivo sempre é: mais leads com menor CPL possível.
 
 ## BLOCO TRELLO
 
+(Este bloco NÃO é um resumo de 5 linhas — é um panorama executivo completo para o gestor que não vai ler o relatório inteiro. Deve ser rico, com os principais insights de cada módulo, contextualizado e com causa raiz real. Escreva como se estivesse explicando a situação da conta para alguém que não viu os dados.)
+
 Meta Ads {CLIENT_NAME} - DD/MM/YYYY
 Gasto: $X | Leads: N | CPL: $X
-Variacao vs semana anterior: CPL X% | Leads X%
-Pacing: [status com emoji e ação se necessário]
+Variação vs semana anterior: CPL X% emoji | Leads X% emoji
+Pacing: [status emoji] — Projeção $X vs Budget $X ([X]% do mês decorrido)
 
 ---
 
-Campanha: [nome]
+📌 CONTEXTO DA SEMANA
+[Se houve mudança relevante na conta — campanha pausada/reativada, novo criativo, mudança de budget, público saturado — explique em 2-4 linhas o que mudou e por que isso impacta os números. Se não houve nada relevante, OMITIR esta seção completamente.]
 
-O que esta funcionando:
-- [criativo vencedor real com volume] - CTR X% | CPL $X com N leads
-- [frequência / público OK se aplicável]
+---
 
-O que nao esta funcionando:
-- [criativos críticos reais] OU "Sem problemas criticos identificados"
+📊 PANORAMA DA SEMANA
 
-Criativo vencedor: [nome] — CPL $X com N leads
-O que precisa ser feito:
-- [ações concretas]
+🔍 Campanhas & Anúncios
+[2-3 linhas: quais campanhas estão ativas, situação geral dos anúncios, o que está gerando resultado e o que não está. Cite nomes reais.]
+
+📉 Causa Raiz do CPL
+[2-4 linhas: explique por que o CPL subiu ou caiu. Seja específico — CPM melhorou mas CTR caiu? Criativo ineficiente consumindo budget? Campanha com melhor CPL foi pausada? Relate a causa real, não só o número.]
+
+⚠️ Anomalias
+[Se houver: lista com bullet dos problemas detectados — criativos com 0 leads, CPM anômalo, desaparecimento de campanha. Se não houver: "Nenhuma anomalia crítica esta semana."]
+
+📅 Pacing
+[2-3 linhas: projeção mensal vs budget + o que está causando o ritmo atual + ação concreta necessária para corrigir. Ex: "No ritmo atual, julho encerrará com $192 de $500 gastos — apenas 38% do budget aproveitado. A principal causa é o encerramento da campanha Site - México que gerava 140 leads/semana. Ação: reativar campanha ou aumentar budget diário da ativa."]
+
+😴 Fadiga de Criativos
+[1-2 linhas: status de frequência geral dos criativos. Há algum em risco de fadiga? Ou está tudo OK abaixo de 1.8?]
+
+🎨 Criativos
+Vencedor principal: [nome] — CPL $X com N leads ([formato: vídeo/imagem])
+[Candidato a escalar]: [nome] se houver — CPL $X com N leads
+Para pausar: [nome] — [motivo direto em 1 linha]
+Dados insuficientes (aguardar): [nomes separados por vírgula]
+
+🎯 Ad Sets & Públicos
+[1-2 linhas: CPM do público, espaço para escala, risco de sobreposição se houver mais de 1 ad set.]
+
+---
+
+🚀 PRÓXIMOS PASSOS
+- 🔴 [ação urgente P1 — hoje]
+- 🔴 [ação urgente P2 se houver]
+- 🟡 [ação importante P3 — 24-48h]
+- 🟢 [ação de melhoria P4 se relevante]
 
 ---
 """
