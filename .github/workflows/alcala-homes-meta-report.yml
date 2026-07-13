@@ -1,24 +1,32 @@
-name: Alcala Homes - Relatorio Semanal Meta Ads
+name: Alcala Homes Meta Ads - Relatorio Semanal
 
 on:
-  schedule:
-    - cron: '10 10 * * 1'
-  workflow_dispatch:
+  workflow_dispatch:       # acionado pelo dispatcher-segunda.yml ou manualmente
 
 jobs:
   generate-report:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repositorio
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - name: Configurar Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
+      - name: Instalar dependencias
+        run: pip install anthropic
+
       - name: Gerar relatorio Meta Ads Alcala Homes
         env:
-          ALCALA_META_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
+          META_TOKEN: ${{ secrets.ALCALA_META_TOKEN }}
           GH_PAT: ${{ secrets.GH_PAT }}
-        run: python scripts/alcala_homes_meta_report.py
-
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ACCOUNT_ID: "act_574789065003576"
+          CLIENT_NAME: "Alcala Homes"
+          CURRENCY: "EUR"
+          BUDGET_MONTHLY: "600"
+          REPORT_DIR: "reports/data-know/alcala-homes"
+          USE_MONTH_FOLDER: "true"
+        run: python scripts/meta_report_ai.py
