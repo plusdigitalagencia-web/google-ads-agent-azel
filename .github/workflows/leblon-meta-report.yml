@@ -15,8 +15,18 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Gerar relatorio Meta Ads Leblon
+      - name: Instalar dependencias
+        run: pip install anthropic
+
+      - name: Gerar relatorio Meta Ads Leblon Real Estate
         env:
-          LEBLON_META_TOKEN: ${{ secrets.LEBLON_META_TOKEN }}
+          META_TOKEN: ${{ secrets.LEBLON_META_TOKEN }}
           GH_PAT: ${{ secrets.GH_PAT }}
-        run: python scripts/leblon_meta_report.py
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ACCOUNT_ID: "act_1187011709535726"
+          CLIENT_NAME: "Leblon Real Estate"
+          CURRENCY: "EUR"
+          BUDGET_MONTHLY: "1500"
+          REPORT_DIR: "reports/data-know/leblon-real-estate"
+          USE_MONTH_FOLDER: "false"
+        run: python scripts/meta_report_ai.py
