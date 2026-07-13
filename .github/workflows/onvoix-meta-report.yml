@@ -15,9 +15,13 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Instalar dependencias
+        run: pip install anthropic
+
       - name: Gerar relatorio Meta Ads Onvoix
         env:
           ONVOIX_META_TOKEN: ${{ secrets.LEBLON_META_TOKEN }}
           GH_PAT: ${{ secrets.GH_PAT }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python scripts/onvoix_meta_report.py
 
