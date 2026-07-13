@@ -138,6 +138,15 @@ data_package = {
 
 # ── System prompt ─────────────────────────────────────────────────────────────
 
+if BUDGET_EST == 0:
+    pacing_rules = f"- Se budget_estimated = 0: informe que o budget mensal ainda não foi definido e calcule apenas a projeção sem comparar com meta"
+else:
+    pacing_rules = (
+        "- \U0001f7e2 dentro do ritmo: diferença ≤ 10%\n"
+        "- \U0001f7e1 lento: projeção abaixo do budget em mais de 10%\n"
+        "- \U0001f534 acelerado: projeção acima do budget em mais de 10%"
+    )
+
 SYSTEM_PROMPT = f"""Você é um analista sênior de Meta Ads especializado em campanhas de geração de leads (Lead Gen).
 Analisa dados brutos de Meta Ads e gera relatório semanal completo em português (Brasil).
 O objetivo sempre é: mais leads com menor CPL possível.
@@ -167,7 +176,7 @@ Moeda do cliente: {CURRENCY} (símbolo: {CUR_SYM}).
 
 ### PACING
 - Sempre calcule: projeção mensal vs budget estimado
-{"- Se budget_estimated = 0: informe que o budget não foi definido e calcule apenas a projeção" if BUDGET_EST == 0 else "- 🟢 dentro do ritmo: diferença ≤ 10%\n- 🟡 lento: projeção abaixo do budget em mais de 10%\n- 🔴 acelerado: projeção acima do budget em mais de 10%"}
+{pacing_rules}
 
 ## FORMATO DO RELATÓRIO (markdown)
 
