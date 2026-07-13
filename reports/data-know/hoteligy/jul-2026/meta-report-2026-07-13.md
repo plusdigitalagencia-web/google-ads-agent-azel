@@ -1,224 +1,178 @@
-# Relatorio Meta Ads - Hoteligy
-**Periodo atual:** 06/07/2026 a 12/07/2026
-**Periodo anterior:** 29/06/2026 a 05/07/2026
+# Relatório Meta Ads - Hoteligy
+**Período atual:** 06/07/2026 a 12/07/2026
+**Período anterior:** 29/06/2026 a 05/07/2026
 **Gerado em:** 13/07/2026 | **Conta:** act_51307638
 
 ---
 
 ## Resumo Executivo
 
-| Metrica | Atual | Anterior | Variacao |
+| Métrica | Atual | Anterior | Variação |
 |---|---|---|---|
-| Gasto | €496.55 | €75.94 | +553.9% |
-| Leads | 7 | 0 | --- |
-| CPL medio | €70.94 | --- | --- |
-| CTR medio | 3.15% | 8.21% | -61.6% |
-| CPM medio | €8.68 | €8.91 | -2.6% |
-| Frequencia | 1.56 | 1.47 | +6.4% |
+| Gasto | €0,00 | €0,00 | — |
+| Leads | 0 | 0 | — |
+| CPL | — | — | — |
+| CPM Médio | — | — | — |
+| CTR Médio | — | — | — |
+| Frequência Média | — | — | — |
+
+> ⚠️ **Atenção:** Nenhum dado de campanha foi encontrado para o período atual (06/07 a 12/07/2026). A conta aparenta estar **sem campanhas ativas ou com veiculação suspensa** na semana analisada. O período anterior também retornou zerado, o que indica que a conta pode estar pausada há pelo menos duas semanas consecutivas.
 
 ---
 
-## Modulo 1 - Auditoria de Campanhas e Anuncios
+## Módulo 1 - Auditoria de Campanhas e Anúncios
 
 ### Campanhas
 
-| Campanha | Gasto | CTR | CPM | Freq | Leads | CPL | Status |
+| Campanha | Status | Gasto | Leads | CPL | CPM | CTR | Frequência |
 |---|---|---|---|---|---|---|---|
-| ca-trf-fanazing - Copia | €309.38 | 3.34% | €10.24 | 1.49 | 5 | €61.88 | 🟢 OK |
-| [DK] [Leads] [LP] - 03/06/26 | €147.09 | 3.31% | €15.21 | 2.03 | 2 | €73.55 | 🟢 OK |
-| ca-trf-fanazing | €40.08 | 2.80% | €0.58 | 1.16 | 0 | --- | 🔴 CRITICO |
+| *(sem dados)* | — | — | — | — | — | — | — |
 
-### Anuncios por Campanha
+### Anúncios por Campanha
 
-#### Campanha: [DK] [Leads] [LP] - 03/06/26
+| Anúncio | Ad Set | Gasto | Leads | CPL | CPM | CTR | Frequência | Status |
+|---|---|---|---|---|---|---|---|---|
+| *(sem dados)* | — | — | — | — | — | — | — | — |
 
-| Anuncio | Gasto | CTR | CPM | Freq | Leads | CPL | Status |
-|---|---|---|---|---|---|---|---|
-| img_menu_restaurante_2 VENCEDOR | €20.51 | 5.11% | €11.26 | 1.88 | 1 | €20.51 | 🟢 OK |
-| img_menu_restaurante | €49.69 | 3.14% | €17.91 | 1.54 | 1 | €49.69 | 🟢 OK |
-| img_Webapp2 | €60.02 | 2.65% | €15.12 | 1.86 | 0 | --- | 🔴 CRITICO |
-| vd_Webapp | €11.55 | 2.60% | €15.02 | 1.34 | 0 | --- | 🔴 CRITICO |
-| vd_etiquetas_buffeet | €3.45 | 7.19% | €24.82 | 1.09 | 0 | --- | 🔴 CRITICO |
-| img_gerenal_home | €0.84 | 4.08% | €8.57 | 1.63 | 0 | --- | 🔴 CRITICO |
-| carrossel_ia_hotel | €0.67 | 0.00% | €10.98 | 1.07 | 0 | --- | 🔴 CRITICO |
-| carrossel_gestion_spa | €0.25 | 4.17% | €10.42 | 1.20 | 0 | --- | 🔴 CRITICO |
-| img_room_service | €0.06 | 0.00% | €6.67 | 1.12 | 0 | --- | 🔴 CRITICO |
-| vd_gerenal_home | €0.05 | 0.00% | €10.00 | 1.25 | 0 | --- | 🔴 CRITICO |
-
-#### Campanha: ca-trf-fanazing
-
-| Anuncio | Gasto | CTR | CPM | Freq | Leads | CPL | Status |
-|---|---|---|---|---|---|---|---|
-| Dj Tips - Copia | €24.71 | 2.98% | €0.57 | 1.18 | 0 | --- | 🔴 CRITICO |
-| Dj Tips | €15.37 | 2.50% | €0.61 | 1.14 | 0 | --- | 🔴 CRITICO |
-
-#### Campanha: ca-trf-fanazing - Copia
-
-| Anuncio | Gasto | CTR | CPM | Freq | Leads | CPL | Status |
-|---|---|---|---|---|---|---|---|
-| Dj Tips - Copia VENCEDOR | €168.87 | 2.99% | €9.70 | 1.45 | 4 | €42.22 | 🟢 OK |
-| Dj Tips - Copia 3 | €85.76 | 4.79% | €12.96 | 1.40 | 1 | €85.76 | 🟡 ATENCAO |
-| Dj Tips - Copia 2 | €40.61 | 2.69% | €7.97 | 1.19 | 0 | --- | 🔴 CRITICO |
-| Dj Tips - Copia 4 | €9.57 | 3.74% | €13.77 | 1.19 | 0 | --- | 🔴 CRITICO |
-| Dj Tips - Copia 5 | €4.57 | 2.05% | €11.69 | 1.09 | 0 | --- | 🔴 CRITICO |
+> 🔴 **CRÍTICO:** Nenhuma campanha, ad set ou anúncio ativo encontrado no período. Sem dados de veiculação disponíveis para auditoria.
 
 ---
 
-## Modulo 2 - Diagnostico de CPL (Causa Raiz)
+## Módulo 2 - Diagnóstico de CPL (Causa Raiz)
 
-**ca-trf-fanazing - Copia**
-- 🟢 CPL €61.88 dentro do esperado
+**Não aplicável esta semana.**
 
-**[DK] [Leads] [LP] - 03/06/26**
-- 🟢 CPL €73.55 dentro do esperado
-- Causa raiz: CPM €15.21 (75% acima da media) -> audience competitiva
+Não há dados de veiculação para análise de causa raiz. A ausência total de impressões, cliques e leads impede qualquer diagnóstico de CPM, CTR ou eficiência de conversão.
 
-**ca-trf-fanazing**
-- 🔴 €40.08 investidos com 0 leads
-- Causa raiz: CTR adequado mas sem conversao -> verificar formulario ou qualidade do publico
-- Acao: revisar formulario e segmentacao do ad set
+**Possíveis causas estruturais para investigar:**
+- ❌ Campanhas pausadas manualmente pelo gestor ou pelo cliente
+- ❌ Budget diário esgotado / budget mensal zerado sem reposição
+- ❌ Problema de faturamento ou cartão de crédito recusado na conta
+- ❌ Anúncios reprovados pela Meta (violação de política)
+- ❌ Conta publicitária suspensa ou em revisão
 
 ---
 
-## Modulo 3 - Deteccao de Anomalias
+## Módulo 3 - Detecção de Anomalias
 
-| Tipo | Anuncio | Variacao | Acao |
+| Tipo | Anúncio | Variação | Ação |
 |---|---|---|---|
-| QUEDA DE CTR | img_Webapp2 | 4.53% -> 2.65% (-42%) | Verificar criativo |
-| CPM SUBIU | img_menu_restaurante_2 | €7.30 -> €11.26 (+54%) | Audience competitiva |
-| QUEDA DE CTR | vd_etiquetas_buffeet | 13.04% -> 7.19% (-45%) | Verificar criativo |
-| CPM SUBIU | vd_etiquetas_buffeet | €10.62 -> €24.82 (+134%) | Audience competitiva |
-| NOVO ATIVO | Dj Tips - Copia | Sem historico anterior | Monitorar primeiros resultados |
-| NOVO ATIVO | Dj Tips - Copia | Sem historico anterior | Monitorar primeiros resultados |
-| NOVO ATIVO | Dj Tips - Copia 2 | Sem historico anterior | Monitorar primeiros resultados |
-| NOVO ATIVO | Dj Tips - Copia 3 | Sem historico anterior | Monitorar primeiros resultados |
+| 🔴 CONTA SEM VEICULAÇÃO | Todas as campanhas | Gasto €0 na semana inteira | Verificar status da conta, faturamento e aprovação de anúncios imediatamente |
+
+> A ausência de dados em **duas semanas consecutivas** é a principal anomalia da conta. Nenhuma comparação de variação semana-a-semana é possível.
 
 ---
 
-## Modulo 4 - Pacing Monitor
+## Módulo 4 - Pacing Monitor
 
-Dia **13** de 31 do mes (42% do periodo).
-- Gasto semanal: **€496.55**
-- Projecao mensal (ritmo atual): **€2128.07**
-- Budget: a definir com o cliente — pacing nao calculado
+**Dia 13 de 31 do mês (41,9% do mês decorrido)**
+
+| Métrica | Valor |
+|---|---|
+| Gasto na semana | €0,00 |
+| Gasto acumulado no mês (estimado) | €0,00 |
+| Projeção mensal | €0,00 |
+| Budget mensal definido | Não definido |
+| Status | 🔴 SEM VEICULAÇÃO |
+
+> ⚠️ O budget mensal não foi definido na conta (`budget_monthly: 0`). Além disso, com 41,9% do mês já decorrido e €0 gastos, a projeção mensal é €0 — confirmando que **a conta está inativa**. Não é possível calcular comparativo de projeção vs. meta sem o budget definido.
 
 ---
 
-## Modulo 5 - Fadiga de Criativos
+## Módulo 5 - Fadiga de Criativos
 
-| Anuncio | Freq | CTR | Leads | Status | Recomendacao |
+| Anúncio | Frequência | CTR | Leads | Status | Recomendação |
 |---|---|---|---|---|---|
-| img_menu_restaurante_2 | 1.88 | 5.11% | 1 | MONITORAR | Preparar variacao |
-| img_Webapp2 | 1.86 | 2.65% | 0 | MONITORAR | Preparar variacao |
-| img_menu_restaurante | 1.54 | 3.14% | 1 | OK | Manter |
-| Dj Tips - Copia | 1.45 | 2.99% | 4 | OK | Manter |
-| Dj Tips - Copia 3 | 1.40 | 4.79% | 1 | OK | Manter |
-| vd_Webapp | 1.34 | 2.60% | 0 | OK | Manter |
-| Dj Tips - Copia 2 | 1.19 | 2.69% | 0 | OK | Manter |
-| Dj Tips - Copia 4 | 1.19 | 3.74% | 0 | OK | Manter |
-| Dj Tips - Copia | 1.18 | 2.98% | 0 | OK | Manter |
-| Dj Tips | 1.14 | 2.50% | 0 | OK | Manter |
-| vd_etiquetas_buffeet | 1.09 | 7.19% | 0 | OK | Manter |
-| Dj Tips - Copia 5 | 1.09 | 2.05% | 0 | OK | Manter |
+| *(sem dados)* | — | — | — | — | — |
+
+> Sem veiculação na semana, não há métricas de frequência para monitorar. Quando a conta retomar, monitorar criativos que estavam ativos anteriormente — dependendo do tempo de pausa, o algoritmo pode reiniciar o aprendizado e a frequência junto ao público.
 
 ---
 
-## Modulo 6 - Analise de Copy e Criativos
+## Módulo 6 - Análise de Copy e Criativos
 
-**Top criativos vencedores (menor CPL)**
+**Não aplicável esta semana.**
 
-1. **img_menu_restaurante_2** - CPL €20.51 | CTR 5.11% | 1 leads
-2. **Dj Tips - Copia** - CPL €42.22 | CTR 2.99% | 4 leads
-3. **img_menu_restaurante** - CPL €49.69 | CTR 3.14% | 1 leads
+Sem dados de performance, não é possível identificar criativos vencedores, candidatos a escala ou criativos para pausar.
 
-**Acoes recomendadas:**
-- Escalar budget no criativo img_menu_restaurante_2 - melhor CPL da conta
-- Testar variacao do hook de img_menu_restaurante_2 com angulo diferente (ex: etiquetas digitais vs. check-in online)
-- Continuar acumulando leads (7/100) para ativar lookalike de hoteleiros
-
-**Criativos para pausar (gasto sem resultado)**
-
-- img_Webapp2 - €60.02 gastos, 0 leads -> PAUSAR e redirecionar budget
-- Dj Tips - Copia 2 - €40.61 gastos, 0 leads -> PAUSAR e redirecionar budget
-- Dj Tips - Copia - €24.71 gastos, 0 leads -> PAUSAR e redirecionar budget
+> 📌 **Nota para retomada:** Quando as campanhas forem reativadas, aguardar pelo menos €3 de gasto por criativo antes de qualquer análise, e mínimo de 5 leads para declarar vencedor.
 
 ---
 
-## Modulo 7 - Analise de Ad Sets e Publicos
+## Módulo 7 - Análise de Ad Sets e Públicos
 
-| Ad Set | Gasto | Leads | CPL | CTR | CPM | Status |
-|---|---|---|---|---|---|---|
-| Dj Tips | €309.38 | 5 | €61.88 | 3.34% | €10.24 | 🟢 OK |
-| 02/Advantage S/Hotel - Teste Criati | €74.57 | 2 | €37.28 | 3.96% | €15.47 | 🟢 OK |
-| 01/Advantage S/Hotel - Teste Criati | €72.52 | 0 | --- | 2.66% | €14.95 | 🔴 CRITICO |
-| Dj Tips | €40.08 | 0 | --- | 2.80% | €0.58 | 🔴 CRITICO |
+| Ad Set | Campanha | Gasto | Leads | CPL | CPM | Frequência | Status |
+|---|---|---|---|---|---|---|---|
+| *(sem dados)* | — | — | — | — | — | — | — |
 
+> Sem ad sets ativos no período. Ao reativar campanhas, verificar sobreposição de públicos entre ad sets para evitar competição interna no leilão.
 
 ---
 
-## Plano de Acao
+## Plano de Ação
 
-| Prioridade | Acao | Impacto | Prazo |
+| Prioridade | Ação | Impacto | Prazo |
 |---|---|---|---|
-| CRITICO | Pausar img_Webapp2 (€60.02, 0 leads) | Liberar budget | Imediato |
-| CRITICO | Pausar Dj Tips - Copia 2 (€40.61, 0 leads) | Liberar budget | Imediato |
-| ESCALAR | Aumentar budget em img_menu_restaurante_2 | Reduzir CPL geral | 20/07 |
+| 🔴 1 | Verificar status da conta `act_51307638` no Gerenciador de Anúncios — identificar se há suspensão, reprovação ou problema de faturamento | Crítico — conta completamente inativa | **Hoje** |
+| 🔴 2 | Confirmar com o cliente se a pausa foi intencional ou se é um problema técnico/financeiro | Crítico — sem contexto não é possível agir | **Hoje** |
+| 🔴 3 | Se problema de faturamento: regularizar método de pagamento e solicitar reativação | Crítico — cada dia parado = oportunidades perdidas | **Hoje** |
+| 🟡 4 | Definir e cadastrar budget mensal na ferramenta de relatório (atualmente `0`) para que o pacing seja monitorado corretamente nas próximas semanas | Alto — sem budget definido não há controle de pacing | **24-48h** |
+| 🟡 5 | Ao reativar: verificar se anúncios existentes ainda estão aprovados antes de aumentar budgets | Alto — evitar perda de verba em anúncios reprovados | **No momento da reativação** |
+| 🟢 6 | Ao retomar veiculação: configurar alertas automáticos na Meta para gasto zerado por mais de 24h | Preventivo — evitar que situação se repita sem detecção rápida | **Próximos 7 dias** |
 
 ---
 
-## RESUMO FINAL PARA TRELLO - copie e cole quando quiser postar
-
-Meta Ads Hoteligy - 13/07/2026
-Gasto: €496.55 | Leads: 7 | CPL: €70.94
+## BLOCO TRELLO
 
 ---
 
-Campanha: ca-trf-fanazing
-
-O que esta funcionando:
-- 0 leads gerados no periodo
-- Frequencia em 1.16 - publico sem saturacao
-
-O que nao esta funcionando:
-- Dj Tips - €15.37 gastos com 0 leads
-- Dj Tips - Copia - €24.71 gastos com 0 leads
-
-Criativo vencedor: a definir - nenhum com leads no periodo
-
-O que precisa ser feito:
-- Pausar criativos sem resultado que consomem budget
+**Meta Ads Hoteligy — 13/07/2026**
+Gasto: €0,00 | Leads: 0 | CPL: —
+Variação vs semana anterior: Sem dados comparativos — conta inativa nas duas semanas
+Pacing: 🔴 SEM VEICULAÇÃO — Projeção €0,00 vs Budget não definido (41,9% do mês decorrido)
 
 ---
 
-Campanha: [DK] [Leads] [LP] - 03/06/26
-
-O que esta funcionando:
-- img_menu_restaurante_2 - CTR 5.11% | CPL €20.51
-
-O que nao esta funcionando:
-- img_Webapp2 - €60.02 gastos com 0 leads
-
-Criativo vencedor: img_menu_restaurante_2 - CTR 5.11% | CPL €20.51
-
-O que precisa ser feito:
-- Pausar criativos sem resultado que consomem budget
-- Escalar budget no criativo img_menu_restaurante_2
+**📌 CONTEXTO DA SEMANA**
+A conta `act_51307638` não registrou **nenhuma atividade de veiculação** na semana de 06/07 a 12/07/2026 — zero gasto, zero impressões, zero leads. O período anterior (29/06 a 05/07) também retornou zerado, indicando que a conta pode estar parada há pelo menos **duas semanas consecutivas**. Não há contexto de pausa intencional registrado nos dados. É necessário verificar imediatamente a causa: faturamento, suspensão, reprovação de anúncios ou decisão do cliente.
 
 ---
 
-Campanha: ca-trf-fanazing - Copia
+**📊 PANORAMA DA SEMANA**
 
-O que esta funcionando:
-- Dj Tips - Copia - CTR 2.99% | CPL €42.22
-- Frequencia em 1.49 - publico sem saturacao
+**🔍 Campanhas & Anúncios**
+Nenhuma campanha, ad set ou anúncio registrou atividade no período analisado. A conta retornou completamente vazia para as duas semanas consecutivas auditadas. Não é possível identificar quais campanhas estavam ativas previamente a partir dos dados fornecidos — é necessário acessar o Gerenciador de Anúncios diretamente para verificar o histórico e o status atual de cada campanha.
 
-O que nao esta funcionando:
-- Dj Tips - Copia 2 - €40.61 gastos com 0 leads
+**📉 Causa Raiz do CPL**
+O CPL não pode ser calculado — não houve nenhuma entrega de anúncios. A causa raiz não é de performance (CPM, CTR, copy), mas sim **operacional/estrutural**: a conta simplesmente não está veiculando. As causas mais prováveis são: (1) campanhas pausadas manualmente, (2) problema de faturamento com cartão recusado ou limite atingido, (3) anúncios reprovados em massa pela Meta, ou (4) conta em revisão/suspensa. Cada dia adicional sem veiculação representa perda direta de oportunidade de geração de leads.
 
-Criativo vencedor: Dj Tips - Copia - CTR 2.99% | CPL €42.22
+**⚠️ Anomalias**
+- 🔴 **CONTA SEM VEICULAÇÃO — 2 semanas consecutivas:** Zero gasto, zero leads, zero impressões nos períodos de 29/06 a 12/07. Situação crítica que exige diagnóstico imediato.
+- 🔴 **Budget mensal não definido:** O campo `budget_monthly` está em €0, impossibilitando monitoramento de pacing. Isso precisa ser corrigido na configuração da ferramenta.
 
-O que precisa ser feito:
-- Pausar criativos sem resultado que consomem budget
-- Escalar budget no criativo Dj Tips - Copia
+**📅 Pacing**
+Com 41,9% do mês de julho já decorrido (dia 13 de 31) e €0 gastos até agora, a projeção mensal é €0. O budget mensal não foi definido na ferramenta, então não é possível comparar com uma meta. O impacto prático é claro: se a conta retomar apenas na segunda metade do mês, o volume de leads gerado em julho será significativamente abaixo do potencial. **Ação imediata:** reativar a conta o quanto antes e definir o budget mensal para permitir controle de pacing nas próximas semanas.
+
+**😴 Fadiga de Criativos**
+Sem veiculação, não há dados de frequência para analisar. Ponto positivo: uma pausa prolongada tende a "resfriar" os públicos, potencialmente reduzindo a fadiga de criativos que estavam em circulação antes da pausa. Ao reativar, monitorar a frequência desde o primeiro dia.
+
+**🎨 Criativos**
+🏆 Vencedor principal: Sem dados — não é possível identificar
+🥈 Candidato a escalar: Sem dados
+🔴 Para pausar: Sem dados
+⏳ Dados insuficientes (aguardar): Todos os criativos da conta — nenhum veiculou no período
+
+**🎯 Ad Sets & Públicos**
+Sem dados de ad sets no período. Ao reativar campanhas, verificar sobreposição de públicos entre ad sets, especialmente se múltiplos conjuntos estiverem mirando os mesmos interesses ou públicos personalizados — isso pode gerar competição interna e inflar o CPM.
+
+---
+
+**🚀 PRÓXIMOS PASSOS**
+- 🔴 **[HOJE]** Acessar o Gerenciador de Anúncios da conta `act_51307638` e verificar o status: há campanhas pausadas? Anúncios reprovados? Alerta de faturamento ativo?
+- 🔴 **[HOJE]** Confirmar com o cliente Hoteligy se a pausa das campanhas foi decisão intencional ou falha não detectada — e reativar imediatamente se não foi intencional
+- 🔴 **[HOJE]** Se identificado problema de faturamento: regularizar o método de pagamento e solicitar reativação da conta junto à Meta
+- 🟡 **[24-48h]** Definir e registrar o budget mensal de julho na ferramenta de relatório para habilitar o monitoramento de pacing corretamente
+- 🟡 **[No momento da reativação]** Verificar aprovação de todos os anúncios antes de subir budgets — após período de inatividade, a Meta pode ter reprovado criativos em revisão
+- 🟢 **[Próximos 7 dias]** Configurar alerta automático na Meta Ads (Regras Automatizadas) para notificar o gestor caso o gasto diário fique em €0 por mais de 24h — evitar que esta situação passe despercebida novamente
 
 ---
