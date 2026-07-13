@@ -29,7 +29,7 @@ p2_end   = today - datetime.timedelta(days=8)
 p2_start = today - datetime.timedelta(days=14)
 
 if USE_MONTH:
-    mes_pasta = today.strftime("%b/%y")
+    mes_pasta = today.strftime("%b-%Y").lower()
     REPORT_DIR = f"{REPORT_DIR}/{mes_pasta}"
 
 # ── Coleta de dados ───────────────────────────────────────────────────────────
