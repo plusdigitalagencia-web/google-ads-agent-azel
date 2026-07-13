@@ -1,4 +1,4 @@
-name: Hoteligy - Relatorio Semanal Meta Ads
+name: Hoteligy Meta Ads - Relatorio Semanal
 
 on:
   workflow_dispatch:       # acionado pelo dispatcher-segunda.yml ou manualmente
@@ -15,8 +15,18 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Instalar dependencias
+        run: pip install anthropic
+
       - name: Gerar relatorio Meta Ads Hoteligy
         env:
-          HOTELIGY_META_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
+          META_TOKEN: ${{ secrets.HOTELIGY_META_TOKEN }}
           GH_PAT: ${{ secrets.GH_PAT }}
-        run: python scripts/hoteligy_meta_report.py
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ACCOUNT_ID: "act_51307638"
+          CLIENT_NAME: "Hoteligy"
+          CURRENCY: "EUR"
+          BUDGET_MONTHLY: "0"
+          REPORT_DIR: "reports/data-know/hoteligy"
+          USE_MONTH_FOLDER: "true"
+        run: python scripts/meta_report_ai.py
