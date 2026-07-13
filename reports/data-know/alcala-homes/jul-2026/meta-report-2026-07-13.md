@@ -1,213 +1,181 @@
-# Relatorio Meta Ads - Alcala Homes
-**Periodo atual:** 06/07/2026 a 12/07/2026
-**Periodo anterior:** 29/06/2026 a 05/07/2026
-**Gerado em:** 13/07/2026 | **Conta:** act_574789065003576
+# Relatório Meta Ads - Alcala Homes
+**Período atual:** 06/07/2026 a 12/07/2026
+**Período anterior:** 29/06/2026 a 05/07/2026
+**Gerado em:** 13/07/2026 | **Conta:** act\_574789065003576
 
 ---
 
 ## Resumo Executivo
 
-| Metrica | Atual | Anterior | Variacao |
+| Métrica | Atual | Anterior | Variação |
 |---|---|---|---|
-| Gasto | €414.01 | €497.70 | -16.8% |
-| Leads | 106 | 125 | -15.2% |
-| CPL medio | €3.91 | €3.98 | -1.9% |
-| CTR medio | 2.24% | 2.85% | -21.4% |
-| CPM medio | €13.54 | €11.68 | +16.0% |
-| Frequencia | 1.89 | 1.75 | +7.8% |
+| Gasto | €0,00 | €0,00 | — |
+| Leads | 0 | 0 | — |
+| CPL | — | — | — |
+| CPM médio | — | — | — |
+| CTR médio | — | — | — |
+| Frequência média | — | — | — |
+
+> ⚠️ **Atenção:** Nenhum dado de veiculação foi registrado em nenhum dos dois períodos analisados. A conta não apresentou gasto, impressões ou leads. Isso indica que **todas as campanhas estavam pausadas ou inativas** durante toda a semana de 06/07 a 12/07/2026, bem como na semana anterior (29/06 a 05/07/2026).
 
 ---
 
-## Modulo 1 - Auditoria de Campanhas e Anuncios
+## Módulo 1 - Auditoria de Campanhas e Anúncios
 
 ### Campanhas
 
-| Campanha | Gasto | CTR | CPM | Freq | Leads | CPL | Status |
-|---|---|---|---|---|---|---|---|
-| Vietnam | RevoTravel | I TG  02 | €291.89 | 3.02% | €6.89 | 1.84 | 103 | €2.83 | 🟢 OK |
-| [Data Know] [Form Meta Lead] [Bélgica+Hol+Reino Unido] - 26/06/26 | €122.12 | 1.46% | €20.19 | 1.93 | 3 | €40.71 | 🔴 CRITICO |
-
-### Anuncios por Campanha
-
-#### Campanha: [Data Know] [Form Meta Lead] [Bélgica+Hol+Reino Unido] - 26/06/26
-
-| Anuncio | Gasto | CTR | CPM | Freq | Leads | CPL | Status |
-|---|---|---|---|---|---|---|---|
-| img2_flats_in_madrid VENCEDOR | €66.68 | 1.36% | €18.87 | 1.89 | 2 | €33.34 | 🟢 OK |
-| img4_luxury_living_madrid | €35.32 | 1.78% | €21.74 | 1.32 | 1 | €35.32 | 🟢 OK |
-| img5_madri_homes | €15.46 | 1.35% | €23.21 | 1.33 | 0 | --- | 🔴 CRITICO |
-| img3_invest_your_wealth | €2.87 | 0.00% | €20.95 | 1.40 | 0 | --- | 🔴 CRITICO |
-| img1_looking_for_a_luxury | €1.79 | 2.30% | €20.57 | 1.30 | 0 | --- | 🔴 CRITICO |
-
-#### Campanha: Vietnam | RevoTravel | I TG  02
-
-| Anuncio | Gasto | CTR | CPM | Freq | Leads | CPL | Status |
-|---|---|---|---|---|---|---|---|
-| ADS1 Vietnam Animado New Banner VENCEDOR | €0.57 | 4.17% | €7.92 | 1.07 | 2 | €0.28 | 🟢 OK |
-| ADS2 Animado New Banner | €11.98 | 3.21% | €11.32 | 1.18 | 8 | €1.50 | 🟢 OK |
-| ADS 1 VIETNAM ANIMADO | €125.35 | 2.85% | €6.44 | 1.40 | 50 | €2.51 | 🟢 OK |
-| ADS2 LOCU VIETNAM NEW BANNER | €5.45 | 3.11% | €9.43 | 1.27 | 2 | €2.73 | 🟢 OK |
-| ADS 1 VIETNAM ANIMADO | €87.24 | 3.20% | €6.22 | 1.38 | 30 | €2.91 | 🟢 OK |
-| ADS1 ESTATIC OFERTA VIETNAM | €5.82 | 3.40% | €5.35 | 1.22 | 2 | €2.91 | 🟢 OK |
-| ADS 1 VIETNAM ANIMADO | €18.11 | 2.86% | €8.94 | 1.12 | 6 | €3.02 | 🟢 OK |
-| ADS4 LOVU VIETNAM nNEW BANNER | €9.96 | 2.77% | €12.53 | 1.25 | 2 | €4.98 | 🟡 ATENCAO |
-| ADS1 ESTATIC OFERTA VIETNAM | €9.27 | 3.46% | €6.05 | 1.24 | 1 | €9.27 | 🔴 CRITICO |
-| ADS4 LOVU VIETNAM nNEW BANNER | €2.84 | 5.33% | €11.64 | 1.29 | 0 | --- | 🔴 CRITICO |
-| ADS1 LOCU VIETNAM NEW BANNER | €2.36 | 0.52% | €12.29 | 1.17 | 0 | --- | 🔴 CRITICO |
-| ADS3 ESTATIC OFERTA VIETNAM | €2.35 | 2.15% | €10.09 | 1.19 | 0 | --- | 🔴 CRITICO |
-| ADS2 ESTATIC OFERTA VIETNAM | €1.87 | 4.51% | €14.06 | 1.21 | 0 | --- | 🔴 CRITICO |
-| ADS2 ESTATIC OFERTA VIETNAM | €1.75 | 3.18% | €11.15 | 1.07 | 0 | --- | 🔴 CRITICO |
-| ADS2 Animado New Banner | €1.18 | 1.60% | €9.44 | 1.13 | 0 | --- | 🔴 CRITICO |
-| ADS4 LOVU VIETNAM nNEW BANNER | €0.90 | 4.35% | €13.04 | 1.19 | 0 | --- | 🔴 CRITICO |
-| ADS3 LOCU VIETNAM NEW BANNER | €0.84 | 4.69% | €13.12 | 1.19 | 0 | --- | 🔴 CRITICO |
-| ADS2 ESTATIC OFERTA VIETNAM | €0.77 | 6.25% | €12.03 | 1.05 | 0 | --- | 🔴 CRITICO |
-| ADS3 ESTATIC OFERTA VIETNAM | €0.75 | 2.06% | €7.73 | 1.09 | 0 | --- | 🔴 CRITICO |
-| ADS1 Vietnam Animado New Banner | €0.64 | 0.00% | €8.65 | 1.07 | 0 | --- | 🔴 CRITICO |
-| ADS1 ESTATIC OFERTA VIETNAM | €0.60 | 2.78% | €5.56 | 1.01 | 0 | --- | 🔴 CRITICO |
-| ADS1 LOCU VIETNAM NEW BANNER | €0.28 | 2.78% | €7.78 | 1.16 | 0 | --- | 🔴 CRITICO |
-| ADS1 Vietnam Animado New Banner | €0.27 | 5.26% | €7.11 | 1.03 | 0 | --- | 🔴 CRITICO |
-| ADS3 ESTATIC OFERTA VIETNAM | €0.26 | 2.86% | €7.43 | 1.06 | 0 | --- | 🔴 CRITICO |
-| ADS2 Animado New Banner | €0.24 | 0.00% | €8.28 | 1.07 | 0 | --- | 🔴 CRITICO |
-| ADS1 LOCU VIETNAM NEW BANNER | €0.24 | 5.00% | €12.00 | 1.05 | 0 | --- | 🔴 CRITICO |
-
----
-
-## Modulo 2 - Diagnostico de CPL (Causa Raiz)
-
-**Vietnam | RevoTravel | I TG  02**
-- 🟢 CPL €2.83 dentro do esperado
-
-**[Data Know] [Form Meta Lead] [Bélgica+Hol+Reino Unido] - 26/06/26**
-- 🔴 CPL €40.71 = 942% acima da media (€3.91)
-
----
-
-## Modulo 3 - Deteccao de Anomalias
-
-| Tipo | Anuncio | Variacao | Acao |
-|---|---|---|---|
-| QUEDA DE CTR | img2_flats_in_madrid | 2.26% -> 1.36% (-40%) | Verificar criativo |
-| QUEDA DE CTR | img5_madri_homes | 1.93% -> 1.35% (-30%) | Verificar criativo |
-| CPM SUBIU | ADS 1 VIETNAM ANIMADO | €5.95 -> €8.94 (+50%) | Audience premium mais competitiva |
-| DESAPARECEU | ADS 2 LOCU VIETNAM | Tinha 20 leads - nao aparece mais | Confirmar se foi pausado |
-| DESAPARECEU | ADS 3 LOCU VIETNAM | Tinha 2 leads - nao aparece mais | Confirmar se foi pausado |
-| DESAPARECEU | ADS 3 ESTÁTICA VIETNAM | Tinha 3 leads - nao aparece mais | Confirmar se foi pausado |
-| DESAPARECEU | ADS 2 VIETNAM ANIMADO | Tinha 13 leads - nao aparece mais | Confirmar se foi pausado |
-
----
-
-## Modulo 4 - Pacing Monitor
-
-Dia **13** de 31 do mes (42% do periodo).
-- Gasto semanal: **€414.01**
-- Projecao mensal (ritmo atual): **€1774.33**
-- Budget estimado: €600.00
-- Status: 🔴 ACELERADO (+27% acima do esperado) - risco de esgotar budget antes do fim do mes
-
----
-
-## Modulo 5 - Fadiga de Criativos
-
-| Anuncio | Freq | CTR | Leads | Status | Recomendacao |
+| Campanha | Status | Gasto | Leads | CPL | Observação |
 |---|---|---|---|---|---|
-| img2_flats_in_madrid | 1.89 | 1.36% | 2 | MONITORAR | Preparar variacao |
-| img3_invest_your_wealth | 1.40 | 0.00% | 0 | OK | Manter |
-| ADS 1 VIETNAM ANIMADO | 1.40 | 2.85% | 50 | OK | Manter |
-| ADS 1 VIETNAM ANIMADO | 1.38 | 3.20% | 30 | OK | Manter |
-| img5_madri_homes | 1.33 | 1.35% | 0 | OK | Manter |
-| img4_luxury_living_madrid | 1.32 | 1.78% | 1 | OK | Manter |
-| img1_looking_for_a_luxury | 1.30 | 2.30% | 0 | OK | Manter |
-| ADS4 LOVU VIETNAM nNEW BANNER | 1.29 | 5.33% | 0 | OK | Manter |
-| ADS2 LOCU VIETNAM NEW BANNER | 1.27 | 3.11% | 2 | OK | Manter |
-| ADS4 LOVU VIETNAM nNEW BANNER | 1.25 | 2.77% | 2 | OK | Manter |
-| ADS1 ESTATIC OFERTA VIETNAM | 1.24 | 3.46% | 1 | OK | Manter |
-| ADS1 ESTATIC OFERTA VIETNAM | 1.22 | 3.40% | 2 | OK | Manter |
-| ADS2 ESTATIC OFERTA VIETNAM | 1.21 | 4.51% | 0 | OK | Manter |
-| ADS3 ESTATIC OFERTA VIETNAM | 1.19 | 2.15% | 0 | OK | Manter |
-| ADS2 Animado New Banner | 1.18 | 3.21% | 8 | OK | Manter |
-| ADS1 LOCU VIETNAM NEW BANNER | 1.17 | 0.52% | 0 | OK | Manter |
-| ADS2 Animado New Banner | 1.13 | 1.60% | 0 | OK | Manter |
-| ADS 1 VIETNAM ANIMADO | 1.12 | 2.86% | 6 | OK | Manter |
-| ADS2 ESTATIC OFERTA VIETNAM | 1.07 | 3.18% | 0 | OK | Manter |
+| — | — | — | — | — | Nenhuma campanha ativa encontrada no período |
+
+### Anúncios por Campanha
+
+Nenhum anúncio registrou veiculação no período analisado. Não há dados de anúncios ativos para auditar.
+
+> 🔴 **CRÍTICO:** A conta está com **gasto €0,00 em ambas as semanas**. Isso representa **interrupção total da geração de leads**. A causa precisa ser identificada imediatamente (budget esgotado, campanhas manualmente pausadas, forma de pagamento recusada, política violada ou conta desativada).
 
 ---
 
-## Modulo 6 - Analise de Copy e Criativos
+## Módulo 2 - Diagnóstico de CPL (Causa Raiz)
 
-**Top criativos vencedores (menor CPL)**
+Não é possível calcular CPL ou identificar causa raiz técnica (CPM, CTR, frequência) pois **não houve veiculação em nenhum dos dois períodos**. A raiz do problema está **anterior ao funil de entrega** — a conta simplesmente não entregou anúncios.
 
-1. **ADS2 Animado New Banner** - CPL €1.50 | CTR 3.21% | 8 leads
-2. **ADS 1 VIETNAM ANIMADO** - CPL €2.51 | CTR 2.85% | 50 leads
-3. **ADS2 LOCU VIETNAM NEW BANNER** - CPL €2.73 | CTR 3.11% | 2 leads
+**Possíveis causas a investigar:**
 
-**Acoes recomendadas:**
-- Escalar budget no criativo ADS2 Animado New Banner - melhor CPL da conta
-- Testar variacao: off-market angle + visual de imovel premium Madrid
-- 106 leads acumulados - criar lookalike baseado nos convertidos
-
-**Criativos para pausar (gasto sem resultado)**
-
-- img5_madri_homes - €15.46 gastos, 0 leads -> PAUSAR e redirecionar budget
+- 🔴 **Forma de pagamento recusada ou expirada** — verificar no painel de faturamento do Meta Business Manager
+- 🔴 **Campanhas pausadas manualmente** — verificar se houve ação intencional de pausa (férias, revisão de estratégia)
+- 🔴 **Limite de gasto da conta atingido** — o limite mensal ou total da conta pode ter sido atingido
+- 🔴 **Violação de política ou restrição da conta** — verificar notificações no Meta Business Manager e no Centro de Suporte a Empresas
+- 🔴 **Budget zerado nos conjuntos de anúncios** — budget pode ter sido definido como €0 acidentalmente
 
 ---
 
-## Modulo 7 - Analise de Ad Sets e Publicos
+## Módulo 3 - Detecção de Anomalias
 
-| Ad Set | Gasto | Leads | CPL | CTR | CPM | Status |
-|---|---|---|---|---|---|---|
-| AUDIENCIA SEGMENTADA TEST C | €137.67 | 51 | €2.70 | 2.90% | €6.47 | 🟢 OK |
-| 01/Advantage + Compradores | €122.12 | 3 | €40.71 | 1.46% | €20.19 | 🔴 CRITICO |
-| Nombre: 01 | Broad | España | 40-65 | €102.15 | 34 | €3.00 | 3.23% | €6.40 | 🟢 OK |
-| REMARKETING VIETNAM 02 | €52.07 | 18 | €2.89 | 2.90% | €10.19 | 🟢 OK |
-
-- Campanha Vietnam | RevoTravel | I TG  02 com 3 ad sets simultaneos - verificar sobreposicao de publico premium
-
----
-
-## Plano de Acao
-
-| Prioridade | Acao | Impacto | Prazo |
+| Tipo | Anúncio / Elemento | Detalhe | Ação Recomendada |
 |---|---|---|---|
-| ATENCAO | Revisar img2_flats_in_madrid (CPL €33.34 vs media €3.91) | Reduzir CPL | 20/07 |
-| ESCALAR | Aumentar budget em ADS2 Animado New Banner | Reduzir CPL geral | 20/07 |
+| 🔴 CRÍTICO — Gasto Zero | Conta inteira (act\_574789065003576) | €0,00 gastos na semana atual e na anterior | Verificar imediatamente: pagamento, status de campanhas, restrições de conta |
+| 🔴 CRÍTICO — Leads Zero | Conta inteira | 0 leads gerados em 14 dias consecutivos | Reativar campanhas e confirmar entrega assim que status da conta for regularizado |
+| 🔴 CRÍTICO — Pacing | Budget mensal de €600 | 41,9% do mês decorrido, €0 gastos | Risco de não atingir sequer 50% do budget mensal se não reativado hoje |
 
 ---
 
-## RESUMO FINAL PARA TRELLO - copie e cole quando quiser postar
+## Módulo 4 - Pacing Monitor
 
-Meta Ads Alcala Homes - 13/07/2026
-Gasto: €414.01 | Leads: 106 | CPL: €3.91
-Variacao vs semana anterior: CPL -1.9% | Leads -15.2%
+| Indicador | Valor |
+|---|---|
+| Dia do mês | 13 de 31 |
+| % do mês decorrido | 41,9% |
+| Gasto acumulado no mês | €0,00 |
+| Projeção mensal (ritmo atual) | €0,00 |
+| Budget mensal estimado | €600,00 |
+| Desvio projeção vs budget | −100% |
+| Status | 🔴 ACELERADO INVERSO — Conta parada |
 
----
-
-Campanha: [Data Know] [Form Meta Lead] [Bélgica+Hol+Reino Unido] - 26/06/26
-
-O que esta funcionando:
-- img2_flats_in_madrid - CTR 1.36% | CPL €33.34
-
-O que nao esta funcionando:
-- img5_madri_homes - €15.46 gastos com 0 leads
-
-Criativo vencedor: img2_flats_in_madrid - CTR 1.36% | CPL €33.34
-
-O que precisa ser feito:
-- Pausar criativos sem resultado que consomem budget
-- Escalar budget no criativo img2_flats_in_madrid
+> 🔴 **PACING CRÍTICO:** Com 41,9% do mês já decorrido e €0,00 gastos, a projeção aponta para **€0,00 de entrega no mês de julho**. Para atingir o budget de €600 nos 18 dias restantes, seria necessário um ritmo médio de **€33,33/dia** — o que representa mais que o dobro do ritmo normal esperado (~€19,35/dia). **Reativação imediata é indispensável.** Mesmo reativando hoje, atingir o budget integral em julho é improvável sem ajuste de budget diário.
 
 ---
 
-Campanha: Vietnam | RevoTravel | I TG  02
+## Módulo 5 - Fadiga de Criativos
 
-O que esta funcionando:
-- ADS1 Vietnam Animado New Banner - CTR 4.17% | CPL €0.28
+| Anúncio | Frequência | CTR | Leads | Status | Recomendação |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Sem veiculação no período |
 
-O que nao esta funcionando:
-- Sem problemas criticos identificados nesta campanha
+> Não há dados de frequência para analisar. Paradoxalmente, a **ausência de entrega significa frequência 0** — ao reativar, os públicos estarão "frescos" sem nenhuma fadiga acumulada neste período, o que é um aspecto positivo para o relançamento.
 
-Criativo vencedor: ADS1 Vietnam Animado New Banner - CTR 4.17% | CPL €0.28
+---
 
-O que precisa ser feito:
-- Escalar budget no criativo ADS1 Vietnam Animado New Banner
+## Módulo 6 - Análise de Copy e Criativos
+
+**Criativos Vencedores:** Não é possível identificar. Nenhum criativo veiculou no período.
+
+**Criativos para pausar:** Não aplicável — nenhum anúncio ativo.
+
+**Referência histórica:** Para a retomada das campanhas, recomenda-se priorizar os criativos que apresentaram melhor desempenho em semanas anteriores ao período de inatividade (dados não disponíveis neste dataset — consultar histórico da conta para identificar os melhores CPLs anteriores).
+
+> ⏳ **Aguardar:** Nenhuma decisão sobre criativos pode ser tomada com base neste período. Após reativação, aguardar mínimo de **€10–€15 de gasto por criativo** antes de qualquer julgamento, e **mínimo de 5 leads** para declarar vencedor.
+
+---
+
+## Módulo 7 - Análise de Ad Sets e Públicos
+
+| Ad Set | Gasto | Leads | CPL | CPM | CTR | Frequência | Status |
+|---|---|---|---|---|---|---|---|
+| — | — | — | — | — | — | — | Sem dados |
+
+> Com a conta inativa por pelo menos 14 dias, os públicos não foram pressionados durante este período. Ao reativar:
+> - **Públicos de retargeting** podem apresentar menor alcance efetivo (usuários que interagiram há mais de 14 dias ficam "menos quentes")
+> - **Públicos frios (Lookalike / Interesses)** provavelmente retomam sem impacto relevante
+> - Recomenda-se **monitorar CPM e frequência nas primeiras 48h** após reativação — o algoritmo pode precisar de um período de reaprendizado (fase de aprendizado)
+
+---
+
+## Plano de Ação
+
+| Prioridade | Ação | Impacto | Prazo |
+|---|---|---|---|
+| 🔴 1 — URGENTE | Identificar causa do gasto zero: verificar forma de pagamento, limites de conta e status de campanhas no Meta Business Manager | Desbloqueio imediato da veiculação | **Hoje — 13/07** |
+| 🔴 2 — URGENTE | Regularizar o que estiver bloqueando (atualizar cartão, remover limite de conta, reativar campanhas pausadas) | Retomada da geração de leads | **Hoje — 13/07** |
+| 🔴 3 — URGENTE | Verificar se há notificações de política violada ou conta restrita no Meta Business Support Center | Evitar suspensão permanente | **Hoje — 13/07** |
+| 🟡 4 — IMPORTANTE | Após reativação: ajustar budget diário para ~€25–€30/dia para compensar os dias perdidos em julho (se meta mensal de €600 for mantida) | Recuperação do pacing | **24h após reativação** |
+| 🟡 5 — IMPORTANTE | Monitorar fase de aprendizado: Meta pode reiniciar o aprendizado dos ad sets após longo período sem entrega | Estabilização do CPL | **Primeiros 3–5 dias após reativação** |
+| 🟢 6 — MELHORIA | Após 48h de veiculação estável, analisar quais criativos retomam com melhor CPL e iniciar testes A/B estruturados | Otimização do CPL a médio prazo | **Próximos 7 dias** |
+| 🟢 7 — MELHORIA | Configurar alerta automático de gasto no Meta Ads Manager (ex.: notificação se gasto diário = €0 por mais de 24h) | Prevenção de interrupções futuras | **Próximos 7 dias** |
+
+---
+
+## BLOCO TRELLO
+
+---
+
+**Meta Ads Alcala Homes — 13/07/2026**
+Gasto: €0,00 | Leads: 0 | CPL: —
+Variação vs semana anterior: Gasto — ↔ | Leads — ↔ (sem dados em ambos os períodos)
+Pacing: 🔴 CRÍTICO — Projeção €0,00 vs Budget €600,00 (41,9% do mês decorrido, €0 gastos)
+
+---
+
+**📌 CONTEXTO DA SEMANA**
+A conta act\_574789065003576 registrou **gasto zero em dois períodos consecutivos** (29/06 a 12/07 — 14 dias totais sem veiculação). Isso não é um resultado de otimização ou pausa estratégica planejada: a conta está **completamente inativa**. A causa exata ainda não está confirmada pelos dados disponíveis, mas as hipóteses prioritárias são: forma de pagamento recusada, limite de gasto da conta atingido, campanhas pausadas manualmente ou restrição de conta por violação de política. Este é o problema número 1 a resolver antes de qualquer decisão de campanha.
+
+---
+
+**📊 PANORAMA DA SEMANA**
+
+**🔍 Campanhas & Anúncios**
+Nenhuma campanha esteve ativa durante a semana de 06/07 a 12/07/2026. O dataset retornou listas vazias para campanhas, conjuntos de anúncios e anúncios nos dois períodos analisados. Não há anúncios gerando resultados, não há anúncios consumindo budget indevidamente — a conta está simplesmente parada. Sem reativação imediata, julho inteiro pode ser perdido do ponto de vista de geração de leads para Alcala Homes.
+
+**📉 Causa Raiz do CPL**
+O CPL não pode ser calculado — não houve impressões, cliques ou conversões. A causa raiz não é técnica (não é CPM alto, CTR baixo ou público saturado): o problema está **antes do funil de entrega**. A conta não está entregando anúncios por razões operacionais/administrativas. As quatro hipóteses a verificar em ordem de probabilidade: (1) forma de pagamento expirada ou recusada — a mais comum e mais simples de resolver; (2) limite de gasto mensal da conta atingido; (3) campanhas pausadas manualmente sem registro documentado; (4) restrição de conta por violação de política do Meta — a mais grave e que exige recurso formal.
+
+**⚠️ Anomalias**
+- 🔴 **Gasto €0,00 por 14 dias consecutivos** — conta completamente inativa nos dois períodos analisados
+- 🔴 **Zero leads gerados** — pipeline de geração de contatos completamente interrompido
+- 🔴 **Pacing −100%** — com 41,9% do mês consumido e €0 gastos, a meta mensal de €600 está em risco total; mesmo reativando hoje, será necessário ritmo de €33/dia pelos 18 dias restantes para recuperar o budget integral
+
+**📅 Pacing**
+Estamos no dia 13 de 31 de julho (41,9% do mês) com €0,00 gastos de um budget de €600. A projeção no ritmo atual é €0,00 para o mês — desvio de −100% em relação ao planejado. Para minimizar o impacto, a reativação deve ocorrer **hoje**: com 18 dias restantes e budget de €600, o ritmo necessário seria de ~€33/dia (vs. o normal de ~€19/dia). Uma alternativa é aceitar entregar ~€350–€400 em julho e compensar em agosto, ajustando expectativas de leads com o cliente.
+
+**😴 Fadiga de Criativos**
+Frequência registrada: 0 (sem veiculação). Paradoxalmente, este é o único aspecto positivo da semana — ao reativar, os públicos estarão sem nenhuma fadiga acumulada neste período, e os criativos devem performar com CTR inicial saudável. Monitorar frequência após 3–4 dias de entrega.
+
+**🎨 Criativos**
+🏆 Vencedor principal: ⏳ Impossível determinar — nenhum criativo veiculou no período
+🥈 Candidato a escalar: ⏳ Aguardando dados de veiculação
+🔴 Para pausar: Não aplicável no momento — prioridade é reativar a conta
+⏳ Dados insuficientes (aguardar): Todos os criativos da conta — aguardar mínimo de €15 de gasto e 5 leads por criativo após reativação para retomar análise
+
+**🎯 Ad Sets & Públicos**
+Nenhum ad set registrou entrega. Após reativação, atentar para possível **reinício da fase de aprendizado** dos ad sets (o Meta pode tratar a longa pausa como reset do algoritmo). CPM e estabilidade de entrega devem ser monitorados nas primeiras 48h. Públicos de retargeting podem ter "esfriado" com 14 dias sem contato — considerar reforçar orçamento em públicos frios (Lookalike) na primeira semana de retomada.
+
+---
+
+**🚀 PRÓXIMOS PASSOS**
+- 🔴 **HOJE — Verificar forma de pagamento** no Meta Business Manager (Configurações > Faturamento): confirmar se há cartão válido, sem cobranças recusadas ou limite atingido
+- 🔴 **HOJE — Verificar status da conta e campanhas**: acessar o Gerenciador de Anúncios e confirmar se há campanhas pausadas, conta restrita ou notificações de política no Meta Business Support Center
+- 🔴 **HOJE — Reativar campanhas** assim que a causa for identificada e corrigida; ajustar budget diário para ~€25–€30 para compensar dias perdidos em julho
+- 🟡 **24–48h após reativação — Monitorar fase de aprendizado**: verificar se os ad sets entram em aprendizado e acompanhar CPM e CPL nas primeiras entregas para garantir estabilização
+- 🟢 **Próximos 7 dias — Configurar alerta de gasto zero**: ativar notificações automáticas no Meta Ads Manager para receber alerta se o gasto diário for €0 por mais de 24h, evitando que este cenário se repita sem detecção imediata
 
 ---
