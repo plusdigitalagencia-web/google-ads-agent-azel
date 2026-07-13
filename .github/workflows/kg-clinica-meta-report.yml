@@ -1,4 +1,4 @@
-name: KG Clinica - Relatorio Semanal Meta Ads
+name: KG Clinica Meta Ads - Relatorio Semanal
 
 on:
   workflow_dispatch:       # acionado pelo dispatcher-segunda.yml ou manualmente
@@ -15,8 +15,18 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Gerar relatorio Meta Ads KG Clinica
+      - name: Instalar dependencias
+        run: pip install anthropic
+
+      - name: Gerar relatorio Meta Ads KG Clinica y Salud
         env:
-          KG_CLINICA_META_TOKEN: ${{ secrets.KG_CLINICA_META_TOKEN }}
+          META_TOKEN: ${{ secrets.KG_CLINICA_META_TOKEN }}
           GH_PAT: ${{ secrets.GH_PAT }}
-        run: python scripts/kg_clinica_meta_report.py
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ACCOUNT_ID: "act_375804741111201"
+          CLIENT_NAME: "KG Clinica y Salud"
+          CURRENCY: "EUR"
+          BUDGET_MONTHLY: "600"
+          REPORT_DIR: "reports/data-know/kg-clinica"
+          USE_MONTH_FOLDER: "true"
+        run: python scripts/meta_report_ai.py
