@@ -15,8 +15,6 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Instalar dependencias
-
       - name: Gerar relatorio Meta Ads KG Clinica y Salud
         env:
           META_TOKEN: ${{ secrets.KG_CLINICA_META_TOKEN }}
