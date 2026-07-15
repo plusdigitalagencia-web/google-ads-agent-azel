@@ -15,8 +15,6 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Instalar dependencias
-
       - name: Gerar relatorio Meta Ads Leblon Real Estate
         env:
           META_TOKEN: ${{ secrets.LEBLON_META_TOKEN }}
