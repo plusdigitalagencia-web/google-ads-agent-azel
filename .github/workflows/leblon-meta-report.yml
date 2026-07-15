@@ -16,13 +16,11 @@ jobs:
           python-version: '3.11'
 
       - name: Instalar dependencias
-        run: pip install anthropic
 
       - name: Gerar relatorio Meta Ads Leblon Real Estate
         env:
           META_TOKEN: ${{ secrets.LEBLON_META_TOKEN }}
           GH_PAT: ${{ secrets.GH_PAT }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           ACCOUNT_ID: "act_1187011709535726"
           CLIENT_NAME: "Leblon Real Estate"
           CURRENCY: "EUR"
