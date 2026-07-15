@@ -16,13 +16,11 @@ jobs:
           python-version: '3.11'
 
       - name: Instalar dependencias
-        run: pip install anthropic
 
       - name: Gerar relatorio Meta Ads Luxe Icon LTD
         env:
           META_TOKEN: ${{ secrets.LUXE_ICON_META_TOKEN }}
           GH_PAT: ${{ secrets.GH_PAT }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           ACCOUNT_ID: "act_412122005210742"
           CLIENT_NAME: "Luxe Icon LTD"
           CURRENCY: "EUR"
