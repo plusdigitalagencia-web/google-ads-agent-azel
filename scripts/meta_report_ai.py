@@ -10,7 +10,8 @@ import os, json, datetime, base64, time, urllib.request, urllib.error, urllib.pa
 TOKEN          = os.environ["META_TOKEN"]
 ACCOUNT        = os.environ["ACCOUNT_ID"]
 CLIENT_NAME    = os.environ["CLIENT_NAME"]
-CURRENCY       = os.environ.get("CURRENCY", "€")
+_CURR_RAW      = os.environ.get("CURRENCY", "€")
+CURRENCY       = {"EUR": "€", "BRL": "R$", "USD": "$", "GBP": "£"}.get(_CURR_RAW, _CURR_RAW)
 BUDGET_EST     = int(os.environ.get("BUDGET_MONTHLY", "0"))
 REPORT_DIR     = os.environ.get("REPORT_DIR", "reports/data-know")
 USE_MONTH      = os.environ.get("USE_MONTH_FOLDER", "false").lower() == "true"
