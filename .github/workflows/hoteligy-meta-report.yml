@@ -20,7 +20,7 @@ jobs:
 
       - name: Gerar relatorio Meta Ads Hoteligy
         env:
-          META_TOKEN: ${{ secrets.HOTELIGY_META_TOKEN }}
+          META_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
           GH_PAT: ${{ secrets.GH_PAT }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           ACCOUNT_ID: "act_51307638"
@@ -30,3 +30,4 @@ jobs:
           REPORT_DIR: "reports/data-know/hoteligy"
           USE_MONTH_FOLDER: "true"
         run: python scripts/meta_report_ai.py
+
