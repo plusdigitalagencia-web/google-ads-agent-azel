@@ -1,9 +1,9 @@
-name: Dispatcher — Relatórios Segunda-feira
+name: Dispatcher — Relatórios Quinta-feira
 
 on:
   schedule:
-    - cron: '50 9 * * 1'  # toda segunda 06:50 BRT (09:50 UTC) — aciona antes dos horários individuais
-  workflow_dispatch:       # trigger externo via API (cron-job.org, Make, manual)
+    - cron: '50 9 * * 4'  # toda quinta 06:50 BRT (09:50 UTC)
+  workflow_dispatch:       # trigger externo via API (manual)
 
 jobs:
   dispatch-reports:
@@ -29,7 +29,8 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Disparar todos os relatórios de segunda
+      - name: Disparar todos os relatórios de quinta
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
         run: python scripts/dispatcher_segunda.py
+
