@@ -15,8 +15,6 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Instalar dependencias
-
       - name: Gerar relatorio Meta Ads Alcala Homes
         env:
           META_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
