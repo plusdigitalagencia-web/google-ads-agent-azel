@@ -16,13 +16,11 @@ jobs:
           python-version: '3.11'
 
       - name: Instalar dependencias
-        run: pip install anthropic
 
       - name: Gerar relatorio Meta Ads KG Clinica y Salud
         env:
           META_TOKEN: ${{ secrets.KG_CLINICA_META_TOKEN }}
           GH_PAT: ${{ secrets.GH_PAT }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           ACCOUNT_ID: "act_375804741111201"
           CLIENT_NAME: "KG Clinica y Salud"
           CURRENCY: "EUR"
