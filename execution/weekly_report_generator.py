@@ -609,6 +609,61 @@ def generate_report(customer_id, mcc_id, client_name, currency, start_date=None,
     if not kw_rows:
         lines.append("_Nenhuma palavra-chave com dados no periodo._")
 
+    # \u2500\u2500 Keywords com melhor performance (SOP M\u00f3dulo 4) \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+    lines += ["", "---", "", "## \u2b50 Keywords com Melhor Performance (Geradoras de Convers\u00e3o)", ""]
+    conv_kws = sorted(
+        [r for r in kw_rows if r.metrics.conversions > 0],
+        key=lambda r: micros(r.metrics.cost_micros) / r.metrics.conversions
+    )
+    if conv_kws:
+        lines += [
+            "| Keyword | Tipo | Campanha | Conv. | CPA | CTR | QS | A\u00e7\u00e3o |",
+            "|---|---|---|---|---|---|---|---|",
+        ]
+        for i, row in enumerate(conv_kws[:10]):
+            kw = row.ad_group_criterion.keyword
+            m = row.metrics
+            cost = micros(m.cost_micros)
+            cpa_kw = cost / m.conversions
+            match = match_map.get(kw.match_type.name, kw.match_type.name)
+            qs_info = qs_map.get(kw.text.lower().strip(), {})
+            qs_display = qs_icon(qs_info.get("qs"))
+            star = "\u2b50 VENCEDORA" if i == 0 else ("\ud83d\udfe2 Escalar" if cpa_kw <= cur["cpa"] * 0.8 else "\ud83d\udfe2 Manter")
+            lines.append(f"| {kw.text} | {match} | {row.campaign.name} | {m.conversions:.1f} | {fmt(cpa_kw)} | {m.ctr * 100:.2f}% | {qs_display} | {star} |")
+    else:
+        lines.append("_Nenhuma keyword com convers\u00e3o no per\u00edodo._")
+
+    lines += ["", "---", "", "## \ud83d\udd34 Keywords com Perda de Verba (Sem Convers\u00e3o)", ""]
+    waste_kws = [r for r in kw_rows if r.metrics.conversions == 0 and micros(r.metrics.cost_micros) > 0]
+    waste_kws_sorted = sorted(waste_kws, key=lambda r: micros(r.metrics.cost_micros), reverse=True)
+    if waste_kws_sorted:
+        lines += [
+            "| Keyword | Tipo | Campanha | Gasto | Cliques | QS | Diagn\u00f3stico | A\u00e7\u00e3o |",
+            "|---|---|---|---|---|---|---|---|",
+        ]
+        for row in waste_kws_sorted[:15]:
+            kw = row.ad_group_criterion.keyword
+            m = row.metrics
+            cost = micros(m.cost_micros)
+            match = match_map.get(kw.match_type.name, kw.match_type.name)
+            qs_info = qs_map.get(kw.text.lower().strip(), {})
+            qs_val = qs_info.get("qs")
+            if qs_val and qs_val <= 3:
+                diag = "QS baixo \u2014 relev\u00e2ncia fraca"
+                action = "\ud83d\udd34 Reescrever an\u00fancio/LP"
+            elif match == "Ampla":
+                diag = "Match Ampla \u2014 tr\u00e1fego irrelevante"
+                action = "\ud83d\udfe1 Trocar para Frase/Exata"
+            elif cost > cur["cpa"] * 3 if cur["cpa"] > 0 else cost > 50:
+                diag = f"Gasto {fmt(cost)} sem retorno"
+                action = "\ud83d\udd34 Pausar"
+            else:
+                diag = "Ainda em aprendizado"
+                action = "\ud83d\udfe1 Monitorar"
+            lines.append(f"| {kw.text} | {match} | {row.campaign.name} | {fmt(cost)} | {m.clicks:,} | {qs_icon(qs_val)} | {diag} | {action} |")
+    else:
+        lines.append("_Todas as keywords geraram convers\u00f5es no per\u00edodo._")
+
     # \u2500\u2500 Termos de pesquisa \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
     lines += [
         "", "---", "", "## Termos de Pesquisa", "",
@@ -633,6 +688,127 @@ def generate_report(customer_id, mcc_id, client_name, currency, start_date=None,
         lines.append(f"| {row.search_term_view.search_term} | {row.campaign.name} | {m.clicks:,} | {fmt(micros(m.cost_micros))} | {m.conversions:.1f} | {m.ctr * 100:.2f}% |")
     if not search_rows:
         lines.append("_Nenhum termo de pesquisa encontrado no periodo._")
+
+    # ── Pacing Monitor (SOP Módulo 6) ────────────────────────────────────────────
+    lines += ["", "---", "", "## 📊 Pacing Monitor (Ritmo de Gasto)", ""]
+    today_dt = date.today()
+    days_in_month = (date(today_dt.year + today_dt.month // 12, today_dt.month % 12 + 1, 1) - timedelta(days=1)).day
+    total_daily_budget = sum(c["budget_daily"] for c in campaigns)
+    monthly_budget_est = total_daily_budget * days_in_month
+    weekly_spend = cur["cost"]
+    monthly_projected = (weekly_spend / 7) * days_in_month
+    pct_mes = (today_dt.day / days_in_month) * 100
+    lines += [
+        f"Dia **{today_dt.day}** de {days_in_month} do mês ({pct_mes:.0f}% do período).",
+        f"- Gasto semanal: **{fmt(weekly_spend)}**",
+        f"- Projeção mensal (ritmo atual): **{fmt(monthly_projected)}**",
+    ]
+    if monthly_budget_est > 0:
+        lines.append(f"- Budget estimado (orçamentos diários × {days_in_month} dias): {fmt(monthly_budget_est)}")
+        pct_proj = (monthly_projected / monthly_budget_est) * 100
+        diff = pct_proj - pct_mes
+        if abs(diff) <= 10:
+            lines.append(f"- Status: 🟢 NO RITMO — projeção {fmt(monthly_projected)} alinhada com o mês")
+        elif diff > 10:
+            lines.append(f"- Status: 🔴 ACELERADO — projeção {int(pct_proj)}% do budget vs {int(pct_mes)}% do mês decorrido")
+        else:
+            lines.append(f"- Status: 🟡 LENTO — projeção {int(pct_proj)}% do budget vs {int(pct_mes)}% do mês decorrido")
+    else:
+        lines.append("- Status: ⚠️ Budget diário não configurado nas campanhas")
+
+    # ── Bloco Trello (SOP formato obrigatório) ───────────────────────────────────
+    cpa_var_str = pct_change(cur["cpa"], prev["cpa"]) or "---"
+    conv_var_str = pct_change(cur["conversions"], prev["conversions"]) or "---"
+    if monthly_budget_est > 0:
+        pct_proj2 = (monthly_projected / monthly_budget_est) * 100
+        diff2 = pct_proj2 - pct_mes
+        if abs(diff2) <= 10:   pac_icon, pac_st = "🟢", "NO RITMO"
+        elif diff2 > 10:       pac_icon, pac_st = "🔴", "ACELERADO"
+        else:                  pac_icon, pac_st = "🟡", "LENTO"
+        pacing_trello = f"Pacing: {pac_icon} {pac_st} — Projeção {fmt(monthly_projected)} vs Budget est. {fmt(monthly_budget_est)} ({int(pct_mes)}% do mês)"
+    else:
+        pacing_trello = "Pacing: ⚠️ Budget não configurado"
+
+    lines += [
+        "", "---", "",
+        "## 🟦 RESUMO FINAL PARA TRELLO — copie e cole quando quiser postar", "",
+        f"📊 Google Ads {client_name} — {generated_at}",
+        f"💰 Gasto: {fmt(cur['cost'])} | 🎯 Conversões: {cur['conversions']:.0f} | 📉 CPA: {fmt(cur['cpa'])}",
+        f"Variação vs semana anterior: CPA {cpa_var_str} | Conversões {conv_var_str}",
+        pacing_trello,
+        "",
+    ]
+    for camp in campaigns:
+        if camp["status"] != "ATIVA" or camp["cost"] == 0:
+            continue
+        camp_conv_kws = sorted(
+            [r for r in kw_rows if r.campaign.name == camp["name"] and r.metrics.conversions > 0],
+            key=lambda r: micros(r.metrics.cost_micros) / r.metrics.conversions
+        )
+        winner_kw = camp_conv_kws[0] if camp_conv_kws else None
+        camp_waste_terms = [r for r in waste_terms if r.campaign.name == camp["name"]]
+
+        lines += ["---", "", f"📌 Campanha: {camp['name']}", "", "✅ O que está funcionando:"]
+        if winner_kw:
+            kw_txt = winner_kw.ad_group_criterion.keyword.text
+            kw_cpa = micros(winner_kw.metrics.cost_micros) / winner_kw.metrics.conversions
+            kw_ctr = winner_kw.metrics.ctr * 100
+            lines.append(f"- Keyword `{kw_txt}` — CTR {kw_ctr:.2f}% | CPA {fmt(kw_cpa)}")
+        if camp["conversions"] > 0:
+            lines.append(f"- {camp['conversions']:.0f} conversões no período (CPA {fmt(camp['cpa'])})")
+        if camp["impr_share"] and float(camp["impr_share"]) > 0 and float(camp["impr_share"]) >= 0.6:
+            lines.append(f"- Impression Share {safe_pct(camp['impr_share'])} — boa cobertura")
+        if not winner_kw and camp["conversions"] == 0:
+            lines.append("- Nenhum resultado positivo identificado nesta semana")
+
+        lines += ["", "❌ O que não está funcionando:"]
+        if camp_waste_terms:
+            for r in camp_waste_terms[:2]:
+                m_w = r.metrics
+                lines.append(f"- `{r.search_term_view.search_term}` — {fmt(micros(m_w.cost_micros))} gastos, 0 conversões")
+        if camp["conversions"] == 0 and camp["cost"] > 0:
+            lines.append(f"- 0 conversões com {fmt(camp['cost'])} investidos")
+        if camp["lost_budget"] and float(camp["lost_budget"]) > 0.2:
+            lines.append(f"- IS perdida por orçamento: {safe_pct(camp['lost_budget'])} — budget limitando alcance")
+        if camp["lost_rank"] and float(camp["lost_rank"]) > 0.2:
+            lines.append(f"- IS perdida por qualidade: {safe_pct(camp['lost_rank'])} — melhorar QS")
+        if not camp_waste_terms and camp["conversions"] > 0:
+            lines.append("- Sem problemas críticos nesta campanha")
+
+        lines.append("")
+        if winner_kw:
+            kw_txt = winner_kw.ad_group_criterion.keyword.text
+            kw_match = match_map.get(winner_kw.ad_group_criterion.keyword.match_type.name, "")
+            kw_cpa = micros(winner_kw.metrics.cost_micros) / winner_kw.metrics.conversions
+            kw_ctr = winner_kw.metrics.ctr * 100
+            lines.append(f"⭐ Keyword vencedora: `{kw_txt}` [{kw_match}] — CTR {kw_ctr:.2f}% | CPA {fmt(kw_cpa)}")
+        else:
+            lines.append("⭐ Keyword vencedora: a definir — aguardar mais volume no período")
+
+        if camp_waste_terms:
+            lines += ["", "🚫 Negativações da semana:"]
+            for r in camp_waste_terms[:5]:
+                lines.append(f"- {r.search_term_view.search_term}")
+
+        lines += ["", "🔧 O que precisa ser feito:"]
+        trello_actions = []
+        if camp_waste_terms:
+            terms_str = ", ".join(f'"{r.search_term_view.search_term}"' for r in camp_waste_terms[:3])
+            trello_actions.append(f"Negativar termos: {terms_str}")
+        if winner_kw:
+            kw_cpa2 = micros(winner_kw.metrics.cost_micros) / winner_kw.metrics.conversions
+            if cur["cpa"] > 0 and kw_cpa2 <= cur["cpa"] * 0.8:
+                trello_actions.append(f"Aumentar bid na keyword `{winner_kw.ad_group_criterion.keyword.text}` — CPA abaixo da média")
+        if camp["lost_rank"] and float(camp["lost_rank"]) > 0.2:
+            trello_actions.append("Revisar RSA — melhorar Quality Score")
+        if camp["lost_budget"] and float(camp["lost_budget"]) > 0.2:
+            trello_actions.append(f"Aumentar budget diário — perdendo {safe_pct(camp['lost_budget'])} de IS")
+        if not trello_actions:
+            trello_actions.append("Monitorar — sem ações urgentes identificadas")
+        for a in trello_actions:
+            lines.append(f"- {a}")
+        lines.append("")
+    lines.append("---")
 
     lines += ["", "---", "", "_Relatorio gerado automaticamente via GitHub Actions + Google Ads API | Plus Digital_"]
 
