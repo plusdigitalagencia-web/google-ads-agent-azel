@@ -829,6 +829,7 @@ if __name__ == "__main__":
     report = generate_report(args.customer_id, args.mcc_id, args.client_name, args.currency,
                              args.start_date, args.end_date)
 
+    report = report.encode("utf-8", errors="replace").decode("utf-8")
     with open(args.output, "w", encoding="utf-8") as f:
         f.write(report)
 
