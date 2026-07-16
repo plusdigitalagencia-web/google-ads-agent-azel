@@ -633,7 +633,7 @@ def generate_report(customer_id, mcc_id, client_name, currency, start_date=None,
     else:
         lines.append("_Nenhuma keyword com convers\u00e3o no per\u00edodo._")
 
-    lines += ["", "---", "", "## \ud83d\udd34 Keywords com Perda de Verba (Sem Convers\u00e3o)", ""]
+    lines += ["", "---", "", "## 🔴 Keywords com Perda de Verba (Sem Convers\u00e3o)", ""]
     waste_kws = [r for r in kw_rows if r.metrics.conversions == 0 and micros(r.metrics.cost_micros) > 0]
     waste_kws_sorted = sorted(waste_kws, key=lambda r: micros(r.metrics.cost_micros), reverse=True)
     if waste_kws_sorted:
@@ -650,13 +650,13 @@ def generate_report(customer_id, mcc_id, client_name, currency, start_date=None,
             qs_val = qs_info.get("qs")
             if qs_val and qs_val <= 3:
                 diag = "QS baixo \u2014 relev\u00e2ncia fraca"
-                action = "\ud83d\udd34 Reescrever an\u00fancio/LP"
+                action = "🔴 Reescrever an\u00fancio/LP"
             elif match == "Ampla":
                 diag = "Match Ampla \u2014 tr\u00e1fego irrelevante"
                 action = "\ud83d\udfe1 Trocar para Frase/Exata"
             elif cost > cur["cpa"] * 3 if cur["cpa"] > 0 else cost > 50:
                 diag = f"Gasto {fmt(cost)} sem retorno"
-                action = "\ud83d\udd34 Pausar"
+                action = "🔴 Pausar"
             else:
                 diag = "Ainda em aprendizado"
                 action = "\ud83d\udfe1 Monitorar"
