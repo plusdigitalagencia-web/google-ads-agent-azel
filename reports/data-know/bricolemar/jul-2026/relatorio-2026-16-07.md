@@ -209,7 +209,7 @@ _Nenhuma keyword com conversão no período._
 
 ---
 
-## ?? Keywords com Perda de Verba (Sem Conversão)
+## 🔴 Keywords com Perda de Verba (Sem Conversão)
 
 | Keyword | Tipo | Campanha | Gasto | Cliques | QS | Diagnóstico | Ação |
 |---|---|---|---|---|---|---|---|
@@ -217,15 +217,15 @@ _Nenhuma keyword com conversão no período._
 | articulos de ferreteria | Ampla | 052926_Busqueda_Hector | €14.44 | 56 | — | Match Ampla — tráfego irrelevante | ?? Trocar para Frase/Exata |
 | paellera acero | Frase | [DK] [Search] [Vendas] [Cateory] [Jardim-Piscina-Paelleros] - 10/07/26 | €14.33 | 12 | 🟡 5 | Ainda em aprendizado | ?? Monitorar |
 | ferretería online | Ampla | 052926_Busqueda_Hector | €9.14 | 57 | 🟡 6 | Match Ampla — tráfego irrelevante | ?? Trocar para Frase/Exata |
-| ferreteria en españa | Ampla | 052926_Busqueda_Hector | €6.10 | 26 | 🔴 3 | QS baixo — relevância fraca | ?? Reescrever anúncio/LP |
+| ferreteria en españa | Ampla | 052926_Busqueda_Hector | €6.10 | 26 | 🔴 3 | QS baixo — relevância fraca | 🔴 Reescrever anúncio/LP |
 | hornillo paellero | Frase | [DK] [Search] [Vendas] [Cateory] [Jardim-Piscina-Paelleros] - 10/07/26 | €6.05 | 7 | — | Ainda em aprendizado | ?? Monitorar |
 | herramientas bricolaje | Ampla | 052926_Busqueda_Hector | €4.98 | 20 | 🟡 5 | Match Ampla — tráfego irrelevante | ?? Trocar para Frase/Exata |
 | bricolaje online | Ampla | 052926_Busqueda_Hector | €4.30 | 22 | 🟡 5 | Match Ampla — tráfego irrelevante | ?? Trocar para Frase/Exata |
 | paravientos paellero | Frase | [DK] [Search] [Vendas] [Cateory] [Jardim-Piscina-Paelleros] - 10/07/26 | €3.75 | 5 | 🟡 5 | Ainda em aprendizado | ?? Monitorar |
 | tienda online bricolaje | Ampla | 052926_Busqueda_Hector | €3.14 | 13 | — | Match Ampla — tráfego irrelevante | ?? Trocar para Frase/Exata |
-| paellero | Ampla | 052926_Busqueda_Hector | €2.81 | 13 | 🔴 1 | QS baixo — relevância fraca | ?? Reescrever anúncio/LP |
+| paellero | Ampla | 052926_Busqueda_Hector | €2.81 | 13 | 🔴 1 | QS baixo — relevância fraca | 🔴 Reescrever anúncio/LP |
 | ferreteria online | Ampla | 052926_Busqueda_Hector | €2.60 | 10 | 🟢 7 | Match Ampla — tráfego irrelevante | ?? Trocar para Frase/Exata |
-| ferreteria bricolaje | Ampla | 052926_Busqueda_Hector | €2.54 | 11 | 🔴 3 | QS baixo — relevância fraca | ?? Reescrever anúncio/LP |
+| ferreteria bricolaje | Ampla | 052926_Busqueda_Hector | €2.54 | 11 | 🔴 3 | QS baixo — relevância fraca | 🔴 Reescrever anúncio/LP |
 | productos ferreteria | Ampla | 052926_Busqueda_Hector | €2.28 | 8 | 🟡 5 | Match Ampla — tráfego irrelevante | ?? Trocar para Frase/Exata |
 | tiendas bricolaje online | Ampla | 052926_Busqueda_Hector | €2.23 | 15 | 🟢 7 | Match Ampla — tráfego irrelevante | ?? Trocar para Frase/Exata |
 
