@@ -376,10 +376,11 @@ if not acts:
 for a in acts[:6]: A(a)
 A(""); A("---"); A("")
 
-# ── BLOCO TRELLO ─────────────────────────────────────────────────────────────
-A("## BLOCO TRELLO"); A("")
-A(f"**Meta Ads {CLIENT_NAME} — {today.strftime('%d/%m/%Y')}**")
-A(f"Gasto: {cur(curr['spend'])} | Leads: {int(curr['leads'])} | CPL: {cpl_str(curr['spend'],curr['leads'])}")
+# ── BLOCO TRELLO (formato SOP) ────────────────────────────────────────────────
+A("---"); A("")
+A("## 🟦 RESUMO FINAL PARA TRELLO — copie e cole quando quiser postar"); A("")
+A(f"📊 Meta Ads {CLIENT_NAME} — {today.strftime('%d/%m/%Y')}")
+A(f"💰 Gasto: {cur(curr['spend'])} | 🎯 Leads: {int(curr['leads'])} | 📉 CPL: {cpl_str(curr['spend'],curr['leads'])}")
 if curr['leads'] and prev['leads']:
     A(f"Variação vs semana anterior: CPL {pct(curr['cpl_val'],prev['cpl_val'])} | Leads {pct(curr['leads'],prev['leads'])}")
 if BUDGET_EST:
@@ -394,7 +395,7 @@ for camp in camp_curr:
     ads_nl=[r for r in camp_ads if leads(r)==0 and float(r.get("spend",0))>15]
     best=ads_wl[0] if ads_wl else None
     A("---"); A("")
-    A(f"**Campanha: {cn}**"); A("")
+    A(f"📌 Campanha: {cn}"); A("")
     A("✅ O que está funcionando:")
     if best:
         bl=leads(best)
@@ -413,9 +414,9 @@ for camp in camp_curr:
         A(f"⭐ Criativo vencedor: {best.get('ad_name','?')} — CTR {float(best.get('ctr',0)):.2f}% | CPL {cpl_str(float(best.get('spend',0)),bl)}")
     else: A("⭐ Criativo vencedor: a definir — nenhum com volume suficiente no período")
     A(""); A("🔧 O que precisa ser feito:")
-    if ads_nl: A("- Pausar criativos sem resultado que consomem budget")
+    if ads_nl: A(f"- Pausar criativos sem resultado que consomem budget ({', '.join(b.get('ad_name','?')[:25] for b in ads_nl[:2])})")
     if best:   A(f"- Escalar budget no criativo {best.get('ad_name','?')}")
-    if freq>=2.5: A("- Criar novo criativo antes da frequência atingir 3.5")
+    if freq>=2.5: A("- Criar novo criativo antes da frequência atingir 3,5")
     if not ads_nl and not best and freq<2.5: A("- Monitorar — sem ações urgentes")
     A("")
 A("---")
