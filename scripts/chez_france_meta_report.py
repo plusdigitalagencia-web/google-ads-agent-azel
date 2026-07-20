@@ -245,8 +245,8 @@ lines += [
     f"*Gerado automaticamente | Plus Digital | {today.strftime('%d/%m/%Y')}*",
 ]
 
-os.makedirs(f"reports/chez-france/meta/{mes_folder}", exist_ok=True)
-path = f"reports/chez-france/meta/{mes_folder}/meta-report-{report_date}.md"
+os.makedirs(f"reports/ASSUCAR/chez-france/meta/{mes_folder}", exist_ok=True)
+path = f"reports/ASSUCAR/chez-france/meta/{mes_folder}/meta-report-{report_date}.md"
 with open(path, "w") as f:
     f.write("\n".join(lines))
 print(f"Relatório salvo: {path}")
