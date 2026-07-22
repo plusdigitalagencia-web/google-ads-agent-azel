@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[DK] [Search] [Vendas] [Cateory] [Jardim-Piscina-Paelleros] - 10/07/26</title>
+<style>
+  :root {
+    --ground: #f4f7f5; --panel: #ffffff; --panel-2: #eaf1ee; --border: #d7e0dc;
+    --ink: #142320; --ink-dim: #4b5b56; --ink-faint: #7c8b86;
+    --accent: #157567; --accent-ink: #0d4b42; --accent-soft: #dcefe9;
+    --good: #1f7a52; --good-soft: #e1f3ea; --warn: #8a5a13; --warn-soft: #faf0dc;
+    --fail: #a3261f; --fail-soft: #fbe6e4; --nd: #5b6864; --nd-soft: #e9edeb;
+    --font-sans: -apple-system, "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Consolas, monospace;
+  }
+  :root[data-theme="dark"] {
+    --ground: #0c1614; --panel: #121e1b; --panel-2: #16221f; --border: #24322e;
+    --ink: #e7efec; --ink-dim: #a9b8b3; --ink-faint: #7c8b86;
+    --accent: #37bfa8; --accent-ink: #b7ece1; --accent-soft: #17332d;
+    --good: #4ecb95; --good-soft: #17332a; --warn: #e0b25b; --warn-soft: #362a12;
+    --fail: #ec7972; --fail-soft: #3a1917; --nd: #93a19c; --nd-soft: #1b2624;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0c1614; --panel: #121e1b; --panel-2: #16221f; --border: #24322e;
+      --ink: #e7efec; --ink-dim: #a9b8b3; --ink-faint: #7c8b86;
+      --accent: #37bfa8; --accent-ink: #b7ece1; --accent-soft: #17332d;
+      --good: #4ecb95; --good-soft: #17332a; --warn: #e0b25b; --warn-soft: #362a12;
+      --fail: #ec7972; --fail-soft: #3a1917; --nd: #93a19c; --nd-soft: #1b2624;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--font-sans); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  .page { max-width: 880px; margin: 0 auto; padding: 48px 24px 80px; display: flex; flex-direction: column; gap: 32px; }
+  header.masthead { display: flex; flex-direction: column; gap: 10px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+  .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  h1.slug { font-family: var(--font-mono); font-size: clamp(20px, 4vw, 28px); font-weight: 600; margin: 0; color: var(--ink); word-break: break-word; text-wrap: balance; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13.5px; color: var(--ink-dim); }
+  .meta-row b { color: var(--ink); font-weight: 600; }
+  h2.section-title { font-size: 15px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 14px; }
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .kpi { background: var(--panel); padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 6px; }
+  .kpi .label { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-faint); font-weight: 600; }
+  .kpi .value { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 21px; font-weight: 600; color: var(--ink); }
+  .kpi .value.flag { color: var(--fail); }
+  .kpi .value.good { color: var(--good); }
+  .callout { background: var(--accent-soft); border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border)); border-radius: 10px; padding: 20px 22px; display: flex; flex-direction: column; gap: 8px; }
+  .callout .callout-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--accent-ink); }
+  .callout p { margin: 0; font-size: 15px; color: var(--ink); }
+  .callout p + p { margin-top: 2px; }
+  .callout b.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .check-table { width: 100%; border-collapse: collapse; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .check-row { display: grid; grid-template-columns: 56px 1fr 96px; gap: 12px; align-items: start; padding: 14px 16px; background: var(--panel); border-bottom: 1px solid var(--border); }
+  .check-row:last-child { border-bottom: none; }
+  .check-id { font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-faint); font-weight: 600; padding-top: 2px; }
+  .check-body .check-name { font-size: 14.5px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+  .check-body .check-detail { font-size: 13.5px; color: var(--ink-dim); }
+  .pill { justify-self: end; font-size: 11.5px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; white-space: nowrap; height: fit-content; }
+  .pill.pass { color: var(--good); background: var(--good-soft); }
+  .pill.warn { color: var(--warn); background: var(--warn-soft); }
+  .pill.fail { color: var(--fail); background: var(--fail-soft); }
+  .pill.nd   { color: var(--nd);   background: var(--nd-soft); }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; }
+  table { width: 100%; border-collapse: collapse; background: var(--panel); font-size: 13px; }
+  thead th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint); font-weight: 600; padding: 10px 14px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  tbody td { padding: 9px 14px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr.highlight td { background: var(--accent-soft); font-weight: 700; }
+  td.label-cell { font-family: var(--font-sans); }
+  td.num { text-align: right; }
+  .note { border: 1px dashed var(--border); border-radius: 10px; padding: 16px 18px; font-size: 13.5px; color: var(--ink-dim); background: var(--panel-2); }
+  .note b { color: var(--ink); }
+  ol.recs { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  ol.recs li { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 14px 16px; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; font-size: 14.5px; }
+  ol.recs .n { font-family: var(--font-mono); font-weight: 700; color: var(--accent); }
+  ol.recs b { color: var(--ink); }
+  ol.recs span.body { color: var(--ink-dim); }
+  footer { border-top: 1px solid var(--border); padding-top: 18px; font-size: 12.5px; color: var(--ink-faint); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+  a { color: var(--accent); }
+  code { font-family: var(--font-mono); font-size: 0.92em; }
+  @media (max-width: 520px) { .check-row { grid-template-columns: 1fr; } .check-id { padding-top: 0; } .pill { justify-self: start; } }
+</style>
+</head>
+<body>
+<div class="page" style="padding-bottom:0; gap:8px;"><span class="eyebrow" style="font-family:var(--font-mono); font-size:12px; color:var(--ink-faint);"><a href="../../" style="color:var(--accent); text-decoration:none;">Otimizações Campanhas HTML</a> / <a href="../" style="color:var(--accent); text-decoration:none;">Bricolemar</a> / <a href="./" style="color:var(--accent); text-decoration:none;">Julho/2026</a></span></div>
+
+<div class="page">
+
+  <header class="masthead">
+    <span class="eyebrow">Google Ads &middot; Search &middot; Bricolemar</span>
+    <h1 class="slug">[DK] [Search] [Vendas] [Cateory] [Jardim-Piscina-Paelleros] - 10/07/26</h1>
+    <div class="meta-row">
+      <span><b>Conta:</b> Bricolemar (786-137-8385) · MCC Data Know</span>
+      <span><b>Período:</b> 01/07/2026 – 22/07/2026</span>
+      <span><b>Status:</b> ENABLED</span>
+    </div>
+  </header>
+
+  <section>
+    <h2 class="section-title">Métricas do período</h2>
+    <div class="kpi-grid">
+      <div class="kpi"><span class="label">Gasto</span><span class="value">€ 442,95</span></div>
+      <div class="kpi"><span class="label">Impressões</span><span class="value">4.009</span></div>
+      <div class="kpi"><span class="label">Cliques</span><span class="value">273</span></div>
+      <div class="kpi"><span class="label">CTR</span><span class="value good">6,81%</span></div>
+      <div class="kpi"><span class="label">CPC</span><span class="value">€ 1,62</span></div>
+      <div class="kpi"><span class="label">Conversões</span><span class="value flag">0,00</span></div>
+      <div class="kpi"><span class="label">CPA</span><span class="value">—</span></div>
+      <div class="kpi"><span class="label">ROAS</span><span class="value flag">0,00x</span></div>
+    </div>
+  </section>
+
+  <section class="callout">
+    <span class="callout-title">Achado principal</span>
+    <p>A campanha gastou <b class="num">€ 442,95</b> e gerou <b class="num">273 cliques</b> em julho (CTR <b class="num">6,81%</b>, bom) — mas <b class="num">zero conversões</b>. É a única campanha da conta com ROAS zero absoluto: a outra campanha Search da própria conta (052926_Busqueda_Hector) tem ROAS 0,87 no mesmo período, então o canal Search não é o problema, é esta campanha especificamente.</p>
+    <p>Rastreando o destino real do gasto: <b class="num">33,5%</b> (€148,53) foi pra cliques em sitelinks herdados da conta sem relação com Paelleros, e <b class="num">~49%</b> do gasto total foi em cliques de anúncio disparados por buscas de concorrentes/marketplaces (ManoMano, Garcima, Vevor, Intex, Amazon, El Corte Inglés). Só <b class="num">~13%</b> do orçamento foi clique relevante ao tema vindo do anúncio certo — e mesmo essa fatia não converteu.</p>
+  </section>
+
+  <section>
+    <h2 class="section-title">Checklist de causas raiz</h2>
+    <div class="check-table">
+      <div class="check-row">
+        <span class="check-id">P1</span>
+        <div class="check-body">
+          <div class="check-name">Sitelinks próprios da campanha</div>
+          <div class="check-detail">Ausente — a campanha herda os 5 sitelinks padrão da conta (Sección Hogar-Cocina, Ferretería, Fontanería, Herramientas, Todos los Productos), nenhum relacionado a Jardín-Piscina/Paelleros. 42 cliques (€148,53, 33,5% do gasto) foram parar nessas seções erradas da loja.</div>
+        </div>
+        <span class="pill fail">Ausente</span>
+      </div>
+      <div class="check-row">
+        <span class="check-id">P2</span>
+        <div class="check-body">
+          <div class="check-name">Negativas de marca/concorrente/marketplace</div>
+          <div class="check-detail">Ausente — a lista aplicada desde o lançamento (13 termos por grupo) só cobre riscos genéricos (aluguel, conserto, grátis, receita, emprego, usado, manual). Classifiquei os 1.076 termos de pesquisa reais do período: 75% do gasto em cliques de anúncio foi em buscas por ManoMano, Garcima (fabricante concorrente), Vevor, Intex, Klarstein, Lacor, Quttin, Amazon, El Corte Inglés e ferragens regionais — nunca coberto pela lista atual.</div>
+        </div>
+        <span class="pill fail">Ausente</span>
+      </div>
+      <div class="check-row">
+        <span class="check-id">P3</span>
+        <div class="check-body">
+          <div class="check-name">Final URL segmentada por ad group</div>
+          <div class="check-detail">Ausente — os 5 ad groups (Grelhas, Kits, Suportes, Conjuntos, Acessórios) levam todos para a mesma página de categoria genérica (~64 produtos misturados), não uma view filtrada por subtema.</div>
+        </div>
+        <span class="pill fail">Ausente</span>
+      </div>
+      <div class="check-row">
+        <span class="check-id">P4</span>
+        <div class="check-body">
+          <div class="check-name">Impression Share / Quality Score</div>
+          <div class="check-detail">IS 17,5% — 57,2% perdido por Rank (QS × lance), maior que os 25,3% perdidos por budget. QS das keywords com dado disponível variou de 2 a 8; grupo Suportes com o pior QS (2–3). Esperado em campanha de 12 dias, mas monitorar.</div>
+        </div>
+        <span class="pill warn">Revisar</span>
+      </div>
+      <div class="check-row">
+        <span class="check-id">P5</span>
+        <div class="check-body">
+          <div class="check-name">Tracking de conversão</div>
+          <div class="check-detail">Verificado via API: 3 conversion actions de categoria Purchase ativas e primary (GA4 Purchase, Venta, Ventas Valorizadas). A outra campanha Search da conta converteu no mesmo período, e <code>all_conversions</code> (qualquer tipo, não só primary) também deu zero para Paelleros — não parece ser falha de tracking.</div>
+        </div>
+        <span class="pill pass">OK</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Comparativo — todas as campanhas ativas da conta em julho/2026</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Campanha</th><th>Tipo</th><th class="num">Custo</th><th class="num">Cliques</th><th class="num">Conversões</th><th class="num">ROAS</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">052026_Shopping Hector</td><td class="label-cell">Shopping (legado)</td><td class="num">€ 1.041,55</td><td class="num">21.503</td><td class="num">7,38</td><td class="num">0,25</td></tr>
+          <tr class="highlight"><td class="label-cell">Search Paelleros (esta)</td><td class="label-cell">Search</td><td class="num">€ 442,95</td><td class="num">273</td><td class="num">0,00</td><td class="num">0,00</td></tr>
+          <tr><td class="label-cell">052926_Busqueda_Hector</td><td class="label-cell">Search (legado)</td><td class="num">€ 190,57</td><td class="num">1.564</td><td class="num">1,06</td><td class="num">0,87</td></tr>
+          <tr><td class="label-cell">Merchant Center España</td><td class="label-cell">Shopping</td><td class="num">€ 179,76</td><td class="num">703</td><td class="num">7,86</td><td class="num">5,00</td></tr>
+          <tr><td class="label-cell">Paelleros-Performance Max-ES</td><td class="label-cell">PMax</td><td class="num">€ 45,96</td><td class="num">693</td><td class="num">0,71</td><td class="num">0,91</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="note">
+    <b>Método:</b> dados via GAQL direto à API Google Ads (<code>campaign</code>, <code>keyword_view</code>, <code>search_term_view</code>, <code>ad_group_ad</code>, <code>campaign_asset</code>, <code>customer_asset</code>, <code>conversion_action</code>) — bypass do servidor MCP <code>google-ads-mcp-dataknow</code>, que ainda não reconhece a conta "Bricolemar" no dicionário interno usado por <code>get_campaign_metrics</code>/<code>analyze_keywords</code>/<code>analyze_search_terms</code>/<code>audit_ads</code> (só <code>list_accounts</code> a reconhece). <b>Nota sobre copy:</b> os 5 RSAs foram avaliados à parte (especialista de copy) — CTR já bom (5–9%), copy não é causa raiz. Refinamentos sugeridos: prova social genérica/idêntica nos 5 grupos, falta urgência real, CTAs quase clonados entre grupos.
+  </div>
+
+  <section>
+    <h2 class="section-title">Recomendações priorizadas</h2>
+    <ol class="recs">
+      <li><span class="n">1</span><span><b>Criar sitelinks próprios da campanha</b> — <span class="body">"Kits Paelleros", "Quemadores a Gas", "Soportes", "Accesorios", "Ver Todo Paelleros" — corrige sozinho ~33,5% do desperdício de julho.</span></span></li>
+      <li><span class="n">2</span><span><b>Negativar os termos de marca/concorrente/marketplace identificados</b> — <span class="body">ManoMano, Garcima, Vevor, Intex, Amazon, El Corte Inglés, Klarstein, Lacor, Quttin e ferragens regionais, aplicado aos 5 ad groups.</span></span></li>
+      <li><span class="n">3</span><span><b>Ajustar Final URL por ad group</b> — <span class="body">view filtrada por subtema (kits vs soportes vs accesorios), se o Odoo permitir filtro/tag na URL da categoria.</span></span></li>
+      <li><span class="n">4</span><span><b>Migrar keywords PHRASE para EXACT</b> — <span class="body">nos grupos com pior aderência (Suportes, Acessórios), se a negativação não bastar — phrase match em 2026 expande via "close variants" semânticos além do texto literal.</span></span></li>
+      <li><span class="n">5</span><span><b>Monitorar QS e Impression Share</b> — <span class="body">após as correções acima; revisar lance manual no grupo Suportes se o QS não subir com o volume.</span></span></li>
+    </ol>
+  </section>
+
+  <footer>
+    <span>Fonte: Google Ads API direta (campaign, keyword_view, search_term_view, ad_group_ad, campaign_asset, customer_asset, conversion_action) · Conta Bricolemar 786-137-8385</span>
+    <span>Gerado em 22/07/2026 · Nunca altera nada na conta — apenas diagnóstico</span>
+  </footer>
+
+</div>
+</body>
+</html>
