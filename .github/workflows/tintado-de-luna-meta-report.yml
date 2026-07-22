@@ -1,0 +1,24 @@
+name: Tintado de Luna - Relatorio Semanal Meta Ads
+
+on:
+  schedule:
+    - cron: '10 10 * * 1'  # toda segunda-feira as 07:10 BRT (10:10 UTC)
+  workflow_dispatch:
+
+jobs:
+  generate-report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Gerar relatorio Meta Ads Tintado de Luna
+        env:
+          TINTADO_LUNA_META_TOKEN: ${{ secrets.TINTADO_LUNA_META_TOKEN }}
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: python scripts/tintado_de_luna_meta_report.py
