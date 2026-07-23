@@ -17,8 +17,18 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Instalar dependencias
+        run: pip install anthropic
+
       - name: Gerar relatorio Meta Ads Tintado de Luna
         env:
-          TINTADO_LUNA_META_TOKEN: ${{ secrets.TINTADO_LUNA_META_TOKEN }}
+          META_TOKEN: ${{ secrets.TINTADO_LUNA_META_TOKEN }}
           GH_PAT: ${{ secrets.GH_PAT }}
-        run: python scripts/tintado_de_luna_meta_report.py
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ACCOUNT_ID: "act_9709425065783957"
+          CLIENT_NAME: "Tintado de Luna"
+          CURRENCY: "EUR"
+          BUDGET_MONTHLY: "0"
+          REPORT_DIR: "reports/data-know/tintado-de-luna"
+          USE_MONTH_FOLDER: "true"
+        run: python scripts/meta_report_claude.py
