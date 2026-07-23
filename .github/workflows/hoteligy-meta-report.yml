@@ -15,14 +15,18 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Instalar dependencias
+        run: pip install anthropic
+
       - name: Gerar relatorio Meta Ads Hoteligy
         env:
           META_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
           GH_PAT: ${{ secrets.GH_PAT }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           ACCOUNT_ID: "act_51307638"
           CLIENT_NAME: "Hoteligy"
           CURRENCY: "EUR"
           BUDGET_MONTHLY: "0"
           REPORT_DIR: "reports/data-know/hoteligy"
           USE_MONTH_FOLDER: "true"
-        run: python scripts/meta_report_ai.py
+        run: python scripts/meta_report_claude.py
