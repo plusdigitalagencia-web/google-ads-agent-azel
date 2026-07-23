@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-"""
-Dispatcher — Relatórios Quinta-feira
-Aciona todos os relatórios Meta Ads semanais via workflow_dispatch.
-Chamado pelo dispatcher-segunda.yml toda quinta às 06:50 BRT.
+"""Dispatcher - Relatorios Quinta-feira
+Aciona todos os relatorios Meta Ads semanais via workflow_dispatch.
+Chamado pelo dispatcher-segunda.yml toda quinta as 06:50 BRT.
 """
 import os
 import json
@@ -18,9 +17,9 @@ HEADERS = {
     "Content-Type": "application/json",
 }
 
-# Todos os relatórios que rodam toda quinta-feira
+# Todos os relatorios que rodam toda quinta-feira
 WORKFLOWS = [
-    # Data Know — Meta Ads
+    # Data Know - Meta Ads
     ("Onvoix",              "onvoix-meta-report.yml"),
     ("Leblon Real Estate",  "leblon-meta-report.yml"),
     ("Luxe Icon",           "luxe-icon-meta-report.yml"),
@@ -28,7 +27,7 @@ WORKFLOWS = [
     ("Hoteligy",            "hoteligy-meta-report.yml"),
     ("Alcala Homes",        "alcala-homes-meta-report.yml"),
     ("LRS Safety",          "lrs-safety-meta-report.yml"),
-    # Duosfera — Meta Ads
+    # Duosfera - Meta Ads
     ("Dra. Fernanda",       "dra-fernanda-meta-report.yml"),
     ("Dra. Isabela",        "dra-isabela-meta-report.yml"),
     ("Duosfera Digital",    "duosfera-digital-meta-report.yml"),
@@ -50,8 +49,7 @@ def dispatch(workflow_file):
         return False
 
 
-print("=== Dispatcher Quinta-feira ===
-")
+print("=== Dispatcher Quinta-feira ===")
 erros = []
 
 for nome, workflow in WORKFLOWS:
@@ -62,9 +60,7 @@ for nome, workflow in WORKFLOWS:
         erros.append(nome)
     time.sleep(2)
 
-print(f"
-Total: {len(WORKFLOWS)} workflows | Erros: {len(erros)}")
+print(f"\nTotal: {len(WORKFLOWS)} workflows | Erros: {len(erros)}")
 if erros:
     print(f"Falhas: {chr(44).join(erros)}")
     raise SystemExit(1)
-
