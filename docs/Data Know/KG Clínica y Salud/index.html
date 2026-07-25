@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KG Clínica y Salud — Data Know — Relatórios de Campanhas</title>
+<style>
+  :root {
+    --ground: #f4f7f5; --panel: #ffffff; --border: #d7e0dc;
+    --ink: #142320; --ink-dim: #4b5b56; --ink-faint: #7c8b86;
+    --accent: #157567; --accent-ink: #0d4b42; --accent-soft: #dcefe9;
+    --meta: #1877f2; --meta-ink: #0a58ca; --meta-soft: #dbe8fd;
+    --font-sans: -apple-system, "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0c1614; --panel: #121e1b; --border: #24322e;
+      --ink: #e7efec; --ink-dim: #a9b8b3; --ink-faint: #7c8b86;
+      --accent: #37bfa8; --accent-ink: #b7ece1; --accent-soft: #17332d;
+      --meta: #6ea8fe; --meta-ink: #bcd6ff; --meta-soft: #16233a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0c1614; --panel: #121e1b; --border: #24322e;
+    --ink: #e7efec; --ink-dim: #a9b8b3; --ink-faint: #7c8b86;
+    --accent: #37bfa8; --accent-ink: #b7ece1; --accent-soft: #17332d;
+    --meta: #6ea8fe; --meta-ink: #bcd6ff; --meta-soft: #16233a;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--ground); color:var(--ink); font-family:var(--font-sans); line-height:1.5; }
+  .page { max-width: 760px; margin:0 auto; padding: 56px 24px 80px; display:flex; flex-direction:column; gap:28px; }
+  .breadcrumb { font-family: var(--font-mono); font-size:12.5px; color:var(--ink-faint); }
+  .breadcrumb a { color:var(--meta); text-decoration:none; }
+  h1 { font-size: clamp(22px,4vw,28px); margin:0; text-wrap:balance; }
+  section.platform { display:flex; flex-direction:column; gap:14px; }
+  .platform-head { display:flex; align-items:center; gap:10px; }
+  h2.section-title { font-size: 15px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink-faint); margin: 0; }
+  .tag { font-family: var(--font-mono); font-size:11px; font-weight:600; letter-spacing:.02em; padding:3px 9px; border-radius:20px; background:var(--accent-soft); color:var(--accent-ink); }
+  section.platform.meta .tag { background: var(--meta-soft); color: var(--meta-ink); }
+  .empty { border: 1px dashed var(--border); border-radius: 10px; padding: 18px; font-size: 13.5px; color: var(--ink-faint); background: var(--panel); }
+  footer { border-top:1px solid var(--border); padding-top:16px; font-size:12.5px; color:var(--ink-faint); }
+</style>
+</head>
+<body>
+  <div class="page">
+    <span class="breadcrumb"><a href="../">Data Know</a> / KG Clínica y Salud</span>
+    <h1>KG Clínica y Salud</h1>
+
+    <section class="platform meta">
+      <div class="platform-head">
+        <h2 class="section-title">Meta Ads</h2>
+        <span class="tag">Meta Ads</span>
+      </div>
+      <div class="empty">Nenhum relatório publicado ainda — o primeiro aparecerá aqui após a próxima auditoria do Chef Meta Ads.</div>
+    </section>
+
+    <footer>Cliente: KG Clínica y Salud · Fisioterapia e estética (Barcelona, Espanha) · Sem Google Ads</footer>
+  </div>
+</body>
+</html>
