@@ -5,6 +5,7 @@ Relatórios de diagnóstico de campanhas Google Ads e Meta Ads dos clientes da D
 | Cliente | Plataformas | Relatórios |
 |---|---|---|
 | **Tintado de Luna** | Meta Ads, Google Ads | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Data%20Know/Tintado%20de%20Luna/) |
+| **Onvoix** | Meta Ads | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Data%20Know/Onvoix/) |
 
 > Pasta a criar quando o próximo cliente for confirmado.
 
