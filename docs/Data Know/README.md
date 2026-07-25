@@ -11,6 +11,7 @@ Relatórios de diagnóstico de campanhas Google Ads e Meta Ads dos clientes da D
 | **Hoteligy** | Meta Ads, Google Ads | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Data%20Know/Hoteligy/) |
 | **Alcalá Homes** | Meta Ads | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Data%20Know/Alcal%C3%A1%20Homes/) |
 | **KG Clínica y Salud** | Meta Ads | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Data%20Know/KG%20Cl%C3%ADnica%20y%20Salud/) |
+| **Bricolemar** | Google Ads | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Data%20Know/Bricolemar/) |
 
 > Pasta a criar quando o próximo cliente for confirmado.
 
