@@ -8,6 +8,7 @@ Relatórios de diagnóstico de campanhas Google Ads e Meta Ads dos clientes da D
 | **Onvoix** | Meta Ads | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Data%20Know/Onvoix/) |
 | **Leblon Real Estate** | Meta Ads | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Data%20Know/Leblon%20Real%20Estate/) |
 | **Luxe Icon LTD** | Meta Ads | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Data%20Know/Luxe%20Icon%20LTD/) |
+| **Hoteligy** | Meta Ads, Google Ads | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Data%20Know/Hoteligy/) |
 
 > Pasta a criar quando o próximo cliente for confirmado.
 
