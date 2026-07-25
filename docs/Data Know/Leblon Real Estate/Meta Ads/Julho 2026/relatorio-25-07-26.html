@@ -66,6 +66,7 @@
   .pill.pass { color: var(--good); background: var(--good-soft); }
   .pill.warn { color: var(--warn); background: var(--warn-soft); }
   .pill.fail { color: var(--fail); background: var(--fail-soft); }
+  .pill.nd   { color: var(--nd);   background: var(--nd-soft); }
   .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; }
   table { width: 100%; border-collapse: collapse; background: var(--panel); font-size: 13px; }
   thead th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint); font-weight: 600; padding: 10px 14px; border-bottom: 1px solid var(--border); white-space: nowrap; }
@@ -87,7 +88,8 @@
   .opt-blocks .opt-block:nth-child(-n+4) { border-top: none; }
   .opt-block + .opt-block { border-left: 1px solid var(--border); }
   .opt-block .opt-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; }
-  .opt-block p { margin: 0; font-size: 13.5px; }
+  .opt-block p { margin: 0 0 6px; font-size: 13.5px; }
+  .opt-block p:last-child { margin-bottom: 0; }
   .opt-block.c-blue   { background: #2563eb; border-left-color: rgba(255,255,255,.2); }
   .opt-block.c-yellow { background: #ca8a04; border-left-color: rgba(255,255,255,.2); }
   .opt-block.c-orange { background: #ea580c; border-left-color: rgba(255,255,255,.2); }
@@ -335,7 +337,72 @@
     <h2 class="section-title">Histórico de Otimizações</h2>
     <p class="section-sub">Preenchido manualmente pelo Head de Performance a cada semana — o agente sempre pergunta o que registrar aqui, nunca escreve sozinho.</p>
     <div class="opt-log">
-      <div class="opt-pending">Nenhuma otimização executada nesta semana — as recomendações do Head de Performance acima ainda estão em avaliação. Essa seção será preenchida na próxima publicação, após a decisão do Azel.</div>
+      <div class="opt-entry">
+        <div class="opt-date">Semana de 19/07 – 25/07/2026</div>
+        <div class="opt-blocks">
+          <div class="opt-block c-blue"><div class="opt-label">Otimização realizada</div><p>Ativação do Advantage+ Audience no ad set principal da campanha Europa (<code>[ALE][BEL][HOL]</code>).</p></div>
+          <div class="opt-block c-yellow"><div class="opt-label">Por que foi necessário</div><p>A Europa estava com a segmentação 100% manual (Advantage+ desligado), enquanto a mesma configuração automática já vinha funcionando bem no México — decisão de testar se a automação também melhora o retorno de leads na Europa.</p></div>
+          <div class="opt-block c-orange"><div class="opt-label">Resultado esperado</div><p>Comparar o volume e o custo por lead do conjunto principal da Europa com e sem Advantage+ Audience nas próximas semanas; o efeito só será mensurável a partir do próximo relatório.</p></div>
+          <div class="opt-block c-purple">
+            <div class="opt-label">Orientações para a equipe</div>
+            <p><b>Renan / equipe responsável pela estrutura de campanhas:</b> qualquer novo conjunto de teste deve ser criado numa campanha separada — nunca como um 2º conjunto dentro da mesma CBO de uma campanha já ativa — para não competir por orçamento com o conjunto principal.</p>
+            <p><b>Equipe de criativos:</b> migrar o AD15 (México) para dentro do asset feed do AD10 como 6ª variação, em vez de mantê-lo como anúncio individual competindo sozinho.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="opt-entry">
+        <div class="opt-date">Semana de 19/07 – 25/07/2026 — pendências e outras decisões</div>
+        <div class="check-row">
+          <div class="check-body">
+            <div class="check-name">Disputa de orçamento (CBO) — conjuntos principal e teste, Europa e México</div>
+            <div class="check-detail">Azel vai conversar com o Renan sobre por que um segundo conjunto foi criado dentro da mesma campanha CBO sem consulta prévia. Orientação do Azel: testes assim devem ser feitos numa campanha separada, não como um 2º conjunto dentro da mesma CBO — para não prejudicar a otimização do conjunto principal, tanto na Europa quanto no México.</div>
+          </div>
+          <span class="pill warn">Pendente</span>
+        </div>
+        <div class="check-row">
+          <div class="check-body">
+            <div class="check-name">Colapso de 95% nas impressões do conjunto teste do México</div>
+            <div class="check-detail">Também será discutido com o Renan antes de qualquer decisão.</div>
+          </div>
+          <span class="pill warn">Pendente</span>
+        </div>
+        <div class="check-row">
+          <div class="check-body">
+            <div class="check-name">Levar pra Europa o padrão de diversificação de ângulos do México</div>
+            <div class="check-detail">Decisão adiada — Azel prefere aguardar mais uma semana antes de decidir se executa.</div>
+          </div>
+          <span class="pill warn">Adiado</span>
+        </div>
+        <div class="check-row">
+          <div class="check-body">
+            <div class="check-name">Concentrar mais verba no Facebook (30% a 90% mais barato que o Instagram)</div>
+            <div class="check-detail">Ainda sem decisão — será reavaliado na próxima atualização.</div>
+          </div>
+          <span class="pill warn">Pendente</span>
+        </div>
+        <div class="check-row">
+          <div class="check-body">
+            <div class="check-name">Ajustar a janela de atribuição pro padrão da Meta (7d clique + 1d view + 1d vídeo)</div>
+            <div class="check-detail">Azel decidiu não seguir essa recomendação.</div>
+          </div>
+          <span class="pill fail">Descartada</span>
+        </div>
+        <div class="check-row">
+          <div class="check-body">
+            <div class="check-name">AD010 (Europa) — decidir se vira referência</div>
+            <div class="check-detail">Amostra ainda pequena (47 impressões, 2 leads). Acompanhando por mais uma semana antes de qualquer decisão.</div>
+          </div>
+          <span class="pill nd">Monitorando</span>
+        </div>
+        <div class="check-row">
+          <div class="check-body">
+            <div class="check-name">Conjunto teste da Europa</div>
+            <div class="check-detail">Sem mexer por enquanto — o bom resultado pode ser efeito da redistribuição de orçamento do CBO, não algo estrutural exclusivo dele. A única alteração feita na conta essa semana, em qualquer conjunto, foi a ativação do Advantage+ no conjunto principal (ver acima).</div>
+          </div>
+          <span class="pill nd">Monitorando</span>
+        </div>
+      </div>
     </div>
   </section>
 
