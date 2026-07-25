@@ -6,7 +6,7 @@ Relatórios de diagnóstico de campanhas do Onvoix, organizados por plataforma e
 
 | Mês | Relatórios |
 |---|---|
-| _Nenhum relatório publicado ainda_ | — |
+| **Julho/2026** | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Data%20Know/Onvoix/Meta%20Ads/Julho%202026/) |
 
 > Google Ads ainda pendente de acesso — seção será adicionada quando a conta for concedida.
 
