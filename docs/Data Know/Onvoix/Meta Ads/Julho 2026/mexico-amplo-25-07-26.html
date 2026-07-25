@@ -64,6 +64,24 @@
   .pill.pass { color: var(--good); background: var(--good-soft); }
   .pill.warn { color: var(--warn); background: var(--warn-soft); }
   .pill.fail { color: var(--fail); background: var(--fail-soft); }
+  .opt-log { display: flex; flex-direction: column; gap: 14px; }
+  .opt-entry { border: 1px solid var(--border); border-radius: 10px; background: var(--panel); overflow: hidden; }
+  .opt-entry .opt-date { font-family: var(--font-mono); font-size: 11.5px; font-weight: 600; color: var(--meta-ink); background: var(--meta-soft); padding: 8px 16px; }
+  .opt-blocks { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+  .opt-block { padding: 14px 16px; border-top: 1px solid var(--border); }
+  .opt-blocks .opt-block:nth-child(-n+4) { border-top: none; }
+  .opt-block + .opt-block { border-left: 1px solid var(--border); }
+  .opt-block .opt-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; }
+  .opt-block p { margin: 0 0 6px; font-size: 13.5px; }
+  .opt-block p:last-child { margin-bottom: 0; }
+  .opt-block.c-blue   { background: #2563eb; border-left-color: rgba(255,255,255,.2); }
+  .opt-block.c-yellow { background: #ca8a04; border-left-color: rgba(255,255,255,.2); }
+  .opt-block.c-orange { background: #ea580c; border-left-color: rgba(255,255,255,.2); }
+  .opt-block.c-purple { background: #7c3aed; border-left-color: rgba(255,255,255,.2); }
+  .opt-block.c-blue .opt-label, .opt-block.c-blue p,
+  .opt-block.c-yellow .opt-label, .opt-block.c-yellow p,
+  .opt-block.c-orange .opt-label, .opt-block.c-orange p,
+  .opt-block.c-purple .opt-label, .opt-block.c-purple p { color: #ffffff; }
   .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; }
   table { width: 100%; border-collapse: collapse; background: var(--panel); font-size: 13px; }
   thead th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint); font-weight: 600; padding: 10px 14px; border-bottom: 1px solid var(--border); white-space: nowrap; }
@@ -225,7 +243,32 @@
     <h2 class="section-title">Histórico de Otimizações</h2>
     <p class="section-sub">Preenchido manualmente pelo Head de Performance a cada semana — o agente sempre pergunta o que registrar aqui, nunca escreve sozinho.</p>
     <div class="opt-log">
-      <div class="opt-pending">Aguardando resposta do Azel sobre quais recomendações desta semana serão executadas.</div>
+      <div class="opt-entry">
+        <div class="opt-date">Semana de 18/07 – 24/07/2026</div>
+        <div class="opt-blocks">
+          <div class="opt-block c-blue">
+            <div class="opt-label">Otimização realizada</div>
+            <p>Ajustamos os posicionamentos do conjunto "México amplo": excluímos Audience Network e deixamos rodando só no Instagram.</p>
+            <p>Pausamos o criativo "Ima 06 — Cópia".</p>
+            <p>Confirmado: a conversão personalizada configurada ("Registro") está correta e é intencional — não é erro de configuração.</p>
+          </div>
+          <div class="opt-block c-yellow">
+            <div class="opt-label">Por que foi necessário</div>
+            <p>100% do investimento estava concentrado em Audience Network, com taxa de cliques de 40% (bem acima do normal) — sinal de cliques de baixa qualidade, então direcionamos só pro Instagram.</p>
+            <p>"Ima 06 — Cópia" gastou quase US$ 3 na semana sem gerar nenhum lead.</p>
+          </div>
+          <div class="opt-block c-orange">
+            <div class="opt-label">Resultado esperado</div>
+            <p>Leads mais qualificados vindos do Instagram, mesmo que o custo por lead suba em relação aos US$ 0,34 da semana passada (que provavelmente estava inflado por cliques de baixa qualidade do Audience Network).</p>
+            <p>Menos verba desperdiçada com criativos sem resultado.</p>
+          </div>
+          <div class="opt-block c-purple">
+            <div class="opt-label">Orientações para a equipe</div>
+            <p>Confirmar com o cliente (via CRM) se os 125 leads da semana são contatos reais e qualificados.</p>
+            <p>Confirmar se clientes já convertidos estão sendo excluídos da segmentação.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
