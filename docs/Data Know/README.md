@@ -12,7 +12,7 @@ Relatórios de diagnóstico de campanhas Google Ads e Meta Ads dos clientes da D
 | **Alcalá Homes** | Meta Ads | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Data%20Know/Alcal%C3%A1%20Homes/) |
 | **KG Clínica y Salud** | Meta Ads | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Data%20Know/KG%20Cl%C3%ADnica%20y%20Salud/) |
 | **Bricolemar** | Google Ads | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Data%20Know/Bricolemar/) |
-| **LRS Safety** | _Aguardando conta_ | [Ver status →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Data%20Know/LRS%20Safety/) |
+| **LRS Safety** | Meta Ads | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Data%20Know/LRS%20Safety/) |
 
 > Pasta a criar quando o próximo cliente for confirmado.
 
