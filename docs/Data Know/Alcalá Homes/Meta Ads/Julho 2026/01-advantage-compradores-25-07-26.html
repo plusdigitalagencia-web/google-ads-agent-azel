@@ -247,7 +247,34 @@
     <h2 class="section-title">Histórico de Otimizações</h2>
     <p class="section-sub">Preenchido manualmente pelo Head de Performance a cada semana — o agente sempre pergunta o que registrar aqui, nunca escreve sozinho.</p>
     <div class="opt-log">
-      <div class="opt-pending">Aguardando resposta do Azel sobre quais recomendações desta semana serão executadas.</div>
+      <div class="opt-entry">
+        <div class="opt-date">Semana de 18–24/07/2026</div>
+        <div class="opt-blocks">
+          <div class="opt-block c-blue">
+            <div class="opt-label">Otimização Realizada</div>
+            <p>Público ajustado — trocados/complementados os interesses genéricos de e-commerce por públicos voltados a imóveis de luxo, investimento internacional e perfil de comprador internacional.</p>
+            <p>Criativo "img5_madri_homes" desativado (ângulo "segunda casa"/dolce vita, CPL €26,98).</p>
+            <p>Tentativa de ampliar a janela de atribuição para 7 dias clique + 1 dia visualização — bloqueada pelo Meta (ver nota ao lado).</p>
+          </div>
+          <div class="opt-block c-yellow">
+            <div class="opt-label">Por que foi necessário</div>
+            <p>Os interesses ativos não tinham nenhum sinal de real estate, alto padrão ou perfil internacional — provável causa raiz do CPL atipicamente baixo (€11,04) puxando o lead errado para um produto de entrada em €500.000.</p>
+            <p>"img5" gerava CPL quase 3x a média do conjunto, com ângulo de fantasia que não filtra intenção real de compra.</p>
+            <p>A janela de 1 dia clique/sem visualização sub-atribuía leads e enviesava o algoritmo para conversores rápidos — incoerente com a decisão de compra longa de um imóvel de luxo. O evento de conversão desta conta é o formulário nativo do Meta (Instant Form), então o gargalo não é qualidade de correspondência de evento (EMQ) — é mesmo a janela configurada no conjunto. Confirmado: o Meta trava esse campo depois que o conjunto é publicado — só é editável duplicando o conjunto (o que reinicia a fase de aprendizado).</p>
+          </div>
+          <div class="opt-block c-orange">
+            <div class="opt-label">Resultado Esperado</div>
+            <p>Leads mais qualificados e alinhados ao perfil real de comprador de alto padrão — mesmo que o CPL suba, o que seria saudável dado o alerta identificado na auditoria desta semana.</p>
+            <p>Redução de gasto desperdiçado em cliques de baixa intenção com a pausa de "img5".</p>
+            <p>Atribuição: ainda pendente de decisão — duplicar o conjunto reinicia o aprendizado do algoritmo, então vale pesar o custo-benefício antes de agir. Próximo passo combinado: vamos tentar duplicar o conjunto na próxima atualização, já com a janela de 7 dias clique + 1 dia visualização.</p>
+          </div>
+          <div class="opt-block c-purple">
+            <div class="opt-label">Orientações para a Equipe</div>
+            <p>Revisar os títulos e o corpo dos criativos que não estão performando: "img1_looking_for_a_luxury", "img3_invest_your_wealth" e "img4_luxury_living_madrid".</p>
+            <p>Usar como referência o ângulo do criativo campeão "img2_flats_in_madrid" — investimento e mercado resiliente — em vez do vocabulário genérico de "casa dos sonhos"/"dolce vita" que domina os outros anúncios.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
