@@ -7,6 +7,7 @@ Relatórios de diagnóstico de campanhas Google Ads e Meta Ads dos clientes da D
 | **Tintado de Luna** | Meta Ads, Google Ads | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Data%20Know/Tintado%20de%20Luna/) |
 | **Onvoix** | Meta Ads | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Data%20Know/Onvoix/) |
 | **Leblon Real Estate** | Meta Ads | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Data%20Know/Leblon%20Real%20Estate/) |
+| **Luxe Icon LTD** | Meta Ads | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Data%20Know/Luxe%20Icon%20LTD/) |
 
 > Pasta a criar quando o próximo cliente for confirmado.
 
