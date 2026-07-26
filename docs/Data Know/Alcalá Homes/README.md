@@ -6,7 +6,7 @@ Relatórios de diagnóstico de campanhas do Alcalá Homes, organizados por plata
 
 | Mês | Relatórios |
 |---|---|
-| _Nenhum relatório publicado ainda_ | — |
+| **Julho/2026** | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Data%20Know/Alcal%C3%A1%20Homes/Meta%20Ads/Julho%202026/) |
 
 > Google Ads ainda não confirmado pro cliente — seção será adicionada se/quando ativado.
 

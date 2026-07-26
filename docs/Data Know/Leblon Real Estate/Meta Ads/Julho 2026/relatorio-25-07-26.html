@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leblon Real Estate — Relatório Semanal — 25/07/26</title>
+<style>
+  :root {
+    --ground: #f4f7f5; --panel: #ffffff; --panel-2: #eaf1ee; --border: #d7e0dc;
+    --ink: #142320; --ink-dim: #4b5b56; --ink-faint: #7c8b86;
+    --accent: #157567; --accent-ink: #0d4b42; --accent-soft: #dcefe9;
+    --meta: #1877f2; --meta-ink: #0a58ca; --meta-soft: #dbe8fd;
+    --good: #1f7a52; --good-soft: #e1f3ea; --warn: #8a5a13; --warn-soft: #faf0dc;
+    --fail: #a3261f; --fail-soft: #fbe6e4; --nd: #5b6864; --nd-soft: #e9edeb;
+    --font-sans: -apple-system, "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0c1614; --panel: #121e1b; --panel-2: #16221f; --border: #24322e;
+      --ink: #e7efec; --ink-dim: #a9b8b3; --ink-faint: #7c8b86;
+      --accent: #37bfa8; --accent-ink: #b7ece1; --accent-soft: #17332d;
+      --meta: #6ea8fe; --meta-ink: #bcd6ff; --meta-soft: #16233a;
+      --good: #4ecb95; --good-soft: #17332a; --warn: #e0b25b; --warn-soft: #362a12;
+      --fail: #ec7972; --fail-soft: #3a1917; --nd: #93a19c; --nd-soft: #1b2624;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0c1614; --panel: #121e1b; --panel-2: #16221f; --border: #24322e;
+    --ink: #e7efec; --ink-dim: #a9b8b3; --ink-faint: #7c8b86;
+    --accent: #37bfa8; --accent-ink: #b7ece1; --accent-soft: #17332d;
+    --meta: #6ea8fe; --meta-ink: #bcd6ff; --meta-soft: #16233a;
+    --good: #4ecb95; --good-soft: #17332a; --warn: #e0b25b; --warn-soft: #362a12;
+    --fail: #ec7972; --fail-soft: #3a1917; --nd: #93a19c; --nd-soft: #1b2624;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--font-sans); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  .page { max-width: 880px; margin: 0 auto; padding: 48px 24px 80px; display: flex; flex-direction: column; gap: 32px; }
+  .breadcrumb { font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-faint); }
+  .breadcrumb a { color: var(--meta); text-decoration: none; }
+  header.masthead { display: flex; flex-direction: column; gap: 10px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+  .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--meta); font-weight: 600; }
+  h1.slug { font-family: var(--font-mono); font-size: clamp(20px, 4vw, 28px); font-weight: 600; margin: 0; color: var(--ink); word-break: break-word; text-wrap: balance; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13.5px; color: var(--ink-dim); }
+  .meta-row b { color: var(--ink); font-weight: 600; }
+  h2.section-title { font-size: 15px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 6px; }
+  .section-sub { font-size: 13px; color: var(--ink-faint); margin: -8px 0 14px; font-style: italic; }
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .kpi { background: var(--panel); padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 6px; }
+  .kpi .label { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-faint); font-weight: 600; }
+  .kpi .value { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 21px; font-weight: 600; color: var(--ink); }
+  .kpi .value.flag { color: var(--fail); }
+  .kpi .value.good { color: var(--good); }
+  .kpi.mini { padding: 10px 12px 8px; }
+  .kpi.mini .value { font-size: 16px; }
+  .callout { background: var(--meta-soft); border: 1px solid color-mix(in srgb, var(--meta) 35%, var(--border)); border-radius: 10px; padding: 20px 22px; display: flex; flex-direction: column; gap: 8px; }
+  .callout .callout-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--meta-ink); }
+  .callout p { margin: 0; font-size: 15px; color: var(--ink); }
+  .callout b.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .check-table { width: 100%; border-collapse: collapse; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .check-row { display: grid; grid-template-columns: 1fr 96px; gap: 12px; align-items: start; padding: 14px 16px; background: var(--panel); border-bottom: 1px solid var(--border); }
+  .check-row:last-child { border-bottom: none; }
+  .check-body .check-name { font-size: 14.5px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+  .check-body .check-detail { font-size: 13.5px; color: var(--ink-dim); }
+  .pill { justify-self: end; font-size: 11.5px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; white-space: nowrap; height: fit-content; }
+  .pill.pass { color: var(--good); background: var(--good-soft); }
+  .pill.warn { color: var(--warn); background: var(--warn-soft); }
+  .pill.fail { color: var(--fail); background: var(--fail-soft); }
+  .pill.nd   { color: var(--nd);   background: var(--nd-soft); }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; }
+  table { width: 100%; border-collapse: collapse; background: var(--panel); font-size: 13px; }
+  thead th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint); font-weight: 600; padding: 10px 14px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  tbody td { padding: 9px 14px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr.highlight td { background: var(--meta-soft); font-weight: 700; }
+  td.label-cell { font-family: var(--font-sans); }
+  td.num { text-align: right; }
+  ol.recs { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  ol.recs li { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 14px 16px; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; font-size: 14.5px; }
+  ol.recs .n { font-family: var(--font-mono); font-weight: 700; color: var(--meta); }
+  ol.recs b { color: var(--ink); }
+  ol.recs span.body { color: var(--ink-dim); }
+  .opt-log { display: flex; flex-direction: column; gap: 14px; }
+  .opt-entry { border: 1px solid var(--border); border-radius: 10px; background: var(--panel); overflow: hidden; }
+  .opt-entry .opt-date { font-family: var(--font-mono); font-size: 11.5px; font-weight: 600; color: var(--meta-ink); background: var(--meta-soft); padding: 8px 16px; }
+  .opt-blocks { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+  .opt-block { padding: 14px 16px; border-top: 1px solid var(--border); }
+  .opt-blocks .opt-block:nth-child(-n+4) { border-top: none; }
+  .opt-block + .opt-block { border-left: 1px solid var(--border); }
+  .opt-block .opt-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; }
+  .opt-block p { margin: 0 0 6px; font-size: 13.5px; }
+  .opt-block p:last-child { margin-bottom: 0; }
+  .opt-block.c-blue   { background: #2563eb; border-left-color: rgba(255,255,255,.2); }
+  .opt-block.c-yellow { background: #ca8a04; border-left-color: rgba(255,255,255,.2); }
+  .opt-block.c-orange { background: #ea580c; border-left-color: rgba(255,255,255,.2); }
+  .opt-block.c-purple { background: #7c3aed; border-left-color: rgba(255,255,255,.2); }
+  .opt-block.c-blue .opt-label, .opt-block.c-blue p,
+  .opt-block.c-yellow .opt-label, .opt-block.c-yellow p,
+  .opt-block.c-orange .opt-label, .opt-block.c-orange p,
+  .opt-block.c-purple .opt-label, .opt-block.c-purple p { color: #ffffff; }
+  .opt-pending { border: 1px dashed var(--border); border-radius: 10px; padding: 18px; font-size: 13.5px; color: var(--ink-faint); background: var(--panel-2); }
+  .campaign-block { border: 1px solid var(--border); border-radius: 12px; padding: 20px; background: var(--panel-2); display: flex; flex-direction: column; gap: 16px; }
+  .campaign-head { display: flex; flex-direction: column; gap: 4px; }
+  .campaign-head h3 { margin: 0; font-size: 17px; font-weight: 700; color: var(--ink); }
+  .campaign-head .campaign-meta { font-size: 12.5px; color: var(--ink-dim); }
+  .adset-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  .adset-card { border: 1px solid var(--border); border-radius: 10px; background: var(--panel); padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+  .adset-card .role-tag { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--ink-faint); }
+  .adset-card h4 { margin: 2px 0 0; font-size: 14.5px; font-weight: 700; color: var(--meta-ink); }
+  .adset-card .kpi-grid.mini-grid { grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); }
+  .adset-card p.narrative { margin: 0; font-size: 13.5px; color: var(--ink-dim); }
+  footer { border-top: 1px solid var(--border); padding-top: 18px; font-size: 12.5px; color: var(--ink-faint); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+  a { color: var(--meta); }
+  code { font-family: var(--font-mono); font-size: 0.92em; }
+  @media (max-width: 520px) { .check-row { grid-template-columns: 1fr; } .pill { justify-self: start; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <span class="breadcrumb"><a href="../../../">Data Know</a> / <a href="../../">Leblon Real Estate</a> / <a href="../">Meta Ads</a> / <a href="./">Julho/2026</a></span>
+
+  <header class="masthead">
+    <span class="eyebrow">Meta Ads &middot; Leblon Real Estate</span>
+    <h1 class="slug">Relatório Semanal Consolidado</h1>
+    <div class="meta-row">
+      <span><b>Período:</b> últimos 7 dias (19/07 – 25/07/2026)</span>
+      <span><b>Status:</b> 4 conjuntos ativos (2 campanhas)</span>
+      <span><b>Campanhas:</b> [CPL][EUROPA] &middot; DK - [CPL][MEXICO][FORMS][BOF][09/10]</span>
+    </div>
+  </header>
+
+  <section>
+    <h2 class="section-title">Panorama Geral da Conta</h2>
+    <p class="section-sub">Investimento e leads somam os criativos com dado individual reportado nesta análise — alguns anúncios não tiveram número individual reportado essa semana (ver "Ranking de Criativos" mais abaixo).</p>
+    <div class="kpi-grid">
+      <div class="kpi"><span class="label">Investimento total (criativos c/ dado)</span><span class="value">€ 270,04</span></div>
+      <div class="kpi"><span class="label">Leads totais</span><span class="value">19</span></div>
+      <div class="kpi"><span class="label">Custo por lead médio</span><span class="value">€ 14,21</span></div>
+      <div class="kpi"><span class="label">Custo por lead — Europa</span><span class="value">€ 13,62</span></div>
+      <div class="kpi"><span class="label">Custo por lead — México</span><span class="value good">€ 16,66</span></div>
+      <div class="kpi"><span class="label">CPL Europa — semana anterior</span><span class="value">€ 17,48</span></div>
+      <div class="kpi"><span class="label">CPL México — semana anterior</span><span class="value">€ 25,62</span></div>
+      <div class="kpi"><span class="label">CTR médio da conta</span><span class="value">2,24%</span></div>
+      <div class="kpi"><span class="label">CPM médio da conta</span><span class="value">€ 15,17</span></div>
+    </div>
+  </section>
+
+  <section class="callout">
+    <span class="callout-title">Achado principal</span>
+    <p>A conta tem duas dinâmicas bem diferentes essa semana. Na <b>Europa</b>, o conjunto principal perdeu força depois que o gestor pausou <b class="num">3</b> dos <b class="num">4</b> anúncios que rodavam ali (AD05, AD06 e AD07). Como os dois conjuntos da Europa dividem o mesmo orçamento (CBO) e têm público quase idêntico, o algoritmo redirecionou verba pro conjunto teste — as impressões do principal caíram cerca de <b class="num">19,5%</b> enquanto as do teste cresceram quase <b class="num">48%</b> na semana. O caso mais revelador: o anúncio AD06 gastou <b class="num">€ 25,73</b> sem nenhum lead no conjunto principal, mas essa <b>mesma peça</b> (mesma copy, mesmo público) é a campeã de toda a conta quando roda no conjunto teste — <b class="num">€ 8,03</b> por lead. Isso prova que o problema não é o texto do anúncio, é a disputa de leilão entre dois conjuntos praticamente duplicados brigando pelo mesmo orçamento. Somando os dois conjuntos, a campanha Europa trouxe <b class="num">10 leads</b> a um custo médio de <b class="num">€ 13,62</b>.</p>
+    <p>No <b>México</b>, a história é de melhora: o custo por lead da campanha caiu de <b class="num">€ 25,62</b> para <b class="num">€ 16,66</b> (<b class="num">-35%</b>), a maior melhora da conta essa semana — puxada quase toda pelo conjunto principal, onde o anúncio AD10 (5 ângulos emocionais diferentes, com segmentação automática Advantage+) segue como a copy de referência da conta: <b class="num">9 leads</b> a <b class="num">€ 15,47</b> cada, concentrando quase toda a entrega do conjunto (<b class="num">8.377</b> impressões). Já o conjunto teste do México praticamente parou de rodar — impressões caíram <b class="num">95%</b> na semana — e o único anúncio ali (AD15) é o mesmo que também está com baixa entrega no conjunto principal (<b class="num">317</b> impressões, mesmo com copy boa: CTR de <b class="num">2,52%</b>, melhor até que o campeão). De novo, o problema não é o texto — é o leilão.</p>
+  </section>
+
+  <section>
+    <h2 class="section-title">Campanha Europa — [CPL][EUROPA]</h2>
+    <div class="campaign-block">
+      <div class="campaign-head">
+        <h3>[CPL][EUROPA]</h3>
+        <span class="campaign-meta">Custo por lead da campanha: <b>€ 13,62</b> (semana anterior € 17,48) &middot; 2 conjuntos ativos &middot; Estágio: Fundo de funil (geração de leads)</span>
+      </div>
+      <div class="adset-grid">
+        <div class="adset-card">
+          <span class="role-tag">Conjunto principal</span>
+          <h4>[ALE][BEL][HOL]</h4>
+          <div class="kpi-grid mini-grid">
+            <div class="kpi mini"><span class="label">Investimento</span><span class="value">€ 90,66</span></div>
+            <div class="kpi mini"><span class="label">Leads</span><span class="value">5</span></div>
+            <div class="kpi mini"><span class="label">Custo/lead</span><span class="value flag">€ 18,13</span></div>
+            <div class="kpi mini"><span class="label">Frequência</span><span class="value good">1,71</span></div>
+          </div>
+          <p class="narrative">Perdeu força essa semana: 3 dos 4 anúncios foram pausados (AD05, AD06, AD07), sobrando praticamente só o AD010 ativo. O CBO redirecionou verba pro conjunto teste, deixando esse conjunto com o custo por lead mais alto da campanha. O AD06 gastou € 25,73 sem gerar lead antes de ser pausado. Um anúncio novo, o AD010, mostrou custo por lead baixo (€ 1,37), mas com amostra ainda pequena (47 impressões, 2 leads) — cedo pra tirar conclusão.</p>
+        </div>
+        <div class="adset-card">
+          <span class="role-tag">Conjunto teste</span>
+          <h4>#2 - [ALE][BEL][HOL]</h4>
+          <div class="kpi-grid mini-grid">
+            <div class="kpi mini"><span class="label">Investimento</span><span class="value">€ 40,15</span></div>
+            <div class="kpi mini"><span class="label">Leads</span><span class="value">5</span></div>
+            <div class="kpi mini"><span class="label">Custo/lead</span><span class="value good">€ 8,03</span></div>
+          </div>
+          <p class="narrative">Carregou o resultado positivo da campanha essa semana: as impressões cresceram quase 48%, puxadas pela redistribuição de orçamento do CBO. O AD06 — a mesma peça sem resultado no conjunto principal — trouxe 5 leads a € 8,03, o melhor custo por lead de toda a conta essa semana. Não recebemos o dado de frequência individual desse conjunto.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Campanha México — DK - [CPL][MEXICO][FORMS][BOF][09/10]</h2>
+    <div class="campaign-block">
+      <div class="campaign-head">
+        <h3>DK - [CPL][MEXICO][FORMS][BOF][09/10]</h3>
+        <span class="campaign-meta">Custo por lead da campanha: <b>€ 16,66</b> (semana anterior € 25,62, -35%) &middot; 2 conjuntos ativos &middot; Estágio: Fundo de funil (geração de leads)</span>
+      </div>
+      <div class="adset-grid">
+        <div class="adset-card">
+          <span class="role-tag">Conjunto principal</span>
+          <h4>[PS - Cidades x Rico X México]</h4>
+          <div class="kpi-grid mini-grid">
+            <div class="kpi mini"><span class="label">Investimento</span><span class="value">€ 139,23</span></div>
+            <div class="kpi mini"><span class="label">Leads</span><span class="value">9</span></div>
+            <div class="kpi mini"><span class="label">Custo/lead</span><span class="value good">€ 15,47</span></div>
+          </div>
+          <p class="narrative">É o motor da melhora do México essa semana. O AD10 (5 ângulos emocionais, Advantage+ ligado) concentra praticamente toda a entrega do conjunto (8.377 impressões): 9 leads a € 15,47 cada. Um anúncio novo, o AD15, tem copy boa (CTR 2,52%, até melhor que o campeão) mas recebeu pouquíssima entrega da Meta — só 317 impressões, 27 vezes menos que o AD10 no mesmo conjunto. O problema não é o texto, é o leilão.</p>
+        </div>
+        <div class="adset-card">
+          <span class="role-tag">Conjunto teste</span>
+          <h4>#2- [PS - Cidades x Rico X México]</h4>
+          <div class="kpi-grid mini-grid">
+            <div class="kpi mini"><span class="label">Impressões (semana a semana)</span><span class="value flag">-95%</span></div>
+            <div class="kpi mini"><span class="label">Investimento</span><span class="value" style="font-size:13px;">não individualizado</span></div>
+            <div class="kpi mini"><span class="label">Leads</span><span class="value" style="font-size:13px;">não individualizado</span></div>
+          </div>
+          <p class="narrative">Praticamente parou de rodar essa semana: impressões caíram 95%. O único anúncio identificado aqui é o AD15 — a mesma peça de baixa entrega que também roda no conjunto principal —, reforçando que o problema é leilão e distribuição de orçamento, não a copy. Como o conjunto não recebeu verba nem entrega relevante, não há investimento, leads ou custo por lead pra reportar individualmente essa semana.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Comparativo — todos os conjuntos ativos da conta em Julho/2026</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Conjunto</th><th>Campanha</th><th>Estágio</th><th class="num">Investimento</th><th class="num">Resultado</th><th class="num">Custo/Resultado</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">[ALE][BEL][HOL]</td><td class="label-cell">Europa</td><td class="label-cell">Fundo</td><td class="num">€ 90,66*</td><td class="num">5 leads</td><td class="num">€ 18,13</td></tr>
+          <tr><td class="label-cell">#2 - [ALE][BEL][HOL]</td><td class="label-cell">Europa</td><td class="label-cell">Fundo</td><td class="num">€ 40,15*</td><td class="num">5 leads</td><td class="num">€ 8,03</td></tr>
+          <tr><td class="label-cell">[PS - Cidades x Rico X México]</td><td class="label-cell">México</td><td class="label-cell">Fundo</td><td class="num">€ 139,23*</td><td class="num">9 leads</td><td class="num">€ 15,47</td></tr>
+          <tr><td class="label-cell">#2- [PS - Cidades x Rico X México]</td><td class="label-cell">México</td><td class="label-cell">Fundo</td><td class="num">não individualizado</td><td class="num">—</td><td class="num">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="section-sub">* Soma apenas dos criativos com investimento e leads individualmente reportados nesta análise — o "[ALE][BEL][HOL]" teve 1 anúncio (AD05) sem dado detalhado essa semana; o "#2- [PS - Cidades x Rico X México]" não teve nenhum criativo com número individual reportado (só o alerta de queda de entrega).</p>
+  </section>
+
+  <section>
+    <h2 class="section-title">Ranking de Criativos — consolidado</h2>
+    <p class="section-sub">Quais criativos estão trazendo resultado, quais a Meta quase não está mostrando, e quais estão gastando dinheiro sem converter — nos 4 conjuntos ativos da conta.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Criativo</th><th>Campanha · Conjunto</th><th class="num">Impressões</th><th class="num">Investimento</th><th class="num">Leads</th><th class="num">Custo/Lead</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr class="highlight"><td class="label-cell">AD10 — 5 ângulos emocionais (Advantage+)</td><td class="label-cell">México · Principal</td><td class="num">8.377</td><td class="num">€ 139,23</td><td class="num">9</td><td class="num">€ 15,47</td><td><span class="pill pass">Campeão</span></td></tr>
+          <tr class="highlight"><td class="label-cell">AD06</td><td class="label-cell">Europa · Teste</td><td class="num">—</td><td class="num">€ 40,15</td><td class="num">5</td><td class="num">€ 8,03</td><td><span class="pill pass">Campeão</span></td></tr>
+          <tr><td class="label-cell">AD010</td><td class="label-cell">Europa · Principal</td><td class="num">47</td><td class="num">€ 2,74</td><td class="num">2</td><td class="num">€ 1,37</td><td><span class="pill warn">Promissor — amostra pequena</span></td></tr>
+          <tr><td class="label-cell">AD07</td><td class="label-cell">Europa · Principal</td><td class="num">—</td><td class="num">€ 62,19</td><td class="num">3</td><td class="num">€ 20,73</td><td><span class="pill pass">Regular (pausado)</span></td></tr>
+          <tr><td class="label-cell">AD06</td><td class="label-cell">Europa · Principal</td><td class="num">—</td><td class="num">€ 25,73</td><td class="num">0</td><td class="num">—</td><td><span class="pill fail">Sem resultado (pausado)</span></td></tr>
+          <tr><td class="label-cell">AD05</td><td class="label-cell">Europa · Principal</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td><span class="pill warn">Sem dado individual (pausado)</span></td></tr>
+          <tr><td class="label-cell">AD15 novo</td><td class="label-cell">México · Principal</td><td class="num">317</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td><span class="pill warn">Baixa entrega</span></td></tr>
+          <tr><td class="label-cell">AD15 novo</td><td class="label-cell">México · Teste</td><td class="num">queda de 95%</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td><span class="pill warn">Baixa entrega severa</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout" style="margin-top:14px;">
+      <span class="callout-title">Leitura rápida</span>
+      <p><b>Campeões da semana:</b> AD10 (México, principal) — € 15,47/lead, 9 leads, concentrando quase toda a entrega do conjunto (8.377 impressões) — é a copy de referência da conta. AD06 (Europa, teste) teve o menor custo por lead de toda a conta essa semana: € 8,03, com 5 leads.</p>
+      <p><b>Quase não está rodando:</b> AD05 (Europa, principal) sem dado individual reportado essa semana; AD15 novo, nos dois conjuntos do México (317 impressões no principal, queda de 95% no teste) — mesma peça, baixa entrega nos dois lugares, apesar da copy boa (CTR 2,52%).</p>
+      <p><b>Gastando sem trazer resultado:</b> AD06 no conjunto principal da Europa gastou € 25,73 sem nenhum lead antes de ser pausado — mas atenção: essa é a mesma peça que é campeã no conjunto teste. O problema é leilão, não a copy.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Achados de Copy</h2>
+    <p class="section-sub">O que o texto e o ângulo dos anúncios revelam, olhando as duas campanhas juntas.</p>
+    <div class="callout">
+      <p>O padrão de copy que mais funciona na conta é o do AD10 (México, conjunto principal): 5 variações reais de conceito — mérito, identidade nacional, prova social, imaginação e urgência — vendendo identidade, status e estilo de vida, nunca característica técnica. É a copy de referência da conta.</p>
+      <p>A copy da Europa ainda é 100% em formato simples, focada em características técnicas do empreendimento, sem essa diversificação de ângulos. Mas o caso do AD06 — mesma copy, resultado oposto entre o conjunto principal (€ 25,73 sem lead) e o conjunto teste (€ 8,03 por lead, campeão) — prova que essa fraqueza de texto não foi a causa da piora dessa semana: o motivo foi operacional (corte de anúncios + leilão entre os dois conjuntos). Ainda assim, vale reforçar a Europa com o padrão de diversificação do México — o especialista já preparou textos novos nesse formato.</p>
+      <p>No México, o AD15 (novo) também tem copy boa — taxa de cliques de 2,52%, até melhor que o campeão AD10 — mas está recebendo pouquíssima entrega da Meta nos dois conjuntos onde roda (317 impressões no principal, queda de 95% no teste). De novo, o problema não é o texto, é o leilão: ele está competindo sozinho contra um anúncio já consolidado.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Achados de Estrutura / Ad Set</h2>
+    <p class="section-sub">Causas raiz olhando a conta inteira — Europa e México juntos.</p>
+    <div class="check-table">
+      <div class="check-row">
+        <div class="check-body">
+          <div class="check-name">Evento de conversão e EMQ</div>
+          <div class="check-detail">Não recebemos o dado de qualidade de correspondência de eventos (EMQ) essa semana em nenhum dos 4 conjuntos — não dá pra confirmar se isso está inflando o custo por lead em algum lugar. Seguimos de olho nesse número.</div>
+        </div>
+        <span class="pill warn">Monitorar</span>
+      </div>
+      <div class="check-row">
+        <div class="check-body">
+          <div class="check-name">Janela de atribuição</div>
+          <div class="check-detail">Está configurada de forma mais restritiva que o padrão recomendado da Meta em toda a conta: só conta lead até 1 dia depois do clique, sem contar quem só visualizou o anúncio ou assistiu o vídeo (o padrão Meta é 7 dias clique + 1 dia visualização + 1 dia vídeo). Isso pode estar fazendo o custo por lead parecer mais alto do que é de verdade, em Europa e México.</div>
+        </div>
+        <span class="pill warn">Ajustar</span>
+      </div>
+      <div class="check-row">
+        <div class="check-body">
+          <div class="check-name">Orçamento (CBO)</div>
+          <div class="check-detail">As duas campanhas usam orçamento por campanha (CBO), sem teto, com ritmo geral de gasto cerca de 13% abaixo do orçamento mensal de referência — ainda há espaço pra investir mais. Mas o CBO está gerando um efeito colateral em ambas: na Europa, ele está puxando quase toda a verba pro conjunto teste (que cresceu 48% em impressões) enquanto o principal caiu cerca de 19,5% — os dois têm público quase idêntico e brigam entre si. No México, o efeito foi mais extremo: o conjunto teste caiu 95% em impressões, ficando com orçamento residual, enquanto o principal (com o AD10) ficou com quase tudo.</div>
+        </div>
+        <span class="pill fail">Investigar</span>
+      </div>
+      <div class="check-row">
+        <div class="check-body">
+          <div class="check-name">Públicos</div>
+          <div class="check-detail">Em ambas as campanhas, os conjuntos principal e teste têm público praticamente sobreposto dentro da mesma campanha — o que os coloca brigando entre si no leilão em vez de se somarem. Outro ponto: a segmentação automática de público (Advantage+) está ligada no México (e funcionando bem) mas desligada na Europa, sem motivo registrado — vale confirmar se foi intencional.</div>
+        </div>
+        <span class="pill warn">Oportunidade</span>
+      </div>
+      <div class="check-row">
+        <div class="check-body">
+          <div class="check-name">Performance por plataforma</div>
+          <div class="check-detail">Entre os conjuntos da conta com dado suficiente pra medir por posicionamento, o Facebook está saindo de 30% a 90% mais barato que o Instagram no custo por mil impressões. Vale considerar concentrar mais verba no Facebook, nas duas campanhas.</div>
+        </div>
+        <span class="pill warn">Oportunidade</span>
+      </div>
+      <div class="check-row">
+        <div class="check-body">
+          <div class="check-name">Frequência e sinais de fadiga</div>
+          <div class="check-detail">O único dado de frequência individual recebido essa semana foi do conjunto principal da Europa: 1,71 vez por pessoa (era 1,78) — estável e saudável, sem sinal de cansaço. Não recebemos o dado de frequência individual dos outros 3 conjuntos essa semana; vale confirmar se está parecido, especialmente no conjunto teste da Europa, que teve forte crescimento de entrega.</div>
+        </div>
+        <span class="pill warn">Monitorar</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Recomendações do Head de Performance Azel Castro</h2>
+    <ol class="recs">
+      <li><span class="n">1</span><span><b>Investigar e resolver a disputa de orçamento (CBO) entre os conjuntos principal e teste dentro de cada campanha</b> — <span class="body">Europa e México. Considerar consolidar os conjuntos quase duplicados em um único por campanha, já que os públicos se sobrepõem.</span></span></li>
+      <li><span class="n">2</span><span><b>Migrar o AD15 (México) como uma 6ª variação dentro do anúncio campeão AD10</b> — <span class="body">em vez de deixá-lo competindo sozinho com baixa entrega, nos dois conjuntos onde roda hoje.</span></span></li>
+      <li><span class="n">3</span><span><b>Investigar por que o conjunto teste do México colapsou 95% em impressões essa semana</b> — <span class="body">e decidir entre reforçar com orçamento próprio (fora do CBO), consolidar com o principal, ou pausar. Reavaliar na próxima semana se ainda faz sentido continuar ativo.</span></span></li>
+      <li><span class="n">4</span><span><b>Levar pra Europa o padrão de diversificação de ângulos que funciona no México</b> — <span class="body">identidade, status, estilo de vida — o especialista já preparou os textos novos, falta decidir e executar.</span></span></li>
+      <li><span class="n">5</span><span><b>Ajustar a janela de atribuição pro padrão recomendado da Meta em toda a conta</b> — <span class="body">7 dias clique + 1 dia visualização + 1 dia vídeo, em vez do 1 dia clique atual.</span></span></li>
+      <li><span class="n">6</span><span><b>Confirmar se a segmentação automática (Advantage+) deveria estar ligada também na Europa</b> — <span class="body">hoje está desligada lá, sem motivo registrado, e ligada (funcionando bem) no México.</span></span></li>
+      <li><span class="n">7</span><span><b>Considerar concentrar mais verba no Facebook</b> — <span class="body">que está saindo de 30% a 90% mais barato que o Instagram nas duas campanhas.</span></span></li>
+      <li><span class="n">8</span><span><b>Acompanhar o AD010 (Europa) por mais uma semana antes de decidir se vira referência</b> — <span class="body">amostra ainda pequena (47 impressões, 2 leads).</span></span></li>
+      <li><span class="n">9</span><span><b>Não mexer no conjunto teste da Europa por enquanto, só monitorar</b> — <span class="body">o bom resultado pode estar ligado à redistribuição de orçamento do CBO (por causa do corte de anúncios do principal), não a algo estrutural exclusivo dele.</span></span></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2 class="section-title">Histórico de Otimizações</h2>
+    <p class="section-sub">Preenchido manualmente pelo Head de Performance a cada semana — o agente sempre pergunta o que registrar aqui, nunca escreve sozinho.</p>
+    <div class="opt-log">
+      <div class="opt-entry">
+        <div class="opt-date">Semana de 19/07 – 25/07/2026</div>
+        <div class="opt-blocks">
+          <div class="opt-block c-blue"><div class="opt-label">Otimização realizada</div><p>Ativação do Advantage+ Audience no ad set principal da campanha Europa (<code>[ALE][BEL][HOL]</code>).</p></div>
+          <div class="opt-block c-yellow"><div class="opt-label">Por que foi necessário</div><p>A Europa estava com a segmentação 100% manual (Advantage+ desligado), enquanto a mesma configuração automática já vinha funcionando bem no México — decisão de testar se a automação também melhora o retorno de leads na Europa.</p></div>
+          <div class="opt-block c-orange"><div class="opt-label">Resultado esperado</div><p>Comparar o volume e o custo por lead do conjunto principal da Europa com e sem Advantage+ Audience nas próximas semanas; o efeito só será mensurável a partir do próximo relatório.</p></div>
+          <div class="opt-block c-purple">
+            <div class="opt-label">Orientações para a equipe</div>
+            <p><b>Renan / equipe responsável pela estrutura de campanhas:</b> qualquer novo conjunto de teste deve ser criado numa campanha separada — nunca como um 2º conjunto dentro da mesma CBO de uma campanha já ativa — para não competir por orçamento com o conjunto principal.</p>
+            <p><b>Equipe de criativos:</b> migrar o AD15 (México) para dentro do asset feed do AD10 como 6ª variação, em vez de mantê-lo como anúncio individual competindo sozinho.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="opt-entry">
+        <div class="opt-date">Semana de 19/07 – 25/07/2026 — pendências e outras decisões</div>
+        <div class="check-row">
+          <div class="check-body">
+            <div class="check-name">Disputa de orçamento (CBO) — conjuntos principal e teste, Europa e México</div>
+            <div class="check-detail">Azel vai conversar com o Renan sobre por que um segundo conjunto foi criado dentro da mesma campanha CBO sem consulta prévia. Orientação do Azel: testes assim devem ser feitos numa campanha separada, não como um 2º conjunto dentro da mesma CBO — para não prejudicar a otimização do conjunto principal, tanto na Europa quanto no México.</div>
+          </div>
+          <span class="pill warn">Pendente</span>
+        </div>
+        <div class="check-row">
+          <div class="check-body">
+            <div class="check-name">Colapso de 95% nas impressões do conjunto teste do México</div>
+            <div class="check-detail">Também será discutido com o Renan antes de qualquer decisão.</div>
+          </div>
+          <span class="pill warn">Pendente</span>
+        </div>
+        <div class="check-row">
+          <div class="check-body">
+            <div class="check-name">Levar pra Europa o padrão de diversificação de ângulos do México</div>
+            <div class="check-detail">Decisão adiada — Azel prefere aguardar mais uma semana antes de decidir se executa.</div>
+          </div>
+          <span class="pill warn">Adiado</span>
+        </div>
+        <div class="check-row">
+          <div class="check-body">
+            <div class="check-name">Concentrar mais verba no Facebook (30% a 90% mais barato que o Instagram)</div>
+            <div class="check-detail">Ainda sem decisão — será reavaliado na próxima atualização.</div>
+          </div>
+          <span class="pill warn">Pendente</span>
+        </div>
+        <div class="check-row">
+          <div class="check-body">
+            <div class="check-name">Ajustar a janela de atribuição pro padrão da Meta (7d clique + 1d view + 1d vídeo)</div>
+            <div class="check-detail">Azel decidiu não seguir essa recomendação.</div>
+          </div>
+          <span class="pill fail">Descartada</span>
+        </div>
+        <div class="check-row">
+          <div class="check-body">
+            <div class="check-name">AD010 (Europa) — decidir se vira referência</div>
+            <div class="check-detail">Amostra ainda pequena (47 impressões, 2 leads). Acompanhando por mais uma semana antes de qualquer decisão.</div>
+          </div>
+          <span class="pill nd">Monitorando</span>
+        </div>
+        <div class="check-row">
+          <div class="check-body">
+            <div class="check-name">Conjunto teste da Europa</div>
+            <div class="check-detail">Sem mexer por enquanto — o bom resultado pode ser efeito da redistribuição de orçamento do CBO, não algo estrutural exclusivo dele. A única alteração feita na conta essa semana, em qualquer conjunto, foi a ativação do Advantage+ no conjunto principal (ver acima).</div>
+          </div>
+          <span class="pill nd">Monitorando</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Leblon Real Estate · Meta Ads</span>
+    <span>Gerado em 25/07/2026</span>
+  </footer>
+
+</div>
+</body>
+</html>
