@@ -3,13 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bricolemar — Data Know — Relatórios de Campanhas</title>
+<title>Bricolemar — Google Ads — Julho/2026</title>
 <style>
   :root {
     --ground: #f4f7f5; --panel: #ffffff; --border: #d7e0dc;
     --ink: #142320; --ink-dim: #4b5b56; --ink-faint: #7c8b86;
     --accent: #157567; --accent-ink: #0d4b42; --accent-soft: #dcefe9;
-    --meta: #1877f2; --meta-ink: #0a58ca; --meta-soft: #dbe8fd;
     --font-sans: -apple-system, "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
     --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Consolas, monospace;
   }
@@ -18,27 +17,19 @@
       --ground: #0c1614; --panel: #121e1b; --border: #24322e;
       --ink: #e7efec; --ink-dim: #a9b8b3; --ink-faint: #7c8b86;
       --accent: #37bfa8; --accent-ink: #b7ece1; --accent-soft: #17332d;
-      --meta: #6ea8fe; --meta-ink: #bcd6ff; --meta-soft: #16233a;
     }
   }
   :root[data-theme="dark"] {
     --ground: #0c1614; --panel: #121e1b; --border: #24322e;
     --ink: #e7efec; --ink-dim: #a9b8b3; --ink-faint: #7c8b86;
     --accent: #37bfa8; --accent-ink: #b7ece1; --accent-soft: #17332d;
-    --meta: #6ea8fe; --meta-ink: #bcd6ff; --meta-soft: #16233a;
   }
   * { box-sizing: border-box; }
   body { margin:0; background:var(--ground); color:var(--ink); font-family:var(--font-sans); line-height:1.5; }
-  .page { max-width: 760px; margin:0 auto; padding: 56px 24px 80px; display:flex; flex-direction:column; gap:28px; }
+  .page { max-width: 720px; margin:0 auto; padding: 56px 24px 80px; display:flex; flex-direction:column; gap:24px; }
   .breadcrumb { font-family: var(--font-mono); font-size:12.5px; color:var(--ink-faint); }
-  .breadcrumb a { color:var(--meta); text-decoration:none; }
+  .breadcrumb a { color:var(--accent); text-decoration:none; }
   h1 { font-size: clamp(22px,4vw,28px); margin:0; text-wrap:balance; }
-  section.platform { display:flex; flex-direction:column; gap:14px; }
-  .platform-head { display:flex; align-items:center; gap:10px; }
-  h2.section-title { font-size: 15px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink-faint); margin: 0; }
-  .tag { font-family: var(--font-mono); font-size:11px; font-weight:600; letter-spacing:.02em; padding:3px 9px; border-radius:20px; background:var(--accent-soft); color:var(--accent-ink); }
-  section.platform.meta .tag { background: var(--meta-soft); color: var(--meta-ink); }
-  .empty { border: 1px dashed var(--border); border-radius: 10px; padding: 18px; font-size: 13.5px; color: var(--ink-faint); background: var(--panel); }
   .list { display:flex; flex-direction:column; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden; }
   a.row { display:flex; flex-direction:column; gap:3px; padding:16px 18px; background:var(--panel); text-decoration:none; color:var(--ink); }
   a.row:hover { background: var(--accent-soft); }
@@ -49,23 +40,15 @@
 </head>
 <body>
   <div class="page">
-    <span class="breadcrumb"><a href="../">Data Know</a> / Bricolemar</span>
-    <h1>Bricolemar</h1>
-
-    <section class="platform">
-      <div class="platform-head">
-        <h2 class="section-title">Google Ads</h2>
-        <span class="tag">Google Ads</span>
-      </div>
-      <div class="list">
-        <a class="row" href="Google%20Ads/Julho%202026/">
-          <span class="slug">Julho/2026</span>
-          <span class="meta">1 relatório — Search Jardim-Piscina-Paelleros</span>
-        </a>
-      </div>
-    </section>
-
-    <footer>Cliente: Bricolemar · E-commerce de bricolagem (Espanha) · Google Ads 786-137-8385 · Meta Ads a confirmar</footer>
+    <span class="breadcrumb"><a href="../../../">Data Know</a> / <a href="../../">Bricolemar</a> / <a href="../">Google Ads</a> / Julho/2026</span>
+    <h1>Bricolemar — Google Ads — Julho/2026</h1>
+    <div class="list">
+      <a class="row" href="jardim-piscina-paelleros-26-07-26.html">
+        <span class="slug">26/07/2026</span>
+        <span class="meta">Search Jardim-Piscina-Paelleros · período 10/07–24/07/2026</span>
+      </a>
+    </div>
+    <footer>Cliente: Bricolemar · Google Ads 786-137-8385</footer>
   </div>
 </body>
 </html>
