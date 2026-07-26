@@ -14,6 +14,12 @@ Relatórios de diagnóstico de campanhas do Tintado de Luna, organizados por pla
 |---|---|
 | _Nenhum relatório publicado ainda_ | — |
 
+## Estratégia
+
+| Documento | Link |
+|---|---|
+| Modelo de Relatório — Reforma-Interior (exemplo) | [Ver →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Data%20Know/Tintado%20de%20Luna/Estrat%C3%A9gia/) |
+
 ---
 
 Cliente: Tintado de Luna · Madrid (Carabanchel)
