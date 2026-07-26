@@ -1,0 +1,727 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tintado de Lunas Madrid — Auditoria Meta Ads (Andromeda) · 60 dias</title>
+<style>
+  :root {
+    --ground: #f4f7f5; --panel: #ffffff; --panel-2: #eaf1ee; --border: #d7e0dc;
+    --ink: #142320; --ink-dim: #4b5b56; --ink-faint: #7c8b86;
+    --accent: #157567; --accent-ink: #0d4b42; --accent-soft: #dcefe9;
+    --good: #1f7a52; --good-soft: #e1f3ea; --warn: #8a5a13; --warn-soft: #faf0dc;
+    --fail: #a3261f; --fail-soft: #fbe6e4; --nd: #5b6864; --nd-soft: #e9edeb;
+    --cat-1: #2a78d6; --cat-2: #eb6834; --cat-3: #1baf7a; --cat-4: #eda100;
+    --funnel-fundo-ink: #ffffff;
+    --font-sans: -apple-system, "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Consolas, monospace;
+  }
+  :root[data-theme="dark"] {
+    --ground: #0c1614; --panel: #121e1b; --panel-2: #16221f; --border: #24322e;
+    --ink: #e7efec; --ink-dim: #a9b8b3; --ink-faint: #7c8b86;
+    --accent: #37bfa8; --accent-ink: #b7ece1; --accent-soft: #17332d;
+    --good: #4ecb95; --good-soft: #17332a; --warn: #e0b25b; --warn-soft: #362a12;
+    --fail: #ec7972; --fail-soft: #3a1917; --nd: #93a19c; --nd-soft: #1b2624;
+    --cat-1: #3987e5; --cat-2: #d95926; --cat-3: #199e70; --cat-4: #c98500;
+    --funnel-fundo-ink: #0c1614;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0c1614; --panel: #121e1b; --panel-2: #16221f; --border: #24322e;
+      --ink: #e7efec; --ink-dim: #a9b8b3; --ink-faint: #7c8b86;
+      --accent: #37bfa8; --accent-ink: #b7ece1; --accent-soft: #17332d;
+      --good: #4ecb95; --good-soft: #17332a; --warn: #e0b25b; --warn-soft: #362a12;
+      --fail: #ec7972; --fail-soft: #3a1917; --nd: #93a19c; --nd-soft: #1b2624;
+      --cat-1: #3987e5; --cat-2: #d95926; --cat-3: #199e70; --cat-4: #c98500;
+      --funnel-fundo-ink: #0c1614;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--font-sans); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  .page { max-width: 960px; margin: 0 auto; padding: 48px 24px 80px; display: flex; flex-direction: column; gap: 32px; }
+  .draft-banner { background: var(--warn-soft); border: 1px solid color-mix(in srgb, var(--warn) 40%, var(--border)); color: var(--warn); border-radius: 10px; padding: 14px 18px; font-size: 13.5px; font-weight: 600; }
+  .draft-banner span.dim { font-weight: 400; color: var(--ink-dim); }
+  header.masthead { display: flex; flex-direction: column; gap: 10px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+  .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  h1.slug { font-family: var(--font-mono); font-size: clamp(20px, 4vw, 28px); font-weight: 600; margin: 0; color: var(--ink); word-break: break-word; text-wrap: balance; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13.5px; color: var(--ink-dim); }
+  .meta-row b { color: var(--ink); font-weight: 600; }
+  h2.section-title { font-size: 15px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 14px; }
+  h3.subsection-title { font-size: 13.5px; font-weight: 700; color: var(--ink-dim); margin: 22px 0 10px; }
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .kpi { background: var(--panel); padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 6px; }
+  .kpi .label { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-faint); font-weight: 600; }
+  .kpi .value { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 20px; font-weight: 600; color: var(--ink); }
+  .kpi .value.flag { color: var(--fail); }
+  .kpi .value.good { color: var(--good); }
+  .callout { background: var(--accent-soft); border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border)); border-radius: 10px; padding: 20px 22px; display: flex; flex-direction: column; gap: 8px; }
+  .callout .callout-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--accent-ink); }
+  .callout p { margin: 0; font-size: 15px; color: var(--ink); }
+  .callout p + p { margin-top: 2px; }
+  .callout b.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .check-table { width: 100%; border-collapse: collapse; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .check-row { display: grid; grid-template-columns: 56px 1fr 96px; gap: 12px; align-items: start; padding: 14px 16px; background: var(--panel); border-bottom: 1px solid var(--border); }
+  .check-row:last-child { border-bottom: none; }
+  .check-id { font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-faint); font-weight: 600; padding-top: 2px; }
+  .check-body .check-name { font-size: 14.5px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+  .check-body .check-detail { font-size: 13.5px; color: var(--ink-dim); }
+  .pill { justify-self: end; font-size: 11.5px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; white-space: nowrap; height: fit-content; }
+  .pill.pass { color: var(--good); background: var(--good-soft); }
+  .pill.warn { color: var(--warn); background: var(--warn-soft); }
+  .pill.fail { color: var(--fail); background: var(--fail-soft); }
+  .pill.nd   { color: var(--nd);   background: var(--nd-soft); }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; }
+  table { width: 100%; border-collapse: collapse; background: var(--panel); font-size: 13px; }
+  thead th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint); font-weight: 600; padding: 10px 14px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  tbody td { padding: 9px 14px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr.highlight td { background: var(--accent-soft); font-weight: 700; }
+  td.label-cell { font-family: var(--font-sans); }
+  td.num { text-align: right; }
+  .note { border: 1px dashed var(--border); border-radius: 10px; padding: 16px 18px; font-size: 13.5px; color: var(--ink-dim); background: var(--panel-2); }
+  .note b { color: var(--ink); }
+  ol.recs { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  ol.recs li { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 14px 16px; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; font-size: 14.5px; }
+  ol.recs .n { font-family: var(--font-mono); font-weight: 700; color: var(--accent); }
+  ol.recs b { color: var(--ink); }
+  ol.recs span.body { color: var(--ink-dim); }
+  ol.recs .impact { display: block; margin-top: 6px; font-size: 13px; color: var(--accent-ink); }
+  ol.recs .impact b { color: var(--accent-ink); }
+  footer { border-top: 1px solid var(--border); padding-top: 18px; font-size: 12.5px; color: var(--ink-faint); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+  a { color: var(--accent); }
+  code { font-family: var(--font-mono); font-size: 0.92em; }
+
+  /* charts */
+  .chart-card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px 20px; }
+  .chart-card .chart-caption { font-size: 12.5px; color: var(--ink-faint); margin-top: 10px; }
+  .exec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 720px) { .exec-grid { grid-template-columns: 1fr; } }
+
+  .barchart { display: flex; flex-direction: column; gap: 10px; }
+  .bar-row { display: grid; grid-template-columns: 150px 1fr 64px; align-items: center; gap: 10px; }
+  .bar-row .bar-label { font-size: 12.5px; color: var(--ink-dim); text-align: right; }
+  .bar-row .bar-track { position: relative; height: 20px; max-height: 24px; background: var(--panel-2); border-radius: 4px; }
+  .bar-row .bar-fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 0 4px 4px 0; }
+  .bar-row .bar-fill.good { background: var(--good); }
+  .bar-row .bar-fill.warn { background: var(--warn); }
+  .bar-row .bar-fill.fail { background: var(--fail); }
+  .bar-row .bar-value { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 12.5px; font-weight: 600; }
+  .bar-row .bar-value.good { color: var(--good); }
+  .bar-row .bar-value.warn { color: var(--warn); }
+  .bar-row .bar-value.fail { color: var(--fail); }
+  .bar-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 4px; font-size: 12px; color: var(--ink-dim); }
+  .bar-legend .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+
+  .donut-wrap { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+  .donut { position: relative; width: 148px; height: 148px; border-radius: 50%; flex-shrink: 0; }
+  .donut::after { content: ""; position: absolute; inset: 24px; background: var(--panel); border-radius: 50%; display: flex; }
+  .donut .donut-center { position: absolute; inset: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .donut .donut-center .dv { font-family: var(--font-mono); font-size: 15px; font-weight: 700; color: var(--ink); }
+  .donut .donut-center .dl { font-size: 10px; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.04em; }
+  .donut-legend { display: flex; flex-direction: column; gap: 8px; font-size: 13px; flex: 1; min-width: 200px; }
+  .donut-legend .leg-row { display: flex; align-items: center; gap: 8px; }
+  .donut-legend .swatch { display: inline-block; width: 11px; height: 11px; border-radius: 3px; flex-shrink: 0; }
+  .donut-legend .leg-name { color: var(--ink); font-weight: 600; flex: 1; }
+  .donut-legend .leg-val { font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--ink-dim); font-size: 12.5px; }
+
+  .linechart-legend { display: flex; gap: 18px; font-size: 12.5px; color: var(--ink-dim); margin-bottom: 6px; }
+  .linechart-legend .swatch { display: inline-block; width: 16px; height: 2px; margin-right: 6px; vertical-align: 2px; }
+  svg.linechart text { font-family: var(--font-sans); fill: var(--ink-faint); font-size: 11px; }
+  svg.linechart text.end-label { font-size: 12px; font-weight: 700; fill: var(--ink); }
+  svg.linechart .gridline { stroke: var(--border); stroke-width: 1; }
+
+  details.account-block { border: 1px solid var(--border); border-radius: 10px; background: var(--panel); }
+  details.account-block > summary { cursor: pointer; list-style: none; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; font-weight: 700; font-size: 14.5px; }
+  details.account-block > summary::-webkit-details-marker { display: none; }
+  details.account-block > summary .chev { font-family: var(--font-mono); color: var(--accent); font-weight: 400; }
+  details.account-block[open] > summary { border-bottom: 1px solid var(--border); }
+  details.account-block .account-body { padding: 20px; display: flex; flex-direction: column; gap: 22px; }
+
+  @media (max-width: 520px) {
+    .check-row { grid-template-columns: 1fr; } .check-id { padding-top: 0; } .pill { justify-self: start; }
+    .bar-row { grid-template-columns: 96px 1fr 56px; }
+  }
+
+  /* mind map */
+  .mindmap { display: flex; flex-direction: column; align-items: stretch; }
+  .mm-node { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; text-align: center; position: relative; }
+  .mm-node-title { font-weight: 700; font-size: 13.5px; color: var(--ink); }
+  .mm-node-sub { font-size: 11.5px; color: var(--ink-dim); margin-top: 4px; }
+  .mm-root { max-width: 340px; margin: 0 auto; }
+  .mm-trunk { width: 1px; height: 22px; background: var(--border); margin: 0 auto; }
+  .mm-branch-row { display: flex; gap: 12px; position: relative; padding-top: 22px; }
+  .mm-branch-row::before { content: ""; position: absolute; top: 0; height: 1px; background: var(--border); }
+  .mm-branch-row.mm-row-4::before { left: 12.5%; right: 12.5%; }
+  .mm-branch-row.mm-row-3::before { left: 16.67%; right: 16.67%; }
+  .mm-branch-row.mm-row-2::before { left: 25%; right: 25%; }
+  .mm-branch-row .mm-node { flex: 1; }
+  .mm-branch-row .mm-node::before { content: ""; position: absolute; top: -22px; left: 50%; width: 1px; height: 22px; background: var(--border); }
+  .mm-node.cat-1 { border-top: 3px solid var(--cat-1); }
+  .mm-node.cat-2 { border-top: 3px solid var(--cat-2); }
+  .mm-node.cat-3 { border-top: 3px solid var(--cat-3); }
+  .mm-node.cat-4 { border-top: 3px solid var(--cat-4); }
+  .mm-node.funnel-topo { background: var(--accent-soft); }
+  .mm-node.funnel-meio { background: color-mix(in srgb, var(--accent) 35%, var(--panel)); }
+  .mm-node.funnel-fundo { background: var(--accent); }
+  .mm-node.funnel-fundo .mm-node-title, .mm-node.funnel-fundo .mm-node-sub { color: var(--funnel-fundo-ink); }
+  @media (max-width: 640px) { .mm-branch-row { flex-direction: column; gap: 20px; } .mm-branch-row::before, .mm-branch-row .mm-node::before { display: none; } }
+</style>
+</head>
+<body>
+<div class="page" style="padding-bottom:0; gap:8px;">
+  <span class="eyebrow" style="font-family:var(--font-mono); font-size:12px; color:var(--ink-faint);"><a href="../../../" style="color:var(--accent); text-decoration:none;">Data Know</a> / <a href="../" style="color:var(--accent); text-decoration:none;">Tintado de Luna</a> / <a href="./" style="color:var(--accent); text-decoration:none;">Estratégia</a></span>
+  <div class="draft-banner">📝 RASCUNHO — documento de planejamento estratégico, ainda sujeito a ajustes. <span class="dim">Seção "Proposta de Melhoria" está com um primeiro rascunho pronto pra narrar ajustes em cima.</span></div>
+</div>
+
+<div class="page">
+
+  <header class="masthead">
+    <span class="eyebrow">Meta Ads &middot; Auditoria Andromeda &middot; Tintado de Lunas Madrid</span>
+    <h1 class="slug">Tintado de Lunas Madrid — Auditoria Meta Ads (2 contas)</h1>
+    <div class="meta-row">
+      <span><b>Contas:</b> act_9709425065783957 "Grupo M3 Car Center" (Fuenlabrada/Villalba) · act_104976496561645 "Madrid Tintado De Lunas" (Carabanchel/Arroyomolinos)</span>
+      <span><b>Período:</b> últimos 60 dias (23/05–24/07/2026)</span>
+      <span><b>Moeda:</b> EUR</span>
+      <span><b>Objetivo:</b> Leads (Fundo de funil, Instant Form nativo)</span>
+    </div>
+  </header>
+
+  <section>
+    <h2 class="section-title">Resumo executivo — 60 dias</h2>
+    <div class="kpi-grid">
+      <div class="kpi"><span class="label">Investimento ativo</span><span class="value">€ 10.128,07</span></div>
+      <div class="kpi"><span class="label">Contas Meta Ads</span><span class="value">2</span></div>
+      <div class="kpi"><span class="label">Localidades ativas</span><span class="value">4</span></div>
+      <div class="kpi"><span class="label">Campanhas ativas</span><span class="value">4</span></div>
+      <div class="kpi"><span class="label">Estrutura de budget</span><span class="value flag">100% ABO</span></div>
+      <div class="kpi"><span class="label">Formatos de anúncio ativos</span><span class="value flag">1 (vídeo)</span></div>
+    </div>
+  </section>
+
+  <section class="callout">
+    <span class="callout-title">Achado principal</span>
+    <p>As duas contas rodam a mesma estrutura de Leads em <b>ABO</b>, com <b>4 localidades</b> ativas (Fuenlabrada, Villalba, Carabanchel, Arroyomolinos) e <b class="num">€ 10.128,07</b> investidos em 60 dias. Um padrão se repete nas duas contas, de forma independente: o ângulo <b>"Tuning/estilo"</b> bate o ângulo <b>"Família/conforto"</b> com folga em CPL e em taxa de conversão clique→lead — mesmo em contas e times de anúncio diferentes.</p>
+    <p>A localidade mais crítica é <b>Arroyomolinos</b>: CTR igual ao de Carabanchel, mas conversão clique→lead quase pela metade — aponta pra fricção <i>pós-clique</i> (formulário/copy), não pro anúncio. Em paralelo, <b>Fuenlabrada e Villalba</b> (conta 1) mostram fadiga de público clássica: frequência quase dobrou e o alcance semanal caiu pela metade, com o mesmo criativo rodando há ~1 mês.</p>
+  </section>
+
+  <section>
+    <h2 class="section-title">Panorama visual</h2>
+    <div class="exec-grid">
+
+      <div class="chart-card">
+        <h3 class="subsection-title" style="margin-top:0;">Distribuição do investimento por localidade</h3>
+        <div class="donut-wrap">
+          <div class="donut" style="background: conic-gradient(var(--cat-1) 0% 26.31%, var(--cat-2) 26.31% 48.70%, var(--cat-3) 48.70% 78.38%, var(--cat-4) 78.38% 100%);">
+            <div class="donut-center"><span class="dv">€10.128</span><span class="dl">60 dias</span></div>
+          </div>
+          <div class="donut-legend">
+            <div class="leg-row"><span class="swatch" style="background:var(--cat-1);"></span><span class="leg-name">Fuenlabrada</span><span class="leg-val">€ 2.664,93 · 26,3%</span></div>
+            <div class="leg-row"><span class="swatch" style="background:var(--cat-2);"></span><span class="leg-name">Villalba</span><span class="leg-val">€ 2.267,61 · 22,4%</span></div>
+            <div class="leg-row"><span class="swatch" style="background:var(--cat-3);"></span><span class="leg-name">Carabanchel</span><span class="leg-val">€ 3.006,62 · 29,7%</span></div>
+            <div class="leg-row"><span class="swatch" style="background:var(--cat-4);"></span><span class="leg-name">Arroyomolinos</span><span class="leg-val">€ 2.188,91 · 21,6%</span></div>
+          </div>
+        </div>
+        <p class="chart-caption">Só campanhas ativas — spend de campanhas pausadas nunca entra neste relatório.</p>
+      </div>
+
+      <div class="chart-card">
+        <h3 class="subsection-title" style="margin-top:0;">CPL atual por localidade</h3>
+        <div class="barchart">
+          <div class="bar-row"><span class="bar-label">Carabanchel</span><div class="bar-track"><div class="bar-fill good" style="width:43.8%;"></div></div><span class="bar-value good">€ 2,19</span></div>
+          <div class="bar-row"><span class="bar-label">Fuenlabrada</span><div class="bar-track"><div class="bar-fill good" style="width:49.0%;"></div></div><span class="bar-value good">€ 2,45</span></div>
+          <div class="bar-row"><span class="bar-label">Villalba</span><div class="bar-track"><div class="bar-fill warn" style="width:71.0%;"></div></div><span class="bar-value warn">€ 3,55</span></div>
+          <div class="bar-row"><span class="bar-label">Arroyomolinos</span><div class="bar-track"><div class="bar-fill fail" style="width:84.8%;"></div></div><span class="bar-value fail">€ 4,24</span></div>
+        </div>
+        <div class="bar-legend">
+          <span><span class="swatch" style="background:var(--good);"></span>Saudável (≤€2,50)</span>
+          <span><span class="swatch" style="background:var(--warn);"></span>Atenção (€2,50–4,00)</span>
+          <span><span class="swatch" style="background:var(--fail);"></span>Crítico (&gt;€4,00)</span>
+        </div>
+        <p class="chart-caption">Fuenlabrada/Villalba: blended dos últimos ~30 dias desde o relançamento de 23/06 · Carabanchel: média dos 2 ad sets ativos desde a reestruturação de 24/06 · Arroyomolinos: ad set único, período total.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Fadiga de público — CPL semanal, Conta 1 (Fuenlabrada vs. Villalba)</h2>
+    <div class="chart-card">
+      <div class="linechart-legend">
+        <span><span class="swatch" style="background:var(--cat-1);"></span>Fuenlabrada</span>
+        <span><span class="swatch" style="background:var(--cat-2);"></span>Villalba</span>
+      </div>
+      <svg class="linechart" viewBox="0 0 600 260" width="100%" style="max-width:600px; display:block;">
+        <line class="gridline" x1="60" y1="220" x2="560" y2="220"></line>
+        <line class="gridline" x1="60" y1="180" x2="560" y2="180"></line>
+        <line class="gridline" x1="60" y1="140" x2="560" y2="140"></line>
+        <line class="gridline" x1="60" y1="100" x2="560" y2="100"></line>
+        <line class="gridline" x1="60" y1="60"  x2="560" y2="60"></line>
+        <line class="gridline" x1="60" y1="20"  x2="560" y2="20"></line>
+        <text x="52" y="224" text-anchor="end">€0</text>
+        <text x="52" y="184" text-anchor="end">€1</text>
+        <text x="52" y="144" text-anchor="end">€2</text>
+        <text x="52" y="104" text-anchor="end">€3</text>
+        <text x="52" y="64"  text-anchor="end">€4</text>
+        <text x="52" y="24"  text-anchor="end">€5</text>
+
+        <text x="60"  y="240" text-anchor="middle">23-29/5</text>
+        <text x="160" y="240" text-anchor="middle">20-26/6*</text>
+        <text x="260" y="240" text-anchor="middle">27/6-3/7</text>
+        <text x="360" y="240" text-anchor="middle">4-10/7</text>
+        <text x="460" y="240" text-anchor="middle">11-17/7</text>
+        <text x="560" y="240" text-anchor="middle">18-22/7†</text>
+
+        <polyline points="60,157.2 160,159.2 260,144.4 360,97.2 460,70 560,89.2" fill="none" stroke="var(--cat-1)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></polyline>
+        <polyline points="60,138 160,106.4 260,131.2 360,71.2 460,68.4 560,49.2" fill="none" stroke="var(--cat-2)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></polyline>
+
+        <circle cx="60" cy="157.2" r="4" fill="var(--cat-1)" stroke="var(--panel)" stroke-width="2"><title>Fuenlabrada 23-29/5: €1,57</title></circle>
+        <circle cx="160" cy="159.2" r="4" fill="var(--cat-1)" stroke="var(--panel)" stroke-width="2"><title>Fuenlabrada 20-26/6 (relançamento): €1,52</title></circle>
+        <circle cx="260" cy="144.4" r="4" fill="var(--cat-1)" stroke="var(--panel)" stroke-width="2"><title>Fuenlabrada 27/6-3/7: €1,89</title></circle>
+        <circle cx="360" cy="97.2" r="4" fill="var(--cat-1)" stroke="var(--panel)" stroke-width="2"><title>Fuenlabrada 4-10/7: €3,07</title></circle>
+        <circle cx="460" cy="70" r="4" fill="var(--cat-1)" stroke="var(--panel)" stroke-width="2"><title>Fuenlabrada 11-17/7: €3,75</title></circle>
+        <circle cx="560" cy="89.2" r="5" fill="var(--cat-1)" stroke="var(--panel)" stroke-width="2"><title>Fuenlabrada 18-22/7 (parcial): €3,27</title></circle>
+
+        <circle cx="60" cy="138" r="4" fill="var(--cat-2)" stroke="var(--panel)" stroke-width="2"><title>Villalba 23-29/5: €2,05</title></circle>
+        <circle cx="160" cy="106.4" r="4" fill="var(--cat-2)" stroke="var(--panel)" stroke-width="2"><title>Villalba 20-26/6 (relançamento): €2,84</title></circle>
+        <circle cx="260" cy="131.2" r="4" fill="var(--cat-2)" stroke="var(--panel)" stroke-width="2"><title>Villalba 27/6-3/7: €2,22</title></circle>
+        <circle cx="360" cy="71.2" r="4" fill="var(--cat-2)" stroke="var(--panel)" stroke-width="2"><title>Villalba 4-10/7: €3,72</title></circle>
+        <circle cx="460" cy="68.4" r="4" fill="var(--cat-2)" stroke="var(--panel)" stroke-width="2"><title>Villalba 11-17/7: €3,79</title></circle>
+        <circle cx="560" cy="49.2" r="5" fill="var(--cat-2)" stroke="var(--panel)" stroke-width="2"><title>Villalba 18-22/7 (parcial): €4,27</title></circle>
+
+        <text class="end-label" x="568" y="92" fill="var(--cat-1)">€3,27</text>
+        <text class="end-label" x="568" y="46" fill="var(--cat-2)">€4,27</text>
+      </svg>
+      <p class="chart-caption">* semana do relançamento de criativo (23/06) · † semana parcial (dado até 22/07). CPM ficou estável no mesmo período (Fuenlabrada 3,90→3,13 · Villalba 3,91→3,14) — a alta de CPL não é leilão mais caro, é o mesmo criativo reimpactando um público hiperlocal cada vez menor (frequência quase dobrou, alcance semanal caiu quase pela metade).</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Pontos de acerto</h2>
+    <div class="check-table">
+      <div class="check-row">
+        <span class="check-id">✓</span>
+        <div class="check-body"><div class="check-name">Ângulo "Tuning/estilo" é o vencedor consistente</div><div class="check-detail">Melhor CPL e melhor taxa de conversão clique→lead nas duas contas, de forma independente — sinal forte de que a persona que mais converte busca personalização/estética.</div></div>
+        <span class="pill pass">Confirmado</span>
+      </div>
+      <div class="check-row">
+        <span class="check-id">✓</span>
+        <div class="check-body"><div class="check-name">Carabanchel está saudável</div><div class="check-detail">CPL €2,14–2,23 nos dois ad sets ativos, CTR 2,4–2,7% — os melhores números da conta 2.</div></div>
+        <span class="pill pass">Confirmado</span>
+      </div>
+      <div class="check-row">
+        <span class="check-id">✓</span>
+        <div class="check-body"><div class="check-name">Reestruturação de 24/06 já melhorou o CPL</div><div class="check-detail">Segmentação ampla + Advantage+ automático de posicionamento (conta 2) superou a configuração anterior nas duas localidades — não reverter esse padrão.</div></div>
+        <span class="pill pass">Confirmado</span>
+      </div>
+      <div class="check-row">
+        <span class="check-id">✓</span>
+        <div class="check-body"><div class="check-name">Otimização por qualidade já em uso</div><div class="check-detail">Todos os ad sets ativos das duas contas usam <code>QUALITY_LEAD</code>, não só volume de lead — bom sinal, já otimizando pro tipo certo de resultado.</div></div>
+        <span class="pill pass">Confirmado</span>
+      </div>
+      <div class="check-row">
+        <span class="check-id">✓</span>
+        <div class="check-body"><div class="check-name">Posicionamento automático coerente</div><div class="check-detail">Distribuição FB/IG automática responde bem nas duas contas — sem necessidade de intervenção manual de posicionamento.</div></div>
+        <span class="pill pass">Confirmado</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Detalhamento completo por conta</h2>
+
+    <details class="account-block" open>
+      <summary>Conta 1 — Grupo M3 Car Center (Fuenlabrada / Villalba) <span class="chev">▾ ver análise completa</span></summary>
+      <div class="account-body">
+
+        <div class="kpi-grid">
+          <div class="kpi"><span class="label">Conta</span><span class="value" style="font-size:14px;">act_9709425065783957</span></div>
+          <div class="kpi"><span class="label">Investido (ativas)</span><span class="value">€ 4.932,54</span></div>
+          <div class="kpi"><span class="label">Estrutura budget</span><span class="value flag">ABO</span></div>
+          <div class="kpi"><span class="label">Formatos ativos</span><span class="value flag">1 (vídeo)</span></div>
+        </div>
+
+        <div>
+          <h3 class="subsection-title">Estrutura (campanhas ativas)</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Campanha</th><th>Objetivo</th><th>Estágio de funil</th><th class="num">Spend 60d</th></tr></thead>
+              <tbody>
+                <tr><td class="label-cell">Fuenlabrada — Clientes Potenciales</td><td class="label-cell">OUTCOME_LEADS</td><td class="label-cell">Fundo (CPL + volume)</td><td class="num">€ 2.664,93</td></tr>
+                <tr><td class="label-cell">Villalba — Clientes Potenciales</td><td class="label-cell">OUTCOME_LEADS</td><td class="label-cell">Fundo (CPL + volume)</td><td class="num">€ 2.267,61</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="subsection-title">Especialista de copy/criativo — CPL por anúncio (últimos ~30 dias desde relançamento em 23/06)</h3>
+          <div class="chart-card">
+            <div class="barchart">
+              <div class="bar-row"><span class="bar-label">Fuenlabrada · Tuning</span><div class="bar-track"><div class="bar-fill good" style="width:23.0%;"></div></div><span class="bar-value good">€ 1,61</span></div>
+              <div class="bar-row"><span class="bar-label">Villalba · Tuning</span><div class="bar-track"><div class="bar-fill warn" style="width:43.7%;"></div></div><span class="bar-value warn">€ 3,06</span></div>
+              <div class="bar-row"><span class="bar-label">Villalba · Qashqai Familia</span><div class="bar-track"><div class="bar-fill warn" style="width:46.3%;"></div></div><span class="bar-value warn">€ 3,24</span></div>
+              <div class="bar-row"><span class="bar-label">Fuenlabrada · Familia</span><div class="bar-track"><div class="bar-fill warn" style="width:51.1%;"></div></div><span class="bar-value warn">€ 3,58</span></div>
+              <div class="bar-row"><span class="bar-label">Fuenlabrada · Qashqai Familia</span><div class="bar-track"><div class="bar-fill fail" style="width:75.4%;"></div></div><span class="bar-value fail">€ 5,28</span></div>
+              <div class="bar-row"><span class="bar-label">Villalba · Merced Classe E</span><div class="bar-track"><div class="bar-fill fail" style="width:89.6%;"></div></div><span class="bar-value fail">€ 6,27</span></div>
+            </div>
+            <p class="chart-caption">Escala até €7,00 · verde ≤€2,00 · âmbar €2,00–4,00 · vermelho &gt;€4,00</p>
+          </div>
+          <div class="table-wrap" style="margin-top:12px;">
+            <table>
+              <thead><tr><th>Anúncio</th><th>Ad set</th><th>Gancho</th><th class="num">CTR</th><th class="num">Freq.</th><th class="num">CPL</th><th class="num">Leads</th></tr></thead>
+              <tbody>
+                <tr><td class="label-cell">Fuenlabrada Tuning</td><td class="label-cell">Tuning Fuenlabrada</td><td class="label-cell">"Dale más carácter a tu coche" — estilo/deportivo</td><td class="num">2,44%</td><td class="num">2,10</td><td class="num">€ 1,61</td><td class="num">231</td></tr>
+                <tr><td class="label-cell">Tuning Villalba</td><td class="label-cell">Villalba Tuning</td><td class="label-cell">Mesmo gancho, versão Villalba</td><td class="num">1,90%</td><td class="num">2,44</td><td class="num">€ 3,06</td><td class="num">156</td></tr>
+                <tr><td class="label-cell">Familia Fuenlabrada</td><td class="label-cell">Fuenlabrada Familia</td><td class="label-cell">"Más confort para viajar en familia"</td><td class="num">1,88%</td><td class="num">3,08</td><td class="num">€ 3,58</td><td class="num">121</td></tr>
+                <tr><td class="label-cell">Qashqai Familia (Villalba)</td><td class="label-cell">Villalba Familia</td><td class="label-cell">Variante família, modelo Qashqai</td><td class="num">1,83%</td><td class="num">2,30</td><td class="num">€ 3,24</td><td class="num">92</td></tr>
+                <tr><td class="label-cell">Merced Classe E — Familia</td><td class="label-cell">Villalba Familia</td><td class="label-cell">Variante família, modelo Mercedes Classe E</td><td class="num">1,92%</td><td class="num">1,94</td><td class="num">€ 6,27</td><td class="num">38</td></tr>
+                <tr><td class="label-cell">Qashqai Familia Fuenlabrada</td><td class="label-cell">Fuenlabrada Familia</td><td class="label-cell">Variante Qashqai, pouco alcance (13k)</td><td class="num">2,07%</td><td class="num">1,91</td><td class="num">€ 5,28</td><td class="num">20</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="note" style="margin-top:12px;"><b>Achados de copy:</b> ângulo Tuning bate Família com folga (2–2,2x melhor CPL) em ambas as localidades. Variantes nomeadas por modelo de carro (Qashqai, Mercedes) são consistentemente as piores. Zero diversificação de formato — os 6 anúncios ativos são todos vídeo único, sem imagem, carrossel ou Flexível/Advantage+, e sem variação de texto/headline dentro do mesmo anúncio.</div>
+        </div>
+
+        <div>
+          <h3 class="subsection-title">Especialista de conjunto de anúncios — estrutura e orçamento</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Ad set</th><th>Campanha</th><th class="num">Budget/dia</th><th>Público</th><th>Formato</th></tr></thead>
+              <tbody>
+                <tr><td class="label-cell">Tuning Fuenlabrada</td><td class="label-cell">Fuenlabrada</td><td class="num">€ 21,90</td><td class="label-cell">18-65, geo, broad sem interesses</td><td class="label-cell">Vídeo único</td></tr>
+                <tr><td class="label-cell">Fuenlabrada Familia</td><td class="label-cell">Fuenlabrada</td><td class="num">€ 21,90</td><td class="label-cell">18-60, geo, broad sem interesses</td><td class="label-cell">Vídeo único</td></tr>
+                <tr><td class="label-cell">Villalba Tuning</td><td class="label-cell">Villalba</td><td class="num">€ 21,90</td><td class="label-cell">18-60, geo, + interesses (Tuning Cars, Veículos)</td><td class="label-cell">Vídeo único</td></tr>
+                <tr><td class="label-cell">Villalba Familia</td><td class="label-cell">Villalba</td><td class="num">€ 21,90</td><td class="label-cell">18-60, geo, broad sem interesses</td><td class="label-cell">Vídeo único</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="note" style="margin-top:12px;"><b>Achados estruturais:</b> 100% ABO — os dois ad sets de cada campanha (Tuning/Família) têm orçamento fixo idêntico mesmo com performance bem diferente; em CBO o algoritmo realocaria automaticamente a favor do Tuning. "Villalba Tuning" ainda carrega uma camada de interesses empilhada sobre o funil geográfico já estreito, destoando dos outros 3 ad sets 100% broad. Em "Fuenlabrada Familia" os 2 anúncios competem pelo mesmo budget com entrega desbalanceada (€432 vs €105 de spend acumulado) — mesma dinâmica em "Villalba Familia".</div>
+        </div>
+
+        <div>
+          <h3 class="subsection-title">Checklist Andromeda — Conta 1</h3>
+          <div class="check-table">
+            <div class="check-row"><span class="check-id">A1</span><div class="check-body"><div class="check-name">Pixel + CAPI ativos</div><div class="check-detail">N/A — evento de lead nativo do Instant Form, não depende de pixel/CAPI de site.</div></div><span class="pill nd">N/A</span></div>
+            <div class="check-row"><span class="check-id">A2</span><div class="check-body"><div class="check-name">Máx. 3 campanhas ativas por objetivo</div><div class="check-detail">2 campanhas ativas, mesmo objetivo (Leads).</div></div><span class="pill pass">OK</span></div>
+            <div class="check-row"><span class="check-id">A3</span><div class="check-body"><div class="check-name">CBO como padrão</div><div class="check-detail">ABO nas duas campanhas ativas — maior oportunidade estrutural deste relatório.</div></div><span class="pill fail">Ausente</span></div>
+            <div class="check-row"><span class="check-id">A4</span><div class="check-body"><div class="check-name">1 evento de conversão por campanha</div><div class="check-detail">Lead / QUALITY_LEAD em todos os ad sets ativos.</div></div><span class="pill pass">OK</span></div>
+            <div class="check-row"><span class="check-id">A5</span><div class="check-body"><div class="check-name">Segmentação ampla, sem empilhamento</div><div class="check-detail">3 de 4 ad sets broad; "Villalba Tuning" ainda com camada de interesses.</div></div><span class="pill warn">Revisar</span></div>
+            <div class="check-row"><span class="check-id">A6</span><div class="check-body"><div class="check-name">Pelo menos 2 formatos diferentes ativos</div><div class="check-detail">Só vídeo único nos 6 anúncios ativos — sem imagem, carrossel ou Advantage+.</div></div><span class="pill fail">Ausente</span></div>
+            <div class="check-row"><span class="check-id">A7</span><div class="check-body"><div class="check-name">Pelo menos 2 conceitos diferentes ativos</div><div class="check-detail">Tuning vs. Família, nas duas localidades.</div></div><span class="pill pass">OK</span></div>
+            <div class="check-row"><span class="check-id">A8</span><div class="check-body"><div class="check-name">Variações de texto/headline por anúncio</div><div class="check-detail">Vídeo fixo, sem <code>asset_feed_spec</code> — Andromeda não tem margem pra testar ganchos alternativos.</div></div><span class="pill fail">Ausente</span></div>
+            <div class="check-row"><span class="check-id">A9</span><div class="check-body"><div class="check-name">Criativos renovados nos últimos 30–60 dias</div><div class="check-detail">Dentro do prazo técnico, mas trajetória de fadiga sugere ciclo de vida mais curto pro tamanho do público.</div></div><span class="pill warn">Revisar</span></div>
+            <div class="check-row"><span class="check-id">A10</span><div class="check-body"><div class="check-name">Frequência controlada (&lt;3–4)</div><div class="check-detail">Ainda dentro do limiar, mas subindo rápido e consistente nas duas localidades.</div></div><span class="pill warn">Revisar</span></div>
+            <div class="check-row"><span class="check-id">A11</span><div class="check-body"><div class="check-name">CPM monitorado / estável</div><div class="check-detail">CPM estável a levemente decrescente — não é o vilão da alta de CPL.</div></div><span class="pill pass">OK</span></div>
+          </div>
+        </div>
+
+      </div>
+    </details>
+
+    <details class="account-block" open>
+      <summary>Conta 2 — Madrid Tintado De Lunas (Carabanchel / Arroyomolinos) <span class="chev">▾ ver análise completa</span></summary>
+      <div class="account-body">
+
+        <div class="kpi-grid">
+          <div class="kpi"><span class="label">Conta</span><span class="value" style="font-size:14px;">act_104976496561645</span></div>
+          <div class="kpi"><span class="label">Investido (ativas)</span><span class="value">€ 5.195,53</span></div>
+          <div class="kpi"><span class="label">Estrutura budget</span><span class="value flag">ABO</span></div>
+          <div class="kpi"><span class="label">Formatos ativos</span><span class="value flag">1 (vídeo)</span></div>
+        </div>
+
+        <div>
+          <h3 class="subsection-title">Estrutura (campanhas ativas)</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Campanha</th><th>Objetivo</th><th class="num">Spend 60d</th><th class="num">Leads</th><th class="num">CPL</th><th class="num">CTR</th><th class="num">Freq.</th></tr></thead>
+              <tbody>
+                <tr><td class="label-cell">Madrid (Carabanchel)</td><td class="label-cell">OUTCOME_LEADS</td><td class="num">€ 3.006,62</td><td class="num">1.130</td><td class="num">€ 2,66</td><td class="num">1,88%</td><td class="num">3,27</td></tr>
+                <tr><td class="label-cell">Arroyomolinos</td><td class="label-cell">OUTCOME_LEADS</td><td class="num">€ 2.188,91</td><td class="num">~515</td><td class="num">€ 4,24</td><td class="num">1,64%</td><td class="num">3,89</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="subsection-title">O ponto central: conversão pós-clique em Arroyomolinos</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Localidade</th><th class="num">CTR</th><th class="num">Conversão clique→lead</th><th>Lead form</th></tr></thead>
+              <tbody>
+                <tr><td class="label-cell">Carabanchel</td><td class="num">2,4–2,7%</td><td class="num">5,27%–6,42%</td><td class="label-cell"><code>970889992136036</code></td></tr>
+                <tr class="highlight"><td class="label-cell">Arroyomolinos</td><td class="num">2,14%</td><td class="num">3,47%</td><td class="label-cell"><code>1701304064546325</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="note" style="margin-top:12px;"><b>Leitura:</b> CTR comparável isola o problema pra <i>depois</i> do clique, não no criativo. Arroyomolinos usa um formulário de lead diferente do de Carabanchel — suspeito principal. Corrigindo a conversão clique→lead pra perto de 5%, o CPL projetado de Arroyomolinos cai de €4,24 para ~€2,80.</div>
+        </div>
+
+        <div>
+          <h3 class="subsection-title">Especialista de conjunto de anúncios — estrutura e orçamento</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Ad set</th><th>Campanha</th><th class="num">Budget/dia</th><th>Observação</th></tr></thead>
+              <tbody>
+                <tr><td class="label-cell">Carabanchel Familia</td><td class="label-cell">Madrid (Carabanchel)</td><td class="num">€ 21,90</td><td class="label-cell">CTA LEARN_MORE, sem prova social</td></tr>
+                <tr><td class="label-cell">Carabanchel Tuning</td><td class="label-cell">Madrid (Carabanchel)</td><td class="num">€ 21,90</td><td class="label-cell">Melhor conversão clique→lead da conta (6,42%)</td></tr>
+                <tr class="highlight"><td class="label-cell">Arroyomolinos Familia</td><td class="label-cell">Arroyomolinos</td><td class="num">€ 44,00</td><td class="label-cell">Maior orçamento individual da conta, pior CPL</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="note" style="margin-top:12px;"><b>Achados estruturais:</b> "Carabanchel Familia" e "Carabanchel Tuning" têm público configurado idêntico (mesma idade, mesmos CEPs) — competem no mesmo leilão, com orçamento fixo dividido 50/50 pelo ABO mesmo o Tuning performando melhor. "Arroyomolinos Familia" já recebe o maior orçamento individual da conta com o pior CPL e a maior frequência — via ABO, o algoritmo não realoca essa verba automaticamente pra longe do ad set problemático. Copy de Arroyomolinos é praticamente idêntica à de Carabanchel, com a menção à localidade só na última frase do texto — sem reforço de confiança pra uma oficina nova.</div>
+        </div>
+
+        <div>
+          <h3 class="subsection-title">Checklist Andromeda — Conta 2</h3>
+          <div class="check-table">
+            <div class="check-row"><span class="check-id">B1</span><div class="check-body"><div class="check-name">Pixel + CAPI ativos</div><div class="check-detail">N/A — evento de lead nativo do Instant Form.</div></div><span class="pill nd">N/A</span></div>
+            <div class="check-row"><span class="check-id">B2</span><div class="check-body"><div class="check-name">Máx. 3 campanhas ativas por objetivo</div><div class="check-detail">2 campanhas ativas, mesmo objetivo (Leads).</div></div><span class="pill pass">OK</span></div>
+            <div class="check-row"><span class="check-id">B3</span><div class="check-body"><div class="check-name">CBO como padrão</div><div class="check-detail">ABO nas duas campanhas ativas.</div></div><span class="pill fail">Ausente</span></div>
+            <div class="check-row"><span class="check-id">B4</span><div class="check-body"><div class="check-name">1 evento de conversão por campanha</div><div class="check-detail">Lead em todos os ad sets ativos.</div></div><span class="pill pass">OK</span></div>
+            <div class="check-row"><span class="check-id">B5</span><div class="check-body"><div class="check-name">Segmentação sem redundância entre ad sets irmãos</div><div class="check-detail">"Carabanchel Familia" e "Carabanchel Tuning" competem no mesmo público configurado de forma idêntica.</div></div><span class="pill warn">Revisar</span></div>
+            <div class="check-row"><span class="check-id">B6</span><div class="check-body"><div class="check-name">Pelo menos 2 formatos diferentes ativos</div><div class="check-detail">Só vídeo único em todos os anúncios ativos.</div></div><span class="pill fail">Ausente</span></div>
+            <div class="check-row"><span class="check-id">B7</span><div class="check-body"><div class="check-name">Pelo menos 2 conceitos diferentes ativos</div><div class="check-detail">Família e Tuning em Carabanchel; Arroyomolinos hoje só tem Família ativo.</div></div><span class="pill warn">Revisar</span></div>
+            <div class="check-row"><span class="check-id">B8</span><div class="check-body"><div class="check-name">Frequência controlada (&lt;3–4)</div><div class="check-detail">3,27–3,89, subindo nas duas localidades.</div></div><span class="pill warn">Revisar</span></div>
+            <div class="check-row"><span class="check-id">B9</span><div class="check-body"><div class="check-name">Conversão pós-clique saudável em todas as localidades</div><div class="check-detail">Arroyomolinos converte quase pela metade de Carabanchel clique→lead — ver seção acima.</div></div><span class="pill fail">Ausente</span></div>
+            <div class="check-row"><span class="check-id">B10</span><div class="check-body"><div class="check-name">CTA alinhado ao objetivo (Fundo/Leads)</div><div class="check-detail">2 anúncios ("Familia", sem sufixo, nas duas localidades) ainda usam LEARN_MORE em vez de BOOK_TRAVEL.</div></div><span class="pill warn">Revisar</span></div>
+          </div>
+        </div>
+
+      </div>
+    </details>
+  </section>
+
+  <div class="note">
+    <b>Método:</b> dados via Meta Graph API direta (<code>campaigns</code>, <code>adsets</code>, <code>ads</code>/<code>creative</code>, <code>insights</code> por campanha/ad set/plataforma, breakdown semanal) — chef-meta-ads orquestrando em paralelo os especialistas <code>ads-copy-analyzer-meta</code> e <code>ads-adset-analyzer-meta</code>, com síntese aplicando a filosofia Andromeda. <b>Regra de publicação:</b> nenhum dado de campanha/ad set/anúncio pausado entra neste relatório — 3 achados que dependiam de entidades pausadas (performance histórica do ad set "Tuning" pausado em Arroyomolinos, do ad set de teste "Preço" pausado, e limpeza administrativa de ad sets órfãos) ficaram de fora daqui e foram levados só pro chat, como pedem as regras inquebráveis da SOP.
+  </div>
+
+  <div class="page" style="padding-top:0; padding-bottom:0;"><div style="height:1px; background:var(--border); margin:8px 0 0;"></div></div>
+
+  <header class="masthead">
+    <span class="eyebrow">Meta Ads &amp; Google Ads &middot; Novo Planejamento de Campanha</span>
+    <h1 class="slug">Planejamento — Campanha Multi-loja (Leads) + Google Ads</h1>
+    <div class="meta-row">
+      <span><b>Conta Meta:</b> act_104976496561645 "Madrid Tintado De Lunas"</span>
+      <span><b>Lojas:</b> Fuenlabrada · Villalba · Carabanchel · Arroyomolinos</span>
+      <span><b>Baseado em:</b> achados da auditoria de 60 dias (parte 1 deste documento)</span>
+    </div>
+  </header>
+
+  <section class="callout">
+    <span class="callout-title">O que estamos propondo</span>
+    <p>Consolidar as 4 lojas numa <b>única campanha de Leads</b>, com um <b>conjunto de anúncios por loja</b> (Advantage+, segmentado geograficamente), reaproveitando o que a auditoria já validou: o ângulo <b>Tuning/estilo</b> como protagonista, segmentação <b>ampla sem empilhar interesse</b>, e diversificação de formato desde o dia 1 — o oposto do que a auditoria encontrou (zero diversificação, 100% vídeo único).</p>
+    <p>Antes de comprometer o budget de escala, uma <b>fase piloto</b> decide entre dois destinos — <b>LP</b> vs. <b>Inlead</b> — usando a lição mais cara da auditoria: CTR parecido não garante a mesma conversão pós-clique (foi exatamente o que aconteceu em Arroyomolinos).</p>
+  </section>
+
+  <section>
+    <h2 class="section-title">Orçamento proposto</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Item</th><th>Tipo</th><th class="num">Budget</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Meta — Fase piloto (LP vs. Inlead)</td><td class="label-cell">Teste, curta duração</td><td class="num">€ 2.000</td></tr>
+          <tr class="highlight"><td class="label-cell">Meta — Campanha Leads multi-loja (escala)</td><td class="label-cell">Recorrente mensal</td><td class="num">€ 8.000</td></tr>
+          <tr><td class="label-cell">Google — Performance Max (todas as lojas)</td><td class="label-cell">Recorrente mensal</td><td class="num">€ 1.000</td></tr>
+          <tr><td class="label-cell">Google — YouTube (todas as lojas)</td><td class="label-cell">Recorrente mensal</td><td class="num">€ 1.000</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="chart-caption">Vamos começar com o valor total mensal de <b>€ 12.000</b> (€8.000 Meta escala + €2.000 Meta piloto + €1.000 PMax + €1.000 YouTube).</p>
+  </section>
+
+  <section>
+    <h2 class="section-title">Fase 1 — Piloto: LP vs. Inlead</h2>
+    <div class="kpi-grid">
+      <div class="kpi"><span class="label">Budget</span><span class="value">€ 2.000</span></div>
+      <div class="kpi"><span class="label">Duração sugerida</span><span class="value">2 semanas</span></div>
+      <div class="kpi"><span class="label">Split</span><span class="value">50% / 50%</span></div>
+      <div class="kpi"><span class="label">Critério de decisão</span><span class="value" style="font-size:13px;">CPL + conversão pós-clique</span></div>
+    </div>
+    <div class="note" style="margin-top:14px;"><b>Desenho do teste:</b> mesmo criativo, mesmo público, dois braços variando só o destino do clique — um pra LP (site atual ou a nova LP com seletor, ver abaixo), outro pra Inlead. Controla a variável de destino isoladamente, do jeito que a auditoria mostrou ser necessário (Arroyomolinos teve CTR igual ao de Carabanchel, mas conversão pós-clique quase pela metade — o problema nunca apareceria olhando só CTR). O destino vencedor (melhor CPL <i>e</i> melhor conversão pós-clique, não só CTR) vira o destino único da Fase 2.</div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Fase 2 — Escala: mapa da campanha</h2>
+
+    <div class="mindmap">
+      <div class="mm-node mm-root">
+        <div class="mm-node-title">Campanha única — Leads</div>
+        <div class="mm-node-sub">Advantage+ audience · <b>ABO</b> (orçamento fixo por conjunto, não CBO) · €8.000/mês</div>
+      </div>
+      <div class="mm-trunk"></div>
+      <div class="mm-branch-row mm-row-4">
+        <div class="mm-node cat-1"><div class="mm-node-title">Fuenlabrada</div><div class="mm-node-sub">€2.000/mês · geo raio da loja</div></div>
+        <div class="mm-node cat-2"><div class="mm-node-title">Villalba</div><div class="mm-node-sub">€2.000/mês · geo raio da loja</div></div>
+        <div class="mm-node cat-3"><div class="mm-node-title">Carabanchel</div><div class="mm-node-sub">€2.000/mês · geo raio da loja</div></div>
+        <div class="mm-node cat-4"><div class="mm-node-title">Arroyomolinos</div><div class="mm-node-sub">€2.000/mês · geo raio da loja</div></div>
+      </div>
+      <div class="mm-trunk"></div>
+      <div class="mm-node mm-root">
+        <div class="mm-node-title">9 criativos por conjunto (mesma estrutura nos 4)</div>
+        <div class="mm-node-sub">Destino: vencedor da Fase 1</div>
+      </div>
+      <div class="mm-trunk"></div>
+      <div class="mm-branch-row mm-row-3">
+        <div class="mm-node funnel-topo"><div class="mm-node-title">Topo (3)</div><div class="mm-node-sub">1 carrossel · 1 estático · 1 vídeo</div></div>
+        <div class="mm-node funnel-meio"><div class="mm-node-title">Meio (3)</div><div class="mm-node-sub">3 vídeos</div></div>
+        <div class="mm-node funnel-fundo"><div class="mm-node-title">Fundo (3)</div><div class="mm-node-sub">1 carrossel + 2 vídeos</div></div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <span class="callout-title">Confirmado: ABO, não CBO — neste momento</span>
+      <p>Vamos trabalhar com <b>cada loja a nível de conjunto de anúncio</b>, com orçamento fixo e independente de €2.000/mês por conjunto. Não faz sentido usar CBO neste momento: cada conjunto é um teste por loja, e só dá pra comparar as 4 localidades de forma justa se cada uma tiver orçamento garantido — em CBO o algoritmo poderia concentrar o budget numa loja só e deixar as outras sem verba, o que inviabilizaria a comparação.</p>
+      <p>Isso não contradiz a recomendação de CBO da auditoria: lá o problema era 2 conceitos disputando o <i>mesmo</i> público na <i>mesma</i> localidade — aqui são 4 mercados geográficos diferentes, sem essa disputa interna.</p>
+    </div>
+
+    <h3 class="subsection-title">Camada de consciência — o que cada estágio precisa comunicar</h3>
+    <p style="font-size:13.5px; color:var(--ink-dim); margin:0 0 12px;">Isso não é copy final — é o brief estratégico (nível de consciência + mensagem validada) pra equipe de criação desbravar em cima. As duas mensagens-âncora vêm direto do site (<code>madridtintadodelunas.es</code>), que já tem 4 blocos de valor testados editorialmente — focamos nos 2 que o Azel apontou como prioridade.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Estágio</th><th>Nível de consciência</th><th>Mensagem-âncora (fonte: site)</th><th>Papel estratégico</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="label-cell"><b>Topo</b></td>
+            <td class="label-cell">Inconsciente → consciente do problema</td>
+            <td class="label-cell">"Estética automotriz de alto nivel" — <i>"Mejora la apariencia de tu vehículo con un acabado más elegante y moderno, aumentando su valor y destacando en cada calle de Madrid."</i></td>
+            <td class="label-cell">Chama atenção sem exigir conhecimento prévio da categoria — é o ângulo estético/aspiracional, o mesmo espírito do "Tuning" que já venceu na auditoria.</td>
+          </tr>
+          <tr>
+            <td class="label-cell"><b>Meio</b></td>
+            <td class="label-cell">Consciente da solução → consciente do produto</td>
+            <td class="label-cell">"Lámina homologada para pasar la ITV sin complicaciones" — <i>"Aplicamos películas certificadas y conforme a la normativa de la ITV, garantizando seguridad, legalidad y tranquilidad en cada trayecto."</i></td>
+            <td class="label-cell">Resolve a objeção racional nº 1 da categoria na Espanha (é legal? passo na ITV?) — ângulo <b>não testado</b> nos anúncios auditados até aqui, alavanca nova.</td>
+          </tr>
+          <tr class="highlight">
+            <td class="label-cell"><b>Fundo</b></td>
+            <td class="label-cell">Mais consciente</td>
+            <td class="label-cell">Combinação das duas — desejo estético + segurança legal (ITV) + facilidade ("1 hora")</td>
+            <td class="label-cell">Junta desejo com segurança pra remover a última objeção antes do lead — CTA direto.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subsection-title">O que reaproveitamos da auditoria</h3>
+    <div class="check-table">
+      <div class="check-row"><span class="check-id">✓</span><div class="check-body"><div class="check-name">Ângulo Tuning/estilo como protagonista</div><div class="check-detail">Puxou o melhor CPL e melhor conversão nas duas contas auditadas — vira o ângulo dominante no Topo, não mais um entre dois iguais.</div></div><span class="pill pass">Aplicado</span></div>
+      <div class="check-row"><span class="check-id">✓</span><div class="check-body"><div class="check-name">Segmentação ampla + Advantage+, sem empilhar interesse</div><div class="check-detail">A auditoria viu "Villalba Tuning" com interesse empilhado performar pior que os broad — os 4 conjuntos novos nascem 100% broad + Advantage+.</div></div><span class="pill pass">Aplicado</span></div>
+      <div class="check-row"><span class="check-id">✓</span><div class="check-body"><div class="check-name">Diversificação de formato desde o dia 1</div><div class="check-detail">A auditoria achou 100% vídeo único nas duas contas — aqui já nascem 3 formatos (vídeo, carrossel, estático) distribuídos pelo funil.</div></div><span class="pill pass">Aplicado</span></div>
+      <div class="check-row"><span class="check-id">✓</span><div class="check-body"><div class="check-name">CTA de ação direta desde o lançamento</div><div class="check-detail">A auditoria achou anúncios ainda com LEARN_MORE em vez de CTA de conversão — aqui entra direto com CTA de ação.</div></div><span class="pill pass">Aplicado</span></div>
+      <div class="check-row"><span class="check-id">✓</span><div class="check-body"><div class="check-name">QUALITY_LEAD como meta de otimização</div><div class="check-detail">Já era acerto nas duas contas auditadas — mantido nos 4 conjuntos novos.</div></div><span class="pill pass">Aplicado</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Google Ads — mapa das campanhas</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Campanha</th><th>Estrutura</th><th class="num">Budget</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Performance Max</td><td class="label-cell">1 campanha única, todas as 4 lojas juntas — sem quebrar por localidade</td><td class="num">€ 1.000/mês</td></tr>
+          <tr><td class="label-cell">YouTube (separada)</td><td class="label-cell">1 campanha única, mesmo direcionamento consolidado</td><td class="num">€ 1.000/mês</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note" style="margin-top:12px; margin-bottom:20px;">Diferente do Meta (que segmenta por loja pra garantir presença geográfica), no Google as duas campanhas consolidam <b>todas as lojas num único direcionamento</b> — evita fragmentar o sinal de aprendizado do algoritmo em campanhas pequenas demais, que é onde PMax e YouTube performam pior.</div>
+
+    <h3 class="subsection-title" style="margin-top:0;">Performance Max</h3>
+    <div class="mindmap">
+      <div class="mm-node mm-root">
+        <div class="mm-node-title">Performance Max — todas as lojas</div>
+        <div class="mm-node-sub">€1.000/mês · direcionamento único consolidado</div>
+      </div>
+      <div class="mm-trunk"></div>
+      <div class="mm-branch-row mm-row-4">
+        <div class="mm-node"><div class="mm-node-title">Tintagem de vidros</div><div class="mm-node-sub">Grupo de recursos</div></div>
+        <div class="mm-node"><div class="mm-node-title">Faros ahumados</div><div class="mm-node-sub">Grupo de recursos</div></div>
+        <div class="mm-node"><div class="mm-node-title">Vinil automotriz</div><div class="mm-node-sub">Grupo de recursos</div></div>
+        <div class="mm-node"><div class="mm-node-title">Lâmina PPF</div><div class="mm-node-sub">Grupo de recursos</div></div>
+      </div>
+      <div class="mm-trunk"></div>
+      <div class="mm-node mm-root">
+        <div class="mm-node-title">20 imagens no total</div>
+        <div class="mm-node-sub">Fotos reais de carro ligadas a cada serviço · headline com intenção de agendamento</div>
+      </div>
+      <div class="mm-trunk"></div>
+      <div class="mm-branch-row mm-row-3">
+        <div class="mm-node"><div class="mm-node-title">Quadrado</div><div class="mm-node-sub">1:1</div></div>
+        <div class="mm-node"><div class="mm-node-title">Paisagem</div><div class="mm-node-sub">1.91:1</div></div>
+        <div class="mm-node"><div class="mm-node-title">Retrato</div><div class="mm-node-sub">4:5</div></div>
+      </div>
+    </div>
+    <p class="chart-caption">3 formatos são os obrigatórios do próprio PMax pra cobrir todos os posicionamentos (Busca, Display, YouTube, Gmail, Descoberta) — as 20 imagens se distribuem entre os 4 grupos de recursos, sempre nos 3 formatos.</p>
+
+    <h3 class="subsection-title">YouTube</h3>
+    <div class="mindmap">
+      <div class="mm-node mm-root">
+        <div class="mm-node-title">YouTube — todas as lojas</div>
+        <div class="mm-node-sub">€1.000/mês · direcionamento único consolidado</div>
+      </div>
+      <div class="mm-trunk"></div>
+      <div class="mm-branch-row mm-row-2">
+        <div class="mm-node"><div class="mm-node-title">Bumper (6s)</div><div class="mm-node-sub">Reforço do ângulo estético/Tuning</div></div>
+        <div class="mm-node"><div class="mm-node-title">In-stream (15-30s)</div><div class="mm-node-sub">Reaproveita o vídeo de Fundo do Meta (estética + ITV)</div></div>
+      </div>
+    </div>
+    <p class="chart-caption">Estrutura de criativo do YouTube ainda é um primeiro rascunho — pode ser detalhada mais quando tivermos os vídeos finais do Meta pra reaproveitar.</p>
+  </section>
+
+  <section>
+    <h2 class="section-title">Nova LP — seletor de produto e loja</h2>
+    <div class="note">Queremos testar uma nova LP juntando seletor de produto e seletor de loja.</div>
+    <ol class="recs" style="margin-top:12px;">
+      <li><span class="n">1</span><span><b>Seleção de produto</b> <span class="body">— visitante escolhe o serviço: Tintagem de vidros, Faros ahumados, Vinil automotriz ou Lâmina PPF.</span></span></li>
+      <li><span class="n">2</span><span><b>Seleção de loja</b> <span class="body">— visitante escolhe entre Fuenlabrada, Villalba, Carabanchel ou Arroyomolinos.</span></span></li>
+      <li><span class="n">3</span><span><b>Roteamento condicional</b> <span class="body">— com base nas duas escolhas, direciona pro WhatsApp da loja certa ou pro formulário (a decidir por loja/produto qual canal faz mais sentido).</span></span></li>
+    </ol>
+    <p class="chart-caption" style="margin-top:10px;">Essa LP é candidata natural a entrar como um dos dois braços da Fase 1 (piloto LP vs. Inlead).</p>
+  </section>
+
+  <section>
+    <h2 class="section-title">Resumo executivo — KPIs esperados em 90 dias (Meta)</h2>
+    <div class="kpi-grid">
+      <div class="kpi"><span class="label">CPA ideal (cliente)</span><span class="value good">€ 5,00</span></div>
+      <div class="kpi"><span class="label">CPA — nunca ultrapassar</span><span class="value flag">€ 10,00</span></div>
+      <div class="kpi"><span class="label">CPA hoje (auditoria, 2 contas)</span><span class="value">€ 4 – 8</span></div>
+      <div class="kpi"><span class="label">Budget mensal (campanha escala)</span><span class="value">€ 8.000</span></div>
+    </div>
+
+    <div class="exec-grid" style="margin-top:16px;">
+      <div class="chart-card">
+        <h3 class="subsection-title" style="margin-top:0;">CPA por cenário</h3>
+        <div class="barchart">
+          <div class="bar-row"><span class="bar-label">Melhor caso hoje</span><div class="bar-track"><div class="bar-fill good" style="width:40%;"></div></div><span class="bar-value good">€ 4</span></div>
+          <div class="bar-row"><span class="bar-label">Meta ideal (90d)</span><div class="bar-track"><div class="bar-fill good" style="width:50%;"></div></div><span class="bar-value good">€ 5</span></div>
+          <div class="bar-row"><span class="bar-label">Pior caso hoje</span><div class="bar-track"><div class="bar-fill warn" style="width:80%;"></div></div><span class="bar-value warn">€ 8</span></div>
+          <div class="bar-row"><span class="bar-label">Limite máximo</span><div class="bar-track"><div class="bar-fill fail" style="width:100%;"></div></div><span class="bar-value fail">€ 10</span></div>
+        </div>
+        <p class="chart-caption">Escala até €10 · verde ≤€5 (ideal) · âmbar €5–10 · vermelho = linha que nunca deve ser ultrapassada.</p>
+      </div>
+
+      <div class="chart-card">
+        <h3 class="subsection-title" style="margin-top:0;">Leads/mês equivalentes (budget fixo de €8.000)</h3>
+        <div class="barchart">
+          <div class="bar-row"><span class="bar-label">Melhor caso hoje</span><div class="bar-track"><div class="bar-fill good" style="width:100%;"></div></div><span class="bar-value good">2.000</span></div>
+          <div class="bar-row"><span class="bar-label">Meta ideal (90d)</span><div class="bar-track"><div class="bar-fill good" style="width:80%;"></div></div><span class="bar-value good">1.600</span></div>
+          <div class="bar-row"><span class="bar-label">Pior caso hoje</span><div class="bar-track"><div class="bar-fill warn" style="width:50%;"></div></div><span class="bar-value warn">1.000</span></div>
+          <div class="bar-row"><span class="bar-label">Limite máximo</span><div class="bar-track"><div class="bar-fill fail" style="width:40%;"></div></div><span class="bar-value fail">800</span></div>
+        </div>
+        <p class="chart-caption">€8.000 ÷ CPA de cada cenário. Aqui, barra maior = melhor (mais leads pelo mesmo budget).</p>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:16px;">
+      <span class="callout-title">Por que achamos que dá pra sair de "€4–8" pra "€5 estável"</span>
+      <p>Hoje o CPA varia muito entre lojas (de €2,19 em Carabanchel a €4,24+ em Arroyomolinos, e picos de €5–6 nos criativos mais fracos) porque cada loja roda sozinha, com 1 formato só e sem estrutura de funil. A proposta ataca exatamente essas 3 causas: <b>Advantage+ com budget garantido por loja</b> (elimina o "zero investimento" que puxava a média pra baixo em lojas esquecidas), <b>9 criativos diversificados por funil</b> em vez de 1 vídeo genérico (elimina a fadiga que fazia o CPL subir 2x em 3 semanas), e a <b>correção do pós-clique</b> via piloto LP vs. Inlead (o mesmo tipo de vazamento que já vimos em Arroyomolinos). Com as 4 lojas todas nesse padrão, esperamos consolidar perto de <b class="num">€5</b>, com <b class="num">€10</b> como linha de alerta — nunca a meta.</p>
+    </div>
+  </section>
+
+  <footer>
+    <span>Parte 1: Meta Graph API direta · chef-meta-ads + ads-copy-analyzer-meta + ads-adset-analyzer-meta · Contas act_9709425065783957 e act_104976496561645 · Parte 2: planejamento baseado nos achados da Parte 1 + madridtintadodelunas.es</span>
+    <span>Gerado em 24/07/2026 · Rascunho — nenhuma alteração feita nas contas</span>
+  </footer>
+
+</div>
+</body>
+</html>
