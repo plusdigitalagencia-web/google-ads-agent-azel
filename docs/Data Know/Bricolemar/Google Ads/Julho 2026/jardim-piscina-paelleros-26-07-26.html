@@ -77,6 +77,13 @@
   ol.recs span.body { color: var(--ink-dim); }
   .opt-log { display: flex; flex-direction: column; gap: 14px; }
   .opt-pending { border: 1px dashed var(--border); border-radius: 10px; padding: 18px; font-size: 13.5px; color: var(--ink-faint); background: var(--panel-2); }
+  .opt-card { background: var(--panel); border: 1px solid var(--border); border-left: 4px solid var(--good); border-radius: 10px; padding: 18px 20px; display: flex; flex-direction: column; gap: 10px; }
+  .opt-card.discarded { border-left-color: var(--nd); }
+  .opt-card .opt-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .opt-card .opt-title { font-size: 15px; font-weight: 700; color: var(--ink); }
+  .opt-card .opt-field { font-size: 13.5px; color: var(--ink-dim); }
+  .opt-card .opt-field b.opt-label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint); font-weight: 700; margin-bottom: 2px; }
+  .pill.nd { color: var(--nd); background: var(--nd-soft); }
   footer { border-top: 1px solid var(--border); padding-top: 18px; font-size: 12.5px; color: var(--ink-faint); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
   a { color: var(--accent); }
   code { font-family: var(--font-mono); font-size: 0.92em; }
@@ -244,7 +251,47 @@
     <h2 class="section-title">Histórico de Otimizações</h2>
     <p class="section-sub">Preenchido manualmente pelo Head de Performance a cada semana — o agente sempre pergunta o que registrar aqui, nunca escreve sozinho.</p>
     <div class="opt-log">
-      <div class="opt-pending">Aguardando resposta do Azel sobre quais recomendações desta rodada serão executadas (e o motivo da pausa da campanha "052926_Busqueda_Hector").</div>
+
+      <div class="opt-card">
+        <div class="opt-head"><span class="opt-title">Negativação de marca/concorrente/marketplace</span><span class="pill pass">Feito</span></div>
+        <div class="opt-field"><b class="opt-label">Otimização Realizada</b>Negativas de marca/concorrente (ManoMano, Intex, Klarstein, Vevor, Garcima, Amazon, Quttin, Aosom) aplicadas nos 5 grupos de anúncio.</div>
+        <div class="opt-field"><b class="opt-label">Por que foi necessário</b>~49% do gasto em cliques de anúncio no período foi em buscas por essas marcas/concorrentes — maior causa de gasto sem retorno da campanha.</div>
+        <div class="opt-field"><b class="opt-label">Resultado Esperado</b>Menos gasto em tráfego sem intenção de compra na Bricolemar, liberando budget pra cliques realmente relacionados a Paelleros.</div>
+        <div class="opt-field"><b class="opt-label">Orientações para a Equipe</b>Revisar semanalmente o relatório de termos de pesquisa pra capturar novas variações de marca/concorrente ainda não cobertas.</div>
+      </div>
+
+      <div class="opt-card">
+        <div class="opt-head"><span class="opt-title">Final URL por ad group</span><span class="pill pass">Atualizado</span></div>
+        <div class="opt-field"><b class="opt-label">Otimização Realizada</b>Cada um dos 5 ad groups agora aponta pra página específica de subcategoria (as mesmas páginas já usadas nos sitelinks), em vez da página genérica de categoria.</div>
+        <div class="opt-field"><b class="opt-label">Por que foi necessário</b>Todos os grupos levavam pra mesma página genérica, quebrando a promessa específica de cada anúncio.</div>
+        <div class="opt-field"><b class="opt-label">Resultado Esperado</b>Página de destino mais alinhada ao que o anúncio prometeu — deve reduzir rejeição e ajudar a tirar a conversão do zero.</div>
+        <div class="opt-field"><b class="opt-label">Orientações para a Equipe</b>Conferir visualmente se cada página escolhida bate com o subtema do grupo (não misturar Kits com Suportes, por exemplo).</div>
+      </div>
+
+      <div class="opt-card">
+        <div class="opt-head"><span class="opt-title">Novo título "Kit Paellero 90cm" (grupo Kits)</span><span class="pill pass">Feito</span></div>
+        <div class="opt-field"><b class="opt-label">Otimização Realizada</b>Título "Kit Paellero 90cm" adicionado ao RSA do grupo Kits, fechando a lacuna de tamanho — o grupo já cobria 60cm e 70cm.</div>
+        <div class="opt-field"><b class="opt-label">Por que foi necessário</b>Cobertura de copy incompleta pro range de tamanhos vendidos — sem esse título, buscas específicas por "90cm" não tinham headline exato.</div>
+        <div class="opt-field"><b class="opt-label">Resultado Esperado</b>Melhor Ad Relevance/CTR nas buscas específicas por kit de 90cm.</div>
+        <div class="opt-field"><b class="opt-label">Orientações para a Equipe</b>Se aparecer volume relevante por outros tamanhos (40cm, 100cm), considerar o mesmo ajuste.</div>
+      </div>
+
+      <div class="opt-card">
+        <div class="opt-head"><span class="opt-title">Correção de título no grupo Acessórios</span><span class="pill pass">Feito</span></div>
+        <div class="opt-field"><b class="opt-label">Otimização Realizada</b>Título "Paravientos para Paella" corrigido para "Paravientos para Paellero", batendo com a keyword exata do grupo.</div>
+        <div class="opt-field"><b class="opt-label">Por que foi necessário</b>A keyword do grupo é "paravientos paellero", não "paravientos para paella" — o título não batia literalmente, o que pode ter pesado no componente de Ad Relevance.</div>
+        <div class="opt-field"><b class="opt-label">Resultado Esperado</b>Melhora no Ad Relevance/Quality Score dessa keyword especificamente.</div>
+        <div class="opt-field"><b class="opt-label">Orientações para a Equipe</b>Só monitorar o QS dela no próximo ciclo pra confirmar a melhora.</div>
+      </div>
+
+      <div class="opt-card discarded">
+        <div class="opt-head"><span class="opt-title">Gatilho de urgência sazonal (pico do verão)</span><span class="pill nd">Descartado</span></div>
+        <div class="opt-field"><b class="opt-label">Considerado</b>Adicionar gatilho de urgência sazonal aos títulos — nenhum dos 5 grupos usa esse gatilho hoje, e a campanha está rodando no pico do verão.</div>
+        <div class="opt-field"><b class="opt-label">Decisão</b>Descartado pelo gestor nesta rodada.</div>
+      </div>
+
+      <div class="opt-pending"><b style="color:var(--ink); font-weight:700;">Campanha "052926_Busqueda_Hector" pausada:</b> motivo confirmado pelo Azel — não estava gerando conversões.</div>
+
     </div>
   </section>
 
