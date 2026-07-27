@@ -5,7 +5,6 @@ Relatórios de diagnóstico de campanhas, organizados por cliente. Clique numa l
 | Cliente | Relatórios |
 |---|---|
 | **Chez France** | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/otimizacoes-campanhas-html/Chez%20France/) |
-| **Bricolemar** | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/otimizacoes-campanhas-html/Bricolemar/) |
 
 > Pasta a criar quando o próximo cliente for confirmado.
 
