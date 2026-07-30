@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fechamento de Julho/2026 — Meta Ads — Dr. Bruno</title>
+<style>
+  :root {
+    --ground: #f4f7f5; --panel: #ffffff; --panel-2: #eaf1ee; --border: #d7e0dc;
+    --ink: #142320; --ink-dim: #4b5b56; --ink-faint: #7c8b86;
+    --accent: #157567; --accent-ink: #0d4b42; --accent-soft: #dcefe9;
+    --meta: #1877f2; --meta-ink: #0a58ca; --meta-soft: #dbe8fd;
+    --good: #1f7a52; --good-soft: #e1f3ea; --warn: #8a5a13; --warn-soft: #faf0dc;
+    --fail: #a3261f; --fail-soft: #fbe6e4; --nd: #5b6864; --nd-soft: #e9edeb;
+    --font-sans: -apple-system, "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0c1614; --panel: #121e1b; --panel-2: #16221f; --border: #24322e;
+      --ink: #e7efec; --ink-dim: #a9b8b3; --ink-faint: #7c8b86;
+      --accent: #37bfa8; --accent-ink: #b7ece1; --accent-soft: #17332d;
+      --meta: #6ea8fe; --meta-ink: #bcd6ff; --meta-soft: #16233a;
+      --good: #4ecb95; --good-soft: #17332a; --warn: #e0b25b; --warn-soft: #362a12;
+      --fail: #ec7972; --fail-soft: #3a1917; --nd: #93a19c; --nd-soft: #1b2624;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0c1614; --panel: #121e1b; --panel-2: #16221f; --border: #24322e;
+    --ink: #e7efec; --ink-dim: #a9b8b3; --ink-faint: #7c8b86;
+    --accent: #37bfa8; --accent-ink: #b7ece1; --accent-soft: #17332d;
+    --meta: #6ea8fe; --meta-ink: #bcd6ff; --meta-soft: #16233a;
+    --good: #4ecb95; --good-soft: #17332a; --warn: #e0b25b; --warn-soft: #362a12;
+    --fail: #ec7972; --fail-soft: #3a1917; --nd: #93a19c; --nd-soft: #1b2624;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--font-sans); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  .page { max-width: 920px; margin: 0 auto; padding: 48px 24px 80px; display: flex; flex-direction: column; gap: 36px; }
+  .breadcrumb { font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-faint); }
+  .breadcrumb a { color: var(--meta); text-decoration: none; }
+  header.masthead { display: flex; flex-direction: column; gap: 10px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+  .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--meta); font-weight: 600; }
+  h1.slug { font-family: var(--font-mono); font-size: clamp(20px, 4vw, 28px); font-weight: 600; margin: 0; color: var(--ink); text-wrap: balance; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13.5px; color: var(--ink-dim); }
+  .meta-row b { color: var(--ink); font-weight: 600; }
+  h2.section-title { font-size: 15px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 6px; }
+  h3.sub-title { font-family: var(--font-mono); font-size: 16px; font-weight: 600; color: var(--ink); margin: 0 0 4px; }
+  .section-sub { font-size: 13px; color: var(--ink-faint); margin: -8px 0 14px; font-style: italic; }
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .kpi { background: var(--panel); padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 6px; }
+  .kpi .label { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-faint); font-weight: 600; }
+  .kpi .value { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 21px; font-weight: 600; color: var(--ink); }
+  .kpi .value.flag { color: var(--fail); } .kpi .value.good { color: var(--good); }
+  .callout { background: var(--meta-soft); border: 1px solid color-mix(in srgb, var(--meta) 35%, var(--border)); border-radius: 10px; padding: 20px 22px; display: flex; flex-direction: column; gap: 8px; }
+  .callout .callout-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--meta-ink); }
+  .callout p { margin: 0; font-size: 15px; color: var(--ink); }
+  .callout.fail { background: var(--fail-soft); border-color: color-mix(in srgb, var(--fail) 40%, var(--border)); }
+  .callout.fail .callout-title { color: var(--fail); }
+  .callout.warn { background: var(--warn-soft); border-color: color-mix(in srgb, var(--warn) 35%, var(--border)); }
+  .callout.warn .callout-title { color: var(--warn); }
+  .check-table { width: 100%; border-collapse: collapse; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .check-row { display: grid; grid-template-columns: 1fr 96px; gap: 12px; align-items: start; padding: 14px 16px; background: var(--panel); border-bottom: 1px solid var(--border); }
+  .check-row:last-child { border-bottom: none; }
+  .check-body .check-name { font-size: 14.5px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+  .check-body .check-detail { font-size: 13.5px; color: var(--ink-dim); }
+  .pill { justify-self: end; font-size: 11.5px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; white-space: nowrap; height: fit-content; }
+  .pill.pass { color: var(--good); background: var(--good-soft); }
+  .pill.warn { color: var(--warn); background: var(--warn-soft); }
+  .pill.fail { color: var(--fail); background: var(--fail-soft); }
+  .pill.nd { color: var(--nd); background: var(--nd-soft); }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; }
+  table { width: 100%; border-collapse: collapse; background: var(--panel); font-size: 13px; }
+  thead th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint); font-weight: 600; padding: 10px 14px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  tbody td { padding: 9px 14px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr.highlight td { background: var(--meta-soft); font-weight: 700; }
+  td.label-cell { font-family: var(--font-sans); }
+  td.num { text-align: right; }
+  ol.recs { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  ol.recs li { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 14px 16px; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; font-size: 14.5px; }
+  ol.recs .n { font-family: var(--font-mono); font-weight: 700; color: var(--meta); }
+  ol.recs b { color: var(--ink); } ol.recs span.body { color: var(--ink-dim); }
+  .conjunto-block { display: flex; flex-direction: column; gap: 16px; padding: 22px; border: 1px solid var(--border); border-radius: 12px; background: var(--panel-2); }
+  .opt-empty { border: 1px dashed var(--border); border-radius: 10px; padding: 16px 18px; font-size: 13.5px; color: var(--ink-faint); background: var(--panel); }
+  footer { border-top: 1px solid var(--border); padding-top: 18px; font-size: 12.5px; color: var(--ink-faint); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+  a { color: var(--meta); }
+  @media (max-width: 520px) { .check-row { grid-template-columns: 1fr; } .pill { justify-self: start; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <span class="breadcrumb"><a href="../../../">Plus Digital</a> / <a href="../../">Dr. Bruno</a> / <a href="../">Meta Ads</a> / <a href="./">Julho 2026</a></span>
+
+  <header class="masthead">
+    <span class="eyebrow">Meta Ads &middot; Dr. Bruno Couto (Ortopedista) &middot; Fechamento Mensal</span>
+    <h1 class="slug">Julho/2026 — 3 conjuntos ativos</h1>
+    <div class="meta-row">
+      <span><b>Período:</b> 01/07/2026 – 30/07/2026 (mês fechado)</span>
+      <span><b>Conta:</b> act_999511941078753</span>
+    </div>
+  </header>
+
+  <section class="callout fail">
+    <span class="callout-title">🚨 Achado crítico do mês — prioridade máxima, transversal aos 3 conjuntos</span>
+    <p>A conta <b>parou de gastar/entregar de 18/07 a 30/07 — 13 dias consecutivos de R$0,00</b>, depois de rodar normalmente de 01 a 17/07. Causa raiz confirmada: os 3 anúncios de maior volume (um por conjunto) foram pausados automaticamente pela Meta com erro <code>WITH_ISSUES</code> — "número do WhatsApp ausente". Os 3 dependem da mesma Página, por isso a falha derrubou os 3 conjuntos ao mesmo tempo. Não é problema de estrutura, orçamento ou leilão — é desconexão do WhatsApp Business com a Página.</p>
+    <p><b>Impacto:</b> nos 17 dias com entrega normal, a conta gerou R$481,90 e 60 conversas (custo/conversa R$8,03 — melhor que junho). Projeção: ~R$368 e ~46 conversas perdidas nos 13 dias parados.</p>
+    <p><b>Ação imediata:</b> verificar no Business Manager → WhatsApp Manager se o número segue conectado/verificado, reconectar, testar preview antes de reativar os anúncios. A copy dos 3 anúncios pausados não precisa ser reescrita — já validada por resultado real.</p>
+  </section>
+
+  <section>
+    <h2 class="section-title">Fechamento do mês — conta inteira</h2>
+    <div class="kpi-grid">
+      <div class="kpi"><span class="label">Investimento total</span><span class="value">R$ 481,90</span></div>
+      <div class="kpi"><span class="label">Conversas iniciadas</span><span class="value">60</span></div>
+      <div class="kpi"><span class="label">Custo por conversa</span><span class="value good">R$ 8,03</span></div>
+      <div class="kpi"><span class="label">vs. Junho/2026</span><span class="value good">-31,9%</span></div>
+      <div class="kpi"><span class="label">Dias com entrega</span><span class="value flag">17 de 30</span></div>
+    </div>
+  </section>
+
+  <section class="callout">
+    <span class="callout-title">Panorama do mês</span>
+    <p>Mês tecnicamente eficiente enquanto rodou — o custo por conversa médio de julho (R$8,03) é melhor que junho (R$11,79). O problema do mês não foi qualidade de leilão, público ou criativo — foi 100% volume perdido pela falha técnica de WhatsApp. Projeção de recuperação: com reconexão e realocação de orçamento a favor do Conjunto Bahia+Pará, agosto pode fechar em torno de R$850-900 investidos e ~100-105 conversas.</p>
+  </section>
+
+  <section>
+    <h2 class="section-title">Comparativo entre os 3 conjuntos ativos</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Conjunto</th><th class="num">Gasto</th><th class="num">Conversas</th><th class="num">Custo/Conversa</th><th>vs. Junho</th></tr></thead>
+        <tbody>
+          <tr class="highlight"><td class="label-cell">Bahia + Pará</td><td class="num">R$ 159,19</td><td class="num">39</td><td class="num">R$ 4,08</td><td class="label-cell">🟢 Melhorou (R$5,67→R$4,08)</td></tr>
+          <tr><td class="label-cell">Brasília + 50km</td><td class="num">R$ 160,85</td><td class="num">13</td><td class="num">R$ 12,37</td><td class="label-cell">🟡 Melhorou (R$17,11→R$12,37)</td></tr>
+          <tr><td class="label-cell">PS-Saúde/Interesses</td><td class="num">R$ 161,86</td><td class="num">8</td><td class="num">R$ 20,23</td><td class="label-cell">🔴 Piorou (R$12,36→R$20,23)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="section-sub" style="margin-top:10px;">Orçamento praticamente idêntico entre os 3 (R$10/dia cada, ABO), apesar de entregarem resultados 5x diferentes entre si — oportunidade clara de realocação assim que a entrega for restabelecida.</p>
+  </section>
+
+  <section>
+    <h2 class="section-title">Ranking de Criativos — por conjunto</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Anúncio</th><th>Conjunto</th><th class="num">Impressões</th><th class="num">Gasto</th><th class="num">Conversas</th><th class="num">Custo/Conversa</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr class="highlight"><td class="label-cell">Img3 – Sua dor no joelho não pode</td><td class="label-cell">Bahia + Pará</td><td class="num">20.593</td><td class="num">R$ 157,17</td><td class="num">39</td><td class="num">R$ 4,03</td><td><span class="pill pass">🏆 Campeão de toda a conta (pausado)</span></td></tr>
+          <tr><td class="label-cell">Img4 – Sua dor no joelho não pode</td><td class="label-cell">Brasília + 50km</td><td class="num">13.810</td><td class="num">R$ 159,13</td><td class="num">13</td><td class="num">R$ 12,24</td><td><span class="pill pass">🏆 Campeão do conjunto (pausado)</span></td></tr>
+          <tr><td class="label-cell">Img1 – Sofre com dores no joelho</td><td class="label-cell">PS-Saúde/Interesses</td><td class="num">9.060</td><td class="num">R$ 152,83</td><td class="num">8</td><td class="num">R$ 19,10</td><td><span class="pill warn">🏆 Campeão do conjunto, mas o pior campeão da conta (pausado)</span></td></tr>
+          <tr><td class="label-cell">Img1 – Não deixe sua dor virar cirurgia</td><td class="label-cell">Bahia + Pará</td><td class="num">99</td><td class="num">R$ 1,68</td><td class="num">0</td><td class="num">—</td><td><span class="pill nd">Ativo, copy boa, sem volume</span></td></tr>
+          <tr><td class="label-cell">Img2 – Depois dos 60</td><td class="label-cell">Bahia + Pará</td><td class="num">26</td><td class="num">R$ 0,34</td><td class="num">0</td><td class="num">—</td><td><span class="pill nd">Ativo, copy boa, sem volume</span></td></tr>
+          <tr><td class="label-cell">Img3 – Especialista em Joelho</td><td class="label-cell">Brasília + 50km</td><td class="num">85</td><td class="num">R$ 1,72</td><td class="num">0</td><td class="num">—</td><td><span class="pill warn">⚠️ Baixa entrega</span></td></tr>
+          <tr><td class="label-cell">Img2 – Cuide do seu joelho</td><td class="label-cell">PS-Saúde/Interesses</td><td class="num">167</td><td class="num">R$ 4,38</td><td class="num">0</td><td class="num">—</td><td><span class="pill fail">❌ Gastando sem resultado</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="section-sub" style="margin-top:10px;">Nota de diversificação (Andromeda): o conjunto Bahia+Pará é o único com diversificação criativa real (3 conceitos distintos: dor geral, medo de cirurgia, persona 60+). No conjunto PS-Saúde/Interesses os 3 anúncios usam literalmente o mesmo texto institucional.</p>
+  </section>
+
+  <section>
+    <h2 class="section-title">Diagnóstico por conjunto</h2>
+
+    <div class="conjunto-block">
+      <h3 class="sub-title">Conjunto 1 — "Bahia + Pará" (Consulta Online)</h3>
+      <p style="margin:0; font-size:14.5px; color:var(--ink-dim);"><b>Segmentação Bahia+Pará é intencional e estratégica</b> (telemedicina + pacientes que viajam para cirurgia em Brasília). Modelo a replicar — melhor copy da conta (3 conceitos genuinamente diferentes) no público certo. Algoritmo convergiu cedo no campeão (Img3), nunca deu volume aos outros 2 provarem se performam igual. Orçamento fixo R$10/dia igual aos outros conjuntos, apesar do CPA ser 3x melhor.</p>
+      <div class="check-table">
+        <div class="check-row"><div class="check-body"><div class="check-name">Janela de atribuição</div><div class="check-detail">Só 7d clique — maior impacto potencial dos 3, risco de subcontagem em Stories/Reels/WhatsApp Status</div></div><span class="pill warn">Ajustar</span></div>
+        <div class="check-row"><div class="check-body"><div class="check-name">Orçamento</div><div class="check-detail">Melhor CPA da conta no mesmo teto dos piores — subdimensionado</div></div><span class="pill warn">Oportunidade</span></div>
+        <div class="check-row"><div class="check-body"><div class="check-name">Públicos</div><div class="check-detail">Segmentação regional intencional e documentada</div></div><span class="pill pass">OK</span></div>
+        <div class="check-row"><div class="check-body"><div class="check-name">Copy dos anúncios</div><div class="check-detail">Melhor diversificação real da conta</div></div><span class="pill pass">OK</span></div>
+      </div>
+    </div>
+
+    <div class="conjunto-block">
+      <h3 class="sub-title">Conjunto 2 — "Brasília + 50km"</h3>
+      <p style="margin:0; font-size:14.5px; color:var(--ink-dim);">Sustentado por 1 único anúncio ativo de fato (Img4). Quando caiu pelo erro de WhatsApp, o conjunto foi a zero. 3 dos 5 anúncios já estavam zerados antes da falha técnica.</p>
+      <div class="check-table">
+        <div class="check-row"><div class="check-body"><div class="check-name">Orçamento</div><div class="check-detail">ABO R$10/dia, pior CPA — candidato a redução em favor do Conjunto Bahia+Pará</div></div><span class="pill nd">Monitorar</span></div>
+        <div class="check-row"><div class="check-body"><div class="check-name">Copy dos anúncios</div><div class="check-detail">Só 2/5 anúncios com entrega; residual (Img3) institucional/genérico</div></div><span class="pill warn">Ajustar</span></div>
+      </div>
+    </div>
+
+    <div class="conjunto-block">
+      <h3 class="sub-title">Conjunto 3 — "PS-Saúde/Interesses" (o mais sério da conta)</h3>
+      <p style="margin:0; font-size:14.5px; color:var(--ink-dim);">Pior CPA de julho, e o único que piorou desproporcionalmente vs. junho (R$12,36→R$20,23, quase dobrou). Duas causas convergentes: público mais estreito (único conjunto com interesses manuais empilhados, sem Advantage+ Audience), e copy genuinamente mais fraca — os 3 anúncios ativos usam <b>o mesmo texto institucional idêntico</b>, sem gancho de dor, sem diversificação real.</p>
+      <div class="check-table">
+        <div class="check-row"><div class="check-body"><div class="check-name">Orçamento</div><div class="check-detail">Não aumentar até confirmar volta ao patamar pós-correção WhatsApp</div></div><span class="pill warn">Ajustar</span></div>
+        <div class="check-row"><div class="check-body"><div class="check-name">Públicos</div><div class="check-detail">Interesses manuais empilhados, sem Advantage+ Audience — hipótese de causa raiz</div></div><span class="pill warn">Ajustar</span></div>
+        <div class="check-row"><div class="check-body"><div class="check-name">Copy dos anúncios</div><div class="check-detail">PRIORITÁRIO — mesma copy genérica nos 3 anúncios, pior qualidade da conta</div></div><span class="pill fail">Ajustar</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Achado operacional</h2>
+    <div class="callout warn">
+      <span class="callout-title">Adset zumbi</span>
+      <p>O adset "Muito prazer, eu sou a Dra...." (campanha "[01] [POST IG] [MAR/26]") aparece <code>ACTIVE</code> na API mas seu <code>end_time</code> era 31/03/2026, zero impressões/gasto em julho — recomenda-se pausar formalmente.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Recomendações do Head de Performance</h2>
+    <ol class="recs">
+      <li><span class="n">1</span><span><b>Reconectar o WhatsApp Business à Página</b> — <span class="body">bloqueador total, prioridade acima de tudo o resto.</span></li>
+      <li><span class="n">2</span><span><b>Reescrever a copy do Conjunto PS-Saúde/Interesses</b> — <span class="body">usando os ângulos já validados no conjunto Bahia+Pará ("medo de cirurgia", "persona 60+").</span></li>
+      <li><span class="n">3</span><span><b>Realocar orçamento a favor do Bahia+Pará</b> — <span class="body">melhor CPA da conta, 3x melhor que os demais — incrementos de 10-20% a cada 48-72h.</span></li>
+      <li><span class="n">4</span><span><b>Migrar para atribuição Standard</b> — <span class="body">7d clique + 1d visualização + 1d engajamento nos 3 conjuntos.</span></li>
+      <li><span class="n">5</span><span><b>Limpar o Conjunto Brasília+50km</b> — <span class="body">remover os 3 anúncios zerados e criar 1 variação nova de "medo de cirurgia" para reduzir dependência de um único criativo.</span></li>
+      <li><span class="n">6</span><span><b>Forçar verba mínima de teste</b> — <span class="body">para Img1/Img2 do Bahia+Pará enquanto o campeão (Img3) está pausado — janela natural para validar se performam tão bem.</span></li>
+      <li><span class="n">7</span><span><b>Higienizar a conta</b> — <span class="body">pausar formalmente o adset zumbi "Muito prazer, eu sou a Dra....".</span></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2 class="section-title">Histórico de Otimizações</h2>
+    <p class="section-sub">Preenchido manualmente pelo Head de Performance a cada semana — o agente sempre pergunta o que registrar aqui, nunca escreve sozinho.</p>
+    <div class="opt-empty">Nenhuma otimização registrada ainda — primeira publicação deste relatório.</div>
+  </section>
+
+  <footer>
+    <span>Dr. Bruno Couto · Meta Ads · Ver também: <a href="../../Leaper/Julho%202026/">Origem dos Leads (Leaper)</a></span>
+    <span>Gerado em 30/07/2026</span>
+  </footer>
+
+</div>
+</body>
+</html>

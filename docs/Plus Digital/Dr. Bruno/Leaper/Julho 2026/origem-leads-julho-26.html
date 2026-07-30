@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Origem dos Leads — Julho/2026 — Dr. Bruno</title>
+<style>
+  :root {
+    --ground: #f2f3f0; --panel: #ffffff; --panel-2: #eceeea; --border: #d8dad4;
+    --ink: #15201c; --ink-dim: #4c5a53; --ink-faint: #838f87;
+    --meta: #3b5fce; --meta-ink: #23408f; --meta-soft: #e3e9fa;
+    --google: #157567; --google-ink: #0d4b42; --google-soft: #dcefe9;
+    --organico: #7c5cbf; --organico-ink: #543e91; --organico-soft: #ece5f9;
+    --gap: #b45309; --gap-ink: #8a3f07; --gap-soft: #faecd9;
+    --win: #b8860b; --win-soft: #fbf1d6;
+    --font-display: ui-serif, Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+    --font-sans: -apple-system, "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #10160f; --panel: #171f19; --panel-2: #1c251e; --border: #2b352d;
+      --ink: #e9eee9; --ink-dim: #a8b3ab; --ink-faint: #7c8b86;
+      --meta: #7f9bf0; --meta-ink: #c2d1fb; --meta-soft: #1c2542;
+      --google: #4ecba9; --google-ink: #b6ece1; --google-soft: #163029;
+      --organico: #b79bec; --organico-ink: #ded1f7; --organico-soft: #281f3d;
+      --gap: #e8a24c; --gap-ink: #f6d9ac; --gap-soft: #382508;
+      --win: #e8c25b; --win-soft: #3a2f0c;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #10160f; --panel: #171f19; --panel-2: #1c251e; --border: #2b352d;
+    --ink: #e9eee9; --ink-dim: #a8b3ab; --ink-faint: #7c8b86;
+    --meta: #7f9bf0; --meta-ink: #c2d1fb; --meta-soft: #1c2542;
+    --google: #4ecba9; --google-ink: #b6ece1; --google-soft: #163029;
+    --organico: #b79bec; --organico-ink: #ded1f7; --organico-soft: #281f3d;
+    --gap: #e8a24c; --gap-ink: #f6d9ac; --gap-soft: #382508;
+    --win: #e8c25b; --win-soft: #3a2f0c;
+  }
+  * { box-sizing: border-box; } html, body { margin: 0; }
+  body { background: var(--ground); color: var(--ink); font-family: var(--font-sans); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  .page { max-width: 920px; margin: 0 auto; padding: 48px 24px 96px; display: flex; flex-direction: column; gap: 36px; }
+  .breadcrumb { font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-faint); }
+  .breadcrumb a { color: var(--meta); text-decoration: none; }
+  header.masthead { display: flex; flex-direction: column; gap: 12px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+  .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; }
+  h1 { font-family: var(--font-display); font-size: clamp(24px, 4vw, 34px); font-weight: 600; margin: 0; text-wrap: balance; color: var(--ink); }
+  .lede { font-size: 15px; color: var(--ink-dim); max-width: 68ch; margin: 0; }
+  .source-row { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 12.5px; color: var(--ink-faint); font-family: var(--font-mono); }
+  .record-total { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 14px; color: var(--ink-dim); }
+  .record-total b { font-size: 22px; color: var(--ink); }
+  h3.section-title { font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 12px; }
+  .bar-wrap { display: flex; flex-direction: column; gap: 10px; }
+  .bar { display: flex; width: 100%; height: 30px; border-radius: 7px; overflow: hidden; border: 1px solid var(--border); }
+  .bar .seg { height: 100%; }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 13px; color: var(--ink-dim); }
+  .legend .item { display: flex; align-items: center; gap: 7px; }
+  .legend .dot { width: 9px; height: 9px; border-radius: 2px; flex: none; }
+  .legend .n { font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 600; }
+  .rankings { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 20px; }
+  .rank-card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; flex-direction: column; gap: 12px; }
+  .rank-card h4 { margin: 0; font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint); }
+  .rank-list { display: flex; flex-direction: column; gap: 11px; }
+  .rank-row .rlabel { display: flex; align-items: baseline; gap: 6px; font-size: 12.5px; color: var(--ink); margin-bottom: 4px; }
+  .rank-row .rlabel .rcount { margin-left: auto; font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowrap; }
+  .rank-row.untracked .rlabel { color: var(--ink-faint); font-style: italic; }
+  .rank-track { background: var(--panel-2); border-radius: 5px; height: 16px; overflow: hidden; }
+  .rank-fill { height: 100%; background: var(--meta); }
+  .rank-fill.google { background: var(--google); }
+  .rank-row.winner .rank-fill { background: var(--win); }
+  .trophy { font-size: 11px; }
+  .ledger { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--panel); }
+  .lrow { display: flex; align-items: baseline; gap: 12px; padding: 11px 16px; border-bottom: 1px solid var(--border); }
+  .lrow:last-child { border-bottom: none; }
+  .lrow .name { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .lrow .count { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-weight: 600; white-space: nowrap; }
+  .lrow.l-campanha { background: var(--panel-2); font-weight: 700; font-size: 14.5px; }
+  .lrow.l-conjunto { padding-left: 34px; font-size: 13.5px; color: var(--ink-dim); position: relative; }
+  .lrow.l-conjunto::before { content: ""; position: absolute; left: 20px; top: 0; bottom: 0; width: 1px; background: var(--border); }
+  .lrow.l-anuncio { padding-left: 56px; font-size: 13px; color: var(--ink-dim); position: relative; }
+  .lrow.l-anuncio::before { content: ""; position: absolute; left: 20px; top: 0; bottom: 0; width: 1px; background: var(--border); }
+  .lrow.l-anuncio .name::before { content: "—"; margin-right: 7px; color: var(--ink-faint); }
+  .lrow .count.tag-meta { color: var(--meta-ink); }
+  .lrow.l-untracked { background: var(--panel); border-top: 1px dashed var(--border); }
+  .lrow.l-untracked .name { color: var(--ink-dim); font-style: italic; font-weight: 600; }
+  .lrow.l-untracked .name .tag-note { font-style: italic; font-weight: 400; color: var(--ink-faint); }
+  .lrow.l-untracked .count { color: var(--google-ink); }
+  .callout { border-radius: 10px; padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; font-size: 13.5px; }
+  .callout .callout-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+  .callout p { margin: 0; color: var(--ink); }
+  .callout.gap { background: var(--gap-soft); border: 1px solid var(--gap); }
+  .callout.gap .callout-title { color: var(--gap-ink); }
+  footer { border-top: 1px solid var(--border); padding-top: 18px; font-size: 12px; color: var(--ink-faint); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+  footer a { color: var(--meta); }
+  @media (max-width: 560px) { .lrow.l-conjunto { padding-left: 22px; } .lrow.l-anuncio { padding-left: 34px; } .lrow.l-conjunto::before, .lrow.l-anuncio::before { left: 10px; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <span class="breadcrumb"><a href="../../../">Plus Digital</a> / <a href="../../">Dr. Bruno</a> / <a href="../">Leaper</a> / <a href="./">Julho 2026</a></span>
+
+  <header class="masthead">
+    <span class="eyebrow">Leaper (CRM WhatsApp) &middot; Dr. Bruno Couto &middot; Fechamento Mensal</span>
+    <h1>De onde vieram os leads em Julho/2026</h1>
+    <p class="lede">Leitura da planilha de leads (Leaper) do Dr. Bruno, cruzando Origem, Campanha, Conjunto de Anúncios e Anúncio — para saber quantos leads cada nível trouxe no mês, e qual anúncio específico gerou mais conversas no WhatsApp.</p>
+    <div class="source-row"><span>📄 Leads Leaper Bruno Jul/26 · aba "Leads JUL/26"</span><span>Período: 02/07 – 29/07/2026</span></div>
+    <div class="record-total"><b>229</b> leads no mês</div>
+  </header>
+
+  <section>
+    <h3 class="section-title">Leads por origem</h3>
+    <div class="bar-wrap">
+      <div class="bar">
+        <div class="seg" style="width:81.2%; background: var(--gap);" title="Sem Rastreio — 186 (81,2%)"></div>
+        <div class="seg" style="width:9.2%; background: var(--meta);" title="Meta Ads - Mensagem — 21 (9,2%)"></div>
+        <div class="seg" style="width:8.7%; background: var(--google);" title="Google Ads — 20 (8,7%)"></div>
+        <div class="seg" style="width:0.9%; background: var(--organico);" title="Google Orgânico — 2 (0,9%)"></div>
+      </div>
+      <div class="legend">
+        <span class="item"><span class="dot" style="background: var(--gap);"></span>Sem Rastreio <span class="n">186</span> (81,2%)</span>
+        <span class="item"><span class="dot" style="background: var(--meta);"></span>Meta Ads - Mensagem <span class="n">21</span> (9,2%)</span>
+        <span class="item"><span class="dot" style="background: var(--google);"></span>Google Ads <span class="n">20</span> (8,7%)</span>
+        <span class="item"><span class="dot" style="background: var(--organico);"></span>Google Orgânico <span class="n">2</span> (0,9%)</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h3 class="section-title">Ranking — quem trouxe mais conversas no WhatsApp</h3>
+    <div class="rankings">
+      <div class="rank-card"><h4>Por Campanha</h4><div class="rank-list">
+        <div class="rank-row winner"><div class="rlabel"><span class="trophy">🏆</span>Google Ads (bloco único)<span class="rcount">20</span></div><div class="rank-track"><div class="rank-fill google" style="width:100%"></div></div></div>
+        <div class="rank-row"><div class="rlabel">Consulta Online Bahia e Pará — Out/25<span class="rcount">14</span></div><div class="rank-track"><div class="rank-fill" style="width:70%"></div></div></div>
+        <div class="rank-row"><div class="rlabel">Novos Criativos — 07.05.25<span class="rcount">7</span></div><div class="rank-track"><div class="rank-fill" style="width:35%"></div></div></div>
+      </div></div>
+      <div class="rank-card"><h4>Por Conjunto de Anúncios</h4><div class="rank-list">
+        <div class="rank-row winner"><div class="rlabel"><span class="trophy">🏆</span>Google Ads (bloco único)<span class="rcount">20</span></div><div class="rank-track"><div class="rank-fill google" style="width:100%"></div></div></div>
+        <div class="rank-row"><div class="rlabel">01/PS-Saúde/Interesses /Bahia + Pará<span class="rcount">14</span></div><div class="rank-track"><div class="rank-fill" style="width:70%"></div></div></div>
+        <div class="rank-row"><div class="rlabel">02 - Brasília + 50km<span class="rcount">5</span></div><div class="rank-track"><div class="rank-fill" style="width:25%"></div></div></div>
+        <div class="rank-row"><div class="rlabel">03 - PS-Saúde/Interesses<span class="rcount">2</span></div><div class="rank-track"><div class="rank-fill" style="width:10%"></div></div></div>
+      </div></div>
+      <div class="rank-card"><h4>Por Anúncio (criativo)</h4><div class="rank-list">
+        <div class="rank-row winner"><div class="rlabel"><span class="trophy">🏆</span>Google Ads (sem anúncio identificado)<span class="rcount">20</span></div><div class="rank-track"><div class="rank-fill google" style="width:100%"></div></div></div>
+        <div class="rank-row"><div class="rlabel">Img3 — Sua dor no joelho não pode...<span class="rcount">14</span></div><div class="rank-track"><div class="rank-fill" style="width:70%"></div></div></div>
+        <div class="rank-row"><div class="rlabel">Img4 — Sua dor no joelho não pode...<span class="rcount">5</span></div><div class="rank-track"><div class="rank-fill" style="width:25%"></div></div></div>
+        <div class="rank-row"><div class="rlabel">Img1 — Sofre com dores no joelho...<span class="rcount">2</span></div><div class="rank-track"><div class="rank-fill" style="width:10%"></div></div></div>
+      </div></div>
+    </div>
+  </section>
+
+  <section>
+    <h3 class="section-title">Campanha → Conjunto → Anúncio</h3>
+    <div class="ledger">
+      <div class="lrow l-campanha"><span class="name">Consulta Online Bahia e Pará — Out/25</span><span class="count tag-meta">14</span></div>
+      <div class="lrow l-conjunto"><span class="name">01/PS-Saúde/Interesses /Bahia + Pará</span><span class="count">14</span></div>
+      <div class="lrow l-anuncio"><span class="name">Img3 — Sua dor no joelho não pode...</span><span class="count">14</span></div>
+      <div class="lrow l-campanha"><span class="name">Novos Criativos — 07.05.25</span><span class="count tag-meta">7</span></div>
+      <div class="lrow l-conjunto"><span class="name">02 - Brasília + 50km</span><span class="count">5</span></div>
+      <div class="lrow l-anuncio"><span class="name">Img4 — Sua dor no joelho não pode...</span><span class="count">5</span></div>
+      <div class="lrow l-conjunto"><span class="name">03 - PS-Saúde/Interesses</span><span class="count">2</span></div>
+      <div class="lrow l-anuncio"><span class="name">Img1 — Sofre com dores no joelho...</span><span class="count">2</span></div>
+      <div class="lrow l-untracked"><span class="name">Google Ads <span class="tag-note">(20 leads confirmados vindos do Google — sem Campanha/Conjunto/Anúncio nesta planilha, só sabemos que veio via clique num sitelink)</span></span><span class="count">20</span></div>
+    </div>
+  </section>
+
+  <section class="callout gap">
+    <span class="callout-title">⚠ Ponto de atenção</span>
+    <p><b>81,2% dos leads (186 de 229) chegaram "Sem Rastreio"</b> — não entram nem na tabela acima. Como a conversão é direto no WhatsApp sem clique rastreado no site, esses leads ficam invisíveis para qualquer atribuição de campanha. Das origens conhecidas (43 leads: 21 Meta + 20 Google + 2 orgânico), o Google Ads é isoladamente o maior bloco — mas sem saber qual campanha.</p>
+  </section>
+
+  <footer>
+    <span>Dr. Bruno Couto · Leaper · Ver também: <a href="../../Meta%20Ads/Julho%202026/">Meta Ads</a> · <a href="../../Google%20Ads/Julho%202026/">Google Ads</a></span>
+    <span>Gerado em 30/07/2026</span>
+  </footer>
+
+</div>
+</body>
+</html>

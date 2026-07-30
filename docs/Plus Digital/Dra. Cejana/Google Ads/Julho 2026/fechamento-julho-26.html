@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fechamento de Julho/2026 — Google Ads — Dra. Cejana</title>
+<style>
+  :root {
+    --ground: #f4f7f5; --panel: #ffffff; --panel-2: #eaf1ee; --border: #d7e0dc;
+    --ink: #142320; --ink-dim: #4b5b56; --ink-faint: #7c8b86;
+    --accent: #157567; --accent-ink: #0d4b42; --accent-soft: #dcefe9;
+    --good: #1f7a52; --good-soft: #e1f3ea; --warn: #8a5a13; --warn-soft: #faf0dc;
+    --fail: #a3261f; --fail-soft: #fbe6e4; --nd: #5b6864; --nd-soft: #e9edeb;
+    --font-sans: -apple-system, "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0c1614; --panel: #121e1b; --panel-2: #16221f; --border: #24322e;
+      --ink: #e7efec; --ink-dim: #a9b8b3; --ink-faint: #7c8b86;
+      --accent: #37bfa8; --accent-ink: #b7ece1; --accent-soft: #17332d;
+      --good: #4ecb95; --good-soft: #17332a; --warn: #e0b25b; --warn-soft: #362a12;
+      --fail: #ec7972; --fail-soft: #3a1917; --nd: #93a19c; --nd-soft: #1b2624;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0c1614; --panel: #121e1b; --panel-2: #16221f; --border: #24322e;
+    --ink: #e7efec; --ink-dim: #a9b8b3; --ink-faint: #7c8b86;
+    --accent: #37bfa8; --accent-ink: #b7ece1; --accent-soft: #17332d;
+    --good: #4ecb95; --good-soft: #17332a; --warn: #e0b25b; --warn-soft: #362a12;
+    --fail: #ec7972; --fail-soft: #3a1917; --nd: #93a19c; --nd-soft: #1b2624;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--font-sans); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  .page { max-width: 920px; margin: 0 auto; padding: 48px 24px 80px; display: flex; flex-direction: column; gap: 36px; }
+  .breadcrumb { font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-faint); }
+  .breadcrumb a { color: var(--accent); text-decoration: none; }
+  header.masthead { display: flex; flex-direction: column; gap: 10px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+  .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  h1.slug { font-family: var(--font-mono); font-size: clamp(20px, 4vw, 28px); font-weight: 600; margin: 0; color: var(--ink); text-wrap: balance; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13.5px; color: var(--ink-dim); }
+  .meta-row b { color: var(--ink); font-weight: 600; }
+  h2.section-title { font-size: 15px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 6px; }
+  .section-sub { font-size: 13px; color: var(--ink-faint); margin: -8px 0 14px; font-style: italic; }
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .kpi { background: var(--panel); padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 6px; }
+  .kpi .label { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-faint); font-weight: 600; }
+  .kpi .value { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 21px; font-weight: 600; color: var(--ink); }
+  .kpi .value.flag { color: var(--fail); } .kpi .value.good { color: var(--good); }
+  .callout { background: var(--accent-soft); border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border)); border-radius: 10px; padding: 20px 22px; display: flex; flex-direction: column; gap: 8px; }
+  .callout .callout-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--accent-ink); }
+  .callout p { margin: 0; font-size: 15px; color: var(--ink); }
+  .callout.warn { background: var(--warn-soft); border-color: color-mix(in srgb, var(--warn) 35%, var(--border)); }
+  .callout.warn .callout-title { color: var(--warn); }
+  .check-table { width: 100%; border-collapse: collapse; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .check-row { display: grid; grid-template-columns: 1fr 96px; gap: 12px; align-items: start; padding: 14px 16px; background: var(--panel); border-bottom: 1px solid var(--border); }
+  .check-row:last-child { border-bottom: none; }
+  .check-body .check-name { font-size: 14.5px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+  .check-body .check-detail { font-size: 13.5px; color: var(--ink-dim); }
+  .pill { justify-self: end; font-size: 11.5px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; white-space: nowrap; height: fit-content; }
+  .pill.pass { color: var(--good); background: var(--good-soft); }
+  .pill.warn { color: var(--warn); background: var(--warn-soft); }
+  .pill.fail { color: var(--fail); background: var(--fail-soft); }
+  .pill.nd { color: var(--nd); background: var(--nd-soft); }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; }
+  table { width: 100%; border-collapse: collapse; background: var(--panel); font-size: 13px; }
+  thead th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint); font-weight: 600; padding: 10px 14px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  tbody td { padding: 9px 14px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr.highlight td { background: var(--accent-soft); font-weight: 700; }
+  td.label-cell { font-family: var(--font-sans); }
+  td.num { text-align: right; }
+  ol.recs { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  ol.recs li { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 14px 16px; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; font-size: 14.5px; }
+  ol.recs .n { font-family: var(--font-mono); font-weight: 700; color: var(--accent); }
+  ol.recs b { color: var(--ink); } ol.recs span.body { color: var(--ink-dim); }
+  .opt-empty { border: 1px dashed var(--border); border-radius: 10px; padding: 16px 18px; font-size: 13.5px; color: var(--ink-faint); background: var(--panel); }
+  footer { border-top: 1px solid var(--border); padding-top: 18px; font-size: 12.5px; color: var(--ink-faint); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+  a { color: var(--accent); }
+  code { font-family: var(--font-mono); font-size: 0.92em; }
+  @media (max-width: 520px) { .check-row { grid-template-columns: 1fr; } .pill { justify-self: start; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <span class="breadcrumb"><a href="../../../">Plus Digital</a> / <a href="../../">Dra. Cejana</a> / <a href="../">Google Ads</a> / <a href="./">Julho 2026</a></span>
+
+  <header class="masthead">
+    <span class="eyebrow">Google Ads &middot; Search &middot; Dra. Cejana Hamu (Endocrinologista) &middot; Fechamento Mensal</span>
+    <h1 class="slug">Julho/2026 — 1 campanha ativa</h1>
+    <div class="meta-row">
+      <span><b>Período:</b> 01/07/2026 – 30/07/2026 (mês fechado)</span>
+      <span><b>Conta:</b> 247-019-8472</span>
+    </div>
+  </header>
+
+  <section>
+    <h2 class="section-title">Métricas do período — "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"</h2>
+    <div class="kpi-grid">
+      <div class="kpi"><span class="label">Investimento</span><span class="value">R$ 957,25</span></div>
+      <div class="kpi"><span class="label">Impressões</span><span class="value">6.282</span></div>
+      <div class="kpi"><span class="label">Cliques</span><span class="value">409</span></div>
+      <div class="kpi"><span class="label">CTR</span><span class="value">6,51%</span></div>
+      <div class="kpi"><span class="label">CPC médio</span><span class="value">R$ 2,34</span></div>
+      <div class="kpi"><span class="label">Conversões</span><span class="value">129</span></div>
+      <div class="kpi"><span class="label">CPA</span><span class="value">R$ 7,42</span></div>
+      <div class="kpi"><span class="label">Impression Share</span><span class="value flag">9,99%</span></div>
+    </div>
+  </section>
+
+  <section class="callout">
+    <span class="callout-title">Achado principal</span>
+    <p>A campanha continua presa em ~10% de Impression Share — idêntico ao identificado em 04/07/2026 (90 dias). A causa raiz não mudou: <b>60,14% do IS perdido é por Rank/Quality Score, só 31,51% é por orçamento</b> — mesmo aumentando budget, a campanha continuaria perdendo a maioria dos leilões por qualidade de anúncio/lance. Dado novo e positivo: quando o anúncio aparece, sempre aparece no topo (Top IS = IS = Abs. Top IS, todos 9,99%).</p>
+  </section>
+
+  <section>
+    <h2 class="section-title">Checklist de causas raiz</h2>
+    <div class="check-table">
+      <div class="check-row"><div class="check-body"><div class="check-name">Sitelinks próprios da campanha</div><div class="check-detail">5 sitelinks existem, mas nenhum tem description preenchida, e 2 estão pausados sem motivo aparente — justamente os que apontam para páginas internas de tratamento (Áreas De Atuação, Opções De Consulta)</div></div><span class="pill warn">Ajustar</span></div>
+      <div class="check-row"><div class="check-body"><div class="check-name">Negativas de marca/concorrente/marketplace</div><div class="check-detail">As 71 negativas de 04/07/2026 foram todas aplicadas e confirmadas, mas surgiram vazamentos novos em julho (ver Termos de Pesquisa)</div></div><span class="pill warn">Ajustar</span></div>
+      <div class="check-row"><div class="check-body"><div class="check-name">Final URL segmentada por ad group</div><div class="check-detail">Os 3 ad groups (GP1/GP2/GP3) direcionam 100% para a home — nenhum para as páginas internas de tratamento que já existem no site. Sem mudança em 26 dias</div></div><span class="pill fail">Crítico</span></div>
+      <div class="check-row"><div class="check-body"><div class="check-name">Impression Share e Quality Score</div><div class="check-detail">IS 9,99%, Rank Lost IS 60,14%; keywords de maior volume com QS 3-5</div></div><span class="pill fail">Crítico</span></div>
+      <div class="check-row"><div class="check-body"><div class="check-name">Tracking de conversão</div><div class="check-detail">129 conversões = BTN WHATSAPP (67) + Lead Wpp #to0ww (60) + Conversation started (2) — verificar se as duas primeiras não são o mesmo evento contado 2x</div></div><span class="pill nd">Monitorar</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Resumo da Auditoria de Keywords</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Keyword</th><th>Match</th><th>Grupo</th><th class="num">QS</th><th class="num">Gasto</th><th class="num">CPA</th><th>Situação</th></tr></thead>
+        <tbody>
+          <tr class="highlight"><td class="label-cell">Endocrinologista asa sul</td><td>Broad</td><td>GP2</td><td class="num">3</td><td class="num">R$ 111,37</td><td class="num">R$ 12,37</td><td><span class="pill fail">🔴 Crítico</span></td></tr>
+          <tr><td class="label-cell">endocrinologista</td><td>Phrase</td><td>GP2</td><td class="num">3</td><td class="num">R$ 19,66</td><td class="num">— (0 conv)</td><td><span class="pill fail">🔴 Crítico</span></td></tr>
+          <tr><td class="label-cell">médico endocrinologista</td><td>Broad</td><td>GP2</td><td class="num">3</td><td class="num">—</td><td class="num">R$ 6,32</td><td><span class="pill warn">🟡 QS baixo, mas convertendo — não pausar</span></td></tr>
+          <tr><td class="label-cell">endocrinologista df</td><td>Broad</td><td>GP2</td><td class="num">5</td><td class="num">R$ 323,00</td><td class="num">R$ 7,43</td><td><span class="pill warn">🟡 Maior keyword em volume, estável</span></td></tr>
+          <tr><td class="label-cell">reposição hormonal</td><td>Broad</td><td>GP2</td><td class="num">5</td><td class="num">—</td><td class="num">R$ 7,71</td><td><span class="pill pass">🟢 QS subiu de 1 para 5 desde 04/07</span></td></tr>
+          <tr><td class="label-cell">dra cejana</td><td>Exact</td><td>—</td><td class="num">7</td><td class="num">—</td><td class="num">R$ 3,18</td><td><span class="pill pass">🟢 Melhor CPA da conta (melhorou de R$5,96)</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout" style="margin-top:14px;">
+      <span class="callout-title">Achado estrutural</span>
+      <p>Ad group <b>GP3 "Frase + Exatas"</b> (9 keywords) segue com zero impressão/clique/custo no mês — mesmo achado de 04/07/2026, sem mudança em quase um mês. Problema estrutural (lance/orçamento/config), não de keyword individual.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Termos de Pesquisa</h2>
+    <p class="section-sub">1.267 termos únicos com clique, R$563,90 de gasto agregado, 231 cliques, 65,5 conversões.</p>
+    <div class="callout">
+      <span class="callout-title">🔴 Desalinhado (negativar)</span>
+      <p><b>Padrão A — convênio sem a palavra "convenio":</b> "endocrinologista inas/amil/cassi/sulamérica df" (R$33,51, 0 conv) — negativar as seguradoras isoladamente (amil, cassi, inas, sulamerica).</p>
+      <p><b>Padrão B — buscas por outras clínicas em RAs do DF:</b> ~14 termos, todos R$0 conversão, ex: "clínica brasilia ceilandia", "endocrinologista taguatinga" — adicionar "telefone" como negativa broad de campanha (padrão comum, nenhum termo alinhado que converteu contém essa palavra).</p>
+      <p><b>Padrão C — JÁ CONVERTERAM mas são marcas concorrentes (mais importante):</b> "clínica luciana planaltina df"+variantes (8 conv, R$22,45 — maior cluster de conversão desalinhada), "vita care brasília", "clinica stevanato" e outros — negativar as marcas específicas e validar com a secretária se viraram consulta real.</p>
+      <p><b>Padrão D — desalinhamento de idade:</b> "endocrinologista infantil brasilia", "endocrinologia pediatrica" (3 conv) — estender negativa já existente ("pediatra/pediátrico") para "infantil".</p>
+    </div>
+    <div class="callout" style="margin-top:12px;">
+      <span class="callout-title">🆕 Achado Novo (promover a keyword dedicada)</span>
+      <p>"cejana hamu" (R$8,51, 2conv) · "dra cejana endocrinologista" (R$2,27, 2conv) · "falar com endocrinologista online" (R$7,07, 2conv — alta intenção telemedicina) · "endocrinologista online barato" (R$7,47, 2conv — sinaliza sensibilidade a preço)</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Qualidade dos Anúncios (RSA)</h2>
+    <p class="section-sub">Fato verificado via WebFetch na landing page (endocrinologistadf.com.br): botão WhatsApp abaixo da dobra, prova social "+3000 pacientes"+4 estrelas sem depoimentos nominais. "Reposição Hormonal"/"Tireoide Alterada?"/"Cansaço e Ganho de Peso?" (headlines usados) NÃO aparecem em lugar nenhum da home.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Grupo</th><th>Ad Strength</th><th>Problema principal</th><th>Ação</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">GP1 (genérico)</td><td>AVERAGE</td><td class="label-cell">4 slots de headline vazios; descriptions 3 e 4 quase idênticas</td><td class="label-cell">Completar headlines; diferenciar descriptions</td></tr>
+          <tr class="highlight"><td class="label-cell">GP2 (reposição hormonal)</td><td>AVERAGE</td><td class="label-cell">Gap crítico anúncio↔LP: promessas de tireoide/hormônio não aparecem na home — mesma causa do QS3 em "médico endocrinologista"</td><td class="label-cell">Ligar a landing page interna de Tireoide/Menopausa (já existe no site)</td></tr>
+          <tr><td class="label-cell">GP3 (zero entrega)</td><td>—</td><td class="label-cell">Typo "Endrocrinologista Online" continua ativo desde 04/07 — não corrigido</td><td class="label-cell">Corrigir typo — prioridade absoluta, esforço zero</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Recomendações do Head de Performance</h2>
+    <ol class="recs">
+      <li><span class="n">1</span><span><b>Reativar os 2 sitelinks pausados</b> — <span class="body">apontando (junto com Final URL por ad group) para as páginas internas de tratamento — fecha 2 itens do checklist de uma vez.</span></li>
+      <li><span class="n">2</span><span><b>Corrigir "Endrocrinologista Online"</b> — <span class="body">esforço zero, dano reputacional alto se não corrigir.</span></li>
+      <li><span class="n">3</span><span><b>Aplicar negativas do vazamento novo</b> — <span class="body">seguradoras isoladas (amil/cassi/inas/sulamerica), "telefone" broad de campanha, e marcas concorrentes do Padrão C.</span></li>
+      <li><span class="n">4</span><span><b>Investigar duplicidade de conversion actions</b> — <span class="body">confirmar com quem gerencia GTM/pixel se "BTN WHATSAPP" e "Lead Wpp #to0ww" não são o mesmo clique contado 2x.</span></li>
+      <li><span class="n">5</span><span><b>Promover os 4 achados novos</b> — <span class="body">como keywords exatas dedicadas (cejana hamu, dra cejana endocrinologista, falar com endocrinologista online, endocrinologista online barato).</span></li>
+      <li><span class="n">6</span><span><b>Decidir sobre a campanha Smart pausada</b> — <span class="body">em limbo há pelo menos 26 dias sem decisão do cliente.</span></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2 class="section-title">Histórico de Otimizações</h2>
+    <p class="section-sub">Preenchido manualmente pelo Head de Performance a cada semana — o agente sempre pergunta o que registrar aqui, nunca escreve sozinho.</p>
+    <div class="opt-empty">Nenhuma otimização registrada ainda — primeira publicação deste relatório.</div>
+  </section>
+
+  <footer>
+    <span>Dra. Cejana Hamu · Google Ads · Ver também: <a href="../../Leaper/Julho%202026/">Origem dos Leads (Leaper)</a></span>
+    <span>Gerado em 30/07/2026</span>
+  </footer>
+
+</div>
+</body>
+</html>

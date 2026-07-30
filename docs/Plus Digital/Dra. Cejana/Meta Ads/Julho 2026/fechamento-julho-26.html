@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fechamento de Julho/2026 — Meta Ads — Dra. Cejana</title>
+<style>
+  :root {
+    --ground: #f4f7f5; --panel: #ffffff; --panel-2: #eaf1ee; --border: #d7e0dc;
+    --ink: #142320; --ink-dim: #4b5b56; --ink-faint: #7c8b86;
+    --accent: #157567; --accent-ink: #0d4b42; --accent-soft: #dcefe9;
+    --meta: #1877f2; --meta-ink: #0a58ca; --meta-soft: #dbe8fd;
+    --good: #1f7a52; --good-soft: #e1f3ea; --warn: #8a5a13; --warn-soft: #faf0dc;
+    --fail: #a3261f; --fail-soft: #fbe6e4; --nd: #5b6864; --nd-soft: #e9edeb;
+    --font-sans: -apple-system, "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0c1614; --panel: #121e1b; --panel-2: #16221f; --border: #24322e;
+      --ink: #e7efec; --ink-dim: #a9b8b3; --ink-faint: #7c8b86;
+      --accent: #37bfa8; --accent-ink: #b7ece1; --accent-soft: #17332d;
+      --meta: #6ea8fe; --meta-ink: #bcd6ff; --meta-soft: #16233a;
+      --good: #4ecb95; --good-soft: #17332a; --warn: #e0b25b; --warn-soft: #362a12;
+      --fail: #ec7972; --fail-soft: #3a1917; --nd: #93a19c; --nd-soft: #1b2624;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0c1614; --panel: #121e1b; --panel-2: #16221f; --border: #24322e;
+    --ink: #e7efec; --ink-dim: #a9b8b3; --ink-faint: #7c8b86;
+    --accent: #37bfa8; --accent-ink: #b7ece1; --accent-soft: #17332d;
+    --meta: #6ea8fe; --meta-ink: #bcd6ff; --meta-soft: #16233a;
+    --good: #4ecb95; --good-soft: #17332a; --warn: #e0b25b; --warn-soft: #362a12;
+    --fail: #ec7972; --fail-soft: #3a1917; --nd: #93a19c; --nd-soft: #1b2624;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--font-sans); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  .page { max-width: 920px; margin: 0 auto; padding: 48px 24px 80px; display: flex; flex-direction: column; gap: 36px; }
+  .breadcrumb { font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-faint); }
+  .breadcrumb a { color: var(--meta); text-decoration: none; }
+  header.masthead { display: flex; flex-direction: column; gap: 10px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+  .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--meta); font-weight: 600; }
+  h1.slug { font-family: var(--font-mono); font-size: clamp(20px, 4vw, 28px); font-weight: 600; margin: 0; color: var(--ink); text-wrap: balance; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13.5px; color: var(--ink-dim); }
+  .meta-row b { color: var(--ink); font-weight: 600; }
+  h2.section-title { font-size: 15px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 6px; }
+  h3.sub-title { font-family: var(--font-mono); font-size: 16px; font-weight: 600; color: var(--ink); margin: 0 0 4px; }
+  .section-sub { font-size: 13px; color: var(--ink-faint); margin: -8px 0 14px; font-style: italic; }
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .kpi { background: var(--panel); padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 6px; }
+  .kpi .label { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-faint); font-weight: 600; }
+  .kpi .value { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 21px; font-weight: 600; color: var(--ink); }
+  .kpi .value.flag { color: var(--fail); } .kpi .value.good { color: var(--good); }
+  .callout { background: var(--meta-soft); border: 1px solid color-mix(in srgb, var(--meta) 35%, var(--border)); border-radius: 10px; padding: 20px 22px; display: flex; flex-direction: column; gap: 8px; }
+  .callout .callout-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--meta-ink); }
+  .callout p { margin: 0; font-size: 15px; color: var(--ink); }
+  .callout.warn { background: var(--warn-soft); border-color: color-mix(in srgb, var(--warn) 35%, var(--border)); }
+  .callout.warn .callout-title { color: var(--warn-ink, var(--warn)); }
+  .check-table { width: 100%; border-collapse: collapse; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .check-row { display: grid; grid-template-columns: 1fr 96px; gap: 12px; align-items: start; padding: 14px 16px; background: var(--panel); border-bottom: 1px solid var(--border); }
+  .check-row:last-child { border-bottom: none; }
+  .check-body .check-name { font-size: 14.5px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+  .check-body .check-detail { font-size: 13.5px; color: var(--ink-dim); }
+  .pill { justify-self: end; font-size: 11.5px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; white-space: nowrap; height: fit-content; }
+  .pill.pass { color: var(--good); background: var(--good-soft); }
+  .pill.warn { color: var(--warn); background: var(--warn-soft); }
+  .pill.fail { color: var(--fail); background: var(--fail-soft); }
+  .pill.nd { color: var(--nd); background: var(--nd-soft); }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; }
+  table { width: 100%; border-collapse: collapse; background: var(--panel); font-size: 13px; }
+  thead th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint); font-weight: 600; padding: 10px 14px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  tbody td { padding: 9px 14px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr.highlight td { background: var(--meta-soft); font-weight: 700; }
+  td.label-cell { font-family: var(--font-sans); }
+  td.num { text-align: right; }
+  ol.recs { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  ol.recs li { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 14px 16px; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; font-size: 14.5px; }
+  ol.recs .n { font-family: var(--font-mono); font-weight: 700; color: var(--meta); }
+  ol.recs b { color: var(--ink); } ol.recs span.body { color: var(--ink-dim); }
+  .conjunto-block { display: flex; flex-direction: column; gap: 16px; padding: 22px; border: 1px solid var(--border); border-radius: 12px; background: var(--panel-2); }
+  .opt-log { display: flex; flex-direction: column; gap: 14px; }
+  .opt-entry { border: 1px solid var(--border); border-radius: 10px; background: var(--panel); overflow: hidden; }
+  .opt-empty { border: 1px dashed var(--border); border-radius: 10px; padding: 16px 18px; font-size: 13.5px; color: var(--ink-faint); background: var(--panel); }
+  footer { border-top: 1px solid var(--border); padding-top: 18px; font-size: 12.5px; color: var(--ink-faint); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+  a { color: var(--meta); }
+  @media (max-width: 520px) { .check-row { grid-template-columns: 1fr; } .pill { justify-self: start; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <span class="breadcrumb"><a href="../../../">Plus Digital</a> / <a href="../../">Dra. Cejana</a> / <a href="../">Meta Ads</a> / <a href="./">Julho 2026</a></span>
+
+  <header class="masthead">
+    <span class="eyebrow">Meta Ads &middot; Dra. Cejana Hamu (Endocrinologista) &middot; Fechamento Mensal</span>
+    <h1 class="slug">Julho/2026 — 2 conjuntos ativos</h1>
+    <div class="meta-row">
+      <span><b>Período:</b> 01/07/2026 – 30/07/2026 (mês fechado)</span>
+      <span><b>Conta:</b> act_1258930228369219</span>
+    </div>
+  </header>
+
+  <section>
+    <h2 class="section-title">Fechamento do mês — conta inteira</h2>
+    <div class="kpi-grid">
+      <div class="kpi"><span class="label">Investimento total</span><span class="value">R$ 1.170,68</span></div>
+      <div class="kpi"><span class="label">Conversas iniciadas</span><span class="value">427</span></div>
+      <div class="kpi"><span class="label">Custo por conversa</span><span class="value good">R$ 2,74</span></div>
+      <div class="kpi"><span class="label">vs. Junho/2026</span><span class="value good">-15,7%</span></div>
+      <div class="kpi"><span class="label">CPM médio</span><span class="value">R$ 19,27</span></div>
+      <div class="kpi"><span class="label">CTR médio</span><span class="value">3,27%</span></div>
+    </div>
+  </section>
+
+  <section class="callout">
+    <span class="callout-title">Panorama do mês</span>
+    <p>Investimento estável frente ao padrão histórico (~R$1.170/mês), mas com <b>CPA 15,7% melhor que junho</b> (R$3,25 → R$2,74), em linha com a melhor marca histórica da conta. A melhora é puxada majoritariamente pelo Conjunto "Consulta DF" (CPM -29%, CPA -37%) — parte sazonal (junho-agosto, planos de saúde com carências vencendo) e parte estrutural (maturação do aprendizado do algoritmo). Recomenda-se confirmar em agosto se o patamar se sustenta.</p>
+    <p><b>Ponto de atenção para decisão do gestor/cliente:</b> o conjunto "Consulta Online" hoje roda para o Brasil inteiro — extensão de telemedicina já oficial para o Dr. Bruno, mas nunca formalizada para a Dra. Cejana. Está performando muito bem (melhor CPA da conta) — recomendação é manter e formalizar, aguardando confirmação.</p>
+  </section>
+
+  <section>
+    <h2 class="section-title">Comparativo entre os 2 conjuntos ativos</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Conjunto</th><th>Público</th><th class="num">Investimento</th><th class="num">Conversas</th><th class="num">Custo/Conversa</th></tr></thead>
+        <tbody>
+          <tr class="highlight"><td class="label-cell">Consulta Online</td><td class="label-cell">Brasil inteiro</td><td class="num">R$ 580,41 (49,6%)</td><td class="num">302 (70,7%)</td><td class="num">R$ 1,92</td></tr>
+          <tr><td class="label-cell">Consulta DF</td><td class="label-cell">Brasília (40km)</td><td class="num">R$ 590,27 (50,4%)</td><td class="num">125 (29,3%)</td><td class="num">R$ 4,72</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="section-sub" style="margin-top:10px;">Orçamento quase igual (50/50), mas o Conjunto Consulta Online entrega 2,4x mais volume ao custo de 41% do outro — diferença predominantemente estrutural (geo amplo + Advantage+ Placements completo vs. geo restrito + posicionamento manual), não falha de copy no Conjunto Consulta DF.</p>
+  </section>
+
+  <section>
+    <h2 class="section-title">Ranking de Criativos — conta inteira</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Anúncio</th><th>Conjunto</th><th class="num">Impressões</th><th class="num">Gasto</th><th class="num">Conversas</th><th class="num">Custo/Conversa</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr class="highlight"><td class="label-cell">Img2 – Tireóide desregulada</td><td class="label-cell">Consulta Online</td><td class="num">41.820</td><td class="num">R$ 580,04</td><td class="num">302</td><td class="num">R$ 1,92</td><td><span class="pill pass">🏆 Campeão da conta</span></td></tr>
+          <tr><td class="label-cell">Img2 – Controle o Diabetes</td><td class="label-cell">Consulta DF</td><td class="num">15.896</td><td class="num">R$ 439,41</td><td class="num">97</td><td class="num">R$ 4,53</td><td><span class="pill pass">🏆 Campeão do conjunto</span></td></tr>
+          <tr><td class="label-cell">Carrossel1 – Saúde metabólica?</td><td class="label-cell">Consulta DF</td><td class="num">3.039</td><td class="num">R$ 150,94</td><td class="num">28</td><td class="num">R$ 5,39</td><td><span class="pill nd">Regular</span></td></tr>
+          <tr><td class="label-cell">Carrossel</td><td class="label-cell">Consulta Online</td><td class="num">11</td><td class="num">R$ 0,46</td><td class="num">0</td><td class="num">—</td><td><span class="pill warn">⚠️ Baixa entrega (achado técnico de leilão)</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Diagnóstico por conjunto</h2>
+
+    <div class="conjunto-block">
+      <h3 class="sub-title">Conjunto 1 — "Consulta Online" (Brasil inteiro)</h3>
+      <div class="kpi-grid">
+        <div class="kpi"><span class="label">Gasto</span><span class="value">R$ 580,41</span></div>
+        <div class="kpi"><span class="label">Conversas</span><span class="value">302</span></div>
+        <div class="kpi"><span class="label">Custo/conversa</span><span class="value good">R$ 1,92</span></div>
+        <div class="kpi"><span class="label">CPM</span><span class="value">R$ 13,88</span></div>
+        <div class="kpi"><span class="label">CTR</span><span class="value">3,36%</span></div>
+        <div class="kpi"><span class="label">Frequência</span><span class="value">1,74</span></div>
+      </div>
+      <p style="margin:0; font-size:14.5px; color:var(--ink-dim);">Melhor resultado de toda a conta e melhora frente a junho (R$2,08 → R$1,92). O criativo "Img2 – Tireóide desregulada" carrega praticamente 100% da entrega e do resultado.</p>
+      <div class="check-table">
+        <div class="check-row"><div class="check-body"><div class="check-name">Evento de conversão e EMQ</div><div class="check-detail">Conversão nativa (mensagem), sem sinal contraditório</div></div><span class="pill pass">OK</span></div>
+        <div class="check-row"><div class="check-body"><div class="check-name">Janela de atribuição</div><div class="check-detail">Só 7d clique; falta 1d visualização + 1d engajamento (padrão Standard)</div></div><span class="pill warn">Ajustar</span></div>
+        <div class="check-row"><div class="check-body"><div class="check-name">Orçamento</div><div class="check-detail">ABO R$20/dia, único adset ativo</div></div><span class="pill pass">OK</span></div>
+        <div class="check-row"><div class="check-body"><div class="check-name">Públicos</div><div class="check-detail">Brasil inteiro não documentado oficialmente como estratégia da Cejana — resultado valida</div></div><span class="pill nd">Monitorar</span></div>
+        <div class="check-row"><div class="check-body"><div class="check-name">Performance por plataforma</div><div class="check-detail">Facebook R$1,78/conversa e Instagram R$2,09/conversa, ambos saudáveis</div></div><span class="pill pass">OK</span></div>
+        <div class="check-row"><div class="check-body"><div class="check-name">Copy dos anúncios</div><div class="check-detail">Campeão forte; "Carrossel" com baixa entrega crítica (achado técnico, não de copy)</div></div><span class="pill warn">Oportunidade</span></div>
+        <div class="check-row"><div class="check-body"><div class="check-name">Frequência e fadiga</div><div class="check-detail">1,74, estável frente a junho</div></div><span class="pill pass">OK</span></div>
+      </div>
+    </div>
+
+    <div class="conjunto-block">
+      <h3 class="sub-title">Conjunto 2 — "Consulta DF" (Brasília, 40km)</h3>
+      <div class="kpi-grid">
+        <div class="kpi"><span class="label">Gasto</span><span class="value">R$ 590,27</span></div>
+        <div class="kpi"><span class="label">Conversas</span><span class="value">125</span></div>
+        <div class="kpi"><span class="label">Custo/conversa</span><span class="value good">R$ 4,72</span></div>
+        <div class="kpi"><span class="label">CPM</span><span class="value">R$ 31,18</span></div>
+        <div class="kpi"><span class="label">CTR</span><span class="value">3,07%</span></div>
+        <div class="kpi"><span class="label">Frequência</span><span class="value">1,96</span></div>
+      </div>
+      <p style="margin:0; font-size:14.5px; color:var(--ink-dim);">Segundo melhor resultado, com melhora expressiva mês a mês (CPA -36,8% vs. junho R$7,47). CPM quase 2,5x mais caro que o Conjunto 1 — explicado majoritariamente por posicionamento manual restrito competindo com Advantage+ Placements, mais leilão local mais disputado. Há um adset de remarketing "02/RMKT" pausado sem motivo aparente.</p>
+      <div class="check-table">
+        <div class="check-row"><div class="check-body"><div class="check-name">Evento de conversão e EMQ</div><div class="check-detail">Mesma consistência do Conjunto 1</div></div><span class="pill pass">OK</span></div>
+        <div class="check-row"><div class="check-body"><div class="check-name">Janela de atribuição</div><div class="check-detail">Mesmo desvio — só 7d clique</div></div><span class="pill warn">Ajustar</span></div>
+        <div class="check-row"><div class="check-body"><div class="check-name">Orçamento</div><div class="check-detail">ABO R$20/dia, único adset ativo</div></div><span class="pill pass">OK</span></div>
+        <div class="check-row"><div class="check-body"><div class="check-name">Públicos</div><div class="check-detail">Geo alinhado ao público histórico documentado (Brasília)</div></div><span class="pill pass">OK</span></div>
+        <div class="check-row"><div class="check-body"><div class="check-name">Performance por plataforma</div><div class="check-detail">Instagram concentra 81% do gasto; posicionamento manual é o principal suspeito do CPM mais alto</div></div><span class="pill warn">Oportunidade</span></div>
+        <div class="check-row"><div class="check-body"><div class="check-name">Copy dos anúncios</div><div class="check-detail">Campeão "Diabetes" mais institucional/fraco que o campeão geral "Tireóide"</div></div><span class="pill warn">Oportunidade</span></div>
+        <div class="check-row"><div class="check-body"><div class="check-name">Frequência e fadiga</div><div class="check-detail">1,96, melhorou frente a junho</div></div><span class="pill pass">OK</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Achado operacional</h2>
+    <p class="section-sub" style="margin-top:0;">Fora do diagnóstico de performance</p>
+    <div class="callout warn">
+      <span class="callout-title">Adset zumbi</span>
+      <p>O adset "Muito prazer, eu sou a Dra...." (campanha "[01] [POST IG] [MAR/26]") aparece como <code>ACTIVE</code> na API mas seu <code>end_time</code> era 31/03/2026 e teve zero impressões/gasto em julho — resíduo sem entrega, sem impacto orçamentário. Recomenda-se pausar formalmente para higienizar a conta.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Recomendações do Head de Performance</h2>
+    <ol class="recs">
+      <li><span class="n">1</span><span><b>[Confirmar com cliente]</b> — <span class="body">Formalizar (ou não) a estratégia "Consulta Online" nacional no contexto do cliente — é o melhor resultado da conta.</span></li>
+      <li><span class="n">2</span><span><b>Padronizar janela de atribuição</b> — <span class="body">Migrar os 2 conjuntos para o padrão Meta Standard (7d clique + 1d visualização + 1d engajamento em vídeo).</span></li>
+      <li><span class="n">3</span><span><b>Testar o "Carrossel" isolado</b> — <span class="body">Duplicar em teste isolado antes de descartar a copy, que qualitativamente está no mesmo nível do campeão — a baixa entrega parece ser achado técnico de leilão.</span></li>
+      <li><span class="n">4</span><span><b>Reescrever o ângulo "Diabetes"</b> — <span class="body">Testar cruzado no Conjunto 2 com a mesma estrutura de gancho do "Tireóide" (sintoma físico concreto na abertura).</span></li>
+      <li><span class="n">5</span><span><b>Testar abertura de posicionamento</b> — <span class="body">No Conjunto 2, remover mobile-only/posições fixas mantendo o geo travado em Brasília — experimento controlado de baixo risco.</span></li>
+      <li><span class="n">6</span><span><b>Reativar o remarketing</b> — <span class="body">Adset "02/RMKT" hoje pausado — reativar com orçamento modesto isolado (R$15-20/dia); a conta não tem nenhuma campanha de retargeting ativa hoje.</span></li>
+      <li><span class="n">7</span><span><b>Repor pipeline de criativos</b> — <span class="body">Novos ângulos: emagrecimento medicamentoso (Ozempic/Mounjaro), reposição hormonal/menopausa, pré-diabetes/resistência à insulina.</span></li>
+      <li><span class="n">8</span><span><b>Ajustar mensagem pré-preenchida</b> — <span class="body">Trocar a do "Carrossel1" (hoje envia o corpo inteiro do post) por mensagem curta e natural, no padrão dos ice-breakers já configurados.</span></li>
+      <li><span class="n">9</span><span><b>Higienizar a conta</b> — <span class="body">Pausar formalmente o adset zumbi "Muito prazer, eu sou a Dra....".</span></li>
+      <li><span class="n">10</span><span><b>Monitorar agosto</b> — <span class="body">Confirmar se a melhora de CPM/CPA do Conjunto 2 se sustenta além da janela sazonal jun-ago.</span></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2 class="section-title">Histórico de Otimizações</h2>
+    <p class="section-sub">Preenchido manualmente pelo Head de Performance a cada semana — o agente sempre pergunta o que registrar aqui, nunca escreve sozinho.</p>
+    <div class="opt-empty">Nenhuma otimização registrada ainda — primeira publicação deste relatório.</div>
+  </section>
+
+  <footer>
+    <span>Dra. Cejana Hamu · Meta Ads · Ver também: <a href="../../Leaper/Julho%202026/">Origem dos Leads (Leaper)</a></span>
+    <span>Gerado em 30/07/2026</span>
+  </footer>
+
+</div>
+</body>
+</html>
