@@ -14,7 +14,7 @@ Relatórios de diagnóstico de campanhas do Vicente Villa - Autónomo, organizad
 
 | Documento | Link |
 |---|---|
-| _Nenhum documento publicado ainda_ | — |
+| **Planificación de Campaña — Meta Ads** | [Ver →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Data%20Know/Vicente%20Villa%20-%20Aut%C3%B3nomo/Estrat%C3%A9gia/planejamento-campanha.html) |
 
 ---
 
