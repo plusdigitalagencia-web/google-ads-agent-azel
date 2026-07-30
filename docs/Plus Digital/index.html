@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plus Digital — Relatórios de Campanhas</title>
+<style>
+  :root {
+    --ground: #f4f7f5; --panel: #ffffff; --border: #d7e0dc;
+    --ink: #142320; --ink-dim: #4b5b56; --ink-faint: #7c8b86;
+    --accent: #157567; --accent-ink: #0d4b42; --accent-soft: #dcefe9;
+    --meta: #1877f2; --meta-ink: #0a58ca; --meta-soft: #dbe8fd;
+    --font-sans: -apple-system, "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0c1614; --panel: #121e1b; --border: #24322e;
+      --ink: #e7efec; --ink-dim: #a9b8b3; --ink-faint: #7c8b86;
+      --accent: #37bfa8; --accent-ink: #b7ece1; --accent-soft: #17332d;
+      --meta: #6ea8fe; --meta-ink: #bcd6ff; --meta-soft: #16233a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0c1614; --panel: #121e1b; --border: #24322e;
+    --ink: #e7efec; --ink-dim: #a9b8b3; --ink-faint: #7c8b86;
+    --accent: #37bfa8; --accent-ink: #b7ece1; --accent-soft: #17332d;
+    --meta: #6ea8fe; --meta-ink: #bcd6ff; --meta-soft: #16233a;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--ground); color:var(--ink); font-family:var(--font-sans); line-height:1.5; }
+  .page { max-width: 760px; margin:0 auto; padding: 56px 24px 80px; display:flex; flex-direction:column; gap:28px; }
+  .eyebrow { font-family: var(--font-mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); font-weight:600; }
+  h1 { font-size: clamp(24px,4vw,32px); margin:0; text-wrap:balance; }
+  p.lede { color:var(--ink-dim); margin:0; font-size:15px; max-width: 60ch; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; }
+  a.card { display:flex; flex-direction:column; gap:10px; padding:20px 22px; background:var(--panel); border:1px solid var(--border); border-radius:10px; text-decoration:none; color:var(--ink); }
+  a.card:hover { border-color: var(--accent); }
+  a.card .name { font-weight:700; font-size:16px; }
+  a.card .desc { font-size:13px; color:var(--ink-faint); }
+  .tags { display:flex; flex-wrap:wrap; gap:6px; }
+  .tag { font-family: var(--font-mono); font-size:11px; font-weight:600; letter-spacing:.02em; padding:3px 9px; border-radius:20px; background:var(--accent-soft); color:var(--accent-ink); }
+  .tag.tag-meta { background: var(--meta-soft); color: var(--meta-ink); }
+  .tag.tag-google { background: var(--accent-soft); color: var(--accent-ink); }
+  .tag.tag-pending { background: transparent; border: 1px dashed var(--border); color: var(--ink-faint); }
+  .card.placeholder { opacity:.5; border-style:dashed; }
+  footer { border-top:1px solid var(--border); padding-top:16px; font-size:12.5px; color:var(--ink-faint); }
+</style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <span class="eyebrow">Plus Digital Agência · MCC Principal</span>
+      <h1>Plus Digital — Relatórios de Campanhas</h1>
+      <p class="lede">Relatórios de diagnóstico de Google Ads e Meta Ads, organizados por cliente. Cada cartão mostra quais plataformas esse cliente utiliza.</p>
+    </header>
+    <div class="grid">
+      <a class="card" href="Dra.%20Cejana%20e%20Dr.%20Bruno/">
+        <span class="name">Dra. Cejana e Dr. Bruno</span>
+        <span class="desc">Endocrinologista + Ortopedista — Brasília, DF</span>
+        <span class="tags">
+          <span class="tag tag-meta">Meta Ads</span>
+          <span class="tag tag-google">Google Ads</span>
+        </span>
+      </a>
+      <div class="card placeholder">
+        <span class="name">Próximo cliente</span>
+        <span class="desc">Cartão a criar quando o cliente for confirmado</span>
+      </div>
+    </div>
+    <footer>Repositório: google-ads-agent-azel · branch main</footer>
+  </div>
+</body>
+</html>
