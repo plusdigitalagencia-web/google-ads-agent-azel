@@ -50,6 +50,7 @@ const ACCOUNTS = {
   "sciente":         { id: "3679830725", mcc: "2319759276" },
   "spartan":         { id: "9559342501", mcc: "2319759276" },
   "nordika":         { id: "6182489345", mcc: "2319759276" },
+  "m3 car center":   { id: "5792094652", mcc: "2319759276" },
 };
 
 function resolveAccount(name) {
