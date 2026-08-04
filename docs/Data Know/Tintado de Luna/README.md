@@ -12,7 +12,7 @@ Relatórios de diagnóstico de campanhas do Tintado de Luna, organizados por pla
 
 | Mês | Relatórios |
 |---|---|
-| _Nenhum relatório publicado ainda_ | — |
+| Agosto/2026 | [04/08 — Auditoria Inicial →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Data%20Know/Tintado%20de%20Luna/Google%20Ads/Agosto%202026/auditoria-inicial-04-08-26.html) |
 
 ## Estratégia
 

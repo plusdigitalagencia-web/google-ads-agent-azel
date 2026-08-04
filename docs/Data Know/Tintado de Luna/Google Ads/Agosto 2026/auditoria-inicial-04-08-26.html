@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Auditoria Inicial — Google Ads — 04/08/26</title>
+<style>
+  :root {
+    --ground: #f4f7f5; --panel: #ffffff; --panel-2: #eaf1ee; --border: #d7e0dc;
+    --ink: #142320; --ink-dim: #4b5b56; --ink-faint: #7c8b86;
+    --accent: #157567; --accent-ink: #0d4b42; --accent-soft: #dcefe9;
+    --good: #1f7a52; --good-soft: #e1f3ea; --warn: #8a5a13; --warn-soft: #faf0dc;
+    --fail: #a3261f; --fail-soft: #fbe6e4; --nd: #5b6864; --nd-soft: #e9edeb;
+    --font-sans: -apple-system, "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0c1614; --panel: #121e1b; --panel-2: #16221f; --border: #24322e;
+      --ink: #e7efec; --ink-dim: #a9b8b3; --ink-faint: #7c8b86;
+      --accent: #37bfa8; --accent-ink: #b7ece1; --accent-soft: #17332d;
+      --good: #4ecb95; --good-soft: #17332a; --warn: #e0b25b; --warn-soft: #362a12;
+      --fail: #ec7972; --fail-soft: #3a1917; --nd: #93a19c; --nd-soft: #1b2624;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0c1614; --panel: #121e1b; --panel-2: #16221f; --border: #24322e;
+    --ink: #e7efec; --ink-dim: #a9b8b3; --ink-faint: #7c8b86;
+    --accent: #37bfa8; --accent-ink: #b7ece1; --accent-soft: #17332d;
+    --good: #4ecb95; --good-soft: #17332a; --warn: #e0b25b; --warn-soft: #362a12;
+    --fail: #ec7972; --fail-soft: #3a1917; --nd: #93a19c; --nd-soft: #1b2624;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--font-sans); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  .page { max-width: 880px; margin: 0 auto; padding: 48px 24px 80px; display: flex; flex-direction: column; gap: 32px; }
+  .breadcrumb { font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-faint); }
+  .breadcrumb a { color: var(--accent); text-decoration: none; }
+  header.masthead { display: flex; flex-direction: column; gap: 10px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+  .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  h1.slug { font-family: var(--font-mono); font-size: clamp(20px, 4vw, 28px); font-weight: 600; margin: 0; color: var(--ink); word-break: break-word; text-wrap: balance; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13.5px; color: var(--ink-dim); }
+  .meta-row b { color: var(--ink); font-weight: 600; }
+  h2.section-title { font-size: 15px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 6px; }
+  .section-sub { font-size: 13px; color: var(--ink-faint); margin: -8px 0 14px; font-style: italic; }
+  .sub-head { font-size: 14px; font-weight: 700; color: var(--ink); margin: 4px 0 -6px; }
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .kpi { background: var(--panel); padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 6px; }
+  .kpi .label { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-faint); font-weight: 600; }
+  .kpi .value { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 21px; font-weight: 600; color: var(--ink); }
+  .kpi .value.flag { color: var(--fail); }
+  .kpi .value.good { color: var(--good); }
+  .callout { background: var(--accent-soft); border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border)); border-radius: 10px; padding: 20px 22px; display: flex; flex-direction: column; gap: 8px; }
+  .callout .callout-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--accent-ink); }
+  .callout p { margin: 0; font-size: 15px; color: var(--ink); }
+  .callout b.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .callout.fail-tone { background: var(--fail-soft); border-color: color-mix(in srgb, var(--fail) 35%, var(--border)); }
+  .callout.fail-tone .callout-title { color: var(--fail); }
+  .check-table { width: 100%; border-collapse: collapse; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .check-row { display: grid; grid-template-columns: 1fr 96px; gap: 12px; align-items: start; padding: 14px 16px; background: var(--panel); border-bottom: 1px solid var(--border); }
+  .check-row:last-child { border-bottom: none; }
+  .check-body .check-name { font-size: 14.5px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+  .check-body .check-detail { font-size: 13.5px; color: var(--ink-dim); }
+  .pill { justify-self: end; font-size: 11.5px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; white-space: nowrap; height: fit-content; }
+  .pill.pass { color: var(--good); background: var(--good-soft); }
+  .pill.warn { color: var(--warn); background: var(--warn-soft); }
+  .pill.fail { color: var(--fail); background: var(--fail-soft); }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; }
+  table { width: 100%; border-collapse: collapse; background: var(--panel); font-size: 13px; }
+  thead th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint); font-weight: 600; padding: 10px 14px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  tbody td { padding: 9px 14px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr.highlight td { background: var(--accent-soft); font-weight: 700; }
+  tbody tr.muted td { opacity: .55; }
+  td.label-cell { font-family: var(--font-sans); }
+  td.num { text-align: right; }
+  ol.recs { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  ol.recs li { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 14px 16px; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; font-size: 14.5px; }
+  ol.recs .n { font-family: var(--font-mono); font-weight: 700; color: var(--accent); }
+  ol.recs b { color: var(--ink); }
+  ol.recs span.body { color: var(--ink-dim); }
+  .opt-log { display: flex; flex-direction: column; gap: 14px; }
+  .opt-entry { border: 1px solid var(--border); border-radius: 10px; background: var(--panel); overflow: hidden; }
+  .opt-entry .opt-date { font-family: var(--font-mono); font-size: 11.5px; font-weight: 600; color: var(--accent-ink); background: var(--accent-soft); padding: 8px 16px; }
+  .opt-blocks { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+  .opt-block { padding: 14px 16px; border-top: 1px solid var(--border); }
+  .opt-blocks .opt-block:nth-child(-n+4) { border-top: none; }
+  .opt-block + .opt-block { border-left: 1px solid var(--border); }
+  .opt-block .opt-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; }
+  .opt-block p { margin: 0; font-size: 13.5px; }
+  .opt-block.c-blue   { background: #2563eb; border-left-color: rgba(255,255,255,.2); }
+  .opt-block.c-yellow { background: #ca8a04; border-left-color: rgba(255,255,255,.2); }
+  .opt-block.c-orange { background: #ea580c; border-left-color: rgba(255,255,255,.2); }
+  .opt-block.c-purple { background: #7c3aed; border-left-color: rgba(255,255,255,.2); }
+  .opt-block.c-blue .opt-label, .opt-block.c-blue p,
+  .opt-block.c-yellow .opt-label, .opt-block.c-yellow p,
+  .opt-block.c-orange .opt-label, .opt-block.c-orange p,
+  .opt-block.c-purple .opt-label, .opt-block.c-purple p { color: #ffffff; }
+  .opt-empty { border: 1px dashed var(--border); border-radius: 10px; padding: 18px; font-size: 13.5px; color: var(--ink-faint); background: var(--panel); }
+  footer { border-top: 1px solid var(--border); padding-top: 18px; font-size: 12.5px; color: var(--ink-faint); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+  a { color: var(--accent); }
+  code { font-family: var(--font-mono); font-size: 0.92em; }
+  @media (max-width: 520px) { .check-row { grid-template-columns: 1fr; } .pill { justify-self: start; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <span class="breadcrumb"><a href="../../../">Data Know</a> / <a href="../../">Tintado de Luna</a> / <a href="../">Google Ads</a> / <a href="./">Agosto/2026</a></span>
+
+  <header class="masthead">
+    <span class="eyebrow">Google Ads &middot; Search &middot; Tintado de Luna</span>
+    <h1 class="slug">Auditoria Inicial — Conta Madrid Tintado De Lunas</h1>
+    <div class="meta-row">
+      <span><b>Período:</b> auditoria de 60 dias (05/06 – 04/08/2026)</span>
+      <span><b>Conta:</b> Madrid Tintado De Lunas — Google Ads 939-040-1198</span>
+      <span><b>Status:</b> 2 campanhas ativas (ROI- Carabanchel, ROI- Arroyomolinos) + 2 pausadas com atividade no período</span>
+    </div>
+  </header>
+
+  <section class="callout fail-tone">
+    <span class="callout-title">Achado crítico — rastreamento de conversão em correção durante o período analisado</span>
+    <p>A coluna "Conversões" das duas campanhas ativas mistura duas coisas bem diferentes na mesma soma: cliques no site (ações <b>Site TLM (web) reservarcita</b> e <b>Site TLM (web) whatstlm</b>, que contam em massa e sempre valem €0) e as ações que de fato representam negócio — <b>formulário de contato</b> e <b>ligação por telefone</b> (essas sim, valem €1 cada).</p>
+      <p><b>Atualização do Azel:</b> o rastreamento correto — com o evento de conversão apontando para "agendamento concluído" — estava sendo implementado durante boa parte destes 60 dias. Por isso, os números de CPA calculados abaixo (mesmo já filtrando só formulário + telefone) misturam período de tracking antigo com o novo e <b>não devem ser tratados como baseline confiável ainda</b>. A partir de hoje (04/08/2026), com o evento corrigido em vigor, o próximo relatório é que vai estabelecer a primeira baseline real de CPA da conta.</p>
+    </section>
+
+  <section>
+    <h2 class="section-title">CPA aparente vs. CPA real (referência histórica)</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Campanha</th><th class="num">Conv. aparente (Google)</th><th class="num">CPA aparente</th><th class="num">Conv. real (Form + Telefone)</th><th class="num">CPA real</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">ROI- tintado lunas carabanchel</td><td class="num">69</td><td class="num">€ 9,98</td><td class="num">13 (7 formulário + 6 telefone)</td><td class="num" style="color:var(--fail); font-weight:700;">€ 52,98</td></tr>
+          <tr><td class="label-cell">ROI- tintado lunas Arroyomolinos</td><td class="num">78</td><td class="num">€ 3,73</td><td class="num">2 (2 formulário)</td><td class="num" style="color:var(--fail); font-weight:700;">€ 145,30</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="section-sub" style="margin-top:8px;">Números de referência histórica apenas, coletados durante a correção do tracking — não usar como meta/baseline. A baseline real de CPA passa a ser medida a partir de 04/08/2026, com o evento de conversão ("agendamento concluído") já corrigido.</p>
+  </section>
+
+  <section>
+    <h2 class="section-title">Panorama de campanhas — 60 dias (ativas e pausadas)</h2>
+    <p class="section-sub">Ordenado por resultado (conversão real, do maior pro menor) — nas pausadas, "conversão real" usa Local Actions - Directions (pedido de rota no Maps), já que essas campanhas não tinham o tracking ROI configurado.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Campanha</th><th>Status</th><th>Tipo</th><th class="num">Budget/dia</th><th class="num">Gasto 60d</th><th class="num">Cliques</th><th class="num">Conv. aparente</th><th class="num">Conv. real</th></tr></thead>
+        <tbody>
+          <tr class="muted"><td class="label-cell">Madrid - TLM</td><td class="label-cell">Pausada</td><td class="label-cell">Search</td><td class="num">€ 15,00</td><td class="num">€ 478,13</td><td class="num">1.051</td><td class="num">1.462*</td><td class="num">75 (Directions)*</td></tr>
+          <tr class="muted"><td class="label-cell">Arroyomolinos - TLM</td><td class="label-cell">Pausada</td><td class="label-cell">Search</td><td class="num">€ 15,00</td><td class="num">€ 381,90</td><td class="num">846</td><td class="num">1.229*</td><td class="num">48 (Directions)*</td></tr>
+          <tr class="highlight"><td class="label-cell">ROI- tintado lunas carabanchel</td><td class="label-cell">Ativa</td><td class="label-cell">Search</td><td class="num">€ 21,00</td><td class="num">€ 688,80</td><td class="num">901</td><td class="num">69</td><td class="num">13</td></tr>
+          <tr class="highlight"><td class="label-cell">ROI- tintado lunas Arroyomolinos</td><td class="label-cell">Ativa</td><td class="label-cell">Search</td><td class="num">€ 21,00</td><td class="num">€ 290,60</td><td class="num">361</td><td class="num">78</td><td class="num">2</td></tr>
+          <tr class="muted"><td class="label-cell">Campaña Vinilo</td><td class="label-cell">Pausada</td><td class="label-cell">Search</td><td class="num">€ 22,37</td><td class="num">€ 0,00</td><td class="num">0</td><td class="num">0</td><td class="num">—</td></tr>
+          <tr class="muted"><td class="label-cell">Llamadas - Tintado de lunas</td><td class="label-cell">Pausada</td><td class="label-cell">Search</td><td class="num">€ 10,00</td><td class="num">€ 0,00</td><td class="num">0</td><td class="num">0</td><td class="num">—</td></tr>
+          <tr class="muted"><td class="label-cell">PMAX TLM OFICIAL</td><td class="label-cell">Pausada</td><td class="label-cell">PMax</td><td class="num">€ 10,00</td><td class="num">€ 0,00</td><td class="num">0</td><td class="num">0</td><td class="num">—</td></tr>
+        </tbody>
+      </table>
+      <p class="section-sub" style="margin:8px 14px 10px;">*Conv. aparente das pausadas está inflada pelas mesmas ações DEFAULT de clique no site. Budget ativo hoje: € 42/dia nas 2 campanhas ligadas (~€ 1.260/mês). Padrão observado: as campanhas antigas com tracking ruim (Madrid-TLM, Arroyomolinos-TLM) foram pausadas e substituídas pelas "ROI-" no mesmo raio geográfico, com tracking correto configurado — mas as ações DEFAULT de €0 continuam ativas junto nas campanhas novas mesmo assim. Isso é uma hipótese com base nos dados, não uma conclusão — vale confirmar com o Azel se foi essa mesma a lógica da migração.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Métricas do período — campanhas ativas</h2>
+    <p class="sub-head">ROI- tintado lunas carabanchel</p>
+    <div class="kpi-grid">
+      <div class="kpi"><span class="label">Budget/dia</span><span class="value">€ 21,00</span></div>
+      <div class="kpi"><span class="label">Gasto 60d</span><span class="value">€ 688,80</span></div>
+      <div class="kpi"><span class="label">Cliques</span><span class="value">901</span></div>
+      <div class="kpi"><span class="label">CPC médio</span><span class="value">€ 0,76</span></div>
+      <div class="kpi"><span class="label">Conv. aparente (não usar)</span><span class="value">69</span></div>
+      <div class="kpi"><span class="label">CPA aparente (não usar)</span><span class="value">€ 9,98</span></div>
+      <div class="kpi"><span class="label">Conv. real (Form+Tel)</span><span class="value">13</span></div>
+      <div class="kpi"><span class="label">CPA real</span><span class="value flag">€ 52,98</span></div>
+      <div class="kpi"><span class="label">Impression Share média</span><span class="value">23,2%</span></div>
+    </div>
+
+    <p class="sub-head">ROI- tintado lunas Arroyomolinos</p>
+    <div class="kpi-grid">
+      <div class="kpi"><span class="label">Budget/dia</span><span class="value">€ 21,00</span></div>
+      <div class="kpi"><span class="label">Gasto 60d</span><span class="value">€ 290,60</span></div>
+      <div class="kpi"><span class="label">Cliques</span><span class="value">361</span></div>
+      <div class="kpi"><span class="label">CPC médio</span><span class="value">€ 0,81</span></div>
+      <div class="kpi"><span class="label">Conv. aparente (não usar)</span><span class="value">78</span></div>
+      <div class="kpi"><span class="label">CPA aparente (não usar)</span><span class="value">€ 3,73</span></div>
+      <div class="kpi"><span class="label">Conv. real (Form+Tel)</span><span class="value">2</span></div>
+      <div class="kpi"><span class="label">CPA real</span><span class="value flag">€ 145,30</span></div>
+      <div class="kpi"><span class="label">Impression Share média</span><span class="value">19,6%</span></div>
+    </div>
+    <p class="section-sub" style="margin-top:4px;">CPA real acima é referência histórica (tracking em correção neste período) — não usar como meta.</p>
+  </section>
+
+  <section>
+    <h2 class="section-title">Impression Share — por que cada campanha não aparece mais</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Campanha</th><th class="num">IS média</th><th class="num">Perdido por Rank</th><th class="num">Perdido por Budget</th><th>Fator limitante</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">ROI- tintado lunas carabanchel</td><td class="num">23,2%</td><td class="num">35,9%</td><td class="num">11,7%</td><td class="label-cell">Relevância/lance (Rank)</td></tr>
+          <tr><td class="label-cell">ROI- tintado lunas Arroyomolinos</td><td class="num">19,6%</td><td class="num">7,2%</td><td class="num">73,2%</td><td class="label-cell">Verba (Budget)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout" style="margin-top:14px;">
+      <span class="callout-title">Leitura rápida</span>
+      <p>Carabanchel perde impressão sobretudo por qualidade/relevância do anúncio — aumentar verba ali não resolveria sozinho. Arroyomolinos está mesmo travada por orçamento (73,2% perdido por budget) — mas antes de colocar mais dinheiro, vale corrigir a copy (ver seção de Qualidade dos Anúncios abaixo), porque hoje a campanha converte muito pouco (CPA real € 145,30) mesmo dentro do orçamento atual.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Checklist de causas raiz</h2>
+    <div class="check-table">
+      <div class="check-row">
+        <div class="check-body">
+          <div class="check-name">Sitelinks próprios da campanha</div>
+          <div class="check-detail">As 2 campanhas ativas já têm 3 sitelinks cada. Falta ainda ativar Callout Assets (frases de destaque abaixo do anúncio) — hoje nenhuma campanha usa esse recurso.</div>
+        </div>
+        <span class="pill pass">OK</span>
+      </div>
+      <div class="check-row">
+        <div class="check-body">
+          <div class="check-name">Negativas de marca/concorrente/marketplace</div>
+          <div class="check-detail">49 termos de pesquisa de oficinas/marcas concorrentes (Carglass, Norauto, Aurgi, Ralarsa, Laminsol, Llumar, Edofilm, Pilkington, Crystalline, entre outras) geraram € 128,21 e 54 cliques sem nenhuma conversão real. <b>Corrigido pelo Azel após esta auditoria</b> — termos já bloqueados.</div>
+        </div>
+        <span class="pill pass">OK</span>
+      </div>
+      <div class="check-row">
+        <div class="check-body">
+          <div class="check-name">Final URL / segmentação por ad group</div>
+          <div class="check-detail">A description do ad group de Carabanchel citava Collado Villalba, e a do ad group de Arroyomolinos citava Fuenlabrada — cidades diferentes da que a pessoa buscou. <b>Corrigido pelo Azel após esta auditoria</b> — cada ad group agora cita a cidade certa. Fuenlabrada/Villalba seguem sendo áreas atendidas e podem ganhar ad group próprio numa etapa futura.</div>
+        </div>
+        <span class="pill pass">OK</span>
+      </div>
+      <div class="check-row">
+        <div class="check-body">
+          <div class="check-name">Impression Share e Quality Score</div>
+          <div class="check-detail">Carabanchel: IS 23,2%, perdido majoritariamente por Rank (35,9%) — problema de qualidade/lance, não de verba. Arroyomolinos: IS 19,6%, perdido majoritariamente por Budget (73,2%) — aqui sim é limitação de orçamento, mas a copy precisa ser corrigida antes de aumentar verba.</div>
+        </div>
+        <span class="pill warn">Monitorar</span>
+      </div>
+      <div class="check-row">
+        <div class="check-body">
+          <div class="check-name">Tracking de conversão</div>
+          <div class="check-detail">A coluna "Conversões" mistura ações DEFAULT de clique no site (contam em massa, valor sempre € 0) com as ações ROI reais de formulário e telefone (valor € 1 cada) e, nas campanhas antigas, com Local Actions - Directions. Resultado: CPA aparente muito mais baixo que o CPA real (ver seção acima).</div>
+        </div>
+        <span class="pill fail">Crítico</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Keywords prioritárias — relevância baixa (Ad Relevance abaixo da média) e zero conversão real</h2>
+    <p class="section-sub">Todas as 7 combinações keyword × ad group nessa condição, ordenadas por cliques (nenhuma converteu no período).</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Keyword</th><th>Match</th><th>Ad Group</th><th class="num">Gasto</th><th class="num">Cliques</th><th class="num">QS</th><th>Situação</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">tintado de lunas Madrid</td><td class="label-cell">Broad</td><td class="label-cell">Carabanchel-Tunning</td><td class="num">€ 14,89</td><td class="num">42</td><td class="num">6</td><td><span class="pill fail">Crítico</span></td></tr>
+          <tr><td class="label-cell">tintado de lunas cerca de mi</td><td class="label-cell">Broad</td><td class="label-cell">Carabanchel-Tunning</td><td class="num">€ 33,19</td><td class="num">41</td><td class="num">5</td><td><span class="pill fail">Crítico</span></td></tr>
+          <tr><td class="label-cell">tintado de lunas cerca de mi</td><td class="label-cell">Broad</td><td class="label-cell">Arroyomolinos-Tuning</td><td class="num">€ 19,29</td><td class="num">17</td><td class="num">6</td><td><span class="pill fail">Crítico</span></td></tr>
+          <tr><td class="label-cell">tintar lunas coche</td><td class="label-cell">Broad</td><td class="label-cell">Carabanchel (genérico)</td><td class="num">€ 14,84</td><td class="num">16</td><td class="num">6</td><td><span class="pill fail">Crítico</span></td></tr>
+          <tr><td class="label-cell">tintar lunas coche precio</td><td class="label-cell">Broad</td><td class="label-cell">Arroyomolinos-Tuning</td><td class="num">€ 23,95</td><td class="num">15</td><td class="num">5</td><td><span class="pill fail">Crítico</span></td></tr>
+          <tr><td class="label-cell">tintar lunas coche precio</td><td class="label-cell">Broad</td><td class="label-cell">Carabanchel (genérico)</td><td class="num">€ 18,90</td><td class="num">8</td><td class="num">6</td><td><span class="pill fail">Crítico</span></td></tr>
+          <tr><td class="label-cell">tintar cristales coche precio</td><td class="label-cell">Broad</td><td class="label-cell">Carabanchel (genérico)</td><td class="num">€ 12,29</td><td class="num">6</td><td class="num">5</td><td><span class="pill fail">Crítico</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout" style="margin-top:14px;">
+      <span class="callout-title">Causa raiz confirmada</span>
+      <p>A description que roda nesses ad groups promete agendar em <b>Collado Villalba</b> (ad group Carabanchel) e <b>Fuenlabrada</b> (ad group Arroyomolinos) — cidades diferentes da que a pessoa buscou. Fuenlabrada e Villalba são áreas de atendimento reais (confirmado pelo Azel), o problema não é atendimento, é o ad group errado citando a cidade errada: quem busca "cerca de mí" a partir de Carabanchel quer ver Carabanchel confirmado, não Villalba.</p>
+      <p style="font-size:13px; color:var(--good); font-weight:600;">✅ Corrigido pelo Azel após esta auditoria — as descriptions já citam a cidade certa. As keywords acima refletem o período ANTES da correção; o próximo relatório deve mostrar melhora na relevância.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Gasto relevante sem nota de qualidade calculada ainda</h2>
+    <p class="section-sub">Zero conversão real no período, ordenado por cliques.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Keyword</th><th>Ad Group</th><th class="num">Gasto</th><th class="num">Cliques</th><th>Situação</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">tintar lunas (broad)</td><td class="label-cell">Arroyomolinos-Tuning</td><td class="num">€ 85,33</td><td class="num">100</td><td><span class="pill warn">Atenção</span></td></tr>
+          <tr><td class="label-cell">tintar lunas coche precio (broad)</td><td class="label-cell">Carabanchel-Tunning</td><td class="num">€ 21,81</td><td class="num">13</td><td><span class="pill warn">Atenção</span></td></tr>
+          <tr><td class="label-cell">laminas solares coche (broad)</td><td class="label-cell">Carabanchel (genérico)</td><td class="num">€ 8,68</td><td class="num">13</td><td><span class="pill warn">Atenção</span></td></tr>
+          <tr><td class="label-cell">laminas solares coche (broad)</td><td class="label-cell">Carabanchel-Tunning</td><td class="num">€ 30,60</td><td class="num">12</td><td><span class="pill warn">Atenção</span></td></tr>
+          <tr><td class="label-cell">laminas solares coche (broad)</td><td class="label-cell">Arroyomolinos-Tuning</td><td class="num">€ 8,50</td><td class="num">7</td><td><span class="pill warn">Atenção</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout" style="margin-top:14px;">
+      <span class="callout-title">Leitura rápida</span>
+      <p>"tintar lunas" em Arroyomolinos é o maior gasto isolado sem conversão real da conta inteira (€ 85,33). "laminas solares coche" repete em 3 ad groups sem converter em nenhum — hipótese: atrai gente buscando comprar o material pra instalar em casa (DIY), não contratar o serviço.</p>
+      <p style="font-size:13px; color:var(--warn); font-weight:600;">⏳ Pendente de análise — o Azel decidiu aguardar: como o evento de conversão estava incorreto neste mesmo período, o "zero conversão" de "laminas solares coche" também não é um dado limpo. Reavaliar quando o tracking corrigido já tiver dados acumulados.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Keywords convertendo bem — contexto positivo</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Keyword</th><th>Ad Group</th><th class="num">Gasto</th><th class="num">Cliques</th><th class="num">Conv. real</th><th class="num">CPA real</th><th class="num">QS</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">tintar lunas (broad)</td><td class="label-cell">Carabanchel (genérico)</td><td class="num">€ 215,30</td><td class="num">319</td><td class="num">5</td><td class="num">€ 43,06</td><td class="num">7-8</td></tr>
+          <tr><td class="label-cell">tintar lunas (broad)</td><td class="label-cell">Carabanchel-Tunning</td><td class="num">€ 142,22</td><td class="num">183</td><td class="num">3</td><td class="num">€ 47,41</td><td class="num">7-8</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Termos de pesquisa</h2>
+    <p class="section-sub">O que os termos reais digitados revelam sobre quem está clicando.</p>
+    <div class="callout">
+      <span class="callout-title">🔴 Desalinhado — já negativado ✅</span>
+      <p>49 termos de pesquisa por marcas/oficinas concorrentes, 54 cliques, € 128,21, zero conversão real: Carglass, Norauto, Aurgi, Ralarsa, Laminsol, Llumar, Edofilm, Pilkington, Crystalline, talleres Velasco/Orocar/Sánchez Montero, entre outras. Maiores custos individuais: "laminsol" € 10,70, "talleres velasco leganes" € 10,24, "norauto alcobendas" € 8,32, "carglass tres cantos" € 7,98, "carglass móstoles" € 7,50, "carglass pozuelo" € 7,21, "aurgi torrejón de ardoz" € 5,95. <b>Já bloqueados pelo Azel após esta auditoria.</b></p>
+      <p style="font-size:13px; color:var(--ink-faint); font-style:italic;">Nota: o termo "m3carcenter" apareceu na lista de termos de pesquisa mas <b>não</b> é concorrente — é a segunda loja do mesmo grupo (Grupo M3 Car Center, mesma empresa dona do Tintado de Luna). Excluído da negativação.</p>
+    </div>
+    <div class="callout" style="margin-top:14px;">
+      <span class="callout-title">🟢 Ponto de ajuste — não negativar, ajustar copy/oferta</span>
+      <p>Termos genéricos e qualificados que ainda não converteram: 595 cliques, € 386,52, zero conversão real, no agregado. Maiores: "tintado de lunas cerca de mi" (Carabanchel genérico) 34 clk / € 10,98; "tintado de lunas" (Carabanchel genérico) 31 clk / € 17,79; "tintado de lunas cerca de mi" (Carabanchel-Tunning) 28 clk / € 7,22; "tintado de lunas madrid" (Carabanchel-Tunning) 26 clk / € 10,04. São buscas relevantes — o problema é a copy/oferta, não a intenção de quem busca.</p>
+    </div>
+    <div class="callout" style="margin-top:14px;">
+      <span class="callout-title">🆕 Achado novo — reforçar</span>
+      <p>Termos que já converteram 1x cada (via keyword broad "tintar lunas" / "tintado de lunas Madrid"): "tintado de lunas torrejon de ardoz" (×2), "tintado de lunas madrid", "tintar cristales coche", "premium glass tintado de lunas", "vidrios tintados no homologados", "tintado de lunas alcorcon". Padrão: buscas com cidade/bairro específico convertem. <span style="color:var(--ink-faint);">(Avaliada a ideia de ad groups dedicados por cidade — descartada por ora pelo Azel; mantido só como registro do padrão.)</span></p>
+      <p style="font-size:13px; color:var(--ink-faint); font-style:italic;">Ponto de atenção (não é ação, é registro): "vidrios tintados no homologados" converteu, mas contradiz o diferencial de homologação ITV do negócio — pode ser interpretação equivocada de quem buscou, vale só ficar de olho.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Diagnóstico de Copy — anúncios vs. landing page</h2>
+    <p class="section-sub">O que o anúncio promete hoje vs. o que a landing page (madridtintadodelunas.es/tintado-de-lunas/) confirma.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Promessa no anúncio</th><th>Anúncio promete</th><th>LP confirma?</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Preço "Desde 60€"</td><td class="label-cell">Sim</td><td class="label-cell"><span class="pill fail">Não</span></td></tr>
+          <tr><td class="label-cell">Garantia "10 años"</td><td class="label-cell">Sim</td><td class="label-cell"><span class="pill fail">Não</span></td></tr>
+          <tr><td class="label-cell">Marca Soltek / 3M</td><td class="label-cell">Sim</td><td class="label-cell"><span class="pill fail">Não</span></td></tr>
+          <tr><td class="label-cell">Homologação ITV</td><td class="label-cell">—</td><td class="label-cell"><span class="pill pass">Sim</span></td></tr>
+          <tr><td class="label-cell">Tempo de instalação (1-2h)</td><td class="label-cell">Sim</td><td class="label-cell"><span class="pill pass">Sim</span></td></tr>
+          <tr><td class="label-cell">Localidades atendidas (inclui Fuenlabrada/Villalba/Alcobendas/Villaverde)</td><td class="label-cell">—</td><td class="label-cell"><span class="pill pass">Sim</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout" style="margin-top:14px;">
+      <span class="callout-title">Ações de copy</span>
+      <p><b>✅ Realizado:</b> corrigida a cidade errada nas descriptions — "Collado Villalba" → "Carabanchel" no ad group Carabanchel; "Fuenlabrada" → "Arroyomolinos" no ad group Arroyomolinos.</p>
+      <p><b>Pendente:</b> ativar Callout Assets (hoje só há sitelinks, nenhum callout) — sugestão de 6, baseados só no que a LP já confirma: "Homologado para ITV", "Instalación en 1-2 Horas", "Corte Computerizado", "+12 Años de Experiencia", "Atención Personalizada", "Reserva de Cita Online". Não incluir ainda "Desde 60€" / "Garantía 10 Años" / "Láminas Soltek" até o gap de LP ser resolvido.</p>
+      <p style="font-size:13px; color:var(--ink-faint); font-style:italic;">Descartado pelo Azel nesta rodada: headline de resposta a "precio", copy neutra nos ad groups Familiar/Tuning, e resolver o gap oferta×landing page.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Recomendações do Head de Performance Azel Castro</h2>
+    <ol class="recs">
+      <li><span class="n">✅</span><span><b>Termos de concorrentes/oficinas bloqueados</b> — <span class="body">os 49 termos identificados (Carglass, Norauto, Aurgi, Ralarsa, Laminsol, Llumar, Edofilm, Pilkington, Crystalline e variações — € 128,21 sem nenhuma conversão real) já foram negativados pelo Azel.</span></span></li>
+      <li><span class="n">✅</span><span><b>Cidade errada corrigida nas descriptions</b> — <span class="body">Villalba → Carabanchel no ad group Carabanchel; Fuenlabrada → Arroyomolinos no ad group Arroyomolinos.</span></span></li>
+      <li><span class="n">1</span><span><b>Aguardar a nova baseline de CPA</b> — <span class="body">o evento de conversão corrigido ("agendamento concluído") passa a valer a partir de hoje; o próximo relatório traz o primeiro CPA confiável da conta.</span></span></li>
+      <li><span class="n">2</span><span><b>Ativar 6 Callout Assets</b> — <span class="body">baseados só no que a landing page já confirma hoje (ver lista na seção de Diagnóstico de Copy).</span></span></li>
+      <li><span class="n">3</span><span><b>Só aumentar verba em Arroyomolinos depois de ver o efeito da correção de copy</b> — <span class="body">73,2% do Impression Share perdido ali é por budget, mas antes de colocar mais dinheiro vale esperar o próximo relatório mostrar se a correção de cidade já melhorou a conversão.</span></span></li>
+    </ol>
+    <p class="section-sub" style="margin-top:10px;">⏳ Pendente de análise, aguardando dados limpos: <b>"laminas solares coche"</b> segue gastando sem conversão em 3 ad groups, mas como o evento de conversão estava incorreto nesse mesmo período, o Azel decidiu esperar o tracking corrigido acumular dados antes de agir sobre essa keyword.</p>
+    <p class="section-sub">Descartado nesta rodada: headline de resposta a "precio", copy neutra nos ad groups Familiar/Tuning, resolver o gap oferta×landing page, e criar ad groups dedicados por cidade.</p>
+  </section>
+
+  <section>
+    <h2 class="section-title">Histórico de Otimizações</h2>
+    <p class="section-sub">Preenchido manualmente pelo Head de Performance a cada semana — o agente sempre pergunta o que registrar aqui, nunca escreve sozinho.</p>
+    <div class="opt-log">
+      <div class="opt-entry">
+        <div class="opt-date">04/08/2026 — logo após esta auditoria</div>
+        <div class="opt-blocks">
+          <div class="opt-block c-blue"><div class="opt-label">Otimização realizada</div><p>Negativados os 49 termos de pesquisa de marcas/oficinas concorrentes (Carglass, Norauto, Aurgi, Ralarsa, Laminsol, Llumar, Edofilm, Pilkington, Crystalline e variações). Corrigida a description com cidade errada em 2 ad groups: "Collado Villalba" → "Carabanchel" e "Fuenlabrada" → "Arroyomolinos".</p></div>
+          <div class="opt-block c-yellow"><div class="opt-label">Por que foi necessário</div><p>Os termos de concorrente geraram € 128,21 em 54 cliques sem nenhuma conversão real nos últimos 60 dias. As descriptions com cidade errada contradiziam a intenção de quem buscava "cerca de mí" a partir do próprio bairro, prejudicando a relevância do anúncio.</p></div>
+          <div class="opt-block c-orange"><div class="opt-label">Resultado esperado</div><p>Menos gasto desperdiçado em tráfego de concorrente; melhora na relevância/Quality Score das keywords que tinham a description com cidade errada.</p></div>
+          <div class="opt-block c-purple"><div class="opt-label">Orientações para a equipe</div><p>Acompanhar o próximo relatório pra ver se a Ad Relevance das keywords "cerca de mí"/"Madrid" melhorou após a correção da description. "laminas solares coche" fica em observação, aguardando o evento de conversão corrigido acumular dados limpos antes de decidir uma ação.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Tintado de Luna · Google Ads</span>
+    <span>Gerado em 04/08/2026</span>
+  </footer>
+
+</div>
+</body>
+</html>
