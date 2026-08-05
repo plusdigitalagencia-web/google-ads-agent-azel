@@ -6,6 +6,7 @@ Relatórios de diagnóstico de campanhas do Leblon Real Estate, organizados por 
 
 | Mês | Relatórios |
 |---|---|
+| **Agosto/2026** | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Data%20Know/Leblon%20Real%20Estate/Meta%20Ads/Agosto%202026/) |
 | **Julho/2026** | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Data%20Know/Leblon%20Real%20Estate/Meta%20Ads/Julho%202026/) |
 
 > Cliente não utiliza Google Ads — todo investimento é em Meta Ads.
