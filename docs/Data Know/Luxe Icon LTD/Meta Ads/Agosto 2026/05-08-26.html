@@ -1,0 +1,692 @@
+<title>Luxe Icon LTD — Relatório Semanal Meta Ads — 05/08/2026</title>
+<style>
+  :root{
+    --bg:#14120f;
+    --bg-elevated:#1c1915;
+    --bg-card:#1f1c17;
+    --hairline:#332f28;
+    --ink:#f2ede4;
+    --ink-muted:#a79c8c;
+    --ink-faint:#71675a;
+    --accent:#c39a5f;
+    --accent-soft:#c39a5f22;
+    --good:#7fac8f;
+    --good-soft:#7fac8f1f;
+    --bad:#c47764;
+    --bad-soft:#c477641f;
+    --warn:#d1a354;
+    --warn-soft:#d1a35422;
+    --neutral-chip:#3a352c;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, monospace;
+  }
+
+  :root[data-theme="light"]{
+    --bg:#faf7f0;
+    --bg-elevated:#ffffff;
+    --bg-card:#ffffff;
+    --hairline:#e4dccb;
+    --ink:#241f18;
+    --ink-muted:#6b6152;
+    --ink-faint:#948a79;
+    --accent:#96723c;
+    --accent-soft:#96723c17;
+    --good:#3f7a5b;
+    --good-soft:#3f7a5b16;
+    --bad:#a8503b;
+    --bad-soft:#a8503b16;
+    --warn:#9c6f1f;
+    --warn-soft:#9c6f1f1c;
+    --neutral-chip:#efe8d8;
+  }
+
+  @media (prefers-color-scheme: light){
+    :root{
+      --bg:#faf7f0;
+      --bg-elevated:#ffffff;
+      --bg-card:#ffffff;
+      --hairline:#e4dccb;
+      --ink:#241f18;
+      --ink-muted:#6b6152;
+      --ink-faint:#948a79;
+      --accent:#96723c;
+      --accent-soft:#96723c17;
+      --good:#3f7a5b;
+      --good-soft:#3f7a5b16;
+      --bad:#a8503b;
+      --bad-soft:#a8503b16;
+      --warn:#9c6f1f;
+      --warn-soft:#9c6f1f1c;
+      --neutral-chip:#efe8d8;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#14120f;
+    --bg-elevated:#1c1915;
+    --bg-card:#1f1c17;
+    --hairline:#332f28;
+    --ink:#f2ede4;
+    --ink-muted:#a79c8c;
+    --ink-faint:#71675a;
+    --accent:#c39a5f;
+    --accent-soft:#c39a5f22;
+    --good:#7fac8f;
+    --good-soft:#7fac8f1f;
+    --bad:#c47764;
+    --bad-soft:#c477641f;
+    --warn:#d1a354;
+    --warn-soft:#d1a35422;
+    --neutral-chip:#3a352c;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--accent-soft); }
+
+  .wrap{ max-width:920px; margin:0 auto; padding:0 24px 96px; }
+
+  /* ---------- Masthead ---------- */
+  .masthead{
+    padding:56px 24px 40px;
+    border-bottom:1px solid var(--hairline);
+    background:
+      radial-gradient(circle at 12% 0%, var(--accent-soft), transparent 55%);
+  }
+  .masthead-inner{ max-width:920px; margin:0 auto; }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:18px;
+  }
+  .eyebrow .dot{ width:5px;height:5px;border-radius:50%;background:var(--accent); }
+  h1{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(28px,4vw,40px);
+    letter-spacing:-.01em;
+    margin:0 0 12px;
+    text-wrap:balance;
+  }
+  .masthead-sub{
+    color:var(--ink-muted);
+    font-size:15px;
+    max-width:60ch;
+    margin:0 0 26px;
+  }
+  .masthead-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 28px;
+    font-size:13px;
+    color:var(--ink-muted);
+  }
+  .masthead-meta strong{ color:var(--ink); font-weight:600; }
+
+  /* ---------- Section scaffolding ---------- */
+  section{ padding:48px 0; border-bottom:1px solid var(--hairline); }
+  section:last-of-type{ border-bottom:none; }
+  .section-label{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:0 0 6px;
+  }
+  h2{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:24px;
+    margin:0 0 8px;
+    letter-spacing:-.005em;
+  }
+  .section-intro{ color:var(--ink-muted); font-size:14.5px; max-width:64ch; margin:0 0 28px; }
+
+  /* ---------- KPI strip ---------- */
+  .kpi-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    background:var(--hairline);
+    border:1px solid var(--hairline);
+    border-radius:10px;
+    overflow:hidden;
+  }
+  .kpi{
+    background:var(--bg-card);
+    padding:20px 18px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .kpi-label{ font-size:11.5px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.08em; }
+  .kpi-value{ font-family:var(--mono); font-variant-numeric:tabular-nums; font-size:26px; font-weight:600; letter-spacing:-.01em; }
+  .kpi-delta{
+    font-family:var(--mono);
+    font-size:12.5px;
+    font-variant-numeric:tabular-nums;
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    width:fit-content;
+    padding:3px 8px;
+    border-radius:20px;
+  }
+  .kpi-delta.up-bad{ color:var(--bad); background:var(--bad-soft); }
+  .kpi-delta.up-good{ color:var(--good); background:var(--good-soft); }
+  .kpi-delta.down-bad{ color:var(--bad); background:var(--bad-soft); }
+  .kpi-delta.down-good{ color:var(--good); background:var(--good-soft); }
+  .kpi-prev{ font-size:12px; color:var(--ink-faint); }
+
+  @media (max-width:720px){ .kpi-grid{ grid-template-columns:repeat(2,1fr); } }
+
+  /* ---------- Melhorou / Piorou ---------- */
+  .comparison{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+  }
+  @media (max-width:720px){ .comparison{ grid-template-columns:1fr; } }
+  .comp-col{
+    background:var(--bg-card);
+    border:1px solid var(--hairline);
+    border-radius:12px;
+    padding:22px 22px 8px;
+  }
+  .comp-col.good{ border-top:3px solid var(--good); }
+  .comp-col.bad{ border-top:3px solid var(--bad); }
+  .comp-head{
+    display:flex; align-items:center; gap:8px;
+    font-family:var(--serif); font-size:18px; margin-bottom:16px;
+  }
+  .comp-head .tag{ font-size:11px; font-family:var(--mono); padding:2px 8px; border-radius:20px; }
+  .comp-col.good .tag{ background:var(--good-soft); color:var(--good); }
+  .comp-col.bad .tag{ background:var(--bad-soft); color:var(--bad); }
+  .comp-list{ list-style:none; margin:0; padding:0; }
+  .comp-list li{
+    padding:12px 0 14px;
+    border-top:1px solid var(--hairline);
+    font-size:13.8px;
+    color:var(--ink);
+  }
+  .comp-list li:first-child{ border-top:none; }
+  .comp-list li b{ font-weight:600; }
+  .comp-list .num{
+    font-family:var(--mono); font-variant-numeric:tabular-nums;
+    color:var(--ink-muted); font-size:12.5px; display:block; margin-top:3px;
+  }
+
+  /* ---------- Adset cards ---------- */
+  .adset{
+    background:var(--bg-card);
+    border:1px solid var(--hairline);
+    border-radius:12px;
+    padding:22px 24px;
+    margin-bottom:16px;
+  }
+  .adset-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap; margin-bottom:14px; }
+  .adset-name{ font-family:var(--serif); font-size:18px; margin:0 0 4px; }
+  .adset-sub{ font-size:12.5px; color:var(--ink-faint); font-family:var(--mono); }
+  .chip{
+    font-family:var(--mono); font-size:10.8px; text-transform:uppercase; letter-spacing:.05em;
+    padding:4px 9px; border-radius:20px; white-space:nowrap;
+  }
+  .chip.active{ background:var(--good-soft); color:var(--good); }
+  .chip.paused{ background:var(--neutral-chip); color:var(--ink-muted); }
+  .chip.new{ background:var(--accent-soft); color:var(--accent); }
+  .adset-metrics{
+    display:grid; grid-template-columns:repeat(5,1fr); gap:14px;
+    padding-top:14px; border-top:1px solid var(--hairline);
+  }
+  @media (max-width:720px){ .adset-metrics{ grid-template-columns:repeat(2,1fr); } }
+  .m-label{ font-size:10.5px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.06em; margin-bottom:4px; }
+  .m-value{ font-family:var(--mono); font-variant-numeric:tabular-nums; font-size:15px; font-weight:600; }
+  .m-value.hl-good{ color:var(--good); }
+  .m-value.hl-bad{ color:var(--bad); }
+
+  /* ---------- Table (ranking) ---------- */
+  .table-scroll{ overflow-x:auto; border:1px solid var(--hairline); border-radius:12px; }
+  table{ width:100%; border-collapse:collapse; font-size:13.5px; min-width:640px; }
+  thead th{
+    text-align:left; font-family:var(--mono); font-size:10.8px; text-transform:uppercase; letter-spacing:.06em;
+    color:var(--ink-faint); padding:12px 16px; background:var(--bg-elevated); border-bottom:1px solid var(--hairline);
+  }
+  tbody td{ padding:13px 16px; border-bottom:1px solid var(--hairline); vertical-align:top; }
+  tbody tr:last-child td{ border-bottom:none; }
+  td.num{ font-family:var(--mono); font-variant-numeric:tabular-nums; }
+  .status-pill{
+    display:inline-block; font-family:var(--mono); font-size:10.5px; text-transform:uppercase; letter-spacing:.04em;
+    padding:3px 9px; border-radius:20px;
+  }
+  .status-champion{ background:var(--good-soft); color:var(--good); }
+  .status-low{ background:var(--neutral-chip); color:var(--ink-muted); }
+  .status-waste{ background:var(--bad-soft); color:var(--bad); }
+  .status-ok{ background:var(--accent-soft); color:var(--accent); }
+
+  /* ---------- Decision / pendency list ---------- */
+  .pend{ display:flex; flex-direction:column; gap:1px; background:var(--hairline); border:1px solid var(--hairline); border-radius:12px; overflow:hidden; }
+  .pend-row{ background:var(--bg-card); padding:16px 20px; display:grid; grid-template-columns:120px 1fr; gap:16px; align-items:start; }
+  @media (max-width:640px){ .pend-row{ grid-template-columns:1fr; } }
+  .pend-status{ font-family:var(--mono); font-size:10.8px; text-transform:uppercase; letter-spacing:.05em; padding:4px 10px; border-radius:20px; width:fit-content; height:fit-content; }
+  .pend-text b{ display:block; margin-bottom:3px; font-size:14px; font-weight:600;}
+  .pend-text span{ font-size:13px; color:var(--ink-muted); }
+  .st-done{ background:var(--good-soft); color:var(--good); }
+  .st-open{ background:var(--warn-soft); color:var(--warn); }
+  .st-unk{ background:var(--neutral-chip); color:var(--ink-muted); }
+  .st-newq{ background:var(--bad-soft); color:var(--bad); }
+
+  /* ---------- Diagnosis ---------- */
+  .diag{
+    background:var(--bg-card); border:1px solid var(--hairline); border-radius:12px; padding:24px;
+  }
+  .diag ol{ margin:0 0 18px; padding-left:22px; }
+  .diag li{ margin-bottom:10px; font-size:14px; }
+  .diag .verdict{
+    margin-top:18px; padding:16px 18px; border-radius:10px; background:var(--accent-soft);
+    border-left:3px solid var(--accent); font-size:14px; line-height:1.6;
+  }
+
+  /* ---------- Histórico de Otimizações ---------- */
+  .opt-card{
+    border:1px solid var(--hairline); border-radius:12px; background:var(--bg-card);
+    margin-bottom:16px; overflow:hidden;
+  }
+  .opt-title{
+    padding:14px 20px; font-family:var(--serif); font-size:16px; border-bottom:1px solid var(--hairline);
+  }
+  .opt-grid{ display:grid; grid-template-columns:1fr 1fr; }
+  .opt-block{ padding:16px 20px; }
+  .opt-block-label{
+    font-family:var(--mono); font-size:10.5px; text-transform:uppercase; letter-spacing:.06em;
+    margin-bottom:6px; font-weight:600;
+  }
+  .opt-block p{ margin:0; font-size:13.5px; line-height:1.55; color:var(--ink-muted); }
+  .opt-block.realizada{ background:var(--accent-soft); }
+  .opt-block.realizada .opt-block-label{ color:var(--accent); }
+  .opt-block.motivo{ background:transparent; }
+  .opt-block.motivo .opt-block-label{ color:var(--ink-faint); }
+  .opt-block.esperado{ background:var(--good-soft); }
+  .opt-block.esperado .opt-block-label{ color:var(--good); }
+  .opt-block.orientacoes{ background:var(--warn-soft); }
+  .opt-block.orientacoes .opt-block-label{ color:var(--warn); }
+  @media (max-width:640px){ .opt-grid{ grid-template-columns:1fr; } }
+
+  .decision-list{ display:flex; flex-direction:column; gap:1px; background:var(--hairline); border:1px solid var(--hairline); border-radius:12px; overflow:hidden; margin-bottom:16px; }
+  .decision-row{ background:var(--bg-card); padding:14px 20px; display:grid; grid-template-columns:120px 1fr; gap:16px; align-items:start; }
+  .decision-row b{ display:block; margin-bottom:3px; font-size:14px; font-weight:600; }
+  .decision-row span{ font-size:13px; color:var(--ink-muted); }
+
+  /* ---------- Footer / approval ---------- */
+  .approval{
+    background:var(--bg-card); border:1px dashed var(--hairline); border-radius:12px; padding:24px;
+    font-size:13.5px; color:var(--ink-muted);
+  }
+  .approval b{ color:var(--ink); }
+  .approval code{ font-family:var(--mono); background:var(--neutral-chip); padding:1px 6px; border-radius:5px; font-size:12.5px; color:var(--ink); }
+  footer{ padding:32px 0 8px; text-align:center; font-size:12px; color:var(--ink-faint); font-family:var(--mono); }
+
+  a{ color:var(--accent); }
+</style>
+
+<div class="masthead">
+  <div class="masthead-inner">
+    <div class="eyebrow"><span class="dot"></span> Data Know · Meta Ads · Rascunho para aprovação</div>
+    <h1>Luxe Icon LTD — Relatório Semanal</h1>
+    <p class="masthead-sub">RC Bag Marketplace (Resellers Connector) — leads via formulário nativo Meta. Comparativo direto contra a semana de 18–24/07, publicada em 25/07/2026.</p>
+    <div class="masthead-meta">
+      <span>Período analisado: <strong>29/07 – 04/08/2026</strong></span>
+      <span>Conta: <strong>act_412122005210742 (EUR)</strong></span>
+      <span>Fonte: <strong>Graph API direta v25.0 (token .env do MCC Data Know)</strong></span>
+      <span>Gerado: <strong>05/08/2026</strong></span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section id="kpis">
+    <p class="section-label">Placar da semana</p>
+    <h2>Conta — resultado agregado</h2>
+    <p class="section-intro">Único campanha ativa: <em>DK – Leads – Forms – 11/03</em> (Fundo de funil, formulário nativo Meta). Dois conjuntos com investimento: 02 (existente) e 03 (novo, criado 31/07).</p>
+
+    <div class="kpi-grid">
+      <div class="kpi">
+        <span class="kpi-label">Investimento</span>
+        <span class="kpi-value">€384,71</span>
+        <span class="kpi-delta up-bad">↑ 88,4% vs sem. anterior</span>
+        <span class="kpi-prev">Anterior: €204,25</span>
+      </div>
+      <div class="kpi">
+        <span class="kpi-label">Leads</span>
+        <span class="kpi-value">39</span>
+        <span class="kpi-delta up-good">↑ 62,5% vs sem. anterior</span>
+        <span class="kpi-prev">Anterior: 24</span>
+      </div>
+      <div class="kpi">
+        <span class="kpi-label">CPL</span>
+        <span class="kpi-value">€9,86</span>
+        <span class="kpi-delta up-bad">↑ 15,9% vs sem. anterior</span>
+        <span class="kpi-prev">Anterior: €8,51 · duas semanas atrás: €4,85</span>
+      </div>
+      <div class="kpi">
+        <span class="kpi-label">CTR</span>
+        <span class="kpi-value">2,66%</span>
+        <span class="kpi-delta down-bad">↓ 0,20 p.p.</span>
+        <span class="kpi-prev">Anterior: 2,86%</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="comparativo">
+    <p class="section-label">Vs. relatório de 25/07</p>
+    <h2>O que melhorou e o que piorou</h2>
+    <p class="section-intro">Leitura direta contra as métricas, decisões e pendências registradas no relatório da semana 18–24/07.</p>
+
+    <div class="comparison">
+      <div class="comp-col good">
+        <div class="comp-head"><span class="tag">Melhorou</span></div>
+        <ul class="comp-list">
+          <li><b>Volume de leads quase dobrou</b><span class="num">24 → 39 leads (+62,5%)</span></li>
+          <li><b>Lógica de público em OU confirmada e ampliada</b> nos conjuntos 02 e 03: um único bloco combina marcas de luxo, Second-hand shop, Comércio eletrônico, Brechó, American Express, Bens de luxo e os cargos (Personal assistant, Personal shopper, Concierge, Store Manager/Owner, Operations Manager/Coordinator, Founder) — mais amplo que o combinado originalmente decidido.</li>
+          <li><b>Conjunto novo "03" entrega o melhor CPL da conta</b><span class="num">€5,72 — abaixo até do patamar de duas semanas atrás (€4,85)</span></li>
+          <li><b>Pacing muito mais eficiente</b><span class="num">~€55/dia gasto vs €60/dia de capacidade configurada (≈91%), contra ≈51% de utilização na semana anterior</span></li>
+          <li><b>Pausa do conjunto "01" respeitada integralmente</b> — €0,00 investidos, conforme decisão registrada.</li>
+          <li><b>Facebook segue com CTR melhor que Instagram</b> nos dois conjuntos ativos — padrão consistente nas duas semanas, dado confiável para decisão de posicionamento.</li>
+        </ul>
+      </div>
+      <div class="comp-col bad">
+        <div class="comp-head"><span class="tag">Piorou</span></div>
+        <ul class="comp-list">
+          <li><b>CPL da conta subiu pela 2ª semana seguida</b><span class="num">€8,51 → €9,86 (+15,9%) · acumulado de duas semanas: +103% sobre €4,85</span></li>
+          <li><b>CPM subiu</b><span class="num">€8,67 → €9,89 (+14,1%)</span></li>
+          <li><b>Atribuição segue fora do padrão em toda a campanha</b><span class="num">Confirmado via API direta: conjuntos "01", "02" e "03" usam <code>attribution_spec</code> de 1 dia clique apenas (CLICK_THROUGH, window_days=1) — não o padrão Meta Standard (7d clique + 1d view). A pendência da semana passada não foi resolvida; o dado do MCP que sugeria correção estava incorreto.</span></li>
+          <li><b>Duplicação de texto é maior do que o reportado</b><span class="num">6 dos 7 anúncios ativos usam o mesmo texto primário verbatim ("Stop Losing Sales…") — incluindo o "Rc1-jun" fatigado E o novo campeão "[RC VIDEO 2] [JULIO]". A pendência de consolidação não só não avançou como se espalhou para o conjunto novo.</span></li>
+          <li><b>Fadiga do "Rc1-jun" se confirmou como previsto</b><span class="num">CPL individual: €6,74 → €16,28 (+142%) — consumindo €227,97, 59% de todo o investimento da semana, com o pior custo por lead do conjunto 02</span></li>
+          <li><b>"Rc2-jun" segue em baixa entrega crônica</b> — 3ª semana consecutiva sem gerar nenhum lead.</li>
+          <li><b>Anúncio "descobrir_bolso" sumiu da conta</b> sem registro de pausa documentado — confirmado de forma independente via API direta, precisa confirmação do motivo.</li>
+          <li><b>Duas mudanças estruturais não documentadas</b>: orçamento do conjunto 02 caiu de €45→€30/dia, e o conjunto 03 foi criado em 31/07 — nenhuma das duas aparece nas decisões do relatório anterior.</li>
+          <li><b>Checagem de EMQ/Pixel/CAPI</b> segue sem execução — ainda pendente há 2 semanas.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="conjuntos">
+    <p class="section-label">Por conjunto de anúncios</p>
+    <h2>Conjuntos ativos na semana</h2>
+    <p class="section-intro">ABO mantido (sem CBO) — orçamento definido a nível de conjunto, sem alteração de estrutura.</p>
+
+    <div class="adset">
+      <div class="adset-top">
+        <div>
+          <p class="adset-name">03 / Advantage S/Moda e Marcas / 7M / Vídeos Novos / Agosto</p>
+          <p class="adset-sub">ID 120250393949710295 · criado 31/07 · não existia no relatório anterior</p>
+        </div>
+        <span class="chip new">Novo · Ativo</span>
+      </div>
+      <div class="adset-metrics">
+        <div><div class="m-label">Gasto</div><div class="m-value">€131,55</div></div>
+        <div><div class="m-label">Leads</div><div class="m-value hl-good">23</div></div>
+        <div><div class="m-label">CPL</div><div class="m-value hl-good">€5,72</div></div>
+        <div><div class="m-label">CTR</div><div class="m-value">3,49%</div></div>
+        <div><div class="m-label">Orçamento/dia</div><div class="m-value">€30,00</div></div>
+      </div>
+    </div>
+
+    <div class="adset">
+      <div class="adset-top">
+        <div>
+          <p class="adset-name">02 / Advantage S/Moda e Marcas / 7M / Vídeos Novos / Abril</p>
+          <p class="adset-sub">ID 120244768508040295 · ativo desde 09/04 · orçamento reduzido de €45→€30/dia (não documentado)</p>
+        </div>
+        <span class="chip active">Ativo</span>
+      </div>
+      <div class="adset-metrics">
+        <div><div class="m-label">Gasto</div><div class="m-value">€253,16</div></div>
+        <div><div class="m-label">Leads</div><div class="m-value">16</div></div>
+        <div><div class="m-label">CPL</div><div class="m-value hl-bad">€15,82</div></div>
+        <div><div class="m-label">CTR</div><div class="m-value">2,18%</div></div>
+        <div><div class="m-label">Orçamento/dia</div><div class="m-value">€30,00</div></div>
+      </div>
+    </div>
+
+    <div class="adset">
+      <div class="adset-top">
+        <div>
+          <p class="adset-name">01 / Advantage S/Moda e Marcas / 7M</p>
+          <p class="adset-sub">ID 120243249131940295 · pausado desde 22/07 · atribuição ainda em 1d clique (não corrigida)</p>
+        </div>
+        <span class="chip paused">Pausado</span>
+      </div>
+      <div class="adset-metrics">
+        <div><div class="m-label">Gasto</div><div class="m-value">€0,00</div></div>
+        <div><div class="m-label">Leads</div><div class="m-value">—</div></div>
+        <div><div class="m-label">CPL</div><div class="m-value">—</div></div>
+        <div><div class="m-label">CTR</div><div class="m-value">—</div></div>
+        <div><div class="m-label">Orçamento/dia</div><div class="m-value">€5,00 (config.)</div></div>
+      </div>
+    </div>
+
+    <div class="table-scroll" style="margin-top:22px;">
+      <table>
+        <thead>
+          <tr><th>Plataforma</th><th>Conjunto</th><th>Gasto</th><th>CPM</th><th>CTR</th><th>Impressões</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Facebook</td><td>03 (novo)</td><td class="num">€49,32</td><td class="num">€8,85</td><td class="num">3,97%</td><td class="num">5.570</td></tr>
+          <tr><td>Instagram</td><td>03 (novo)</td><td class="num">€82,23</td><td class="num">€9,72</td><td class="num">3,18%</td><td class="num">8.459</td></tr>
+          <tr><td>Facebook</td><td>02</td><td class="num">€88,57</td><td class="num">€10,53</td><td class="num">2,96%</td><td class="num">8.415</td></tr>
+          <tr><td>Instagram</td><td>02</td><td class="num">€164,59</td><td class="num">€10,01</td><td class="num">1,79%</td><td class="num">16.447</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="ranking">
+    <p class="section-label">Ranking de criativos</p>
+    <h2>Anúncios ativos na semana</h2>
+    <p class="section-intro">Classificação por entrega e custo por lead dentro de cada conjunto. Coluna "Texto" identifica o corpo do anúncio (creative.body), confirmado via API direta.</p>
+
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>Anúncio</th><th>Conjunto</th><th>Gasto</th><th>Leads</th><th>CPL</th><th>Texto</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>[RC VIDEO 2] [JULIO]</td><td>03</td>
+            <td class="num">€130,27</td><td class="num">23</td><td class="num">€5,66</td>
+            <td>"Stop Losing Sales…" (A)</td>
+            <td><span class="status-pill status-champion">Campeão</span></td>
+          </tr>
+          <tr>
+            <td>[RC VIDEO 1] [JULIO]</td><td>03</td>
+            <td class="num">€0,66</td><td class="num">0</td><td class="num">—</td>
+            <td>"Stop Losing Sales…" (A)</td>
+            <td><span class="status-pill status-low">Baixa entrega</span></td>
+          </tr>
+          <tr>
+            <td>[RC VIDEO 3] [JULIO]</td><td>03</td>
+            <td class="num">€0,62</td><td class="num">0</td><td class="num">—</td>
+            <td>"Stop Losing Sales…" (A)</td>
+            <td><span class="status-pill status-low">Baixa entrega</span></td>
+          </tr>
+          <tr>
+            <td>Rc1-jun</td><td>02</td>
+            <td class="num">€227,97</td><td class="num">14</td><td class="num">€16,28</td>
+            <td>"Stop Losing Sales…" (A)</td>
+            <td><span class="status-pill status-waste">Fadiga confirmada</span></td>
+          </tr>
+          <tr>
+            <td>comprar mejor</td><td>02</td>
+            <td class="num">€23,86</td><td class="num">2</td><td class="num">€11,93</td>
+            <td>"Stop Losing Sales…" (A)</td>
+            <td><span class="status-pill status-ok">Saiu da baixa entrega</span></td>
+          </tr>
+          <tr>
+            <td>Rc9-jul</td><td>02</td>
+            <td class="num">€0,07</td><td class="num">0</td><td class="num">—</td>
+            <td>"Stop Losing Sales…" (A)</td>
+            <td><span class="status-pill status-low">Baixa entrega</span></td>
+          </tr>
+          <tr>
+            <td>Rc2-jun</td><td>02</td>
+            <td class="num">€1,26</td><td class="num">0</td><td class="num">—</td>
+            <td>"Never Lose a Sale Again…" (B) — única diferente</td>
+            <td><span class="status-pill status-low">Baixa entrega crônica (3ª sem.)</span></td>
+          </tr>
+          <tr>
+            <td>descobrir_bolso</td><td>02</td>
+            <td class="num">—</td><td class="num">—</td><td class="num">—</td>
+            <td>—</td>
+            <td><span class="status-pill status-ok">Desativado (confirmado, intencional)</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="section-intro" style="margin-top:16px;">6 dos 7 anúncios ativos (todos exceto "Rc2-jun") rodam o texto (A) idêntico, palavra por palavra — incluindo o anúncio fatigado ("Rc1-jun") e o novo campeão ("[RC VIDEO 2] [JULIO]"). Isso significa que a diferença de CPL entre eles não vem do texto, e sim de outra variável (vídeo do criativo, tempo de veiculação/fadiga, ou mix de posicionamento) — vale investigar qual.</p>
+  </section>
+
+  <section id="pendencias">
+    <p class="section-label">Rastreamento</p>
+    <h2>Status das decisões da semana passada</h2>
+
+    <div class="pend">
+      <div class="pend-row">
+        <span class="pend-status st-done">Cumprido</span>
+        <div class="pend-text"><b>Manter pausa dos conjuntos "01"/"Vídeo 2" por +7 dias</b><span>Conjunto "01" segue com €0,00 investidos na semana.</span></div>
+      </div>
+      <div class="pend-row">
+        <span class="pend-status st-done">Cumprido</span>
+        <div class="pend-text"><b>Reavaliar "Rc1-jun" após 7 dias</b><span>Reavaliação feita no prazo — resultado é negativo: CPL dobrou, fadiga confirmada. Ação recomendada abaixo.</span></div>
+      </div>
+      <div class="pend-row">
+        <span class="pend-status st-done">Cumprido e ampliado</span>
+        <div class="pend-text"><b>Incluir públicos em lógica OU (marcas + cargos)</b><span>Confirmado via targeting spec: bloco único em 02 e 03, com mais cargos que o combinado original.</span></div>
+      </div>
+      <div class="pend-row">
+        <span class="pend-status st-newq">Não resolvido</span>
+        <div class="pend-text"><b>Ajustar janela de atribuição do conjunto "01" para o padrão</b><span>Confirmado via API direta que "01", "02" e "03" seguem com <code>attribution_spec</code> de 1 dia clique apenas — nenhum foi corrigido para o padrão Meta Standard (7d clique + 1d view).</span></div>
+      </div>
+      <div class="pend-row">
+        <span class="pend-status st-newq">Não resolvido — piorou</span>
+        <div class="pend-text"><b>Consolidar anúncios de texto idêntico (aprovação Imaculada)</b><span>Confirmado via <code>creative.body</code> na API direta: agora são 6 dos 7 anúncios ativos com o texto idêntico "Stop Losing Sales…" (eram 3 no relatório anterior) — o problema se espalhou para o conjunto novo "03". Segue pendente aprovação da Imaculada.</span></div>
+      </div>
+      <div class="pend-row">
+        <span class="pend-status st-open">Ainda pendente</span>
+        <div class="pend-text"><b>Verificar EMQ / Pixel / CAPI</b><span>Marcada como "próxima rodada" há 2 semanas — segue sem execução. A conta usa formulário nativo (não pixel de site); o equivalente é o Diagnóstico de Qualidade de Eventos do formulário.</span></div>
+      </div>
+      <div class="pend-row">
+        <span class="pend-status st-done">Confirmado</span>
+        <div class="pend-text"><b>Anúncio "descobrir_bolso" não aparece mais entre os anúncios ativos</b><span>Confirmado pelo Azel: desativação intencional, não é falha de dado.</span></div>
+      </div>
+      <div class="pend-row">
+        <span class="pend-status st-done">Confirmado</span>
+        <div class="pend-text"><b>Duas mudanças estruturais não documentadas</b><span>Confirmado pelo Azel: orçamento do conjunto 02 (€45→€30/dia) e criação do conjunto 03 (31/07) foram ambas a pedido do cliente, para rodar um teste. Ver Histórico de Otimizações.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="diagnostico">
+    <p class="section-label">Diagnóstico em cascata — CPL subiu</p>
+    <h2>Por que o CPL da conta voltou a subir</h2>
+    <div class="diag">
+      <ol>
+        <li><b>EMQ / Pixel / CAPI</b> — não verificável diretamente (conta usa Lead Gen nativo Meta, não pixel de site). Mas a API direta revelou um dado adjacente relevante: a janela de atribuição de "01"/"02"/"03" está fixada em 1 dia clique apenas — mais estreita que o padrão. Uma janela mais curta captura menos conversões tardias, o que pode estar entregando ao algoritmo de otimização um sinal mais pobre e mais ruidoso do que o necessário.</li>
+        <li><b>CPM (fadiga de leilão)</b> — subiu 14,1% (€8,67→€9,89), alta moderada, não explica sozinha o salto de CPL.</li>
+        <li><b>Frequência / saturação de público</b> — freq. agregada de 2,28 é razoável; o sinal real está em "Rc1-jun", ativo ininterruptamente desde 09/04 (quase 4 meses no ar) sem refresh de criativo.</li>
+        <li><b>Sazonalidade</b> — início de agosto, período de férias de verão na Europa; pode reduzir a atenção de revendedores B2B ao marketplace. Hipótese razoável, não comprovável com os dados disponíveis.</li>
+        <li><b>O criativo ainda ressoa com a persona?</b> — "Rc1-jun" é o candidato mais forte a fadiga clássica: mesmo criativo, mesmo público, quase 4 meses de veiculação contínua, CPL dobrou no intervalo de uma semana.</li>
+        <li><b>Não é o algoritmo</b> — o conjunto "03", criado com o mesmo público e no mesmo período, entrega CPL de €5,72 — abaixo até do patamar histórico de €4,85. O problema é pontual em um anúncio saturado, não uma degradação geral da conta.</li>
+      </ol>
+      <div class="verdict">
+        <b>Leitura:</b> a alta do CPL agregado é explicada majoritariamente por "Rc1-jun" concentrar 59% do investimento da semana com o pior custo por lead do conjunto 02. O conjunto 03, com o mesmo público, prova que a oferta e a segmentação continuam funcionando — o gargalo é a fadiga de um criativo específico, não a estrutura da conta.
+      </div>
+    </div>
+  </section>
+
+  <section id="historico">
+    <p class="section-label">Registro de decisões — já resolvido, não é mais recomendação</p>
+    <h2>Histórico de Otimizações</h2>
+    <p class="section-intro">Todos os pontos levantados pelo diagnóstico desta semana já foram decididos pelo Azel — nada abaixo segue em aberto para a próxima rodada.</p>
+
+    <div class="opt-card">
+      <div class="opt-title">Pausa do anúncio "Rc1-jun"</div>
+      <div class="opt-grid">
+        <div class="opt-block realizada">
+          <div class="opt-block-label">Otimização realizada</div>
+          <p>Anúncio "Rc1-jun" pausado no conjunto "02".</p>
+        </div>
+        <div class="opt-block motivo">
+          <div class="opt-block-label">Por que foi necessário</div>
+          <p>Fadiga confirmada: quase 4 meses ativo sem refresh de criativo, CPL individual saltou de €6,74 para €16,28 (+142%) em uma semana, consumindo 59% do investimento do conjunto com o pior custo por lead.</p>
+        </div>
+        <div class="opt-block esperado">
+          <div class="opt-block-label">Resultado esperado</div>
+          <p>Realocação natural de verba para os demais criativos ativos, incluindo o conjunto "03" (CPL €5,72, 65% menor) — queda no CPL médio da conta na leitura da próxima semana.</p>
+        </div>
+        <div class="opt-block orientacoes">
+          <div class="opt-block-label">Orientações para a equipe</div>
+          <p>Monitorar o CPL agregado na próxima semana. Se "Rc1-jun" for reativado no futuro, usar um criativo novo — não reaproveitar o mesmo vídeo.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="opt-card">
+      <div class="opt-title">Redução de orçamento do conjunto "02" e criação do conjunto "03"</div>
+      <div class="opt-grid">
+        <div class="opt-block realizada">
+          <div class="opt-block-label">Otimização realizada</div>
+          <p>Orçamento do conjunto "02" reduzido de €45 para €30/dia; conjunto novo "03" criado em 31/07 com o mesmo público.</p>
+        </div>
+        <div class="opt-block motivo">
+          <div class="opt-block-label">Por que foi necessário</div>
+          <p>A pedido do cliente, para viabilizar um teste comparativo entre os dois conjuntos com orçamento redistribuído.</p>
+        </div>
+        <div class="opt-block esperado">
+          <div class="opt-block-label">Resultado esperado</div>
+          <p>Validar se o conjunto "03" sustenta performance superior com escala — já entrega o melhor CPL da conta (€5,72) na primeira semana de teste.</p>
+        </div>
+        <div class="opt-block orientacoes">
+          <div class="opt-block-label">Orientações para a equipe</div>
+          <p>Manter o split de orçamento até o fechamento do teste. Documentar mudanças estruturais (orçamento, criação/pausa de conjunto) no momento em que acontecem, não só na revisão semanal — evita gap de rastreabilidade como o desta semana.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="decision-list">
+      <div class="decision-row"><b>"Rc2-jun" segue ativo</b><span>Decisão do Azel: aguardar mais 7 dias antes de decidir sobre pausa, apesar da 3ª semana consecutiva sem leads.</span></div>
+      <div class="decision-row"><b>"descobrir_bolso" desativado</b><span>Confirmado pelo Azel como intencional — não requer investigação adicional.</span></div>
+      <div class="decision-row"><b>Janela de atribuição não será corrigida</b><span>Decisão do Azel: descartado — conjuntos "01", "02" e "03" seguem com atribuição de 1 dia clique apenas.</span></div>
+      <div class="decision-row"><b>Textos dos 6 anúncios não serão diferenciados</b><span>Decisão do Azel: descartado — cliente não passou legendas/textos específicos para variar a copy.</span></div>
+      <div class="decision-row"><b>Checagem de Qualidade de Eventos do formulário não será rodada</b><span>Decisão do Azel: descartado nesta rodada.</span></div>
+    </div>
+  </section>
+
+  <section id="aprovacao">
+    <p class="section-label">Antes de publicar</p>
+    <h2>Aguardando aprovação do Azel</h2>
+    <div class="approval">
+      Este HTML é um <b>rascunho para revisão</b> — ainda não foi commitado no GitHub Pages. Caminho de publicação previsto:<br><br>
+      <code>docs/Data Know/Luxe Icon LTD/Meta Ads/Agosto 2026/05-08-26.html</code><br><br>
+      Após confirmação explícita do Azel, o commit + push seguem para o repositório <code>plusdigitalagencia-web/google-ads-agent-azel</code>, branch <code>main</code>.
+    </div>
+  </section>
+
+</div>
+
+<footer>Luxe Icon LTD · Data Know · Plus Digital Agência — gerado via Meta Ads API em 05/08/2026</footer>
