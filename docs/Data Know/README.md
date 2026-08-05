@@ -14,6 +14,7 @@ Relatórios de diagnóstico de campanhas Google Ads e Meta Ads dos clientes da D
 | **Bricolemar** | Google Ads | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Data%20Know/Bricolemar/) |
 | **LRS Safety** | Meta Ads | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Data%20Know/LRS%20Safety/) |
 | **Vicente Villa - Autónomo** | Meta Ads (pendente) | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Data%20Know/Vicente%20Villa%20-%20Aut%C3%B3nomo/) |
+| **Nexara Finance** | Meta Ads (pendente) | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Data%20Know/Nexara%20Finance/) |
 
 > Pasta a criar quando o próximo cliente for confirmado.
 

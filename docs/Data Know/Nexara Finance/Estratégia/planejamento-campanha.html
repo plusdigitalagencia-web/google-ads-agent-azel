@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nexara Finance — Planificación de Campaña</title>
+<style>
+  :root {
+    --ground: #f4f7f5; --panel: #ffffff; --border: #d7e0dc;
+    --ink: #142320; --ink-dim: #4b5b56; --ink-faint: #7c8b86;
+    --accent: #157567; --accent-ink: #0d4b42; --accent-soft: #dcefe9;
+    --meta: #1877f2; --meta-ink: #0a58ca; --meta-soft: #dbe8fd;
+    --warm: #a8631f; --warm-ink: #6b3f10; --warm-soft: #f1e3d0;
+    --alert: #9a3b1f; --alert-ink: #6b2810; --alert-soft: #f5e2da;
+    --font-sans: -apple-system, "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0c1614; --panel: #121e1b; --border: #24322e;
+      --ink: #e7efec; --ink-dim: #a9b8b3; --ink-faint: #7c8b86;
+      --accent: #37bfa8; --accent-ink: #b7ece1; --accent-soft: #17332d;
+      --meta: #6ea8fe; --meta-ink: #bcd6ff; --meta-soft: #16233a;
+      --warm: #e3a463; --warm-ink: #f5d9b0; --warm-soft: #3a2a17;
+      --alert: #e2896a; --alert-ink: #f7cdb9; --alert-soft: #3a2018;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0c1614; --panel: #121e1b; --border: #24322e;
+    --ink: #e7efec; --ink-dim: #a9b8b3; --ink-faint: #7c8b86;
+    --accent: #37bfa8; --accent-ink: #b7ece1; --accent-soft: #17332d;
+    --meta: #6ea8fe; --meta-ink: #bcd6ff; --meta-soft: #16233a;
+    --warm: #e3a463; --warm-ink: #f5d9b0; --warm-soft: #3a2a17;
+    --alert: #e2896a; --alert-ink: #f7cdb9; --alert-soft: #3a2018;
+  }
+
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--ground); color:var(--ink); font-family:var(--font-sans); line-height:1.5; }
+  .page { max-width: 860px; margin:0 auto; padding: 48px 24px 80px; display:flex; flex-direction:column; gap:36px; }
+
+  .lang-toggle { align-self:flex-end; display:flex; border:1px solid var(--border); border-radius:20px; overflow:hidden; background:var(--panel); box-shadow:0 1px 3px rgba(0,0,0,.08); }
+  .lang-btn { font-family:var(--font-mono); font-size:12px; font-weight:700; letter-spacing:.03em; padding:8px 16px; border:none; background:transparent; color:var(--ink-faint); cursor:pointer; }
+  .lang-btn[aria-pressed="true"] { background:var(--accent-soft); color:var(--accent-ink); }
+  .lang-btn:focus-visible { outline:2px solid var(--accent); outline-offset:-2px; }
+
+  .breadcrumb { font-family: var(--font-mono); font-size:12.5px; color:var(--ink-faint); }
+  .breadcrumb a { color:var(--accent); text-decoration:none; }
+
+  header.hero { display:flex; flex-direction:column; gap:10px; }
+  h1 { font-size: clamp(24px,4vw,30px); margin:0; text-wrap:balance; }
+  p.lede { color:var(--ink-dim); margin:0; font-size:15px; max-width:64ch; }
+  .badges { display:flex; flex-wrap:wrap; gap:8px; margin-top:4px; }
+  .badge { font-family:var(--font-mono); font-size:11.5px; font-weight:600; letter-spacing:.02em; padding:4px 10px; border-radius:20px; background:var(--panel); border:1px solid var(--border); color:var(--ink-dim); }
+
+  h2.section-title { font-size:13px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); margin:0 0 4px; }
+
+  .mindmap { display:flex; flex-direction:column; align-items:center; gap:0; }
+
+  .node-root { background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:16px 24px; text-align:center; box-shadow:0 1px 2px rgba(0,0,0,.04); max-width:340px; }
+  .node-root .k { font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-faint); }
+  .node-root .v { font-size:16px; font-weight:700; margin-top:4px; }
+
+  .connector { width:100%; max-width:760px; height:44px; display:none; }
+  @media (min-width:720px) { .connector { display:block; } }
+
+  .branches { display:grid; grid-template-columns: repeat(3,1fr); gap:20px; width:100%; max-width:760px; margin-top:0; }
+  @media (max-width:719px) {
+    .branches { grid-template-columns: 1fr; gap:28px; margin-top:24px; }
+    .branch { position:relative; padding-top:20px; }
+    .branch::before { content:""; position:absolute; top:0; left:50%; width:2px; height:20px; background:var(--border); transform:translateX(-50%); }
+  }
+
+  .branch { display:flex; flex-direction:column; gap:10px; }
+  .branch-head { border-radius:10px; padding:10px 14px; border:1px solid var(--border); background:var(--panel); }
+  .branch-head .label { font-family:var(--font-mono); font-size:11px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; }
+  .branch-head .sub { font-size:12px; color:var(--ink-faint); margin-top:2px; }
+  .branch.publico .branch-head { border-top:3px solid var(--accent); }
+  .branch.publico .label { color:var(--accent-ink); }
+  .branch.criativos .branch-head { border-top:3px solid var(--meta); }
+  .branch.criativos .label { color:var(--meta-ink); }
+  .branch.hooks .branch-head { border-top:3px solid var(--warm); }
+  .branch.hooks .label { color:var(--warm-ink); }
+
+  .leaves { display:flex; flex-direction:column; gap:8px; }
+  .leaf { border:1px solid var(--border); background:var(--panel); border-radius:8px; padding:10px 12px; font-size:12.5px; }
+  .leaf .t { font-weight:700; font-size:12.5px; margin-bottom:2px; }
+  .leaf .d { color:var(--ink-faint); font-size:11.5px; }
+  .leaf.quote { font-style:italic; color:var(--ink-dim); }
+
+  .interests-block { margin-top:4px; padding-top:14px; border-top:1px dashed var(--border); display:flex; flex-direction:column; gap:8px; }
+  .interests-title { font-family:var(--font-mono); font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--accent-ink); }
+  .interests-title span { font-family:var(--font-sans); font-weight:400; text-transform:none; letter-spacing:0; color:var(--ink-faint); }
+  .chip-label { font-size:11px; color:var(--ink-faint); font-weight:600; margin-top:4px; }
+  .chip-group { display:flex; flex-wrap:wrap; gap:6px; }
+  .chip { font-size:11px; padding:4px 9px; border-radius:20px; background:var(--accent-soft); color:var(--accent-ink); border:1px solid transparent; }
+  .interests-note { font-size:10.5px; color:var(--ink-faint); font-style:italic; margin-top:2px; }
+  .branch.publico .leaf { border-left:3px solid var(--accent-soft); }
+  .branch.criativos .leaf { border-left:3px solid var(--meta-soft); }
+  .branch.hooks .leaf { border-left:3px solid var(--warm-soft); }
+
+  .tone-note { font-size:11.5px; color:var(--ink-faint); padding:8px 12px; }
+
+  .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; }
+  .kpi-tile { border:1px solid var(--border); background:var(--panel); border-radius:10px; padding:14px 16px; }
+  .kpi-tile .label { font-family:var(--font-mono); font-size:10.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-faint); }
+  .kpi-tile .value { font-size:22px; font-weight:700; margin-top:4px; font-variant-numeric:tabular-nums; }
+  .kpi-tile .src { font-size:10.5px; color:var(--ink-faint); margin-top:4px; }
+  .kpis-disclaimer { font-size:11.5px; color:var(--ink-faint); }
+
+  .copy-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px; }
+  .copy-card { border:1px solid var(--border); background:var(--panel); border-radius:10px; padding:14px 16px; display:flex; flex-direction:column; gap:8px; }
+  .copy-card .persona { font-family:var(--font-mono); font-size:10.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--accent-ink); }
+  .copy-card .framework { font-family:var(--font-mono); font-size:10px; color:var(--ink-faint); }
+  .copy-card .headline { font-weight:700; font-size:13.5px; }
+  .copy-card .primary { font-size:12px; color:var(--ink-dim); font-style:italic; }
+  .copy-card .cta { font-size:11px; color:var(--ink-faint); }
+  .copy-card .cta b { color:var(--ink); font-style:normal; }
+
+  .callouts { display:flex; flex-direction:column; gap:12px; }
+  .callout { display:flex; gap:12px; border-radius:10px; padding:14px 16px; border:1px solid var(--border); background:var(--panel); }
+  .callout .bar { width:3px; border-radius:2px; flex-shrink:0; }
+  .callout.alert .bar { background:var(--alert); }
+  .callout.note .bar { background:var(--accent); }
+  .callout .body { font-size:13.5px; color:var(--ink-dim); }
+  .callout .body b { color:var(--ink); }
+
+  footer { border-top:1px solid var(--border); padding-top:16px; font-size:12.5px; color:var(--ink-faint); }
+
+  .resumo p { margin:0; color:var(--ink-dim); font-size:14.5px; max-width:68ch; }
+  .resumo p + p { margin-top:10px; }
+
+  .abo-note { font-size:12px; color:var(--ink-faint); max-width:70ch; }
+
+  .steps { display:flex; flex-direction:column; gap:10px; }
+  .step { display:flex; gap:12px; align-items:baseline; }
+  .step .n { font-family:var(--font-mono); font-size:12px; color:var(--accent-ink); background:var(--accent-soft); border-radius:50%; width:20px; height:20px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .step .t { font-size:13.5px; color:var(--ink-dim); }
+  .step .t b { color:var(--ink); }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="lang-toggle" role="group" aria-label="Idioma / Language">
+    <button type="button" class="lang-btn" data-lang="es" aria-pressed="true">ES</button>
+    <button type="button" class="lang-btn" data-lang="pt" aria-pressed="false">PT</button>
+  </div>
+  <span class="breadcrumb"><a href="../../">Data Know</a> / <a href="../">Nexara Finance</a> / <span data-es="Estrategia" data-pt="Estratégia">Estrategia</span></span>
+
+  <header class="hero">
+    <h1 data-es="Planificación de Campaña — Meta Ads" data-pt="Planejamento de Campanha — Meta Ads">Planificación de Campaña — Meta Ads</h1>
+    <p class="lede" data-es="Lead Ads nativo, gestoría B2B para autónomos y PYMEs con IA integrada. Gancho de entrada validado: consultoría financiera gratuita, priorizando Gestión Activa de Financiación y Kit Digital." data-pt="Lead Ads nativo, gestoria B2B para autônomos e PMEs com IA integrada. Gancho de entrada validado: consultoria financeira gratuita, priorizando Gestão Ativa de Financiamento e Kit Digital.">Lead Ads nativo, gestoría B2B para autónomos y PYMEs con IA integrada. Gancho de entrada validado: consultoría financiera gratuita, priorizando Gestión Activa de Financiación y Kit Digital.</p>
+    <div class="badges">
+      <span class="badge" data-es="€350/mes" data-pt="€350/mês">€350/mes</span>
+      <span class="badge" data-es="España (nacional)" data-pt="Espanha (nacional)">España (nacional)</span>
+      <span class="badge" data-es="1 campaña · Leads · ABO" data-pt="1 campanha · Leads · ABO">1 campaña · Leads · ABO</span>
+    </div>
+  </header>
+
+  <section class="resumo">
+    <h2 class="section-title" data-es="Enfoque" data-pt="Abordagem">Enfoque</h2>
+    <p data-es="El sitio actual (nexarafinance.com) tiene una propuesta de valor clara y una estructura de página sólida, pero la prueba social todavía es débil — sin testimonios reales verificables. Como la conversión de esta campaña es 100% vía Lead Ads nativo (formulario dentro del propio Meta), el sitio no es la pieza que necesita cerrar el lead — pero sigue siendo relevante para el Kit Digital, que exige página web como requisito de la subvención." data-pt="O site atual (nexarafinance.com) tem uma proposta de valor clara e uma estrutura de página sólida, mas a prova social ainda é fraca — sem depoimentos reais verificáveis. Como a conversão desta campanha é 100% via Lead Ads nativo (formulário dentro do próprio Meta), o site não é a peça que precisa fechar o lead — mas continua relevante para o Kit Digital, que exige página web como requisito da subvenção.">El sitio actual (nexarafinance.com) tiene una propuesta de valor clara y una estructura de página sólida, pero la prueba social todavía es débil — sin testimonios reales verificables. Como la conversión de esta campaña es 100% vía Lead Ads nativo (formulario dentro del propio Meta), el sitio no es la pieza que necesita cerrar el lead — pero sigue siendo relevante para el Kit Digital, que exige página web como requisito de la subvención.</p>
+    <p data-es-html='Con €350/mes (~€11,50/día) y <b>ABO elegido explícitamente por el gestor</b> — no la recomendación estándar de Andromeda, que sería CBO — la estructura evita fragmentar el presupuesto en 3 conjuntos. En la Fase 1 se usan <b>2 conjuntos de anuncios</b>: uno enfocado en el autónomo (mayor volumen potencial) y otro que combina las dos personas de PYME (financiación + Kit Digital, la prioridad de negocio del cliente).' data-pt-html='Com €350/mês (~€11,50/dia) e <b>ABO escolhido explicitamente pelo gestor</b> — não a recomendação padrão do Andromeda, que seria CBO — a estrutura evita fragmentar o orçamento em 3 conjuntos. Na Fase 1 usam-se <b>2 conjuntos de anúncios</b>: um focado no autônomo (maior volume potencial) e outro que combina as duas personas de PME (financiamento + Kit Digital, a prioridade de negócio do cliente).'>Con €350/mes (~€11,50/día) y <b>ABO elegido explícitamente por el gestor</b> — no la recomendación estándar de Andromeda, que sería CBO — la estructura evita fragmentar el presupuesto en 3 conjuntos. En la Fase 1 se usan <b>2 conjuntos de anuncios</b>: uno enfocado en el autónomo (mayor volumen potencial) y otro que combina las dos personas de PYME (financiación + Kit Digital, la prioridad de negocio del cliente).</p>
+  </section>
+
+  <section>
+    <h2 class="section-title" data-es="Planificación — estructura de la campaña" data-pt="Planejamento — estrutura da campanha">Planificación — estructura de la campaña</h2>
+    <div class="mindmap">
+      <div class="node-root">
+        <div class="k" data-es="Campaña única · ABO" data-pt="Campanha única · ABO">Campaña única · ABO</div>
+        <div class="v" data-es="Meta Ads · Leads (Lead Ads nativo) · €350/mes" data-pt="Meta Ads · Leads (Lead Ads nativo) · €350/mês">Meta Ads · Leads (Lead Ads nativo) · €350/mes</div>
+      </div>
+
+      <svg class="connector" viewBox="0 0 100 44" preserveAspectRatio="none" aria-hidden="true">
+        <line x1="50" y1="0" x2="50" y2="18" stroke="var(--border)" stroke-width="1.5"/>
+        <line x1="16.5" y1="18" x2="83.5" y2="18" stroke="var(--border)" stroke-width="1.5"/>
+        <line x1="16.5" y1="18" x2="16.5" y2="44" stroke="var(--border)" stroke-width="1.5"/>
+        <line x1="50" y1="18" x2="50" y2="44" stroke="var(--border)" stroke-width="1.5"/>
+        <line x1="83.5" y1="18" x2="83.5" y2="44" stroke="var(--border)" stroke-width="1.5"/>
+      </svg>
+
+      <div class="branches">
+        <div class="branch publico">
+          <div class="branch-head">
+            <div class="label">Público</div>
+            <div class="sub" data-es="Advantage+ Audience · 3 personas · España" data-pt="Advantage+ Audience · 3 personas · Espanha">Advantage+ Audience · 3 personas · España</div>
+          </div>
+          <div class="leaves">
+            <div class="leaf">
+              <div class="t" data-es="Autónomo agobiado por burocracia fiscal · 30-55 años" data-pt="Autônomo sobrecarregado pela burocracia fiscal · 30-55 anos">Autónomo agobiado por burocracia fiscal · 30-55 años</div>
+              <div class="d" data-es="Pierde horas cada trimestre con la AEAT y vive con miedo a cometer un error o recibir una multa, sin tiempo para su propio negocio." data-pt="Perde horas a cada trimestre com a AEAT e vive com medo de cometer um erro ou receber uma multa, sem tempo para o próprio negócio.">Pierde horas cada trimestre con la AEAT y vive con miedo a cometer un error o recibir una multa, sin tiempo para su propio negocio.</div>
+              <div class="d" data-es="Gatillo: consultoría financiera gratuita + oferta ligera Alertas Fiscales IA (19€/mes) como puerta de entrada de bajo compromiso." data-pt="Gatilho: consultoria financeira gratuita + oferta leve Alertas Fiscales IA (19€/mês) como porta de entrada de baixo compromisso.">Gatillo: consultoría financiera gratuita + oferta ligera Alertas Fiscales IA (19€/mes) como puerta de entrada de bajo compromiso.</div>
+              <div class="d" data-es-html='Objeción fuerte: "una gestoría online no me va a atender como persona" → contrarrestar con trato directo con la fundadora Luz Dalia, no con un buzón de tickets.' data-pt-html='Objeção forte: "uma gestoria online não vai me atender como pessoa" → contrapor com atendimento direto com a fundadora Luz Dalia, não com uma fila de tickets.'>Objeción fuerte: "una gestoría online no me va a atender como persona" → contrarrestar con trato directo con la fundadora Luz Dalia, no con un buzón de tickets.</div>
+            </div>
+            <div class="leaf">
+              <div class="t" data-es="Dueño de PYME buscando financiación · 30-55 años" data-pt="Dono de PME buscando financiamento · 30-55 anos">Dueño de PYME buscando financiación · 30-55 años</div>
+              <div class="d" data-es="Sabe que necesita capital para crecer pero no sabe cómo acceder de forma segura — siente que está dejando dinero sobre la mesa." data-pt="Sabe que precisa de capital para crescer mas não sabe como acessar com segurança — sente que está deixando dinheiro na mesa.">Sabe que necesita capital para crecer pero no sabe cómo acceder de forma segura — siente que está dejando dinero sobre la mesa.</div>
+              <div class="d" data-es="Gatillo: consultoría financiera gratuita como puerta directa hacia Gestión Activa de Financiación — servicio prioritario del cliente." data-pt="Gatilho: consultoria financeira gratuita como porta direta para Gestão Ativa de Financiamento — serviço prioritário do cliente.">Gatillo: consultoría financiera gratuita como puerta directa hacia Gestión Activa de Financiación — servicio prioritario del cliente.</div>
+              <div class="d" data-es-html='Objeción fuerte: desconfía que "consultoría gratuita" sea solo un anzuelo de venta agresiva → el formulario nativo reduce fricción, sin pedir tarjeta ni compromiso.' data-pt-html='Objeção forte: desconfia que "consultoria gratuita" seja só uma isca de venda agressiva → o formulário nativo reduz fricção, sem pedir cartão nem compromisso.'>Objeción fuerte: desconfía que "consultoría gratuita" sea solo un anzuelo de venta agresiva → el formulario nativo reduce fricción, sin pedir tarjeta ni compromiso.</div>
+            </div>
+            <div class="leaf">
+              <div class="t" data-es="Gestor de PYME buscando eficiencia + Kit Digital · 30-55 años" data-pt="Gestor de PME buscando eficiência + Kit Digital · 30-55 anos">Gestor de PYME buscando eficiencia + Kit Digital · 30-55 años</div>
+              <div class="d" data-es="Sabe que existe la subvención Kit Digital pero el proceso — incluida la exigencia de tener página web — le parece burocrático." data-pt="Sabe que existe a subvenção Kit Digital mas o processo — incluindo a exigência de ter página web — parece burocrático.">Sabe que existe la subvención Kit Digital pero el proceso — incluida la exigencia de tener página web — le parece burocrático.</div>
+              <div class="d" data-es="Gatillo: Kit Digital con la página web incluida, sin trabajo extra de su parte." data-pt="Gatilho: Kit Digital com a página web incluída, sem trabalho extra da parte dele.">Gatillo: Kit Digital con la página web incluida, sin trabajo extra de su parte.</div>
+              <div class="d" data-es-html='Objeción media: ya tiene una gestoría tradicional → cambiar le parece arriesgado; posicionar como complemento inicial vía la subvención, no como "cambio total" de entrada.' data-pt-html='Objeção média: já tem uma gestoria tradicional → trocar parece arriscado; posicionar como complemento inicial via a subvenção, não como "troca total" de cara.'>Objeción media: ya tiene una gestoría tradicional → cambiar le parece arriesgado; posicionar como complemento inicial vía la subvención, no como "cambio total" de entrada.</div>
+            </div>
+          </div>
+
+          <div class="interests-block">
+            <div class="interests-title" data-es-html='Intereses sugeridos <span>— señal para Advantage+ Audience, no restringe la audiencia</span>' data-pt-html='Interesses sugeridos <span>— sinal para Advantage+ Audience, não restringe a audiência</span>'>Intereses sugeridos <span>— señal para Advantage+ Audience, no restringe la audiencia</span></div>
+
+            <div class="chip-label" data-es="Persona 1 — Autónomo / fiscal:" data-pt="Persona 1 — Autônomo / fiscal:">Persona 1 — Autónomo / fiscal:</div>
+            <div class="chip-group">
+              <span class="chip" title="84,5M–99,3M">Contabilidade (negócios e finanças)</span>
+              <span class="chip" title="7,9M–9,3M">Contabilidade financeira (negócios e finanças)</span>
+              <span class="chip" title="8,8M–10,4M">Accounting software</span>
+              <span class="chip" title="688K–809K">Tax preparation</span>
+              <span class="chip" title="43,2M–50,8M">Trabalho autônomo (carreiras)</span>
+              <span class="chip" title="34,3M–40,3M">Freelancer (carreiras)</span>
+            </div>
+
+            <div class="chip-label" data-es="Persona 2 — Financiación:" data-pt="Persona 2 — Financiamento:">Persona 2 — Financiación:</div>
+            <div class="chip-group">
+              <span class="chip" title="8,2M–9,6M">Financiamento</span>
+              <span class="chip" title="25,4M–29,9M">Financiamento coletivo</span>
+              <span class="chip" title="850K–1M">Bancos e serviços financeiros</span>
+              <span class="chip" title="177M–208M">Pequena empresa (negócios e finanças)</span>
+              <span class="chip" title="96,2M–113,1M">Pequenas e médias empresas (negócios e finanças)</span>
+              <span class="chip" title="382M–449M">Empreendedorismo (negócios e finanças)</span>
+            </div>
+
+            <div class="chip-label" data-es="Persona 3 — Kit Digital / eficiencia:" data-pt="Persona 3 — Kit Digital / eficiência:">Persona 3 — Kit Digital / eficiencia:</div>
+            <div class="chip-group">
+              <span class="chip" title="5,9M–6,9M">Digital transformation</span>
+              <span class="chip" title="6M–7,1M">Consulting firm</span>
+              <span class="chip" title="12,8M–15,1M">Administração de pequenas empresas</span>
+              <span class="chip" title="1,1M–1,3M">Negocios Y Emprendimientos</span>
+              <span class="chip" title="177M–208M">Pequena empresa (negócios e finanças)</span>
+            </div>
+
+            <div class="interests-note" data-es="Nombres tal como los devuelve la Graph API de Meta (búsqueda real, 05/08/2026) — no se tradujeron, así aparecen en el Gestor de Anuncios. Se descartaron intereses con audiencia por debajo de 500 mil o fuera de tema (ej. Duty-free shop, Taxi, Hacienda→Hotéis)." data-pt="Nomes exatamente como devolvidos pela Graph API da Meta (busca real, 05/08/2026) — não foram traduzidos, é assim que aparecem no Gerenciador de Anúncios. Foram descartados interesses com audiência abaixo de 500 mil ou fora de tema (ex. Duty-free shop, Taxi, Hacienda→Hotéis).">Nombres tal como los devuelve la Graph API de Meta (búsqueda real, 05/08/2026) — no se tradujeron, así aparecen en el Gestor de Anuncios. Se descartaron intereses con audiencia por debajo de 500 mil o fuera de tema (ej. Duty-free shop, Taxi, Hacienda→Hotéis).</div>
+          </div>
+        </div>
+
+        <div class="branch criativos">
+          <div class="branch-head">
+            <div class="label" data-es="Creativos" data-pt="Criativos">Creativos</div>
+            <div class="sub" data-es="Tono profesional-cercano · 3 conceptos × 2 formatos" data-pt="Tom profissional-próximo · 3 conceitos × 2 formatos">Tono profesional-cercano · 3 conceptos × 2 formatos</div>
+          </div>
+          <div class="leaves">
+            <div class="leaf">
+              <div class="t" data-es="Reel 9:16 — Talking-head con la fundadora" data-pt="Reel 9:16 — Talking-head com a fundadora">Reel 9:16 — Talking-head con la fundadora</div>
+              <div class="d" data-es="Formato principal — Luz Dalia habla directo a cámara. Guion en 4 beats: dolor específico de la persona → causa real → cómo la IA + trato personal de Nexara lo resuelve → CTA consultoría gratuita. Refuerza el diferencial real de trato directo con la fundadora, no un call center." data-pt="Formato principal — Luz Dalia fala direto pra câmera. Roteiro em 4 beats: dor específica da persona → causa real → como a IA + trato pessoal da Nexara resolve → CTA consultoria gratuita. Reforça o diferencial real de trato direto com a fundadora, não um call center.">Formato principal — Luz Dalia habla directo a cámara. Guion en 4 beats: dolor específico de la persona → causa real → cómo la IA + trato personal de Nexara lo resuelve → CTA consultoría gratuita. Refuerza el diferencial real de trato directo con la fundadora, no un call center.</div>
+            </div>
+            <div class="leaf">
+              <div class="t" data-es="Carrusel (4-5 slides) — Problema → Solución" data-pt="Carrossel (4-5 slides) — Problema → Solução">Carrusel (4-5 slides) — Problema → Solución</div>
+              <div class="d" data-es-html="1. Hook de dolor (burocracia/financiación/Kit Digital según persona) · 2. Agita la causa real · 3. Cómo Nexara resuelve con IA (respuesta en 24h) · 4. Prueba disponible (+50 PYMEs asesoradas) · 5. CTA 'Agenda tu consultoría gratis'" data-pt-html="1. Hook de dor (burocracia/financiamento/Kit Digital conforme a persona) · 2. Agita a causa real · 3. Como a Nexara resolve com IA (resposta em 24h) · 4. Prova disponível (+50 PMEs assessoradas) · 5. CTA 'Agenda tu consultoría gratis'">1. Hook de dolor (burocracia/financiación/Kit Digital según persona) · 2. Agita la causa real · 3. Cómo Nexara resuelve con IA (respuesta en 24h) · 4. Prueba disponible (+50 PYMEs asesoradas) · 5. CTA "Agenda tu consultoría gratis"</div>
+            </div>
+            <div class="leaf">
+              <div class="t" data-es="Testimonio en video — a construir" data-pt="Depoimento em vídeo — a construir">Testimonio en video — a construir</div>
+              <div class="d" data-es="Todavía no existe un testimonio real verificable (limitación identificada en el sitio actual). Recomendación: captar el testimonio en video de los primeros 2-3 leads convertidos en clientes, en cuanto la campaña empiece a generar resultados." data-pt="Ainda não existe um depoimento real verificável (limitação identificada no site atual). Recomendação: captar o depoimento em vídeo dos primeiros 2-3 leads convertidos em clientes, assim que a campanha começar a gerar resultados.">Todavía no existe un testimonio real verificable (limitación identificada en el sitio actual). Recomendación: captar el testimonio en video de los primeros 2-3 leads convertidos en clientes, en cuanto la campaña empiece a generar resultados.</div>
+            </div>
+          </div>
+          <div class="tone-note" data-es="Threads y Partnership Ads descartados para este nicho — B2B tradicional/local sin cultura de creator partnership. Alternativa evaluada: carrusel educacional (estilo LinkedIn) para la Persona 3, más analítica — puede sumarse en fase 2." data-pt="Threads e Partnership Ads descartados para esse nicho — B2B tradicional/local sem cultura de creator partnership. Alternativa avaliada: carrossel educacional (estilo LinkedIn) para a Persona 3, mais analítica — pode entrar na fase 2.">Threads y Partnership Ads descartados para este nicho — B2B tradicional/local sin cultura de creator partnership. Alternativa evaluada: carrusel educacional (estilo LinkedIn) para la Persona 3, más analítica — puede sumarse en fase 2.</div>
+        </div>
+
+        <div class="branch hooks">
+          <div class="branch-head">
+            <div class="label">Hooks</div>
+            <div class="sub" data-es="Gancho de entrada: consultoría financiera gratuita" data-pt="Gancho de entrada: consultoria financeira gratuita">Gancho de entrada: consultoría financiera gratuita</div>
+          </div>
+          <div class="leaves">
+            <div class="leaf quote">"¿Otro trimestre corriendo detrás de Hacienda? Te contamos cómo dejar de perder horas — y noches — en esto."
+              <div class="d" style="margin-top:6px; font-style:normal;">Variante: "Autónomo: si todavía llevas tu fiscalidad con hojas de cálculo y miedo a la multa, esto es para ti."</div>
+            </div>
+            <div class="leaf quote">"Hay financiación para tu empresa que hoy no estás usando. Te la mostramos gratis, en 30 minutos."
+              <div class="d" style="margin-top:6px; font-style:normal;">Variante: "¿Sabes cuánto crédito podría conseguir tu PYME ahora mismo? La mayoría de los dueños no lo sabe."</div>
+            </div>
+            <div class="leaf quote">"El Kit Digital te da dinero del Gobierno para tu empresa — la página web que exige, la hacemos nosotros."
+              <div class="d" style="margin-top:6px; font-style:normal;">Variante: "¿Ibas a dejar pasar una subvención por no tener página web? Nosotros te la incluimos."</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title" data-es="Ejemplos de copy (PAS / BAB / 4Ps)" data-pt="Exemplos de copy (PAS / BAB / 4Ps)">Ejemplos de copy (PAS / BAB / 4Ps)</h2>
+    <div class="copy-grid">
+      <div class="copy-card">
+        <div class="persona" data-es="Persona 1 — Autónomo" data-pt="Persona 1 — Autônomo">Persona 1 — Autónomo</div>
+        <div class="framework">Framework: PAS</div>
+        <div class="headline" data-es="Tranquilidad con la IA, no con excusas" data-pt="Tranquilidade com a IA, não com desculpas">Tranquilidad con la IA, no con excusas</div>
+        <div class="primary" data-es="Cada trimestre es lo mismo: recibos que buscar, plazos que se acercan y el miedo a un error con Hacienda. En Nexara Finance usamos IA para procesar en horas lo que una gestoría tradicional tarda días — y hablas directo con quien lleva tu cuenta, no con un buzón de tickets." data-pt="Cada trimestre é a mesma coisa: recibos pra buscar, prazos se aproximando e o medo de um erro com a Receita. Na Nexara Finance usamos IA pra processar em horas o que uma gestoria tradicional leva dias — e você fala direto com quem cuida da sua conta, não com uma fila de tickets.">Cada trimestre es lo mismo: recibos que buscar, plazos que se acercan y el miedo a un error con Hacienda. En Nexara Finance usamos IA para procesar en horas lo que una gestoría tradicional tarda días — y hablas directo con quien lleva tu cuenta, no con un buzón de tickets.</div>
+        <div class="cta" data-es-html='CTA: <b>Agendar sesión gratuita</b>' data-pt-html='CTA: <b>Agendar sesión gratuita</b>'>CTA: <b>Agendar sesión gratuita</b></div>
+      </div>
+      <div class="copy-card">
+        <div class="persona" data-es="Persona 2 — Financiación" data-pt="Persona 2 — Financiamento">Persona 2 — Financiación</div>
+        <div class="framework">Framework: BAB</div>
+        <div class="headline" data-es="Financiación para tu empresa, sin vueltas" data-pt="Financiamento para sua empresa, sem enrolação">Financiación para tu empresa, sin vueltas</div>
+        <div class="primary" data-es="Antes: tu PYME crece, pero el acceso a financiación sigue siendo un misterio. Después: sabes exactamente qué financiación puedes conseguir y cómo. El puente: una consultoría financiera gratuita con Nexara Finance, sin compromiso, donde miramos tu caso real — no una plantilla." data-pt="Antes: sua PME cresce, mas o acesso a financiamento continua sendo um mistério. Depois: você sabe exatamente qual financiamento pode conseguir e como. A ponte: uma consultoria financeira gratuita com a Nexara Finance, sem compromisso, olhando pro seu caso real — não um modelo pronto.">Antes: tu PYME crece, pero el acceso a financiación sigue siendo un misterio. Después: sabes exactamente qué financiación puedes conseguir y cómo. El puente: una consultoría financiera gratuita con Nexara Finance, sin compromiso, donde miramos tu caso real — no una plantilla.</div>
+        <div class="cta" data-es-html='CTA: <b>Agendar sesión gratuita</b>' data-pt-html='CTA: <b>Agendar sesión gratuita</b>'>CTA: <b>Agendar sesión gratuita</b></div>
+      </div>
+      <div class="copy-card">
+        <div class="persona" data-es="Persona 3 — Kit Digital" data-pt="Persona 3 — Kit Digital">Persona 3 — Kit Digital</div>
+        <div class="framework">Framework: 4Ps</div>
+        <div class="headline" data-es="Kit Digital: subvención + tu web, sin líos" data-pt="Kit Digital: subvenção + seu site, sem complicação">Kit Digital: subvención + tu web, sin líos</div>
+        <div class="primary" data-es="Tu empresa puede tener derecho al Kit Digital, la subvención del Gobierno de España — imagina tu propia página web nueva, pagada por la subvención, sin que muevas un dedo en el papeleo. Ya ayudamos a más de 50 PYMEs con su gestión financiera y fiscal." data-pt="Sua empresa pode ter direito ao Kit Digital, a subvenção do Governo da Espanha — imagine sua própria página web nova, paga pela subvenção, sem você mexer um dedo na burocracia. Já ajudamos mais de 50 PMEs com sua gestão financeira e fiscal.">Tu empresa puede tener derecho al Kit Digital, la subvención del Gobierno de España — imagina tu propia página web nueva, pagada por la subvención, sin que muevas un dedo en el papeleo. Ya ayudamos a más de 50 PYMEs con su gestión financiera y fiscal.</div>
+        <div class="cta" data-es-html='CTA: <b>Agendar sesión gratuita</b>' data-pt-html='CTA: <b>Agendar sesión gratuita</b>'>CTA: <b>Agendar sesión gratuita</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title" data-es="Estructura ABO — Fase 1" data-pt="Estrutura ABO — Fase 1">Estructura ABO — Fase 1</h2>
+    <div class="kpis">
+      <div class="kpi-tile">
+        <div class="label" data-es="Conjunto A — Entrada &amp; Fiscal" data-pt="Conjunto A — Entrada &amp; Fiscal">Conjunto A — Entrada &amp; Fiscal</div>
+        <div class="value" data-es="~€7,00/día (60%)" data-pt="~€7,00/dia (60%)">~€7,00/día (60%)</div>
+        <div class="src" data-es="Persona 1 (autónomo) · CTA: consultoría gratis + Alertas Fiscales IA" data-pt="Persona 1 (autônomo) · CTA: consultoria grátis + Alertas Fiscales IA">Persona 1 (autónomo) · CTA: consultoría gratis + Alertas Fiscales IA</div>
+      </div>
+      <div class="kpi-tile">
+        <div class="label" data-es="Conjunto B — Financiación &amp; Kit Digital" data-pt="Conjunto B — Financiamento &amp; Kit Digital">Conjunto B — Financiación &amp; Kit Digital</div>
+        <div class="value" data-es="~€4,50/día (40%)" data-pt="~€4,50/dia (40%)">~€4,50/día (40%)</div>
+        <div class="src" data-es="Personas 2+3 combinadas (PYME) · CTA: consultoría gratis → Financiación / Kit Digital" data-pt="Personas 2+3 combinadas (PME) · CTA: consultoria grátis → Financiamento / Kit Digital">Personas 2+3 combinadas (PYME) · CTA: consultoría gratis → Financiación / Kit Digital</div>
+      </div>
+    </div>
+    <p class="abo-note" data-es="Nota técnica: se usa el tipo de campaña estándar 'Generación de clientes potenciales' (Instant Forms), no 'Leads Advantage+' — las campañas Advantage+ operan con presupuesto Advantage+ (equivalente a CBO) y no permiten fijar presupuesto por conjunto. Como el gestor eligió ABO explícitamente, este es el tipo de campaña compatible. Si el aprendizaje del algoritmo es lento tras 2-3 semanas, evaluar consolidar en 1 solo conjunto o aumentar presupuesto." data-pt="Nota técnica: usa-se o tipo de campanha padrão 'Geração de cadastros' (Formulários Instantâneos), não 'Leads Advantage+' — campanhas Advantage+ operam com orçamento Advantage+ (equivalente a CBO) e não permitem fixar orçamento por conjunto. Como o gestor escolheu ABO explicitamente, esse é o tipo de campanha compatível. Se o aprendizado do algoritmo estiver lento após 2-3 semanas, avaliar consolidar em 1 único conjunto ou aumentar o orçamento.">Nota técnica: se usa el tipo de campaña estándar "Generación de clientes potenciales" (Instant Forms), no "Leads Advantage+" — las campañas Advantage+ operan con presupuesto Advantage+ (equivalente a CBO) y no permiten fijar presupuesto por conjunto. Como el gestor eligió ABO explícitamente, este es el tipo de campaña compatible. Si el aprendizaje del algoritmo es lento tras 2-3 semanas, evaluar consolidar en 1 solo conjunto o aumentar presupuesto.</p>
+  </section>
+
+  <section>
+    <h2 class="section-title" data-es="KPIs esperados (proyección, no garantía)" data-pt="KPIs esperados (projeção, não garantia)">KPIs esperados (proyección, no garantía)</h2>
+    <div class="kpis">
+      <div class="kpi-tile">
+        <div class="label">CPM</div>
+        <div class="value">€2,50–8</div>
+        <div class="src" data-es="Meta Ads España, benchmark general 2026" data-pt="Meta Ads Espanha, benchmark geral 2026">Meta Ads España, benchmark general 2026</div>
+      </div>
+      <div class="kpi-tile">
+        <div class="label" data-es="CPL (costo por lead)" data-pt="CPL (custo por lead)">CPL (costo por lead)</div>
+        <div class="value">€18–35</div>
+        <div class="src" data-es="B2B financiero, ajustado sobre benchmark España" data-pt="B2B financeiro, ajustado sobre benchmark Espanha">B2B financiero, ajustado sobre benchmark España</div>
+      </div>
+      <div class="kpi-tile">
+        <div class="label" data-es="Leads estimados/mes" data-pt="Leads estimados/mês">Leads estimados/mes</div>
+        <div class="value">10–19</div>
+        <div class="src" data-es="con €350/mes de inversión" data-pt="com €350/mês de investimento">con €350/mes de inversión</div>
+      </div>
+      <div class="kpi-tile">
+        <div class="label" data-es="CPA-teto (provisional)" data-pt="CPA-teto (provisório)">CPA-teto (provisional)</div>
+        <div class="value">≈ CPL</div>
+        <div class="src" data-es="Pendiente: ticket medio/LTV no informado" data-pt="Pendência: ticket médio/LTV não informado">Pendiente: ticket medio/LTV no informado</div>
+      </div>
+    </div>
+    <p class="kpis-disclaimer" data-es="Proyección basada en benchmarks reales de mercado (España, Meta Ads, servicios financieros/B2B) — no hay historial propio de campaña todavía. El benchmark general para servicios B2B locales en España es €12-25 de CPL con presupuesto recomendado de €700-1.500/mes; se ajustó hacia arriba (€18-35) porque servicios financieros/legales tienden al extremo alto de la franja B2B. El CPA-teto real solo puede calcularse cuando el cliente informe el ticket medio/LTV de sus planes — quedó como pendencia, no se estimó por margen." data-pt="Projeção baseada em benchmarks reais de mercado (Espanha, Meta Ads, serviços financeiros/B2B) — ainda não há histórico próprio de campanha. O benchmark geral para serviços B2B locais na Espanha é €12-25 de CPL com orçamento recomendado de €700-1.500/mês; foi ajustado para cima (€18-35) porque serviços financeiros/legais tendem ao extremo alto da faixa B2B. O CPA-teto real só pode ser calculado quando o cliente informar o ticket médio/LTV dos seus planos — ficou como pendência, não foi estimado por margem.">Proyección basada en benchmarks reales de mercado (España, Meta Ads, servicios financieros/B2B) — no hay historial propio de campaña todavía. El benchmark general para servicios B2B locales en España es €12-25 de CPL con presupuesto recomendado de €700-1.500/mes; se ajustó hacia arriba (€18-35) porque servicios financieros/legales tienden al extremo alto de la franja B2B. El CPA-teto real solo puede calcularse cuando el cliente informe el ticket medio/LTV de sus planes — quedó como pendencia, no se estimó por margen.</p>
+  </section>
+
+  <section class="callouts">
+    <div class="callout alert">
+      <div class="bar"></div>
+      <div class="body" data-es-html='<b>€350/mes está por debajo del mínimo recomendado</b> (€700-1.500/mes) para generación de leads B2B local en España. Combinado con ABO en 2 conjuntos, cada uno queda aún más ajustado (~€4,50-7/día). No impide lanzar, pero tiende a alargar la fase de aprendizaje del algoritmo.' data-pt-html='<b>€350/mês está abaixo do mínimo recomendado</b> (€700-1.500/mês) para geração de leads B2B local na Espanha. Combinado com ABO em 2 conjuntos, cada um fica ainda mais apertado (~€4,50-7/dia). Não impede o lançamento, mas tende a alongar a fase de aprendizado do algoritmo.'><b>€350/mes está por debajo del mínimo recomendado</b> (€700-1.500/mes) para generación de leads B2B local en España. Combinado con ABO en 2 conjuntos, cada uno queda aún más ajustado (~€4,50-7/día). No impide lanzar, pero tiende a alargar la fase de aprendizaje del algoritmo.</div>
+    </div>
+    <div class="callout alert">
+      <div class="bar"></div>
+      <div class="body" data-es-html='<b>Instagram/Facebook de la empresa todavía no existen</b> — deben crearse antes del lanzamiento (página comercial en Meta es prerrequisito técnico incluso para Lead Ads). Decisión pendiente: perfil nuevo de marca vs. uso temporal del perfil personal de la fundadora.' data-pt-html='<b>Instagram/Facebook da empresa ainda não existem</b> — precisam ser criados antes do lançamento (página comercial no Meta é pré-requisito técnico até para Lead Ads). Decisão pendente: perfil novo da marca vs. uso temporário do perfil pessoal da fundadora.'><b>Instagram/Facebook de la empresa todavía no existen</b> — deben crearse antes del lanzamiento (página comercial en Meta es prerrequisito técnico incluso para Lead Ads). Decisión pendiente: perfil nuevo de marca vs. uso temporal del perfil personal de la fundadora.</div>
+    </div>
+    <div class="callout alert">
+      <div class="bar"></div>
+      <div class="body" data-es-html='<b>Sitio con prueba social débil</b> — sin testimonios reales verificables, panel financiero de ejemplo parece simulado. No bloquea el lanzamiento (conversión es Lead Ads nativo), pero debe corregirse antes de apoyarse en el sitio para el Kit Digital, que exige página web como requisito de la subvención.' data-pt-html='<b>Site com prova social fraca</b> — sem depoimentos reais verificáveis, painel financeiro de exemplo parece simulado. Não bloqueia o lançamento (conversão é Lead Ads nativo), mas deve ser corrigido antes de se apoiar no site para o Kit Digital, que exige página web como requisito da subvenção.'><b>Sitio con prueba social débil</b> — sin testimonios reales verificables, panel financiero de ejemplo parece simulado. No bloquea el lanzamiento (conversión es Lead Ads nativo), pero debe corregirse antes de apoyarse en el sitio para el Kit Digital, que exige página web como requisito de la subvención.</div>
+    </div>
+    <div class="callout note">
+      <div class="bar"></div>
+      <div class="body" data-es-html='<b>Pixel/CAPI no es prerrequisito de lanzamiento</b> — el evento de conversión principal es el formulario nativo de Lead Ads, capturado directamente por Meta. Aun así, se recomienda instalar el Pixel en el sitio desde ya, pensando en retargeting futuro (ej. quien visita la página del Kit Digital sin completar el formulario).' data-pt-html='<b>Pixel/CAPI não é pré-requisito de lançamento</b> — o evento de conversão principal é o formulário nativo de Lead Ads, capturado diretamente pela Meta. Mesmo assim, recomenda-se instalar o Pixel no site desde já, pensando em retargeting futuro (ex. quem visita a página do Kit Digital sem completar o formulário).'><b>Pixel/CAPI no es prerrequisito de lanzamiento</b> — el evento de conversión principal es el formulario nativo de Lead Ads, capturado directamente por Meta. Aun así, se recomienda instalar el Pixel en el sitio desde ya, pensando en retargeting futuro (ej. quien visita la página del Kit Digital sin completar el formulario).</div>
+    </div>
+    <div class="callout note">
+      <div class="bar"></div>
+      <div class="body" data-es-html='CTA siempre suave y consistente con el gancho validado: <b>"Agendar sesión gratuita"</b> / <b>"Solicita tu consultoría gratis"</b> — nunca precio o planes directamente en el anuncio, eso queda para la sesión.' data-pt-html='CTA sempre suave e consistente com o gancho validado: <b>"Agendar sesión gratuita"</b> / <b>"Solicita tu consultoría gratis"</b> — nunca preço ou planos diretamente no anúncio, isso fica pra sessão.'>CTA siempre suave y consistente con el gancho validado: <b>"Agendar sesión gratuita"</b> / <b>"Solicita tu consultoría gratis"</b> — nunca precio o planes directamente en el anuncio, eso queda para la sesión.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title" data-es="Próximos pasos" data-pt="Próximos passos">Próximos pasos</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><span class="t" data-es-html='<b>Aprobación del cliente</b> — validar personas, ganchos, el split ABO de 2 conjuntos y el enfoque de Kit Digital' data-pt-html='<b>Aprovação do cliente</b> — validar personas, ganchos, o split ABO de 2 conjuntos e o enfoque de Kit Digital'><b>Aprobación del cliente</b> — validar personas, ganchos, el split ABO de 2 conjuntos y el enfoque de Kit Digital</span></div>
+      <div class="step"><span class="n">2</span><span class="t" data-es-html='<b>Crear página de empresa en Meta</b> — decidir si es perfil nuevo de marca o uso temporal del perfil personal de la fundadora' data-pt-html='<b>Criar página de empresa na Meta</b> — decidir se é perfil novo da marca ou uso temporário do perfil pessoal da fundadora'><b>Crear página de empresa en Meta</b> — decidir si es perfil nuevo de marca o uso temporal del perfil personal de la fundadora</span></div>
+      <div class="step"><span class="n">3</span><span class="t" data-es-html='<b>Producción de creativos</b> — grabar el Reel con la fundadora y armar el carrusel Problema-Solución' data-pt-html='<b>Produção de criativos</b> — gravar o Reel com a fundadora e montar o carrossel Problema-Solução'><b>Producción de creativos</b> — grabar el Reel con la fundadora y armar el carrusel Problema-Solución</span></div>
+      <div class="step"><span class="n">4</span><span class="t" data-es-html='<b>Instalar Pixel en el sitio</b> — no bloquea el lanzamiento, pero prepara el retargeting futuro' data-pt-html='<b>Instalar Pixel no site</b> — não bloqueia o lançamento, mas prepara o retargeting futuro'><b>Instalar Pixel en el sitio</b> — no bloquea el lanzamiento, pero prepara el retargeting futuro</span></div>
+      <div class="step"><span class="n">5</span><span class="t" data-es-html='<b>Lanzamiento</b> — 2 conjuntos ABO, sin ajustes durante las primeras 2 semanas (aprendizaje del algoritmo)' data-pt-html='<b>Lançamento</b> — 2 conjuntos ABO, sem ajustes durante as primeiras 2 semanas (aprendizado do algoritmo)'><b>Lanzamiento</b> — 2 conjuntos ABO, sin ajustes durante las primeras 2 semanas (aprendizaje del algoritmo)</span></div>
+      <div class="step"><span class="n">6</span><span class="t" data-es-html='<b>Captar el primer testimonio real</b> en cuanto haya clientes convertidos, para reforzar la prueba social' data-pt-html='<b>Captar o primeiro depoimento real</b> assim que houver clientes convertidos, pra reforçar a prova social'><b>Captar el primer testimonio real</b> en cuanto haya clientes convertidos, para reforzar la prueba social</span></div>
+    </div>
+  </section>
+
+  <footer data-es="Cliente: Nexara Finance · Gestoría/contabilidad B2B con IA · Madrid, España" data-pt="Cliente: Nexara Finance · Gestoria/contabilidade B2B com IA · Madrid, Espanha">Cliente: Nexara Finance · Gestoría/contabilidad B2B con IA · Madrid, España</footer>
+</div>
+
+<script>
+(function () {
+  function apply(lang) {
+    document.querySelectorAll('[data-es]').forEach(function (el) {
+      var v = el.getAttribute('data-' + lang);
+      if (v !== null) el.textContent = v;
+    });
+    document.querySelectorAll('[data-es-html]').forEach(function (el) {
+      var v = el.getAttribute('data-' + lang + '-html');
+      if (v !== null) el.innerHTML = v;
+    });
+    document.querySelectorAll('.lang-btn').forEach(function (btn) {
+      btn.setAttribute('aria-pressed', btn.getAttribute('data-lang') === lang ? 'true' : 'false');
+    });
+    document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'es';
+    try { localStorage.setItem('nf-lang', lang); } catch (e) {}
+  }
+  document.querySelectorAll('.lang-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () { apply(btn.getAttribute('data-lang')); });
+  });
+  var saved = 'es';
+  try { saved = localStorage.getItem('nf-lang') || 'es'; } catch (e) {}
+  apply(saved);
+})();
+</script>
+</body>
+</html>
