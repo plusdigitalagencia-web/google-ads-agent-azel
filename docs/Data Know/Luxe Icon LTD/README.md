@@ -6,6 +6,7 @@ Relatórios de diagnóstico de campanhas do Luxe Icon LTD (RC Bag Marketplace / 
 
 | Mês | Relatórios |
 |---|---|
+| **Agosto/2026** | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Data%20Know/Luxe%20Icon%20LTD/Meta%20Ads/Agosto%202026/) |
 | **Julho/2026** | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Data%20Know/Luxe%20Icon%20LTD/Meta%20Ads/Julho%202026/) |
 
 > Cliente não utiliza Google Ads — todo investimento é em Meta Ads.
