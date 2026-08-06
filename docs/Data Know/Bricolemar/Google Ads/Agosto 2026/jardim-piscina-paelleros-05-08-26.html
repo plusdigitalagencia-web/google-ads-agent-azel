@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title id="pageTitle">Search Jardim-Piscina-Paelleros — 05/08/26</title>
+<style>
+  :root {
+    --ground: #f4f7f5; --panel: #ffffff; --panel-2: #eaf1ee; --border: #d7e0dc;
+    --ink: #142320; --ink-dim: #4b5b56; --ink-faint: #7c8b86;
+    --accent: #157567; --accent-ink: #0d4b42; --accent-soft: #dcefe9;
+    --good: #1f7a52; --good-soft: #e1f3ea; --warn: #8a5a13; --warn-soft: #faf0dc;
+    --fail: #a3261f; --fail-soft: #fbe6e4; --nd: #5b6864; --nd-soft: #e9edeb;
+    --font-sans: -apple-system, "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0c1614; --panel: #121e1b; --panel-2: #16221f; --border: #24322e;
+      --ink: #e7efec; --ink-dim: #a9b8b3; --ink-faint: #7c8b86;
+      --accent: #37bfa8; --accent-ink: #b7ece1; --accent-soft: #17332d;
+      --good: #4ecb95; --good-soft: #17332a; --warn: #e0b25b; --warn-soft: #362a12;
+      --fail: #ec7972; --fail-soft: #3a1917; --nd: #93a19c; --nd-soft: #1b2624;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0c1614; --panel: #121e1b; --panel-2: #16221f; --border: #24322e;
+    --ink: #e7efec; --ink-dim: #a9b8b3; --ink-faint: #7c8b86;
+    --accent: #37bfa8; --accent-ink: #b7ece1; --accent-soft: #17332d;
+    --good: #4ecb95; --good-soft: #17332a; --warn: #e0b25b; --warn-soft: #362a12;
+    --fail: #ec7972; --fail-soft: #3a1917; --nd: #93a19c; --nd-soft: #1b2624;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--font-sans); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  .page { max-width: 880px; margin: 0 auto; padding: 48px 24px 80px; display: flex; flex-direction: column; gap: 32px; }
+  .topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .breadcrumb { font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-faint); }
+  .breadcrumb a { color: var(--accent); text-decoration: none; }
+  .lang-btn { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.04em; padding: 6px 14px; border-radius: 20px; border: 1px solid var(--accent); background: var(--accent-soft); color: var(--accent-ink); cursor: pointer; white-space: nowrap; }
+  .lang-btn:hover { background: var(--accent); color: #fff; }
+  header.masthead { display: flex; flex-direction: column; gap: 10px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+  .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  h1.slug { font-family: var(--font-mono); font-size: clamp(20px, 4vw, 28px); font-weight: 600; margin: 0; color: var(--ink); word-break: break-word; text-wrap: balance; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13.5px; color: var(--ink-dim); }
+  .meta-row b { color: var(--ink); font-weight: 600; }
+  h2.section-title { font-size: 15px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 6px; }
+  .section-sub { font-size: 13px; color: var(--ink-faint); margin: -8px 0 14px; font-style: italic; }
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .kpi { background: var(--panel); padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 6px; }
+  .kpi .label { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-faint); font-weight: 600; }
+  .kpi .value { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 21px; font-weight: 600; color: var(--ink); }
+  .kpi .value.flag { color: var(--fail); }
+  .kpi .value.good { color: var(--good); }
+  .callout { background: var(--accent-soft); border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border)); border-radius: 10px; padding: 20px 22px; display: flex; flex-direction: column; gap: 8px; }
+  .callout .callout-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--accent-ink); }
+  .callout p { margin: 0; font-size: 15px; color: var(--ink); }
+  .callout b.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .check-table { width: 100%; border-collapse: collapse; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .check-row { display: grid; grid-template-columns: 1fr 96px; gap: 12px; align-items: start; padding: 14px 16px; background: var(--panel); border-bottom: 1px solid var(--border); }
+  .check-row:last-child { border-bottom: none; }
+  .check-body .check-name { font-size: 14.5px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+  .check-body .check-detail { font-size: 13.5px; color: var(--ink-dim); }
+  .pill { justify-self: end; font-size: 11.5px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; white-space: nowrap; height: fit-content; }
+  .pill.pass { color: var(--good); background: var(--good-soft); }
+  .pill.warn { color: var(--warn); background: var(--warn-soft); }
+  .pill.fail { color: var(--fail); background: var(--fail-soft); }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; }
+  table { width: 100%; border-collapse: collapse; background: var(--panel); font-size: 13px; }
+  thead th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint); font-weight: 600; padding: 10px 14px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  tbody td { padding: 9px 14px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr.highlight td { background: var(--accent-soft); font-weight: 700; }
+  tbody tr.muted td { opacity: .55; }
+  td.label-cell { font-family: var(--font-sans); }
+  td.num { text-align: right; }
+  ol.recs { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  ol.recs li { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 14px 16px; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; font-size: 14.5px; }
+  ol.recs .n { font-family: var(--font-mono); font-weight: 700; color: var(--accent); }
+  ol.recs b { color: var(--ink); }
+  ol.recs span.body { color: var(--ink-dim); }
+  .opt-log { display: flex; flex-direction: column; gap: 14px; }
+  .opt-entry { border: 1px solid var(--border); border-radius: 10px; background: var(--panel); overflow: hidden; }
+  .opt-entry .opt-date { font-family: var(--font-mono); font-size: 11.5px; font-weight: 600; color: var(--accent-ink); background: var(--accent-soft); padding: 8px 16px; }
+  .opt-blocks { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+  .opt-block { padding: 14px 16px; border-top: 1px solid var(--border); }
+  .opt-blocks .opt-block:nth-child(-n+4) { border-top: none; }
+  .opt-block + .opt-block { border-left: 1px solid var(--border); }
+  .opt-block .opt-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; }
+  .opt-block p { margin: 0; font-size: 13.5px; }
+  .opt-block.c-blue   { background: #2563eb; border-left-color: rgba(255,255,255,.2); }
+  .opt-block.c-yellow { background: #ca8a04; border-left-color: rgba(255,255,255,.2); }
+  .opt-block.c-orange { background: #ea580c; border-left-color: rgba(255,255,255,.2); }
+  .opt-block.c-purple { background: #7c3aed; border-left-color: rgba(255,255,255,.2); }
+  .opt-block.c-blue .opt-label, .opt-block.c-blue p,
+  .opt-block.c-yellow .opt-label, .opt-block.c-yellow p,
+  .opt-block.c-orange .opt-label, .opt-block.c-orange p,
+  .opt-block.c-purple .opt-label, .opt-block.c-purple p { color: #ffffff; }
+  footer { border-top: 1px solid var(--border); padding-top: 18px; font-size: 12.5px; color: var(--ink-faint); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+  a { color: var(--accent); }
+  code { font-family: var(--font-mono); font-size: 0.92em; }
+  @media (max-width: 520px) { .check-row { grid-template-columns: 1fr; } .pill { justify-self: start; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <span class="breadcrumb"><a href="../../../">Data Know</a> / <a href="../../">Bricolemar</a> / <a href="../">Google Ads</a> / <a href="./">Agosto/2026</a></span>
+    <button id="langBtn" class="lang-btn" onclick="toggleLang()" type="button">ES</button>
+  </div>
+
+  <header class="masthead">
+    <span class="eyebrow">Google Ads &middot; Search &middot; Bricolemar</span>
+    <h1 class="slug" data-es="Search Ventas — Jardín y Piscina (Paelleros)">Search Vendas — Jardim e Piscina (Paelleros)</h1>
+    <div class="meta-row">
+      <span data-es="<b>Período:</b> últimos 7 días (29/07 – 05/08/2026)"><b>Período:</b> últimos 7 dias (29/07 – 05/08/2026)</span>
+      <span data-es="<b>Estado:</b> activa"><b>Status:</b> ativa</span>
+    </div>
+  </header>
+
+  <section>
+    <h2 class="section-title" data-es="Métricas del período">Métricas do período</h2>
+    <div class="kpi-grid">
+      <div class="kpi"><span class="label" data-es="Gasto">Gasto</span><span class="value">€ 347,75</span></div>
+      <div class="kpi"><span class="label" data-es="Impresiones">Impressões</span><span class="value">4.529</span></div>
+      <div class="kpi"><span class="label" data-es="Clics">Cliques</span><span class="value">359</span></div>
+      <div class="kpi"><span class="label" data-es="Tasa de clics">Taxa de cliques</span><span class="value good">8,00%</span></div>
+      <div class="kpi"><span class="label" data-es="Costo por clic">Custo por clique</span><span class="value">€ 0,97</span></div>
+      <div class="kpi"><span class="label" data-es="Conversiones">Conversões</span><span class="value good">1</span></div>
+      <div class="kpi"><span class="label" data-es="Costo por conversión">Custo por conversão</span><span class="value flag">€ 347,75</span></div>
+      <div class="kpi"><span class="label" data-es="ROAS">ROAS</span><span class="value flag">0,51x</span></div>
+    </div>
+  </section>
+
+  <section class="callout">
+    <span class="callout-title" data-es="Hallazgo principal">Achado principal</span>
+    <p data-es='Esta campaña tuvo la primera conversión real desde el lanzamiento el 10/07: la keyword "kit paellero 70 cm" (concordancia exacta, Quality Score 8) generó una venta de <b class="num">€ 177,66</b> por solo <b class="num">€ 7,90</b> de costo. Mirando la semana completa, el gasto casi se duplicó (<b class="num">+113%</b>, de € 163,08 a € 347,75) pero el CPA cayó un <b class="num">69%</b> (de € 1.136,80 a € 347,75) y el ROAS pasó de 0,13x a <b class="num">0,51x</b> — todavía por debajo de 1x, pero mejorando rápido.'>Essa campanha teve a primeira conversão real desde o lançamento em 10/07: a keyword "kit paellero 70 cm" (correspondência exata, Quality Score 8) gerou uma venda de <b class="num">€ 177,66</b> por apenas <b class="num">€ 7,90</b> de custo. Olhando a semana toda, o gasto quase dobrou (<b class="num">+113%</b>, de € 163,08 pra € 347,75) mas o CPA caiu <b class="num">69%</b> (de € 1.136,80 pra € 347,75) e o ROAS saiu de 0,13x pra <b class="num">0,51x</b> — ainda abaixo de 1x, mas melhorando rápido.</p>
+    <p data-es='El Ad Rank también mejoró de forma consistente: la porción de impresiones perdida por calidad/posición cayó de 66,75% a <b class="num">25,21%</b>, reflejo directo de las correcciones de negativas y sitelinks aplicadas hace dos semanas. Y ningún término de búsqueda salió como desalineado en esta auditoría — cero tráfico de competidor o marketplace, muy diferente de julio.'>O Ad Rank também melhorou de forma consistente: a fatia de impressões perdida por qualidade/posição caiu de 66,75% pra <b class="num">25,21%</b>, reflexo direto das correções de negativação e sitelinks aplicadas há duas semanas. E nenhum termo de pesquisa saiu como desalinhado nesta auditoria — zero tráfego de concorrente ou marketplace, bem diferente de julho.</p>
+    <p data-es='El nuevo cuello de botella es el presupuesto: la porción de impresiones perdida por falta de presupuesto se disparó de 9,83% a <b class="num">48,56%</b> — casi la mitad de las búsquedas relevantes no se están mostrando porque el presupuesto diario se agota antes. Por eso la reasignación de presupuesto fue decidida esta semana (ver Histórico de Optimizaciones).'>O novo gargalo é orçamento: a fatia de impressões perdida por falta de verba disparou de 9,83% pra <b class="num">48,56%</b> — quase metade das buscas relevantes não estão sendo exibidas porque o orçamento diário esgota antes. É por isso que a realocação de verba foi decidida essa semana (ver Histórico de Otimizações).</p>
+  </section>
+
+  <section>
+    <h2 class="section-title" data-es="Checklist de causas raíz">Checklist de causas raiz</h2>
+    <div class="check-table">
+      <div class="check-row">
+        <div class="check-body">
+          <div class="check-name" data-es="Sitelinks propios de la campaña">Sitelinks próprios da campanha</div>
+          <div class="check-detail" data-es="Confirmados vía API como específicos de la categoría (Gas Butano, Soportes, Kits Familia) — sigue correcto desde el último análisis.">Confirmados via API como específicos da categoria (Gas Butano, Soportes, Kits Familia) — segue correto desde a última análise.</div>
+        </div>
+        <span class="pill pass" data-es="OK">OK</span>
+      </div>
+      <div class="check-row">
+        <div class="check-body">
+          <div class="check-name" data-es="Negativas de marca/competidor/marketplace">Negativas de marca/concorrente/marketplace</div>
+          <div class="check-detail" data-es="65 negativas aplicadas en la cuenta. En esta auditoría, cero términos de competidor o marketplace aparecieron entre los términos de búsqueda con clic — la lista está funcionando.">65 negativas aplicadas na conta. Nesta auditoria, zero termo de concorrente ou marketplace apareceu entre os termos de pesquisa com clique — a lista está funcionando.</div>
+        </div>
+        <span class="pill pass" data-es="OK">OK</span>
+      </div>
+      <div class="check-row">
+        <div class="check-body">
+          <div class="check-name" data-es="Final URL segmentada por grupo de anuncios">Final URL segmentada por ad group</div>
+          <div class="check-detail" data-es='Grelhas y Conjuntos apuntan a la página correcta. Acessórios apunta a la URL de la categoría "Suportes" (incorrecta, confirmado vía API). Kits y Suportes usan la URL genérica de la categoría madre porque no existe página específica para esas dos en el sitio — confirmado con el cliente, no es una pendencia, es una limitación real del catálogo.'>Grelhas e Conjuntos apontam pra página certa. Acessórios aponta pra URL da categoria "Suportes" (errada, confirmado via API). Kits e Suportes usam a URL genérica da categoria-mãe porque não existe página específica pra essas duas no site — confirmado com o cliente, não é pendência, é limitação real do catálogo.</div>
+        </div>
+        <span class="pill warn" data-es="Ajustar">Ajustar</span>
+      </div>
+      <div class="check-row">
+        <div class="check-body">
+          <div class="check-name" data-es="Impression Share y Quality Score">Impression Share e Quality Score</div>
+          <div class="check-detail" data-es='El IS perdido por presupuesto subió a 48,56% (era 9,83%) — el presupuesto se convirtió en el principal limitante. La keyword "patas para paellero" (grupo Suportes) tiene QS1, el mínimo posible — el término de búsqueda está validado como alineado a la intención, así que la causa del QS bajo es otra, todavía por investigar.'>IS perdido por budget subiu pra 48,56% (era 9,83%) — o orçamento virou o principal limitador. A keyword "patas para paellero" (grupo Suportes) tem QS1, o mínimo possível — o termo de pesquisa é validado como alinhado à intenção, então a causa do QS baixo é outra, ainda a investigar.</div>
+        </div>
+        <span class="pill warn" data-es="Monitorear">Monitorar</span>
+      </div>
+      <div class="check-row">
+        <div class="check-body">
+          <div class="check-name" data-es="Seguimiento de conversión">Tracking de conversão</div>
+          <div class="check-detail" data-es="Funcionando desde el 09/07, vía GTM + GA4. Confirmado de nuevo en esta auditoría.">Funcionando desde 09/07, via GTM + GA4. Confirmado de novo nesta auditoria.</div>
+        </div>
+        <span class="pill pass" data-es="OK">OK</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title" data-es="Comparativa — todas las campañas activas de la cuenta en agosto/2026">Comparativo — todas as campanhas ativas da conta em agosto/2026</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th data-es="Campaña">Campanha</th><th data-es="Tipo">Tipo</th><th class="num" data-es="Gasto">Gasto</th><th class="num" data-es="Conversiones">Conversões</th><th class="num" data-es="Costo/Conversión">Custo/Conversão</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Merchant Center España</td><td class="label-cell">Shopping</td><td class="num">€ 271,48</td><td class="num">10,0</td><td class="num">€ 27,15</td></tr>
+          <tr><td class="label-cell">052026_Shopping Hector</td><td class="label-cell">Shopping</td><td class="num">€ 205,42</td><td class="num">4,0</td><td class="num">€ 51,35</td></tr>
+          <tr><td class="label-cell">Paelleros-Performance Max-ES</td><td class="label-cell">PMax</td><td class="num">€ 47,92</td><td class="num">3,0</td><td class="num">€ 15,97</td></tr>
+          <tr class="highlight"><td class="label-cell" data-es="Search Paelleros (esta)">Search Paelleros (esta)</td><td class="label-cell">Search</td><td class="num">€ 347,75</td><td class="num">1,0</td><td class="num">€ 347,75</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout" style="margin-top:14px;">
+      <span class="callout-title" data-es="Lectura rápida — ¿el problema es el producto?">Leitura rápida — o problema é o produto?</span>
+      <p data-es='No. Los mismos productos "paellero" en las campañas de Shopping y Performance Max sumaron <b class="num">16,25</b> conversiones y <b class="num">€ 1.877,94</b> en valor en los últimos 30 días, con solo <b class="num">€ 280,84</b> de costo combinado (ROAS combinado de ~6,7x) — el producto campeón por sí solo ("Kit Vaello paellero 600mm...") generó 8,5 conversiones y € 1.133,68 en 30 días. La demanda existe y convierte muy bien fuera de la Search. El problema está aislado en la ejecución de esta campaña — enrutamiento de keyword, copy y ahora presupuesto — no en el producto.'>Não. Os mesmos produtos "paellero" nas campanhas de Shopping e Performance Max somaram <b class="num">16,25</b> conversões e <b class="num">€ 1.877,94</b> em valor nos últimos 30 dias, com apenas <b class="num">€ 280,84</b> de custo combinado (ROAS blended de ~6,7x) — o produto campeão sozinho ("Kit Vaello paellero 600mm...") gerou 8,5 conversões e € 1.133,68 em 30 dias. A demanda existe e converte muito bem fora da Search. O problema está isolado na execução desta campanha — routing de keyword, copy e agora orçamento — não no produto.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title" data-es="Calidad de los Anuncios (RSA)">Qualidade dos Anúncios (RSA)</h2>
+    <p class="section-sub" data-es="Lo que diferencia al grupo Kits (el único que convierte) de los otros 4 — y qué hacer al respecto.">O que diferencia o grupo Kits (o único que converte) dos outros 4 — e o que fazer a respeito.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th data-es="Grupo de Anuncios">Grupo de Anúncio</th><th data-es="Título actual">Título atual</th><th data-es="¿Alineado con la keyword?">Alinhado com a keyword?</th><th data-es="Acción">Ação</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Kits</td><td class="label-cell">"Kit Paellero 70cm"</td><td class="label-cell" data-es="Sí — refleja la búsqueda exacta">Sim — espelha a busca exata</td><td class="label-cell"><span class="pill pass" data-es="Campeón — replicar patrón">Campeão — replicar padrão</span></td></tr>
+          <tr><td class="label-cell">Grelhas</td><td class="label-cell">—</td><td class="label-cell" data-es="No deja claro que es solo el quemador">Não deixa claro que é só o queimador</td><td class="label-cell"><span class="pill warn" data-es="Ajustar">Ajustar</span></td></tr>
+          <tr><td class="label-cell">Conjuntos</td><td class="label-cell">"2 y 3 Fuegos"</td><td class="label-cell" data-es="Parcial — no especifica tamaño">Parcial — não especifica tamanho</td><td class="label-cell"><span class="pill warn" data-es="Ajustar">Ajustar</span></td></tr>
+          <tr><td class="label-cell">Suportes</td><td class="label-cell">—</td><td class="label-cell" data-es="No responde a la comparación con competidor">Não responde à comparação com concorrente</td><td class="label-cell"><span class="pill warn" data-es="Ajustar">Ajustar</span></td></tr>
+          <tr><td class="label-cell">Acessórios</td><td class="label-cell">—</td><td class="label-cell">—</td><td class="label-cell"><span class="pill fail" data-es="Bloqueado — depende de la Final URL">Travado — depende da Final URL</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout" style="margin-top:14px;">
+      <span class="callout-title" data-es="Lectura rápida">Leitura rápida</span>
+      <p data-es='Lo que hace que el grupo Kits convierta y los otros 4 no: (1) message match por tamaño exacto en el título — "Kit Paellero 70cm" refleja la búsqueda — y (2) reduce la fricción de decisión vendiendo la solución completa en una sola compra. Los otros 4 grupos venden la pieza suelta sin tranquilizar sobre compatibilidad.'>O que faz o grupo Kits converter e os outros 4 não: (1) message match por tamanho exato no título — "Kit Paellero 70cm" espelha a busca — e (2) reduz a fricção de decisão vendendo a solução completa numa única compra. Os outros 4 grupos vendem a peça avulsa sem tranquilizar sobre compatibilidade.</p>
+      <p data-es='<b>Grelhas:</b> dejar claro que es solo el quemador, con un puente hacia el Kit completo. <b>Conjuntos:</b> replicar títulos por tamaño (60/70/90cm) en vez de solo "2 y 3 Fuegos", copiando el patrón que ya funciona en Kits. <b>Acessórios:</b> copy bloqueada hasta corregir la Final URL — no sirve de nada ajustar el texto con la página incorrecta detrás. <b>Suportes:</b> vale la pena responder a la comparación con Leroy Merlin, pero el QS1 puede tener una causa mayor que el copy — no tratar como resuelto solo con ese ajuste.'><b>Grelhas:</b> deixar claro que é só o queimador, com uma ponte pro Kit completo. <b>Conjuntos:</b> replicar títulos por tamanho (60/70/90cm) em vez de só "2 y 3 Fuegos", copiando o padrão que já funciona em Kits. <b>Acessórios:</b> copy travada até corrigir a Final URL — não adianta ajustar texto com a página errada por trás. <b>Suportes:</b> vale responder à comparação com a Leroy Merlin, mas o QS1 pode ter uma causa maior que copy — não tratar como resolvido só com esse ajuste.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title" data-es="Keywords y Términos de Búsqueda">Keywords e Termos de Pesquisa</h2>
+    <p class="section-sub" data-es="15 keywords tuvieron gasto en el período — solo el grupo Kits convirtió. Abajo, la keyword campeona y las dos que más llaman la atención (mayor gasto sin conversión y menor Quality Score); el detalle de los términos de búsqueda detrás de ese gasto está en la tabla de Ranking de Desperdicio justo abajo.">15 keywords tiveram gasto no período — só o grupo Kits converteu. Abaixo, a keyword campeã e as duas que mais chamam atenção (maior gasto sem conversão e menor Quality Score); o detalhamento dos termos de pesquisa por trás desse gasto está na tabela de Ranking de Desperdício logo abaixo.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th data-es="Keyword">Keyword</th><th data-es="Grupo">Grupo</th><th class="num" data-es="Calidad">Qualidade</th><th class="num" data-es="Gasto">Gasto</th><th data-es="Situación">Situação</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">"kit paellero 70 cm" (exata)</td><td class="label-cell">Kits</td><td class="num">8</td><td class="num">€ 7,90</td><td><span class="pill pass" data-es="Campeón — 1 conversión, € 177,66">Campeão — 1 conversão, € 177,66</span></td></tr>
+          <tr><td class="label-cell">"hornillo paellero" (frase)</td><td class="label-cell">Grelhas</td><td class="num">—</td><td class="num">€ 136,98</td><td><span class="pill fail" data-es="Mayor gasto sin conversión (39,5% del costo de la semana)">Maior gasto sem conversão (39,5% do custo da semana)</span></td></tr>
+          <tr><td class="label-cell">"patas para paellero" (frase)</td><td class="label-cell">Suportes</td><td class="num">1</td><td class="num">—</td><td><span class="pill fail" data-es="Crítico — QS mínimo, término alineado a la intención">Crítico — QS mínimo, termo alinhado à intenção</span></td></tr>
+        </tbody>
+      </table>
+      <p class="section-sub" style="margin-top:8px;" data-es="&quot;—&quot; = dato no incluido en esta auditoría consolidada. Las otras 12 keywords con gasto en el período están resumidas por grupo: Grelhas, Acessórios, Suportes y Conjuntos tuvieron gasto sin ninguna conversión esta semana.">"—" = dado não incluído nesta auditoria consolidada. As outras 12 keywords com gasto no período estão resumidas por grupo: Grelhas, Acessórios, Suportes e Conjuntos tiveram gasto sem nenhuma conversão nesta semana.</p>
+    </div>
+
+    <div class="table-wrap" style="margin-top:14px;">
+      <table>
+        <thead><tr><th>#</th><th data-es="Término de búsqueda">Termo de pesquisa</th><th class="num" data-es="Clics">Cliques</th><th class="num" data-es="Gasto">Gasto</th><th data-es="Keyword / Grupo">Keyword / Grupo</th></tr></thead>
+        <tbody>
+          <tr><td class="num">1</td><td class="label-cell">"paellero gas"</td><td class="num">9</td><td class="num">€ 5,44</td><td class="label-cell">quemador paella gas / Grelhas</td></tr>
+          <tr><td class="num">2</td><td class="label-cell">"paelleros de gas"</td><td class="num">6</td><td class="num">€ 2,48</td><td class="label-cell">hornillo paellero + quemador paella gas / Grelhas</td></tr>
+          <tr><td class="num">3</td><td class="label-cell">"fuego para paella"</td><td class="num">5</td><td class="num">€ 2,28</td><td class="label-cell">quemador paella gas / Grelhas</td></tr>
+          <tr><td class="num">4</td><td class="label-cell">"paellero de gas"</td><td class="num">3</td><td class="num">€ 3,31</td><td class="label-cell">hornillo paellero + quemador paella gas / Grelhas</td></tr>
+          <tr><td class="num">5</td><td class="label-cell">"paellero 70 cm"</td><td class="num">3</td><td class="num">€ 2,62</td><td class="label-cell" data-es="hornillo paellero / Grelhas — búsqueda de tamaño cayendo en el grupo equivocado (debería ir a Kits)">hornillo paellero / Grelhas — busca de tamanho caindo no grupo errado (deveria ir pra Kits)</td></tr>
+          <tr><td class="num">6</td><td class="label-cell">"paellero gas butano"</td><td class="num">3</td><td class="num">€ 1,48</td><td class="label-cell">hornillo paellero + quemador paella gas / Grelhas</td></tr>
+          <tr><td class="num">7</td><td class="label-cell">"bricolemar paellero"</td><td class="num">2</td><td class="num">€ 2,18</td><td class="label-cell" data-es="paellero completo / Conjuntos — búsqueda de marca propia, no convirtió">paellero completo / Conjuntos — busca de marca própria, não converteu</td></tr>
+        </tbody>
+      </table>
+      <p class="section-sub" style="margin-top:8px;" data-es='Ranking de Desperdicio: todos los términos de búsqueda con clic y 0 conversión en el período, ordenados de mayor a menor número de clics. "hornillo paellero" (grupo Grelhas) sigue siendo la keyword de mayor gasto aislado de la campaña: € 136,98, 39,5% del costo de la semana, cero conversiones.'>Ranking de Desperdício: todos os termos de pesquisa com clique e 0 conversão no período, ordenados do maior pro menor número de cliques. "hornillo paellero" (grupo Grelhas) segue como a keyword de maior gasto isolado da campanha: € 136,98, 39,5% do custo da semana, zero conversões.</p>
+    </div>
+
+    <div class="callout" style="margin-top:14px;">
+      <span class="callout-title" data-es="Términos de búsqueda">Termos de pesquisa</span>
+      <p data-es='🟢 Punto de ajuste: los términos del Ranking de Desperdicio arriba ("paellero gas", "paelleros de gas", "fuego para paella" y variaciones) son relevantes — personas realmente buscando paellero a gas — pero todavía no convirtieron; vale la pena dar más tiempo, no negativizar ahora.'>🟢 Ponto de ajuste: os termos do Ranking de Desperdício acima ("paellero gas", "paelleros de gas", "fuego para paella" e variações) são relevantes — pessoas realmente buscando paellero a gás — mas ainda não converteram; vale dar mais tempo, não negativar agora.</p>
+      <p data-es="🔴 Desalineado (negativizar): ninguno en esta auditoría — cero términos de competidor o marketplace aparecieron con clic en el período.">🔴 Desalinhado (negativar): nenhum nesta auditoria — zero termo de concorrente ou marketplace apareceu com clique no período.</p>
+      <p data-es='🆕 Hallazgo nuevo: ninguno — la única conversión de la semana ya vino de una keyword de concordancia exacta ("kit paellero 70 cm"), no de un término escondido dentro de una keyword amplia.'>🆕 Achado novo: nenhum — a única conversão da semana já veio de uma keyword de correspondência exata ("kit paellero 70 cm"), não de um termo escondido dentro de uma keyword ampla.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title" data-es="Recomendaciones del Head de Performance Azel Castro">Recomendações do Head de Performance Azel Castro</h2>
+    <ol class="recs">
+      <li><span class="n">1</span><span data-es='<b>Ajustar el copy del grupo Grelhas</b> — <span class="body">dejar claro que el producto es solo el quemador, con un puente (call-out o sitelink) hacia el Kit completo — evita expectativas equivocadas en quien ya busca el paquete completo.</span>'><b>Ajustar copy do grupo Grelhas</b> — <span class="body">deixar claro que o produto é só o queimador, com uma ponte (call-out ou sitelink) pro Kit completo — evita expectativa errada em quem já busca o pacote fechado.</span></span></li>
+      <li><span class="n">2</span><span data-es='<b>Replicar el copy por tamaño en el grupo Conjuntos</b> — <span class="body">títulos específicos "Conjunto Paellero 60cm/70cm/90cm" en vez del genérico "2 y 3 Fuegos", copiando el patrón que ya convierte en Kits.</span>'><b>Replicar copy por tamanho no grupo Conjuntos</b> — <span class="body">títulos específicos "Conjunto Paellero 60cm/70cm/90cm" em vez do genérico "2 y 3 Fuegos", copiando o padrão que já converte em Kits.</span></span></li>
+      <li><span class="n">3</span><span data-es='<b>Investigar la causa del Quality Score mínimo (1) en "patas para paellero"</b> — <span class="body">el término está validado como alineado a la intención, así que el problema no es relevancia — necesita un diagnóstico específico antes de cualquier ajuste de copy en ese grupo.</span>'><b>Investigar a causa do Quality Score mínimo (1) em "patas para paellero"</b> — <span class="body">o termo é validado como alinhado à intenção, então o problema não é relevância — precisa de diagnóstico específico antes de qualquer ajuste de copy nesse grupo.</span></span></li>
+      <li><span class="n">4</span><span data-es='<b>Preparar copy de respuesta a la comparación con Leroy Merlin en el grupo Suportes</b> — <span class="body">solo después de entender la causa raíz del QS1 — no tratar el copy como la solución completa de ese grupo.</span>'><b>Preparar copy de resposta à comparação com Leroy Merlin no grupo Suportes</b> — <span class="body">só depois de entender a causa raiz do QS1 — não tratar copy como a solução completa desse grupo.</span></span></li>
+      <li><span class="n">5</span><span data-es='<b>Corregir la Final URL del grupo Acessórios en cuanto exista página específica en el catálogo</b> — <span class="body">hoy apunta a la categoría incorrecta ("Suportes"); el copy de ese grupo sigue bloqueado hasta que esto se resuelva.</span>'><b>Corrigir a Final URL do grupo Acessórios assim que existir página específica no catálogo</b> — <span class="body">hoje aponta pra categoria errada ("Suportes"); a copy desse grupo segue travada até isso ser resolvido.</span></span></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2 class="section-title" data-es="Histórico de Optimizaciones">Histórico de Otimizações</h2>
+    <p class="section-sub" data-es="Completado manualmente por el Head de Performance cada semana — el agente siempre pregunta qué registrar aquí, nunca escribe por su cuenta.">Preenchido manualmente pelo Head de Performance a cada semana — o agente sempre pergunta o que registrar aqui, nunca escreve sozinho.</p>
+    <div class="opt-log">
+      <div class="opt-entry">
+        <div class="opt-date" data-es="Semana del 29/07 – 05/08/2026">Semana de 29/07 – 05/08/2026</div>
+        <div class="opt-blocks">
+          <div class="opt-block c-blue"><div class="opt-label" data-es="Optimización realizada">Otimização realizada</div><p data-es='Reasignación de presupuesto entre las 4 campañas activas: Paelleros-Performance Max-ES de € 5 a € 20/día (+€ 15); 052026_Shopping Hector de € 25 a € 15/día (-€ 10); Merchant Center España de € 35 a € 25/día (-€ 10); Search Paelleros de € 33 a € 23/día (-€ 10). Desactivados los grupos de anuncios "Grelhas" y "Conjuntos" dentro de la campaña Search Paelleros — los dos con mayor gasto sin conversión en el período. Mantenido el monitoreo (sin negativizar) de los términos de búsqueda de bajo QS pero intención alineada, como "patas para paellero" — decisión de seguir observando, no cortar tráfico calificado. Descartada, por ahora, la recomendación de definir un CPA objetivo formal para la campaña.'>Realocação de budget entre as 4 campanhas ativas: Paelleros-Performance Max-ES de € 5 pra € 20/dia (+€ 15); 052026_Shopping Hector de € 25 pra € 15/dia (-€ 10); Merchant Center España de € 35 pra € 25/dia (-€ 10); Search Paelleros de € 33 pra € 23/dia (-€ 10). Desativados os grupos de anúncio "Grelhas" e "Conjuntos" dentro da campanha Search Paelleros — os dois com maior gasto sem conversão no período. Mantido monitoramento (sem negativação) dos termos de pesquisa de baixo QS mas intenção alinhada, como "patas para paellero" — decisão de acompanhar, não cortar tráfego qualificado. Descartada, por ora, a recomendação de definir um CPA alvo formal pra campanha.</p></div>
+          <div class="opt-block c-yellow"><div class="opt-label" data-es="Por qué fue necesario">Por que foi necessário</div><p data-es="La comparación cross-campaña mostró que la misma categoría de producto (Paelleros) convierte con CPA de € 8 a € 16 y ROAS de hasta 21x vía PMax dedicada, contra CPA de € 347 y ROAS de 0,51x en la Search — evidencia de que el producto se vende bien, pero la Search no está capturando esa demanda con eficiencia. Grelhas y Conjuntos concentraban el mayor desperdicio de gasto (hornillo paellero solo, 39,5% del costo de la semana, cero conversiones) y el copy de esos grupos no replicaba el patrón comprobado del único grupo que convierte (Kits).">A comparação cross-campanha mostrou que a mesma categoria de produto (Paelleros) converte com CPA de € 8 a € 16 e ROAS de até 21x via PMax dedicada, contra CPA de € 347 e ROAS de 0,51x na Search — evidência de que o produto vende bem, mas a Search não está capturando essa demanda com eficiência. Grelhas e Conjuntos concentravam o maior desperdício de gasto (hornillo paellero sozinho, 39,5% do custo da semana, zero conversões) e a copy desses grupos não replicava o padrão comprovado do único grupo que converte (Kits).</p></div>
+          <div class="opt-block c-orange"><div class="opt-label" data-es="Resultado esperado">Resultado esperado</div><p data-es="Reducción del gasto ineficiente en la Search (manteniendo solo Kits y Suportes activos) y más volumen/eficiencia vía PMax, que ya demuestra funcionar para esta categoría con inversión mínima. El presupuesto total de la cuenta baja levemente (-€ 15/día en conjunto), pero reasignado hacia el formato que ya demuestra convertir mejor para Paelleros.">Redução do gasto ineficiente na Search (mantendo só Kits e Suportes ativos) e mais volume/eficiência via PMax, que já prova funcionar pra essa categoria com investimento mínimo. Total de budget da conta cai levemente (-€ 15/dia no agregado), mas realocado pro formato que já comprovadamente converte melhor pra Paelleros.</p></div>
+          <div class="opt-block c-purple"><div class="opt-label" data-es="Orientaciones para el equipo">Orientações para a equipe</div><p data-es="Reevaluar en 1-2 semanas si vale la pena mantener la Search activa (aunque sea solo con Kits y Suportes) o discontinuarla definitivamente en favor de Shopping/PMax. Monitorear la PMax Paelleros después del aumento de presupuesto — el ROAS varió bastante semana a semana (21,55x → 1,55x) con volumen aún bajo, así que el nuevo nivel de gasto necesita más datos antes de cualquier conclusión. Revisar la Final URL de Acessórios cuando haya página específica disponible en el sitio.">Reavaliar em 1-2 semanas se vale manter a Search ativa (mesmo só com Kits e Suportes) ou descontinuá-la de vez em favor de Shopping/PMax. Monitorar a PMax Paelleros após o aumento de budget — o ROAS variou bastante semana a semana (21,55x → 1,55x) com volume ainda baixo, então o novo patamar de gasto precisa de mais dados antes de qualquer conclusão. Revisar o Final URL de Acessórios quando houver página específica disponível no site.</p></div>
+        </div>
+      </div>
+      <div class="opt-entry">
+        <div class="opt-date" data-es="Semana del 19/07 – 25/07/2026">Semana de 19/07 – 25/07/2026</div>
+        <div class="opt-blocks">
+          <div class="opt-block c-blue"><div class="opt-label" data-es="Optimización realizada">Otimização realizada</div><p data-es='Negativizados los términos de marca/competidor/marketplace (ManoMano, Intex, Klarstein, Vevor, Garcima, Amazon, Quttin, Aosom) en los 5 grupos de anuncios; Final URL de cada ad group cambiada de la categoría genérica a las páginas específicas (las mismas ya usadas en los sitelinks); nuevo título "Kit Paellero 90cm" en el grupo Kits; título "Paravientos para Paella" corregido a "Paravientos para Paellero" en el grupo Acessórios. La campaña "052926_Busqueda_Hector" fue pausada — motivo confirmado por Azel: no estaba generando conversiones.'>Negativados os termos de marca/concorrente/marketplace (ManoMano, Intex, Klarstein, Vevor, Garcima, Amazon, Quttin, Aosom) nos 5 grupos de anúncio; Final URL de cada ad group trocada da categoria genérica pras páginas específicas (as mesmas já usadas nos sitelinks); novo título "Kit Paellero 90cm" no grupo Kits; título "Paravientos para Paella" corrigido para "Paravientos para Paellero" no grupo Acessórios. Campanha "052926_Busqueda_Hector" foi pausada — motivo confirmado pelo Azel: não estava gerando conversões.</p></div>
+          <div class="opt-block c-yellow"><div class="opt-label" data-es="Por qué fue necesario">Por que foi necessário</div><p data-es="~49% del gasto en clics de anuncio en el período fue en búsquedas por esas marcas/competidores, la mayor causa de gasto sin retorno. Los 5 ad groups llevaban todos a la misma página genérica, rompiendo la promesa de cada anuncio. Faltaba título exacto para el tamaño 90cm, y el título de Acessórios no coincidía con la keyword comprada.">~49% do gasto em cliques de anúncio no período foi em buscas por essas marcas/concorrentes, maior causa de gasto sem retorno. Os 5 ad groups levavam todos pra mesma página genérica, quebrando a promessa de cada anúncio. Faltava título exato pro tamanho 90cm, e o título de Acessórios não batia com a keyword comprada.</p></div>
+          <div class="opt-block c-orange"><div class="opt-label" data-es="Resultado esperado">Resultado esperado</div><p data-es="Menos gasto en tráfico sin intención de compra, página de destino más alineada con lo que el anuncio promete, y mejor Ad Relevance/CTR en los grupos Kits y Acessórios — combinación que debería ayudar a sacar la conversión del cero.">Menos gasto em tráfego sem intenção de compra, página de destino mais alinhada com o que o anúncio promete, e melhor Ad Relevance/CTR nos grupos Kits e Acessórios — combinação que deve ajudar a tirar a conversão do zero.</p></div>
+          <div class="opt-block c-purple"><div class="opt-label" data-es="Orientaciones para el equipo">Orientações para a equipe</div><p data-es="Revisar semanalmente el informe de términos de búsqueda para capturar nuevas variaciones de marca/competidor aún no cubiertas. Verificar que cada página de destino elegida coincida con el subtema del grupo. El gatillo de urgencia estacional (pico del verano) fue evaluado y descartado en esta ronda — no es tarea pendiente.">Revisar semanalmente o relatório de termos de pesquisa pra capturar novas variações de marca/concorrente ainda não cobertas. Conferir se cada página de destino escolhida bate mesmo com o subtema do grupo. Gatilho de urgência sazonal (pico do verão) foi avaliado e descartado nesta rodada — não é tarefa pendente.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Bricolemar · Google Ads</span>
+    <span data-es="Generado el 05/08/2026">Gerado em 05/08/2026</span>
+  </footer>
+
+</div>
+<script>
+  (function () {
+    var isES = false;
+    var nodes = null;
+    var titlePT = document.getElementById('pageTitle').textContent;
+    var titleES = "Search Ventas — Jardín y Piscina (Paelleros) — 05/08/26";
+
+    function init() {
+      nodes = document.querySelectorAll('[data-es]');
+      nodes.forEach(function (el) {
+        el.setAttribute('data-pt', el.innerHTML);
+      });
+    }
+
+    window.toggleLang = function () {
+      if (!nodes) init();
+      isES = !isES;
+      nodes.forEach(function (el) {
+        el.innerHTML = isES ? el.getAttribute('data-es') : el.getAttribute('data-pt');
+      });
+      document.documentElement.lang = isES ? 'es' : 'pt-BR';
+      document.getElementById('langBtn').textContent = isES ? 'PT' : 'ES';
+      document.getElementById('pageTitle').textContent = isES ? titleES : titlePT;
+    };
+  })();
+</script>
+</body>
+</html>
