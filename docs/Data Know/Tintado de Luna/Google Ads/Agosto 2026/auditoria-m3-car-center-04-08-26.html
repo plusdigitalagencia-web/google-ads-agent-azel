@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Auditoria Inicial — Google Ads — M3 Car Center — 04/08/26</title>
+<style>
+  :root {
+    --ground: #f4f7f5; --panel: #ffffff; --panel-2: #eaf1ee; --border: #d7e0dc;
+    --ink: #142320; --ink-dim: #4b5b56; --ink-faint: #7c8b86;
+    --accent: #157567; --accent-ink: #0d4b42; --accent-soft: #dcefe9;
+    --good: #1f7a52; --good-soft: #e1f3ea; --warn: #8a5a13; --warn-soft: #faf0dc;
+    --fail: #a3261f; --fail-soft: #fbe6e4; --nd: #5b6864; --nd-soft: #e9edeb;
+    --font-sans: -apple-system, "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0c1614; --panel: #121e1b; --panel-2: #16221f; --border: #24322e;
+      --ink: #e7efec; --ink-dim: #a9b8b3; --ink-faint: #7c8b86;
+      --accent: #37bfa8; --accent-ink: #b7ece1; --accent-soft: #17332d;
+      --good: #4ecb95; --good-soft: #17332a; --warn: #e0b25b; --warn-soft: #362a12;
+      --fail: #ec7972; --fail-soft: #3a1917; --nd: #93a19c; --nd-soft: #1b2624;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0c1614; --panel: #121e1b; --panel-2: #16221f; --border: #24322e;
+    --ink: #e7efec; --ink-dim: #a9b8b3; --ink-faint: #7c8b86;
+    --accent: #37bfa8; --accent-ink: #b7ece1; --accent-soft: #17332d;
+    --good: #4ecb95; --good-soft: #17332a; --warn: #e0b25b; --warn-soft: #362a12;
+    --fail: #ec7972; --fail-soft: #3a1917; --nd: #93a19c; --nd-soft: #1b2624;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--font-sans); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  .page { max-width: 880px; margin: 0 auto; padding: 48px 24px 80px; display: flex; flex-direction: column; gap: 32px; }
+  .breadcrumb { font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-faint); }
+  .breadcrumb a { color: var(--accent); text-decoration: none; }
+  header.masthead { display: flex; flex-direction: column; gap: 10px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+  .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  h1.slug { font-family: var(--font-mono); font-size: clamp(20px, 4vw, 28px); font-weight: 600; margin: 0; color: var(--ink); word-break: break-word; text-wrap: balance; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13.5px; color: var(--ink-dim); }
+  .meta-row b { color: var(--ink); font-weight: 600; }
+  h2.section-title { font-size: 15px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 6px; }
+  .section-sub { font-size: 13px; color: var(--ink-faint); margin: -8px 0 14px; font-style: italic; }
+  .sub-head { font-size: 14px; font-weight: 700; color: var(--ink); margin: 4px 0 -6px; }
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .kpi { background: var(--panel); padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 6px; }
+  .kpi .label { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-faint); font-weight: 600; }
+  .kpi .value { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 21px; font-weight: 600; color: var(--ink); }
+  .kpi .value.flag { color: var(--fail); }
+  .kpi .value.good { color: var(--good); }
+  .callout { background: var(--accent-soft); border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border)); border-radius: 10px; padding: 20px 22px; display: flex; flex-direction: column; gap: 8px; }
+  .callout .callout-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--accent-ink); }
+  .callout p { margin: 0; font-size: 15px; color: var(--ink); }
+  .callout b.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .callout.fail-tone { background: var(--fail-soft); border-color: color-mix(in srgb, var(--fail) 35%, var(--border)); }
+  .callout.fail-tone .callout-title { color: var(--fail); }
+  .callout.good-tone { background: var(--good-soft); border-color: color-mix(in srgb, var(--good) 35%, var(--border)); }
+  .callout.good-tone .callout-title { color: var(--good); }
+  .callout.warn-tone { background: var(--warn-soft); border-color: color-mix(in srgb, var(--warn) 35%, var(--border)); }
+  .callout.warn-tone .callout-title { color: var(--warn); }
+  .check-table { width: 100%; border-collapse: collapse; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .check-row { display: grid; grid-template-columns: 1fr 96px; gap: 12px; align-items: start; padding: 14px 16px; background: var(--panel); border-bottom: 1px solid var(--border); }
+  .check-row:last-child { border-bottom: none; }
+  .check-body .check-name { font-size: 14.5px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+  .check-body .check-detail { font-size: 13.5px; color: var(--ink-dim); }
+  .pill { justify-self: end; font-size: 11.5px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; white-space: nowrap; height: fit-content; }
+  .pill.pass { color: var(--good); background: var(--good-soft); }
+  .pill.warn { color: var(--warn); background: var(--warn-soft); }
+  .pill.fail { color: var(--fail); background: var(--fail-soft); }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; }
+  table { width: 100%; border-collapse: collapse; background: var(--panel); font-size: 13px; }
+  thead th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint); font-weight: 600; padding: 10px 14px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  tbody td { padding: 9px 14px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr.highlight td { background: var(--accent-soft); font-weight: 700; }
+  tbody tr.muted td { opacity: .55; }
+  td.label-cell { font-family: var(--font-sans); }
+  td.num { text-align: right; }
+  ol.recs { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  ol.recs li { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 14px 16px; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; font-size: 14.5px; }
+  ol.recs .n { font-family: var(--font-mono); font-weight: 700; color: var(--accent); }
+  ol.recs b { color: var(--ink); }
+  ol.recs span.body { color: var(--ink-dim); }
+  .opt-log { display: flex; flex-direction: column; gap: 14px; }
+  .opt-entry { border: 1px solid var(--border); border-radius: 10px; background: var(--panel); overflow: hidden; }
+  .opt-entry .opt-date { font-family: var(--font-mono); font-size: 11.5px; font-weight: 600; color: var(--accent-ink); background: var(--accent-soft); padding: 8px 16px; }
+  .opt-blocks { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+  .opt-block { padding: 14px 16px; border-top: 1px solid var(--border); }
+  .opt-blocks .opt-block:nth-child(-n+4) { border-top: none; }
+  .opt-block + .opt-block { border-left: 1px solid var(--border); }
+  .opt-block .opt-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; }
+  .opt-block p { margin: 0; font-size: 13.5px; }
+  .opt-block.c-blue   { background: #2563eb; border-left-color: rgba(255,255,255,.2); }
+  .opt-block.c-yellow { background: #ca8a04; border-left-color: rgba(255,255,255,.2); }
+  .opt-block.c-orange { background: #ea580c; border-left-color: rgba(255,255,255,.2); }
+  .opt-block.c-purple { background: #7c3aed; border-left-color: rgba(255,255,255,.2); }
+  .opt-block.c-blue .opt-label, .opt-block.c-blue p,
+  .opt-block.c-yellow .opt-label, .opt-block.c-yellow p,
+  .opt-block.c-orange .opt-label, .opt-block.c-orange p,
+  .opt-block.c-purple .opt-label, .opt-block.c-purple p { color: #ffffff; }
+  .opt-empty { border: 1px dashed var(--border); border-radius: 10px; padding: 18px; font-size: 13.5px; color: var(--ink-faint); background: var(--panel); }
+  footer { border-top: 1px solid var(--border); padding-top: 18px; font-size: 12.5px; color: var(--ink-faint); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+  a { color: var(--accent); }
+  code { font-family: var(--font-mono); font-size: 0.92em; }
+  @media (max-width: 520px) { .check-row { grid-template-columns: 1fr; } .pill { justify-self: start; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <span class="breadcrumb"><a href="../../../">Data Know</a> / <a href="../../">Tintado de Luna</a> / <a href="../">Google Ads</a> / <a href="./">Agosto/2026</a></span>
+
+  <header class="masthead">
+    <span class="eyebrow">Google Ads &middot; Search &middot; Tintado de Luna</span>
+    <h1 class="slug">Auditoria Inicial — Conta M3 Car Center</h1>
+    <div class="meta-row">
+      <span><b>Período auditado:</b> 60 dias (06/06 – 04/08/2026)</span>
+      <span><b>Conta:</b> M3 Car Center — Google Ads 579-209-4652</span>
+      <span><b>Status na auditoria:</b> 2 campanhas ativas (ROI- Villalba, ROI- Fuenlabrada) + 4 pausadas (2 com gasto no período)</span>
+    </div>
+    <p class="section-sub" style="margin:0;">Primeira auditoria desta conta — conta separada de "Tintado de Lunas Madrid" (939-040-1198), já auditada em 04/08/2026. Não há comparação entre as duas.</p>
+  </header>
+
+  <section>
+    <h2 class="section-title">Ações executadas desde a auditoria</h2>
+    <p class="section-sub">Atualização pós-auditoria — separando o que foi confirmado por dado real (via GAQL, nesta sessão) do que foi apenas relatado e ainda não verificado de forma independente.</p>
+
+    <div class="callout good-tone">
+      <span class="callout-title">✔ Confirmado via dado real — Consolidação dos ad groups duplicados</span>
+      <p>Verificado diretamente na conta (GAQL, leitura): os 2 ad groups "Familiar/Tuning" que tinham a mesma lista de keywords do ad group genérico da campanha estão hoje com <b>status PAUSED</b>, e cada campanha ativa passou a ter um novo anúncio no ad group genérico com o RSA do ângulo que antes só existia no ad group pausado.</p>
+      <p style="font-size:13.5px;">
+        <b>Villalba</b> (campanha 23954394637): ad group "Tintado Villalba Familiar/ Tunning" (196318762463) → <code>PAUSED</code>. RSA de ângulo Tuning copiado para o ad group "Villalba Tintado de lunas" (198325430540) → novo anúncio <code>adGroupAds/198325430540~820119239190</code>, confirmado ENABLED com os headlines do ângulo Tuning ("Dale un Look Más Deportivo", "Haz Destacar Tu Coche", "Tu Coche Como Mereces"...).<br>
+        <b>Fuenlabrada</b> (campanha 23954340604): ad group "Tintado Fuenlabrada Familiar/Tuning" (200643191027) → <code>PAUSED</code>. RSA de ângulo Familiar copiado para o ad group "Fuenlabrada Tintado de lunas" (199224019164) → novo anúncio <code>adGroupAds/199224019164~820233956762</code>, confirmado ENABLED com os headlines do ângulo Familiar ("Protege a Tus Hijos del Sol", "Menos Calor en Tu Coche"...).
+      </p>
+      <p style="font-size:13px; color:var(--ink-faint); font-style:italic;">Resultado: cada campanha ativa passa a ter 1 ad group ativo só, eliminando a competição interna de keywords idênticas entre os 2 ad groups — o achado de canibalização apontado nesta auditoria.</p>
+    </div>
+
+    <div class="callout good-tone" style="margin-top:14px;">
+      <span class="callout-title">✔ Negativas de concorrente a nível de conta</span>
+      <p>Os termos <code>carglass</code>, <code>norauto</code>, <code>midas</code> e <code>feu vert</code> foram adicionados como negativa a nível de conta, diretamente pelo Head de Performance na interface do Google Ads.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Achados estruturais (identificados na auditoria original)</h2>
+    <div class="callout fail-tone">
+      <span class="callout-title">Negativas ausentes nas 2 campanhas ativas</span>
+      <p>Nenhuma das 2 campanhas ativas tinha negativa própria, e nenhuma estava vinculada à lista compartilhada "AAA Palabras Negativas" — essa lista só tem 1 termo ("Gratis") e só estava linkada às 2 campanhas pausadas. Essa ausência foi a causa raiz confirmada do vazamento de termos de concorrentes nas campanhas ativas (ver seção de Termos de Pesquisa). <b>Ação executada</b> — ver seção acima.</p>
+    </div>
+    <div class="callout fail-tone" style="margin-top:14px;">
+      <span class="callout-title">Canibalização de keywords entre ad groups da mesma campanha</span>
+      <p>As 2 campanhas ativas tinham, cada uma, 2 ad groups (ex: "Villalba Tintado de lunas" + "Tintado Villalba Familiar/Tunning") com a <b>mesma lista de keywords phrase-match</b> cadastrada nos dois — mais de 15 keywords duplicadas por campanha. Diferente do Meta Ads, no Google Search os dois ad groups competiam pela mesma busca no mesmo leilão, diluindo Quality Score e distorcendo qual anúncio serve. <b>Ação confirmada como executada</b> — ver seção acima.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Panorama de campanhas — 60 dias (ativas e pausadas)</h2>
+    <p class="section-sub">Ordenado por conversões (do maior pro menor); empate em cliques como critério de desempate. Métricas referentes ao período da auditoria original (06/06–04/08); as mudanças estruturais acima são posteriores ao corte de dados.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Campanha</th><th>Status</th><th>Tipo</th><th class="num">Gasto</th><th class="num">Cliques</th><th class="num">Impressões</th><th class="num">Conversões</th><th class="num">CPA</th></tr></thead>
+        <tbody>
+          <tr class="highlight"><td class="label-cell">ROI- tintado lunas Fuenlabrada</td><td class="label-cell">Ativa</td><td class="label-cell">Search</td><td class="num">€ 929,67</td><td class="num">898</td><td class="num">4.128</td><td class="num">71,3</td><td class="num">€ 13,03</td></tr>
+          <tr class="highlight"><td class="label-cell">ROI- tintado lunas Villalba</td><td class="label-cell">Ativa</td><td class="label-cell">Search</td><td class="num">€ 931,13</td><td class="num">573</td><td class="num">2.701</td><td class="num">44,7</td><td class="num">€ 20,85</td></tr>
+          <tr class="muted"><td class="label-cell">Campaña de búsqueda - Collado Villalba - Tintado de lunas</td><td class="label-cell">Pausada</td><td class="label-cell">Search</td><td class="num">€ 269,46</td><td class="num">223</td><td class="num">2.630</td><td class="num">1,0</td><td class="num">€ 269,46</td></tr>
+          <tr class="muted"><td class="label-cell">Fuenlabrada - Campaña de búsquedas - Tintado de lunas</td><td class="label-cell">Pausada</td><td class="label-cell">Search</td><td class="num">€ 247,03</td><td class="num">193</td><td class="num">2.106</td><td class="num">0</td><td class="num">—</td></tr>
+          <tr class="muted"><td class="label-cell">Dinámicos</td><td class="label-cell">Pausada</td><td class="label-cell">Search</td><td class="num">€ 0,00</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">—</td></tr>
+          <tr class="muted"><td class="label-cell">Tintado de Lunas Desde 60€</td><td class="label-cell">Pausada</td><td class="label-cell">Smart</td><td class="num">€ 0,00</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">—</td></tr>
+        </tbody>
+      </table>
+      <p class="section-sub" style="margin:8px 14px 10px;">Total da conta: gasto € 2.377,30 · cliques 1.887 · impressões 11.565 · conversões 117,0 · CPA médio € 20,32. As 2 campanhas pausadas com gasto ("Collado Villalba" e "Fuenlabrada - Campaña de búsquedas") somam €516,49 e praticamente nenhuma conversão real — motivo da pausa original ainda não confirmado com o Azel (hipótese: substituídas pelas campanhas "ROI-" atuais).</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Métricas do período — campanhas ativas</h2>
+    <p class="sub-head">ROI- tintado lunas Villalba</p>
+    <div class="kpi-grid">
+      <div class="kpi"><span class="label">Gasto</span><span class="value">€ 931,13</span></div>
+      <div class="kpi"><span class="label">Cliques</span><span class="value">573</span></div>
+      <div class="kpi"><span class="label">Impressões</span><span class="value">2.701</span></div>
+      <div class="kpi"><span class="label">CTR</span><span class="value">21,21%</span></div>
+      <div class="kpi"><span class="label">CPC médio</span><span class="value">€ 1,63</span></div>
+      <div class="kpi"><span class="label">Conversões</span><span class="value">44,7</span></div>
+      <div class="kpi"><span class="label">CPA</span><span class="value flag">€ 20,85</span></div>
+      <div class="kpi"><span class="label">Impression Share</span><span class="value">70,3%</span></div>
+    </div>
+
+    <p class="sub-head">ROI- tintado lunas Fuenlabrada</p>
+    <div class="kpi-grid">
+      <div class="kpi"><span class="label">Gasto</span><span class="value">€ 929,67</span></div>
+      <div class="kpi"><span class="label">Cliques</span><span class="value">898</span></div>
+      <div class="kpi"><span class="label">Impressões</span><span class="value">4.128</span></div>
+      <div class="kpi"><span class="label">CTR</span><span class="value">21,75%</span></div>
+      <div class="kpi"><span class="label">CPC médio</span><span class="value">€ 1,04</span></div>
+      <div class="kpi"><span class="label">Conversões</span><span class="value">71,3</span></div>
+      <div class="kpi"><span class="label">CPA</span><span class="value good">€ 13,03</span></div>
+      <div class="kpi"><span class="label">Impression Share</span><span class="value">51,6%</span></div>
+    </div>
+
+    <div class="callout" style="margin-top:14px;">
+      <span class="callout-title">Nota sobre CPA de referência e ROAS</span>
+      <p>Não há CPA alvo formal documentado para este cliente (budget "a definir com o cliente"). Usamos o CPA blended das 2 campanhas ativas (~€ 16) só como referência para calibrar severidade nesta auditoria — isso é um dado a confirmar com o cliente/Azel, não uma meta oficial.</p>
+      <p style="font-size:13px; color:var(--ink-faint); font-style:italic;">O "ROAS"/Conv. Value bruto reportado pela conta (0,05x–0,08x) não é receita real — o Conv. Value ≈ número de conversões (valor placeholder de lead/agendamento, não venda). Não deve ser lido como métrica de receita.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Checklist de causas raiz</h2>
+    <div class="check-table">
+      <div class="check-row">
+        <div class="check-body">
+          <div class="check-name">Sitelinks próprios da campanha</div>
+          <div class="check-detail">As 2 campanhas ativas tinham 2 sitelinks cada, mas zero Callout Assets e zero Structured Snippets, enquanto as campanhas pausadas já tinham callouts aprovados ("Certificado de Calidad", "No Usamos Cúter", "Láminas Soltek"). <b>Decisão do Azel: aprovado reativar/incluir</b> — pendente de execução técnica (adicionar os Callout Assets e Structured Snippet "Servicios" às 2 campanhas ativas).</div>
+        </div>
+        <span class="pill warn">Aprovado — a executar</span>
+      </div>
+      <div class="check-row">
+        <div class="check-body">
+          <div class="check-name">Negativas de marca/concorrente/marketplace</div>
+          <div class="check-detail">Nenhuma negativa própria nas 2 campanhas ativas, e nenhuma vinculação à lista compartilhada existente, na data da auditoria. 35 ocorrências (27 termos únicos) de marcas concorrentes (Carglass, Norauto, Midas, Feu Vert) já tinham gerado 49 cliques e € 72,61 sem conversão no período. <b>Corrigido a nível de conta</b> — ver "Ações executadas" acima.</div>
+        </div>
+        <span class="pill pass">Corrigido</span>
+      </div>
+      <div class="check-row">
+        <div class="check-body">
+          <div class="check-name">Final URL segmentada por ad group</div>
+          <div class="check-detail">Final URL única e consistente em todos os ad groups (grupom3carcenter.com/tintado-de-lunas/), validada via WebFetch direto na LP. Sem erro técnico — mas há gap de mensagem entre o que os RSAs prometem e o que a LP confirma (ver seção de Qualidade dos Anúncios), ainda sem decisão do Azel.</div>
+        </div>
+        <span class="pill pass">OK</span>
+      </div>
+      <div class="check-row">
+        <div class="check-body">
+          <div class="check-name">Impression Share e Quality Score</div>
+          <div class="check-detail">IS 70,3% (Villalba) e 51,6% (Fuenlabrada) na data da auditoria — ambas com espaço de crescimento. QS majoritariamente entre 6 e 10 (32 keywords com QS≥7), sem nenhuma keyword crítica (QS≤4). 14 keywords com QS=0 são ausência de dado (volume insuficiente para o Google calcular), não QS ruim. Com a consolidação dos ad groups, esperado que o QS se estabilize melhor nas próximas semanas — a acompanhar.</div>
+        </div>
+        <span class="pill warn">Monitorar</span>
+      </div>
+      <div class="check-row">
+        <div class="check-body">
+          <div class="check-name">Tracking de conversão</div>
+          <div class="check-detail">Na auditoria original, "m3 car center" e variações (buscas de marca própria) não tinham nenhuma conversão registrada — ficou como pendência, levantando a hipótese de agendamento por telefone/WhatsApp fora do tracking. <b>Resolvido pelo Azel: o tracker de conversão foi recriado.</b> Os CPAs desta auditoria devem ser tratados como baseline pré-correção, não definitivos — recomendo reavaliar com dados pós-correção na próxima auditoria.</div>
+        </div>
+        <span class="pill pass">Resolvido</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Keywords com Ad Relevance abaixo da média</h2>
+    <p class="section-sub">Padrão recorrente identificado na auditoria original: Expected CTR é acima da média e Landing Page Experience é média nesses mesmos casos — o problema é a copy não refletir a keyword, não a landing page. Nenhuma dessas keywords estava próxima de "gasto sem retorno crítico" (nenhuma isolada ultrapassava ~€45 sem conversão) — eram casos de Atenção/QS, não de pausa imediata.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Keyword</th><th>Match</th><th>Ad Group (na data da auditoria)</th><th class="num">QS</th><th class="num">Gasto</th><th class="num">Cliques</th><th>Situação</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">tintado de lunas Madrid</td><td class="label-cell">Phrase</td><td class="label-cell">Tintado Villalba Familiar/Tunning</td><td class="num">6</td><td class="num">€ 45,56</td><td class="num">25</td><td><span class="pill warn">Atenção</span></td></tr>
+          <tr><td class="label-cell">tintado de lunas barato</td><td class="label-cell">Phrase</td><td class="label-cell">Fuenlabrada Tintado de lunas</td><td class="num">6</td><td class="num">€ 19,47</td><td class="num">21</td><td><span class="pill warn">Atenção</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout" style="margin-top:14px;">
+      <span class="callout-title">Leitura rápida</span>
+      <p>As mesmas 3 keywords ("tintado de lunas Madrid", "tintado de lunas cerca de mi", "tintado de lunas barato") repetiam esse padrão de QS 5-6 nos 3 ad groups nomeados na auditoria original — só as 2 linhas com número exato de gasto/cliques entraram na tabela.</p>
+      <p><b>Caso ambíguo:</b> "tintado de lunas cerca de mi" era o termo que mais convertia em toda a conta dentro do ad group "Fuenlabrada Tintado de lunas" (35 cliques, 7,34 conversões), mas nos ad groups Familiar/Tunning gastava sem converter — reforça que o problema era a copy específica de cada ad group, não a keyword em si. Com a consolidação dos ad groups (ver "Ações executadas"), o cenário muda — a reavaliar na próxima auditoria.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Ranking de desperdício — termos de pesquisa</h2>
+    <p class="section-sub">Os 10 termos de maior volume sem nenhuma conversão no período da auditoria, ordenados por cliques (todos com 0 conversões, então o desempate é por clique, do maior pro menor).</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Termo de pesquisa</th><th class="num">Cliques</th><th class="num">Gasto</th><th class="num">Conversões</th><th>Situação</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">m3 car center</td><td class="num">35</td><td class="num">€ 28,86</td><td class="num">0</td><td class="label-cell">Marca própria — não negativar (ver tracking resolvido)</td></tr>
+          <tr><td class="label-cell">m3 car center fuenlabrada</td><td class="num">27</td><td class="num">€ 30,28</td><td class="num">0</td><td class="label-cell">Marca própria — não negativar</td></tr>
+          <tr><td class="label-cell">tintado de lunas madrid</td><td class="num">19</td><td class="num">€ 20,77</td><td class="num">0</td><td class="label-cell">🟢 ajustar copy</td></tr>
+          <tr><td class="label-cell">tintado de lunas barato madrid</td><td class="num">14</td><td class="num">€ 21,32</td><td class="num">0</td><td class="label-cell">🟢 ajustar copy</td></tr>
+          <tr><td class="label-cell">tintado de lunas alcalá de henares</td><td class="num">14</td><td class="num">€ 13,77</td><td class="num">0</td><td class="label-cell">Fora do par Fuenlabrada/Villalba — avaliar raio</td></tr>
+          <tr><td class="label-cell">grand prix collado villalba</td><td class="num">11</td><td class="num">€ 17,04</td><td class="num">0</td><td class="label-cell">Ambíguo — confirmar com o cliente</td></tr>
+          <tr><td class="label-cell">tintado de lunas en villalba</td><td class="num">11</td><td class="num">€ 12,29</td><td class="num">0</td><td class="label-cell">🟢 variação da keyword principal</td></tr>
+          <tr><td class="label-cell">tintado de lunas getafe</td><td class="num">9</td><td class="num">€ 12,99</td><td class="num">0</td><td class="label-cell">Demanda geográfica (achado novo — ver abaixo)</td></tr>
+          <tr><td class="label-cell">tintado lunas</td><td class="num">8</td><td class="num">€ 10,16</td><td class="num">0</td><td class="label-cell">🟢 termo raiz genérico</td></tr>
+          <tr><td class="label-cell">tintado de lunas en collado villalba</td><td class="num">7</td><td class="num">€ 10,96</td><td class="num">0</td><td class="label-cell">🟢 variação da keyword principal</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="section-sub" style="margin-top:8px;">No total, 407 termos únicos sem qualquer conversão somam 781 cliques e € 947,45 no período (dentro do universo de ~€ 1.292 capturado no relatório de termos de pesquisa — ver nota de cobertura de dado abaixo).</p>
+  </section>
+
+  <section>
+    <h2 class="section-title">Termos de pesquisa</h2>
+    <p class="section-sub">1.921 ocorrências (por campanha/ad group) de termos únicos coletados via GAQL direto, 60 dias — 27 termos únicos de concorrentes com clique, deduplicados por texto. O Relatório de Termos de Pesquisa do Google não reporta 100% dos cliques/custo individualmente (limite de privacidade para queries de baixo volume) — os termos identificados aqui somam ~1.025 cliques / € 1.292 de um total de conta de 1.887 cliques / € 2.377; a diferença é uma limitação conhecida do relatório do Google, não um erro de coleta.</p>
+    <div class="callout good-tone">
+      <span class="callout-title">✔ Desalinhado — negativado a nível de conta</span>
+      <p>27 termos únicos de marcas de concorrentes (Carglass, Norauto, Midas, Feu Vert), 49 cliques, € 72,61, 0 conversões (exceto 1 fracionária de 0,25). Também termos de cidades fora da área de atendimento (Toledo, Barcelona, Valencia, Murcia, Bilbao) — a maioria já com 0 clique, mas "tintado de lunas toledo" teve 1 clique / € 1,35.</p>
+    </div>
+    <div class="callout" style="margin-top:14px;">
+      <span class="callout-title">🟢 Ponto de ajuste — não negativar, ajustar copy</span>
+      <p>"tintado de lunas madrid" (várias variações de cidade dentro da região), "tintado de lunas cerca de mi" nos ad groups Familiar/Tuning, "tintado de lunas barato" — todos semanticamente alinhados ao serviço e à LP, só precisavam de ajuste de copy (ver seção de Qualidade dos Anúncios). Com a consolidação dos ad groups, parte desse problema já é endereçado estruturalmente.</p>
+    </div>
+    <div class="callout" style="margin-top:14px;">
+      <span class="callout-title">🟢 Marca própria do cliente — não negativar</span>
+      <p>"m3 car center", "m3 car center collado villalba", "m3 car center fuenlabrada", "m3carcenter" — buscas pela própria marca do cliente (35+27+7+6 = 75 cliques, ~€ 73 combinados, 0 conversão registrada na auditoria original). Ver "Tracking de conversão" no checklist — tracker recriado pelo Azel; a reavaliar se essas conversões passam a aparecer.</p>
+    </div>
+    <div class="callout" style="margin-top:14px;">
+      <span class="callout-title">🆕 Achado novo — demanda geográfica fora de Fuenlabrada/Villalba</span>
+      <p>Convertendo através da keyword ampla "tintado de lunas Madrid": Móstoles (8 cliques, 2 conversões), Torrejón de Ardoz (5 cliques, 1 conversão), Alcorcón (2+ cliques, 1+ conversão), Rivas Vaciamadrid (3 cliques, 1 conversão), Getafe (2 cliques, 1 conversão). <b>Decisão do Azel: expansão para Móstoles descartada por ora</b> — não haverá ad group/campanha dedicada neste momento.</p>
+    </div>
+    <div class="callout" style="margin-top:14px;">
+      <span class="callout-title">🆕 Achado novo — linguagem</span>
+      <p>"tintado de lunas cerca de mi" era o termo de pesquisa que mais convertia em toda a conta (35 cliques, 7,34 conversões). "Polarizados de autos cerca de mi" (1 conversão) mostra que "polarizado" é sinônimo usado por parte do público, ainda não testado em copy.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Qualidade dos Anúncios (RSA)</h2>
+    <p class="section-sub">Diagnóstico original via ads-copy-analyzer-google — nenhum dos 6 RSAs ativos da conta mencionava "Madrid" no headline; só 2 dos 6 usavam "cerca de mí" literalmente; nenhum usava "barato"/"económico" de forma direta. Com a consolidação dos ad groups, a estrutura mudou (ver "Ações executadas") — as sugestões de copy abaixo seguem valendo para os RSAs que permanecem ativos.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Grupo de Anúncio</th><th>Ângulo</th><th>Diagnóstico original</th><th>Ação sugerida</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Fuenlabrada Tintado de lunas</td><td class="label-cell">Genérico + Familiar (após consolidação)</td><td class="label-cell">Melhor ad group em conversão da conta ("cerca de mí" converte muito bem aqui), mas nem todo RSA usa "cerca de mí" nem cita "Madrid"</td><td class="label-cell">Reforçar headline "cerca de mí" e adicionar variação "Madrid"</td></tr>
+          <tr><td class="label-cell">Villalba Tintado de lunas</td><td class="label-cell">Genérico + Tuning (após consolidação)</td><td class="label-cell">Ad Relevance abaixo da média para "tintado de lunas Madrid" (QS 6) e "tintado de lunas cerca de mi" (QS 5-6)</td><td class="label-cell">Ajustar headline pra refletir melhor essas keywords</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout" style="margin-top:14px;">
+      <span class="callout-title">Variações de headline/description sugeridas (ainda pendentes de decisão do Azel)</span>
+      <p><b>Geografia:</b> "Tintado de Lunas en Madrid" / "Cubrimos Madrid y Alrededores" / "Servicio en Toda Madrid"; description "Servicio de tintado homologado en Fuenlabrada, Villalba y toda la zona de Madrid."</p>
+      <p><b>Proximidade:</b> "Tintado Cerca de Ti" / "El Más Cercano a Ti" / "Cerca de Ti, Hoy Mismo"; description "Estamos cerca de ti. Tintado homologado, cita el mismo día."; testar A/B com "Polarizado Cerca de Ti" (sinônimo do achado novo acima).</p>
+      <p><b>Preço:</b> "El Mejor Precio de la Zona" / "Precio Justo, Sin Sorpresas" / "Calidad al Mejor Precio".</p>
+    </div>
+
+    <p class="sub-head" style="margin-top:18px;">Gap verificado anúncio × landing page</p>
+    <p class="section-sub">Confirmado via WebFetch real na LP (grupom3carcenter.com/tintado-de-lunas/) na auditoria original, não é suposição. Ainda sem decisão do Azel.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Promessa no anúncio</th><th>Anúncio promete</th><th>LP confirma?</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Garantía Hasta 10 Años</td><td class="label-cell">Sim</td><td class="label-cell"><span class="pill fail">Não</span></td></tr>
+          <tr><td class="label-cell">Láminas Soltek y 3M</td><td class="label-cell">Sim</td><td class="label-cell"><span class="pill fail">Não</span></td></tr>
+          <tr><td class="label-cell">Precio "Desde 60€"</td><td class="label-cell">Sim</td><td class="label-cell"><span class="pill fail">Não</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout" style="margin-top:14px;">
+      <span class="callout-title">Dois caminhos possíveis — ainda não decidido</span>
+      <p><b>Caminho A:</b> ajustar a copy pra bater com a LP real. <b>Caminho B:</b> atualizar a LP pra confirmar as 3 promessas. Pendente de decisão do Azel.</p>
+    </div>
+
+    <p class="sub-head" style="margin-top:18px;">Extensões de anúncio</p>
+    <div class="callout good-tone">
+      <span class="callout-title">Decisão do Azel: aprovado</span>
+      <p>Reativar "Certificado de Calidad" e "No Usamos Cúter" (já aprovados nas campanhas pausadas) nas 2 campanhas ativas, e incluir Structured Snippet tipo "Servicios" (Tintado de Lunas, Faros Ahumados, Vinilo Automotriz, Lámina PPF). "Láminas Soltek" como callout segue dependente da decisão do Caminho A/B do gap anúncio×LP acima — não incluído ainda. <b>Aprovado pelo Azel — execução técnica (adicionar os assets via API/UI) ainda pendente</b>.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Recomendações do Head de Performance Azel Castro</h2>
+    <ol class="recs">
+      <li><span class="n">1</span><span><b>Negativar marcas de concorrentes e cidades fora do raio</b> — <span class="body"><b>concluído</b>: carglass, norauto, midas, feu vert negativadas a nível de conta; cidades fora do raio (Toledo, Barcelona, Valencia, Murcia, Bilbao) ainda não confirmadas como negativadas.</span></span></li>
+      <li><span class="n">2</span><span><b>Resolver a canibalização de keywords entre ad groups</b> — <span class="body"><b>concluído</b>: ad groups "Familiar/Tuning" pausados, ângulo vencedor de cada um preservado no ad group que ficou ativo (ver "Ações executadas").</span></span></li>
+      <li><span class="n">3</span><span><b>Ajustar copy dos RSAs</b> — <span class="body">incluir "Madrid", reforçar "cerca de mí" e testar sinal de preço — ainda pendente de execução.</span></span></li>
+      <li><span class="n">4</span><span><b>Ativar Callout Assets e Structured Snippets</b> — <span class="body"><b>aprovado pelo Azel</b>; execução técnica ainda pendente.</span></span></li>
+      <li><span class="n">5</span><span><b>Decidir Caminho A ou B para o gap anúncio × LP</b> — <span class="body">garantia de 10 anos, marca Soltek/3M e preço "desde 60€" não estão confirmados na landing page — ainda sem decisão.</span></span></li>
+      <li><span class="n">6</span><span><b>Avaliar expansão para Móstoles</b> — <span class="body"><b>descartado pelo Azel</b> por ora.</span></span></li>
+      <li><span class="n">7</span><span><b>Confirmar conversões de marca própria fora do tracking</b> — <span class="body"><b>resolvido</b>: tracker de conversão recriado pelo Azel.</span></span></li>
+    </ol>
+    <p class="section-sub" style="margin-top:10px;">Ainda pendente de esclarecimento: motivo da pausa original de "Campaña de búsqueda - Collado Villalba" e "Fuenlabrada - Campaña de búsquedas"; classificação de "grand prix collado villalba"; se "tintado de lunas alcalá de henares" está dentro do raio real de atendimento.</p>
+  </section>
+
+  <section>
+    <h2 class="section-title">Fechamento</h2>
+    <div class="callout">
+      <span class="callout-title">Próximo passo</span>
+      <p>Acompanhar a performance nos próximos dias após a consolidação dos ad groups e as demais mudanças reportadas — sem nova ação prevista por enquanto. Próxima auditoria deve confirmar tecnicamente o tracker recriado e reavaliar QS/CPA já sob a nova estrutura de ad groups.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Histórico de Otimizações</h2>
+    <p class="section-sub">Preenchido manualmente pelo Head de Performance a cada semana — o agente sempre pergunta o que registrar aqui, nunca escreve sozinho.</p>
+    <div class="opt-log">
+      <div class="opt-entry">
+        <div class="opt-date">2026-08-07</div>
+        <div class="opt-blocks">
+          <div class="opt-block c-blue"><div class="opt-label">Otimização Realizada</div><p>Consolidação dos ad groups "Familiar/Tuning" duplicados (pausados) em Villalba e Fuenlabrada, preservando o RSA de ângulo vencedor em cada campanha no ad group que ficou ativo. Negativas de concorrente (carglass, norauto, midas, feu vert) adicionadas a nível de conta. Ativação de Callout Assets/Structured Snippets aprovada (execução técnica pendente).</p></div>
+          <div class="opt-block c-yellow"><div class="opt-label">Por que foi necessário</div><p>Canibalização de keywords idênticas entre 2 ad groups da mesma campanha, diluindo Quality Score e leilão interno; vazamento de gasto em termos de concorrente sem negativa própria — achados da auditoria de 04/08.</p></div>
+          <div class="opt-block c-orange"><div class="opt-label">Resultado Esperado</div><p>QS mais estável, menos concorrência interna por keyword e fim do gasto em termos de concorrente. A confirmar na próxima auditoria.</p></div>
+          <div class="opt-block c-purple"><div class="opt-label">Outras decisões</div><p>Tracker de conversão recriado; expansão para Móstoles descartada por ora.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Tintado de Luna · Google Ads · M3 Car Center (579-209-4652)</span>
+    <span>Auditoria original: 04/08/2026 · Atualizado: 07/08/2026</span>
+  </footer>
+
+</div>
+</body>
+</html>
