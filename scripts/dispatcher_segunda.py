@@ -20,7 +20,6 @@ HEADERS = {
 # Todos os relatorios que rodam toda quinta-feira
 WORKFLOWS = [
     # Data Know - Meta Ads
-    ("Onvoix",              "onvoix-meta-report.yml"),
     ("Leblon Real Estate",  "leblon-meta-report.yml"),
     ("Luxe Icon",           "luxe-icon-meta-report.yml"),
     ("KG Clinica",          "kg-clinica-meta-report.yml"),
