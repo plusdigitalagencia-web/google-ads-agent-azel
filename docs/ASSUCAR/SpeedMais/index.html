@@ -39,6 +39,11 @@
   .tag { font-family: var(--font-mono); font-size:11px; font-weight:600; letter-spacing:.02em; padding:3px 9px; border-radius:20px; background:var(--accent-soft); color:var(--accent-ink); }
   section.platform.meta .tag { background: var(--meta-soft); color: var(--meta-ink); }
   .empty { border: 1px dashed var(--border); border-radius: 10px; padding: 18px; font-size: 13.5px; color: var(--ink-faint); background: var(--panel); }
+  .list { display:flex; flex-direction:column; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+  a.row { display:flex; flex-direction:column; gap:3px; padding:16px 18px; background:var(--panel); text-decoration:none; color:var(--ink); }
+  a.row:hover { background: var(--accent-soft); }
+  a.row .slug { font-family:var(--font-mono); font-weight:600; font-size:14.5px; }
+  a.row .meta { font-size:12.5px; color:var(--ink-faint); }
   footer { border-top:1px solid var(--border); padding-top:16px; font-size:12.5px; color:var(--ink-faint); }
 </style>
 </head>
@@ -46,6 +51,19 @@
   <div class="page">
     <span class="breadcrumb"><a href="../">ASSUCAR</a> / SpeedMais</span>
     <h1>SpeedMais</h1>
+
+    <section class="platform interno">
+      <div class="platform-head">
+        <h2 class="section-title">Painel Interno</h2>
+        <span class="tag">Google + Meta · pro gestor</span>
+      </div>
+      <div class="list">
+        <a class="row" href="Painel%20Interno/Agosto%202026/">
+          <span class="slug">Agosto/2026</span>
+          <span class="meta">Painel consolidado de saúde de conta — PMax, Search e Meta Lead LP (🔴 Atenção nas 3, causa: duplicação de tracker já corrigida), decisões do gestor registradas em 17/08/2026</span>
+        </a>
+      </div>
+    </section>
 
     <section class="platform meta">
       <div class="platform-head">
