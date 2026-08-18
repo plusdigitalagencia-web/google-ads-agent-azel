@@ -2,6 +2,14 @@
 
 Relatórios de diagnóstico de campanhas do Chez France, organizados por plataforma e mês. Clique numa linha abaixo para ver os relatórios publicados (abre a página renderizada, fora do navegador de código do GitHub).
 
+## Painel Interno
+
+Painel consolidado de saúde de conta pro gestor (Google Ads + Meta Ads juntos). Não substitui o relatório mensal Meta Ads entregue ao cliente final.
+
+| Mês | Relatórios |
+|---|---|
+| **Agosto/2026** | [Ver painel →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/ASSUCAR/Chez%20France/Painel%20Interno/Agosto%202026/) |
+
 ## Meta Ads
 
 | Mês | Relatórios |
