@@ -2,7 +2,7 @@
 
 Relatórios de diagnóstico de campanhas do Chez France, organizados por plataforma e mês. Clique numa linha abaixo para ver os relatórios publicados (abre a página renderizada, fora do navegador de código do GitHub).
 
-## Painel Interno
+## Resumo Mensal
 
 Painel consolidado de saúde de conta pro gestor (Google Ads + Meta Ads juntos). Não substitui o relatório mensal Meta Ads entregue ao cliente final.
 

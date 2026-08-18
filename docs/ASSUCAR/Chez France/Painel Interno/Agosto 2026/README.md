@@ -1,4 +1,4 @@
-# Chez France — Painel Interno — Agosto/2026
+# Chez France — Resumo Mensal — Agosto/2026
 
 Painel consolidado de saúde de conta pro gestor (Google Ads + Meta Ads juntos), aditivo ao relatório mensal Meta Ads entregue ao cliente final. Clique abaixo para ver o painel publicado.
 
