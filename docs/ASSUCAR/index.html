@@ -44,6 +44,10 @@
   .tag.tag-google { background: var(--accent-soft); color: var(--accent-ink); }
   .card.placeholder { opacity:.5; border-style:dashed; }
   footer { border-top:1px solid var(--border); padding-top:16px; font-size:12.5px; color:var(--ink-faint); }
+  .destaque { margin-bottom: 34px; }
+  .card-destaque { border-color: var(--accent); background: var(--accent-soft); }
+  .sub { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-faint);
+         font-weight: 700; margin: 0 0 14px; }
 </style>
 </head>
 <body>
@@ -51,8 +55,20 @@
     <header>
       <span class="eyebrow">Plus Digital Agência · MCC Açúcar</span>
       <h1>ASSUCAR — Relatórios de Campanhas</h1>
-      <p class="lede">Relatórios de diagnóstico de Google Ads e Meta Ads, organizados por cliente. Cada cartão mostra quais plataformas esse cliente utiliza.</p>
+      <p class="lede">Relatórios de Google Ads e Meta Ads da MCC Açúcar. Os relatórios de período reúnem todos os clientes numa página só; as pastas por cliente guardam os painéis internos anteriores.</p>
     </header>
+    <section class="destaque">
+      <a class="card card-destaque" href="Relatorios/">
+        <span class="name">Relatórios por período</span>
+        <span class="desc">Relatório quinzenal e mensal com todos os clientes numa página só — seletor no topo para trocar de cliente</span>
+        <span class="tags">
+          <span class="tag tag-meta">Meta Ads</span>
+          <span class="tag tag-google">Google Ads</span>
+        </span>
+      </a>
+    </section>
+
+    <h2 class="sub">Por cliente</h2>
     <div class="grid">
       <a class="card" href="Chez%20France/">
         <span class="name">Chez France</span>
