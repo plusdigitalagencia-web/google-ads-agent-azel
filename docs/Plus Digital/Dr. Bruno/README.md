@@ -20,6 +20,7 @@ Relatórios de diagnóstico de campanhas do Dr. Bruno Couto (Ortopedista), organ
 
 | Mês | Relatórios |
 |---|---|
+| **Setembro/2026** | [Origem dos leads no WhatsApp →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Plus%20Digital/Dr.%20Bruno/Leaper/Setembro%202026/origem-leads-setembro-26.html) |
 | **Julho/2026** | [Origem dos leads no WhatsApp →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Plus%20Digital/Dr.%20Bruno/Leaper/Julho%202026/origem-leads-julho-26.html) |
 
 ---

@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Origem de Leads — Bruno</title>
+<style>
+  :root{
+    color-scheme: light;
+    --page-bg: #f9f9f7;
+    --surface: #fcfcfb;
+    --surface-2: #f3f2ee;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #898781;
+    --gridline: #e1e0d9;
+    --baseline: #c3c2b7;
+    --border: rgba(11,11,11,0.10);
+    --good: #0ca30c;
+    --good-bg: rgba(12,163,12,0.10);
+    --critical: #d03b3b;
+    --critical-bg: rgba(208,59,59,0.10);
+    --series-meta: #2a78d6;
+    --series-meta-wash: rgba(42,120,214,0.12);
+    --series-google: #1baf7a;
+    --series-google-wash: rgba(27,175,122,0.12);
+    --series-sem: #a6a49c;
+    --series-sem-wash: rgba(166,164,156,0.16);
+    --series-org: #4a3aa7;
+    --series-org-wash: rgba(74,58,167,0.12);
+    --accent: #2a78d6;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme: dark;
+      --page-bg: #0d0d0d;
+      --surface: #1a1a19;
+      --surface-2: #222220;
+      --text-primary: #ffffff;
+      --text-secondary: #c3c2b7;
+      --text-muted: #8f8d86;
+      --gridline: #2c2c2a;
+      --baseline: #383835;
+      --border: rgba(255,255,255,0.10);
+      --good: #0ca30c;
+      --good-bg: rgba(12,163,12,0.16);
+      --critical: #e66767;
+      --critical-bg: rgba(230,103,103,0.14);
+      --series-meta: #3987e5;
+      --series-meta-wash: rgba(57,135,229,0.18);
+      --series-google: #199e70;
+      --series-google-wash: rgba(25,158,112,0.20);
+      --series-sem: #6f6d66;
+      --series-sem-wash: rgba(111,109,102,0.24);
+      --series-org: #9085e9;
+      --series-org-wash: rgba(144,133,233,0.18);
+      --accent: #3987e5;
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme: dark;
+    --page-bg: #0d0d0d;
+    --surface: #1a1a19;
+    --surface-2: #222220;
+    --text-primary: #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted: #8f8d86;
+    --gridline: #2c2c2a;
+    --baseline: #383835;
+    --border: rgba(255,255,255,0.10);
+    --good: #0ca30c;
+    --good-bg: rgba(12,163,12,0.16);
+    --critical: #e66767;
+    --critical-bg: rgba(230,103,103,0.14);
+    --series-meta: #3987e5;
+    --series-meta-wash: rgba(57,135,229,0.18);
+    --series-google: #199e70;
+    --series-google-wash: rgba(25,158,112,0.20);
+    --series-sem: #6f6d66;
+    --series-sem-wash: rgba(111,109,102,0.24);
+    --series-org: #9085e9;
+    --series-org-wash: rgba(144,133,233,0.18);
+    --accent: #3987e5;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    background: var(--page-bg);
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding-inline: 20px;
+    padding-block: 28px 64px;
+    line-height: 1.45;
+  }
+  .page{ max-width: 1040px; margin: 0 auto; display:flex; flex-direction:column; gap:28px; }
+
+  /* ---------- header ---------- */
+  .hero{ display:flex; flex-direction:column; gap:10px; }
+  .eyebrow{ font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--text-muted); }
+  h1{ font-size: 30px; font-weight:700; margin:0; letter-spacing:-0.01em; text-wrap:balance; }
+  .lede{ font-size:15px; color:var(--text-secondary); max-width:640px; margin:0; }
+  .meta-row{ display:flex; flex-wrap:wrap; gap:8px; margin-top:4px; }
+  .chip{ font-size:12px; font-weight:600; padding:5px 10px; border-radius:999px; border:1px solid var(--border); color:var(--text-secondary); background:var(--surface); }
+  .chip.draft{ color:var(--accent); border-color:var(--accent); background:var(--series-meta-wash); }
+
+  /* ---------- generic panel ---------- */
+  .panel{ background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:20px 22px; }
+  .panel h2{ font-size:17px; margin:0 0 2px; letter-spacing:-0.01em; }
+  .panel h3{ font-size:14px; margin:0 0 10px; color:var(--text-primary); }
+  .panel-sub{ font-size:13px; color:var(--text-muted); margin:0 0 16px; max-width:620px; }
+  .panel-grid{ display:grid; grid-template-columns: 1.1fr 0.9fr; gap:18px; align-items:stretch; }
+  .panel-grid.two-col{ grid-template-columns: 1fr 1fr; }
+  @media (max-width:720px){
+    .panel-grid, .panel-grid.two-col{ grid-template-columns: 1fr; }
+  }
+
+  /* ---------- KPI tiles ---------- */
+  .kpis{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+  @media (max-width:720px){ .kpis{ grid-template-columns:repeat(2,1fr); } }
+  .kpi{ background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:16px 18px; display:flex; flex-direction:column; gap:6px; }
+  .kpi .label{ font-size:12px; color:var(--text-muted); font-weight:600; }
+  .kpi .value{ font-size:28px; font-weight:700; letter-spacing:-0.01em; }
+  .kpi .sub{ font-size:12px; color:var(--text-secondary); }
+  .kpi.good .value{ color:var(--good); }
+  .kpi.critical .value{ color:var(--critical); }
+
+  /* ---------- chart chrome ---------- */
+  svg text{ fill:var(--text-muted); font-family:inherit; }
+  .axis-line{ stroke:var(--baseline); stroke-width:1; }
+  .grid-line{ stroke:var(--gridline); stroke-width:1; }
+  .chart-wrap{ position:relative; }
+  .legend{ display:flex; flex-wrap:wrap; gap:14px; margin-top:12px; }
+  .legend-item{ display:flex; align-items:center; gap:6px; font-size:12px; color:var(--text-secondary); }
+  .swatch{ width:10px; height:10px; border-radius:3px; flex:none; }
+
+  .tooltip{
+    position:fixed; pointer-events:none; z-index:50;
+    background:var(--text-primary); color:var(--page-bg);
+    font-size:12px; padding:8px 10px; border-radius:8px;
+    box-shadow:0 6px 20px rgba(0,0,0,.18);
+    opacity:0; transform:translateY(4px); transition:opacity .1s ease;
+    max-width:220px;
+  }
+  .tooltip.show{ opacity:1; }
+  .tooltip .t-title{ font-weight:700; margin-bottom:4px; }
+  .tooltip .t-row{ display:flex; justify-content:space-between; gap:10px; }
+  .tooltip .t-row + .t-row{ margin-top:2px; }
+
+  /* ---------- donut ---------- */
+  .donut-row{ display:flex; align-items:center; gap:22px; flex-wrap:wrap; }
+  .donut-list{ display:flex; flex-direction:column; gap:10px; flex:1; min-width:180px; }
+  .donut-list .row{ display:flex; align-items:center; gap:8px; font-size:13px; }
+  .donut-list .name{ color:var(--text-secondary); flex:1; }
+  .donut-list .pct{ font-weight:700; font-variant-numeric:tabular-nums; }
+  .donut-center-value{ font-size:22px; font-weight:700; fill:var(--text-primary); }
+  .donut-center-label{ font-size:10px; fill:var(--text-muted); }
+
+  /* ---------- funnel list ---------- */
+  .funnel{ display:flex; flex-direction:column; gap:10px; }
+  .funnel-row{ display:grid; grid-template-columns: 128px 1fr 40px; align-items:center; gap:10px; }
+  .funnel-row .fname{ font-size:12.5px; color:var(--text-secondary); }
+  .funnel-track{ height:14px; border-radius:5px; background:var(--surface-2); overflow:hidden; }
+  .funnel-fill{ height:100%; border-radius:5px; }
+  .funnel-row .fval{ font-size:12.5px; font-weight:700; text-align:right; font-variant-numeric:tabular-nums; }
+
+  /* ---------- ranking bars ---------- */
+  .rank{ display:flex; flex-direction:column; gap:9px; }
+  .rank-row{ display:grid; grid-template-columns: 1fr 128px 58px; align-items:center; gap:10px; padding:5px 6px; border-radius:8px; }
+  .rank-row.with-img{ grid-template-columns: 44px 1fr 128px 58px; padding:6px; }
+  .rank-row.top{ background:var(--series-meta-wash); }
+  .rank-thumb{ width:44px; height:44px; border-radius:8px; object-fit:cover; border:1px solid var(--border); flex:none; background:var(--surface-2); }
+  .rank-thumb-empty{ width:44px; height:44px; border-radius:8px; background:var(--surface-2); flex:none; }
+  .rank-name{ font-size:12.5px; color:var(--text-secondary); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .rank-row.top .rank-name{ color:var(--text-primary); font-weight:600; }
+  .rank-track{ height:12px; border-radius:4px; background:var(--surface-2); overflow:hidden; }
+  .rank-fill{ height:100%; border-radius:4px; }
+  .rank-val{ display:flex; align-items:center; justify-content:flex-end; gap:6px; font-size:12.5px; font-weight:700; font-variant-numeric:tabular-nums; }
+  .rank-conv{ display:inline-flex; align-items:center; gap:3px; font-size:11px; font-weight:600; color:var(--good); }
+  .rank-conv::before{ content:""; width:6px; height:6px; border-radius:50%; background:var(--good); }
+  .rank-empty{ font-size:12.5px; color:var(--text-muted); padding:6px; }
+
+  /* ---------- table ---------- */
+  .table-controls{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:14px; }
+  .search-input{
+    flex:1; min-width:180px; font-size:13px; padding:9px 12px; border-radius:9px;
+    border:1px solid var(--border); background:var(--surface-2); color:var(--text-primary);
+  }
+  .search-input::placeholder{ color:var(--text-muted); }
+  .filter-chip{
+    font-size:12px; font-weight:600; padding:7px 12px; border-radius:999px;
+    border:1px solid var(--border); background:var(--surface-2); color:var(--text-secondary);
+    cursor:pointer; white-space:nowrap;
+  }
+  .filter-chip[aria-pressed="true"]{ background:var(--accent); border-color:var(--accent); color:#fff; }
+  .table-count{ font-size:12px; color:var(--text-muted); margin-bottom:10px; }
+  .table-scroll{ max-height:480px; overflow:auto; border:1px solid var(--border); border-radius:10px; }
+  table{ width:100%; border-collapse:collapse; font-size:12.5px; }
+  thead th{
+    position:sticky; top:0; background:var(--surface-2); text-align:left; padding:9px 10px;
+    font-weight:600; color:var(--text-muted); border-bottom:1px solid var(--border); white-space:nowrap;
+  }
+  tbody td{ padding:9px 10px; border-bottom:1px solid var(--gridline); color:var(--text-secondary); white-space:nowrap; }
+  tbody tr:last-child td{ border-bottom:none; }
+  td.name-cell{ color:var(--text-primary); font-weight:600; }
+  td.detail-cell{ max-width:220px; overflow:hidden; text-overflow:ellipsis; }
+  .status-badge{ display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:600; padding:3px 8px; border-radius:999px; }
+  .status-badge.st-good{ background:var(--good-bg); color:var(--good); }
+  .status-badge.st-critical{ background:var(--critical-bg); color:var(--critical); }
+  .status-badge.st-neutral{ background:var(--surface-2); color:var(--text-secondary); }
+  .origem-tag{ display:inline-flex; align-items:center; gap:5px; font-size:11.5px; }
+  .origem-tag::before{ content:""; width:7px; height:7px; border-radius:50%; }
+  .origem-tag.og-meta::before{ background:var(--series-meta); }
+  .origem-tag.og-google::before{ background:var(--series-google); }
+  .origem-tag.og-sem::before{ background:var(--series-sem); }
+  .origem-tag.og-org::before{ background:var(--series-org); }
+
+  footer{ font-size:12px; color:var(--text-muted); border-top:1px solid var(--border); padding-top:16px; display:flex; flex-direction:column; gap:4px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="hero">
+    <div class="eyebrow">Plus Digital Agência · CRM Leaper</div>
+    <h1>Origem dos leads — Dr. Bruno Couto</h1>
+    <p class="lede">Todo contato que chega no WhatsApp cruzado com a campanha, o conjunto e o anúncio que gerou o clique — a visão que o Gerenciador de Anúncios do Meta sozinho não entrega, porque a conversa acontece fora da plataforma.</p>
+    <div class="meta-row">
+      <span class="chip" id="period-chip">01–28 de setembro de 2026</span>
+      <span class="chip draft">Prévia para aprovação</span>
+    </div>
+  </header>
+
+  <section class="kpis" id="kpis"></section>
+
+  <section class="panel" id="panel-daily">
+    <h2>Evolução diária de leads</h2>
+    <p class="panel-sub">Volume de contatos recebidos por dia, separado por origem. Passe o mouse sobre uma barra para ver o detalhe do dia.</p>
+    <div class="chart-wrap">
+      <svg id="chart-daily" viewBox="0 0 880 300" preserveAspectRatio="xMidYMid meet" style="width:100%;height:auto;overflow:visible"></svg>
+    </div>
+    <div class="legend" id="legend-daily"></div>
+  </section>
+
+  <section class="panel-grid">
+    <div class="panel" id="panel-origem">
+      <h2>De onde vêm os leads</h2>
+      <p class="panel-sub">Distribuição do total de contatos no período por canal de origem.</p>
+      <div class="donut-row">
+        <svg id="chart-donut" viewBox="0 0 200 200" width="200" height="200" style="flex:none"></svg>
+        <div class="donut-list" id="donut-list"></div>
+      </div>
+    </div>
+    <div class="panel" id="panel-funil">
+      <h2>Funil atual</h2>
+      <p class="panel-sub">Status de cada lead no CRM hoje.</p>
+      <div class="funnel" id="funnel"></div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-anuncios">
+    <h2>Qual anúncio trouxe mais conversas no WhatsApp</h2>
+    <p class="panel-sub">Ranking dos anúncios do Meta Ads pelo número de leads que iniciaram conversa, com a peça real puxada direto da conta. O ponto verde mostra quantos desses leads já converteram.</p>
+    <div class="rank" id="rank-anuncio"></div>
+  </section>
+
+  <section class="panel-grid two-col">
+    <div class="panel" id="panel-campanha">
+      <h3>Por campanha (Meta Ads)</h3>
+      <div class="rank" id="rank-campanha"></div>
+    </div>
+    <div class="panel" id="panel-conjunto">
+      <h3>Por conjunto de anúncios (Meta Ads)</h3>
+      <div class="rank" id="rank-conjunto"></div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-google">
+    <h2>Google Ads — qual palavra-chave gerou mais leads</h2>
+    <p class="panel-sub">Termo de busca (UTM) associado a cada lead vindo do Google Ads. É o único nível de detalhe que a plataforma exporta para essa origem — campanha e grupo de anúncio não vêm nomeados, só o ID interno.</p>
+    <div class="rank" id="rank-keyword"></div>
+  </section>
+
+  <footer>
+    <div>Fonte: exportação do CRM Leaper (WhatsApp), planilha compartilhada pelo consultório · período 01–28/09/2026.</div>
+    <div>"Sem Rastreio" é conversa iniciada direto no WhatsApp, sem clique registrado em anúncio — volume real, mas sem campanha para atribuir.</div>
+    <div>Peças de anúncio puxadas em tempo real da conta do Meta Ads do Dr. Bruno (Graph API). Duas entradas do ranking ("(vazio)" e "Post do Instagram: Dor crônica no joelho") não têm peça correspondente ativa na conta — provável anúncio já removido ou interação orgânica fora do Gerenciador de Anúncios.</div>
+    <div>A lista individual de leads (nome e telefone) não é publicada aqui por ser dado de paciente — disponível internamente com a agência.</div>
+    <div>Preparado por Plus Digital Agência.</div>
+  </footer>
+
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+(function(){
+  var fmt = new Intl.NumberFormat('pt-BR');
+  var tooltip = document.getElementById('tooltip');
+
+  function showTooltip(x, y, html){
+    tooltip.innerHTML = html;
+    tooltip.style.left = (x + 14) + 'px';
+    tooltip.style.top = (y + 14) + 'px';
+    tooltip.classList.add('show');
+  }
+  function hideTooltip(){ tooltip.classList.remove('show'); }
+
+  function svgEl(tag, attrs){
+    var el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+    for (var k in attrs) el.setAttribute(k, attrs[k]);
+    return el;
+  }
+
+  var GROUP_COLOR = {
+    'Meta Ads': 'var(--series-meta)',
+    'Google Ads': 'var(--series-google)',
+    'Sem Rastreio': 'var(--series-sem)',
+    'Orgânico': 'var(--series-org)'
+  };
+  var GROUP_ORDER = ['Sem Rastreio','Meta Ads','Google Ads','Orgânico'];
+
+  function origemGroup(o){
+    o = o || '';
+    if (o.indexOf('Meta Ads') === 0) return 'Meta Ads';
+    if (o.indexOf('Google Ads') === 0) return 'Google Ads';
+    if (o.indexOf('Orgânico') !== -1 || o.indexOf('Organico') !== -1) return 'Orgânico';
+    if (o === '' || o === 'Sem Rastreio') return 'Sem Rastreio';
+    return 'Outro';
+  }
+
+  fetch('data.json').then(function(r){ return r.json(); }).then(render).catch(function(err){
+    document.querySelector('.page').innerHTML = '<p style="color:var(--critical)">Não foi possível carregar os dados (data.json). ' + err + '</p>';
+  });
+
+  function render(data){
+    renderKpis(data);
+    renderDaily(data.daily_series);
+    renderDonut(data.origem_distribution);
+    renderFunnel(data.status_distribution);
+    renderRank('rank-anuncio', data.anuncio_rank, 8, data.ad_creatives);
+    renderRank('rank-campanha', data.campanha_rank, 6);
+    renderRank('rank-conjunto', data.conjunto_rank, 6);
+    renderRank('rank-keyword', data.keyword_rank, 8);
+  }
+
+  // ---------------- KPIs ----------------
+  function renderKpis(data){
+    var s = data.status_distribution;
+    var convertido = s['Finalizado - Convertido'] || 0;
+    var perdido = s['Finalizado - Perdido'] || 0;
+    var total = data.total_leads;
+    var emAndamento = total - convertido - perdido;
+    var taxaFechados = (convertido + perdido) > 0 ? (convertido / (convertido + perdido) * 100) : 0;
+
+    var items = [
+      { label:'Contatos recebidos', value: fmt.format(total), sub: 'setembro/2026', cls:'' },
+      { label:'Em andamento', value: fmt.format(emAndamento), sub: 'ainda no funil', cls:'' },
+      { label:'Convertidos', value: fmt.format(convertido), sub: taxaFechados.toFixed(1) + '% dos fechados', cls:'good' },
+      { label:'Perdidos', value: fmt.format(perdido), sub: (100-taxaFechados).toFixed(1) + '% dos fechados', cls:'critical' }
+    ];
+    var host = document.getElementById('kpis');
+    items.forEach(function(it){
+      var div = document.createElement('div');
+      div.className = 'kpi ' + it.cls;
+      div.innerHTML = '<div class="label">' + it.label + '</div><div class="value">' + it.value + '</div><div class="sub">' + it.sub + '</div>';
+      host.appendChild(div);
+    });
+  }
+
+  // ---------------- Daily stacked columns ----------------
+  function renderDaily(series){
+    var svg = document.getElementById('chart-daily');
+    var W = 880, H = 300, M = { top: 16, right: 12, bottom: 34, left: 34 };
+    var innerW = W - M.left - M.right;
+    var innerH = H - M.top - M.bottom;
+    var n = series.length;
+    var band = innerW / n;
+    var barW = Math.min(band * 0.62, 24);
+
+    var totals = series.map(function(d){
+      return GROUP_ORDER.reduce(function(acc,g){ return acc + (d[g]||0); }, 0);
+    });
+    var maxTotal = Math.max.apply(null, totals);
+    var yMax = Math.max(10, Math.ceil(maxTotal / 10) * 10);
+    var yScale = function(v){ return innerH - (v / yMax) * innerH; };
+
+    // gridlines + y ticks
+    var ticks = 4;
+    for (var t = 0; t <= ticks; t++){
+      var val = Math.round(yMax * t / ticks);
+      var y = M.top + yScale(val);
+      svg.appendChild(svgEl('line', { class:'grid-line', x1:M.left, x2:W-M.right, y1:y, y2:y }));
+      var label = svgEl('text', { x: M.left - 8, y: y + 3, 'text-anchor':'end', 'font-size':10 });
+      label.textContent = val;
+      svg.appendChild(label);
+    }
+    // baseline
+    svg.appendChild(svgEl('line', { class:'axis-line', x1:M.left, x2:W-M.right, y1:M.top+innerH, y2:M.top+innerH }));
+
+    series.forEach(function(d, i){
+      var x = M.left + i*band + (band-barW)/2;
+      var yCursor = M.top + innerH;
+      GROUP_ORDER.forEach(function(g){
+        var v = d[g] || 0;
+        if (v <= 0) return;
+        var h = (v / yMax) * innerH;
+        yCursor -= h;
+        var rect = svgEl('rect', {
+          x: x, y: yCursor, width: barW, height: Math.max(h-1,0),
+          rx: 3, fill: GROUP_COLOR[g], 'data-day': d.day
+        });
+        svg.appendChild(rect);
+      });
+      // invisible hover column covering full band+height for tooltip
+      var hover = svgEl('rect', { x: M.left + i*band, y: M.top, width: band, height: innerH, fill:'transparent' });
+      hover.addEventListener('mousemove', function(ev){
+        var rows = GROUP_ORDER.filter(function(g){ return (d[g]||0) > 0; }).map(function(g){
+          return '<div class="t-row"><span>' + g + '</span><span>' + fmt.format(d[g]) + '</span></div>';
+        }).join('');
+        if (!rows) rows = '<div class="t-row"><span>Sem leads</span></div>';
+        var html = '<div class="t-title">' + d.day + ' · ' + fmt.format(totals[i]) + ' leads</div>' + rows;
+        showTooltip(ev.clientX, ev.clientY, html);
+      });
+      hover.addEventListener('mouseleave', hideTooltip);
+      svg.appendChild(hover);
+
+      // x labels: show every ~4th day + first/last
+      if (i % 4 === 0 || i === n-1){
+        var dayNum = d.day.split('/')[0];
+        var lbl = svgEl('text', { x: M.left + i*band + band/2, y: M.top+innerH+16, 'text-anchor':'middle', 'font-size':10 });
+        lbl.textContent = dayNum;
+        svg.appendChild(lbl);
+      }
+    });
+
+    var legend = document.getElementById('legend-daily');
+    GROUP_ORDER.forEach(function(g){
+      var total = series.reduce(function(a,d){ return a + (d[g]||0); }, 0);
+      if (total <= 0) return;
+      var item = document.createElement('div');
+      item.className = 'legend-item';
+      item.innerHTML = '<span class="swatch" style="background:' + GROUP_COLOR[g] + '"></span>' + g + ' (' + fmt.format(total) + ')';
+      legend.appendChild(item);
+    });
+  }
+
+  // ---------------- Donut ----------------
+  function renderDonut(dist){
+    var grouped = {};
+    Object.keys(dist).forEach(function(k){
+      var g = origemGroup(k);
+      grouped[g] = (grouped[g]||0) + dist[k];
+    });
+    var total = Object.values(grouped).reduce(function(a,b){return a+b;},0);
+    var svg = document.getElementById('chart-donut');
+    var cx=100, cy=100, r=72, sw=26;
+    var circumference = 2*Math.PI*r;
+    var offset = 0;
+
+    svg.appendChild(svgEl('circle', { cx:cx, cy:cy, r:r, fill:'none', stroke:'var(--surface-2)', 'stroke-width':sw }));
+
+    var list = document.getElementById('donut-list');
+
+    GROUP_ORDER.forEach(function(g){
+      var v = grouped[g] || 0;
+      if (v <= 0) return;
+      var frac = v/total;
+      var dash = frac*circumference;
+      var gap = Math.max(circumference - dash, 0);
+      var circle = svgEl('circle', {
+        cx:cx, cy:cy, r:r, fill:'none', stroke:GROUP_COLOR[g], 'stroke-width':sw,
+        'stroke-dasharray': dash + ' ' + gap,
+        'stroke-dashoffset': -offset,
+        transform: 'rotate(-90 ' + cx + ' ' + cy + ')'
+      });
+      circle.style.cursor = 'pointer';
+      circle.addEventListener('mousemove', function(ev){
+        showTooltip(ev.clientX, ev.clientY, '<div class="t-title">' + g + '</div><div class="t-row"><span>' + fmt.format(v) + ' leads</span><span>' + (frac*100).toFixed(1) + '%</span></div>');
+      });
+      circle.addEventListener('mouseleave', hideTooltip);
+      svg.appendChild(circle);
+      offset += dash;
+
+      var row = document.createElement('div');
+      row.className = 'row';
+      row.innerHTML = '<span class="swatch" style="background:' + GROUP_COLOR[g] + '"></span><span class="name">' + g + '</span><span class="pct">' + (frac*100).toFixed(1) + '%</span>';
+      list.appendChild(row);
+    });
+
+    var centerVal = svgEl('text', { x:cx, y:cy-2, 'text-anchor':'middle', class:'donut-center-value' });
+    centerVal.textContent = fmt.format(total);
+    svg.appendChild(centerVal);
+    var centerLbl = svgEl('text', { x:cx, y:cy+16, 'text-anchor':'middle', class:'donut-center-label' });
+    centerLbl.textContent = 'leads';
+    svg.appendChild(centerLbl);
+  }
+
+  // ---------------- Funnel ----------------
+  var FUNNEL_ORDER = ['Novo Lead','Contato Iniciado','Qualificação','Proposta Enviada','Negociação','Finalizado - Convertido','Finalizado - Perdido'];
+  function funnelColor(name){
+    if (name === 'Finalizado - Convertido') return 'var(--good)';
+    if (name === 'Finalizado - Perdido') return 'var(--critical)';
+    return 'var(--accent)';
+  }
+  function renderFunnel(dist){
+    var host = document.getElementById('funnel');
+    var max = Math.max.apply(null, FUNNEL_ORDER.map(function(k){ return dist[k]||0; }));
+    FUNNEL_ORDER.forEach(function(name){
+      var v = dist[name] || 0;
+      var row = document.createElement('div');
+      row.className = 'funnel-row';
+      var pct = max > 0 ? (v/max*100) : 0;
+      row.innerHTML = '<div class="fname">' + name + '</div>' +
+        '<div class="funnel-track"><div class="funnel-fill" style="width:' + pct + '%;background:' + funnelColor(name) + '"></div></div>' +
+        '<div class="fval">' + fmt.format(v) + '</div>';
+      host.appendChild(row);
+    });
+  }
+
+  // ---------------- Ranking bars ----------------
+  function renderRank(hostId, items, limit, creatives){
+    var host = document.getElementById(hostId);
+    if (!items || !items.length){
+      host.innerHTML = '<div class="rank-empty">Sem dados neste período.</div>';
+      return;
+    }
+    var shown = items.slice(0, limit);
+    var max = Math.max.apply(null, shown.map(function(d){ return d.leads; }));
+    shown.forEach(function(d, i){
+      var row = document.createElement('div');
+      var hasImg = !!(creatives && creatives[d.name]);
+      row.className = 'rank-row' + (i===0 ? ' top' : '') + (creatives ? ' with-img' : '');
+      var pct = max > 0 ? (d.leads/max*100) : 0;
+      var convHtml = d.convertidos > 0 ? '<span class="rank-conv">' + d.convertidos + '</span>' : '';
+      var imgHtml = creatives ? (hasImg
+        ? '<img class="rank-thumb" src="' + creatives[d.name] + '" alt="Peça do anúncio: ' + escapeHtml(d.name) + '">'
+        : '<div class="rank-thumb-empty" title="Sem peça correspondente na conta (anúncio pode ter sido removido)"></div>') : '';
+      row.innerHTML =
+        imgHtml +
+        '<div class="rank-name" title="' + escapeHtml(d.name) + '">' + escapeHtml(d.name) + '</div>' +
+        '<div class="rank-track"><div class="rank-fill" style="width:' + pct + '%;background:' + (i===0?'var(--accent)':'var(--series-meta)') + '"></div></div>' +
+        '<div class="rank-val">' + convHtml + fmt.format(d.leads) + '</div>';
+      host.appendChild(row);
+    });
+  }
+
+  function escapeHtml(s){
+    var div = document.createElement('div');
+    div.textContent = s;
+    return div.innerHTML;
+  }
+
+})();
+</script>
+</body>
+</html>
