@@ -1,0 +1,1235 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Mensal — Bruno e Cejana</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Archivo:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --ground:#FBF8F4; --surface:#FFFFFF; --surface-2:#F5EFE9;
+  --ink:#231A1D; --ink-2:#5C4E52; --ink-3:#8A7A7E;
+  --rule:#E6DBD3; --rule-strong:#D3C3B9;
+  --accent:#14603D; --accent-soft:#E3EFE8; --gold:#A8792E;
+  --bom:#2F8F5B; --bom-bg:#E6F2EA;
+  --alerta:#A8641A; --alerta-bg:#F9EEDE;
+  --ruim:#C10D1E; --ruim-bg:#FBE2E4;
+  --novo:#3F6493; --novo-bg:#E5ECF6;
+  --meta-c:#3A5CA8; --google-c:#B06A1E;
+  --azul:#1D5FA8; --azul-bg:#EBF2FA; --azul-rule:#C8DCF0;
+  --laranja:#9A3F06; --laranja-bg:#F8D3AC; --laranja-rule:#E3A96F;
+  --shadow:0 1px 2px rgba(35,26,29,.04), 0 10px 26px -18px rgba(35,26,29,.30);
+}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+  --ground:#0F1310; --surface:#171C18; --surface-2:#1E241F;
+  --ink:#E9F0EA; --ink-2:#A9B8AC; --ink-3:#7A8A7D;
+  --rule:#272E28; --rule-strong:#3A443B;
+  --accent:#6FD19B; --accent-soft:#13301F; --gold:#D9A94F;
+  --bom:#5CC79A; --bom-bg:#153024;
+  --alerta:#E2A752; --alerta-bg:#33260F;
+  --ruim:#FF4D58; --ruim-bg:#3D1216;
+  --novo:#8FAEDC; --novo-bg:#1B2436;
+  --meta-c:#8FAEDC; --google-c:#E0A860;
+  --azul:#7FB4EA; --azul-bg:#131D2B; --azul-rule:#24354A;
+  --laranja:#FFB874; --laranja-bg:#54300C; --laranja-rule:#7A4A18;
+  --shadow:0 1px 2px rgba(0,0,0,.30), 0 10px 26px -18px rgba(0,0,0,.70);
+}}
+:root[data-theme="dark"]{
+  --ground:#0F1310; --surface:#171C18; --surface-2:#1E241F;
+  --ink:#E9F0EA; --ink-2:#A9B8AC; --ink-3:#7A8A7D;
+  --rule:#272E28; --rule-strong:#3A443B;
+  --accent:#6FD19B; --accent-soft:#13301F; --gold:#D9A94F;
+  --bom:#5CC79A; --bom-bg:#153024;
+  --alerta:#E2A752; --alerta-bg:#33260F;
+  --ruim:#FF4D58; --ruim-bg:#3D1216;
+  --novo:#8FAEDC; --novo-bg:#1B2436;
+  --meta-c:#8FAEDC; --google-c:#E0A860;
+  --azul:#7FB4EA; --azul-bg:#131D2B; --azul-rule:#24354A;
+  --laranja:#FFB874; --laranja-bg:#54300C; --laranja-rule:#7A4A18;
+  --shadow:0 1px 2px rgba(0,0,0,.30), 0 10px 26px -18px rgba(0,0,0,.70);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:15px; line-height:1.5; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1120px; margin:0 auto; padding-inline:20px; padding-block:0 64px}
+h1,h2,h3{font-family:"Fraunces","Iowan Old Style",Georgia,serif; text-wrap:balance; margin:0}
+.num{font-variant-numeric:tabular-nums}
+
+/* ---------- topo ---------- */
+header.top{
+  background:var(--surface); border-bottom:1px solid var(--rule);
+}
+.top-in{max-width:1120px; margin:0 auto; padding:26px 20px 20px; display:flex; flex-wrap:wrap; gap:18px; align-items:flex-end; justify-content:space-between}
+.eyebrow{font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); font-weight:600}
+h1{font-size:clamp(26px,4.4vw,38px); font-weight:600; letter-spacing:-.015em; margin-top:6px}
+.periodo{color:var(--ink-2); font-size:14px; margin-top:8px}
+.periodo b{color:var(--ink); font-weight:600}
+.fontes{display:flex; gap:8px; flex-wrap:wrap}
+.fonte{
+  display:inline-flex; align-items:center; gap:7px; font-size:12px; font-weight:500;
+  border:1px solid var(--rule-strong); border-radius:999px; padding:6px 12px; color:var(--ink-2);
+  background:var(--surface);
+}
+.dot{width:7px; height:7px; border-radius:50%; background:var(--bom)}
+
+/* ---------- barra de clientes ---------- */
+.clientes-barra{border-top:1px solid var(--rule); background:var(--surface-2)}
+.clientes-in{
+  max-width:1120px; margin:0 auto; padding:10px 20px; display:flex; gap:8px;
+  overflow-x:auto; align-items:stretch;
+}
+.cliente{
+  appearance:none; font-family:inherit; cursor:pointer; white-space:nowrap; text-align:left;
+  background:var(--surface); border:1px solid var(--rule-strong); border-radius:9px;
+  padding:8px 14px; color:var(--ink-2); font-size:13.5px; font-weight:600;
+  display:flex; flex-direction:column; gap:2px; transition:border-color .12s, color .12s;
+}
+.cliente .canais{font-size:10.5px; font-weight:500; color:var(--ink-3); letter-spacing:.02em}
+.cliente:hover{color:var(--ink); border-color:var(--ink-3)}
+.cliente[aria-selected="true"]{
+  background:var(--accent); border-color:var(--accent); color:#fff;
+}
+.cliente[aria-selected="true"] .canais{color:rgba(255,255,255,.75)}
+.cliente:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+
+/* ---------- abas ---------- */
+nav.abas{
+  position:sticky; top:env(safe-area-inset-top,0px); z-index:20;
+  background:color-mix(in srgb, var(--ground) 92%, transparent);
+  backdrop-filter:blur(8px); border-bottom:1px solid var(--rule);
+}
+.abas-in{max-width:1120px; margin:0 auto; padding-inline:20px; display:flex; gap:2px; overflow-x:auto}
+.aba{
+  appearance:none; background:none; border:0; border-bottom:2px solid transparent;
+  font-family:inherit; font-size:14px; font-weight:500; color:var(--ink-3);
+  padding:14px 14px 11px; cursor:pointer; white-space:nowrap;
+}
+.aba:hover{color:var(--ink)}
+.aba[aria-selected="true"]{color:var(--accent); border-bottom-color:var(--accent); font-weight:600}
+.aba:focus-visible{outline:2px solid var(--accent); outline-offset:-4px; border-radius:4px}
+
+/* ---------- blocos ---------- */
+section.painel{padding-top:30px}
+.titulo-sec{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin:34px 0 14px}
+.titulo-sec:first-child{margin-top:0}
+.titulo-sec h2{font-size:21px; font-weight:600; letter-spacing:-.01em}
+.titulo-sec p{margin:0; color:var(--ink-3); font-size:13px}
+
+/* ---------- KPIs ---------- */
+.kpis{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--rule); border:1px solid var(--rule); border-radius:10px; overflow:hidden}
+.kpis[data-n="6"]{grid-template-columns:repeat(3,1fr)}
+@media (max-width:980px){ .kpis,.kpis[data-n="6"]{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:520px){ .kpis,.kpis[data-n="6"]{grid-template-columns:1fr} }
+.kpi{background:var(--surface); padding:14px 16px 15px}
+.kpi .rot{font-size:11px; letter-spacing:.07em; text-transform:uppercase; color:var(--ink-3); font-weight:600}
+.kpi .val{font-family:"Fraunces",Georgia,serif; font-size:23px; font-weight:600; letter-spacing:-.01em; margin-top:5px; font-variant-numeric:tabular-nums}
+.cap{font-size:11.5px; color:var(--ink-3); margin:8px 0 0; max-width:74ch}
+.kpi.destaque{background:var(--surface-2); box-shadow:inset 3px 0 0 var(--accent)}
+.kpi .rot em{font-style:normal; font-weight:500; letter-spacing:0; text-transform:none; opacity:.75}
+.kpi .reparticao{
+  display:flex; flex-wrap:wrap; gap:4px 12px; margin-top:9px; padding-top:8px;
+  border-top:1px solid var(--rule); font-size:11.5px; color:var(--ink-3);
+  font-variant-numeric:tabular-nums;
+}
+.kpi .split{display:flex; flex-direction:column; gap:7px; margin-top:8px}
+.kpi .split .linha{display:flex; align-items:baseline; gap:8px; flex-wrap:wrap}
+.kpi .split .canal{
+  font-size:10px; font-weight:700; letter-spacing:.05em; text-transform:uppercase;
+  border-radius:4px; padding:2px 6px; white-space:nowrap;
+}
+.kpi .split .canal.meta{background:var(--novo-bg); color:var(--meta-c)}
+.kpi .split .canal.google{background:var(--alerta-bg); color:var(--google-c)}
+.kpi .split .v{
+  font-family:"Fraunces",Georgia,serif; font-size:19px; font-weight:600;
+  letter-spacing:-.01em; font-variant-numeric:tabular-nums; margin-right:auto;
+}
+.kpi .split .delta{margin-top:0}
+.kpi .obs{font-size:10.5px; color:var(--ink-3); margin-top:9px; line-height:1.4}
+.delta{display:inline-flex; align-items:center; gap:4px; font-size:11.5px; font-weight:600; margin-top:5px; font-variant-numeric:tabular-nums; white-space:nowrap}
+.delta.up{color:var(--bom)} .delta.down{color:var(--ruim)} .delta.flat{color:var(--ink-3)}
+
+/* ---------- cards de campanha ---------- */
+.cards{display:flex; flex-direction:column; gap:14px}
+.card{
+  background:var(--surface); border:1px solid var(--rule); border-radius:12px;
+  box-shadow:var(--shadow); overflow:hidden; border-left:4px solid var(--rule-strong);
+}
+.card.melhorou{border-left-color:var(--bom)}
+.card.atencao{border-left-color:var(--ruim)}
+.card.estavel{border-left-color:var(--alerta)}
+.card.novo{border-left-color:var(--novo)}
+.card-top{display:flex; gap:14px; align-items:flex-start; justify-content:space-between; padding:16px 18px 12px; flex-wrap:wrap}
+.card-nome{font-family:"Fraunces",Georgia,serif; font-size:17px; font-weight:600; letter-spacing:-.01em; line-height:1.3}
+.chips{display:flex; gap:6px; flex-wrap:wrap; margin-top:7px}
+.chip{font-size:11px; font-weight:500; color:var(--ink-2); background:var(--surface-2); border-radius:5px; padding:3px 8px}
+.selo{
+  display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:600;
+  border-radius:999px; padding:5px 11px; white-space:nowrap;
+}
+.selo.melhorou{background:var(--bom-bg); color:var(--bom)}
+.selo.atencao{background:var(--ruim-bg); color:var(--ruim)}
+.selo.estavel{background:var(--alerta-bg); color:var(--alerta)}
+.selo.novo{background:var(--novo-bg); color:var(--novo)}
+
+.metricas{display:grid; grid-template-columns:repeat(auto-fit,minmax(126px,1fr)); gap:1px; background:var(--rule); border-top:1px solid var(--rule)}
+.m{background:var(--surface); padding:11px 14px 12px}
+.m .rot{font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3); font-weight:600}
+.m .val{font-size:16px; font-weight:600; margin-top:3px; font-variant-numeric:tabular-nums}
+.m.chave{background:var(--surface-2)}
+
+/* comparativo com seta dentro dos cards e KPIs */
+.comp{
+  display:flex; align-items:baseline; gap:4px; margin-top:6px; font-size:11px;
+  font-variant-numeric:tabular-nums; white-space:nowrap;
+}
+.comp .antes{color:var(--ink-3); font-weight:500}
+.comp .seta{font-size:13px; line-height:1; font-weight:700}
+.comp .pcv{font-weight:700}
+.comp.up .seta,.comp.up .pcv{color:var(--bom)}
+.comp.down .seta,.comp.down .pcv{color:var(--ruim)}
+.comp.flat .seta,.comp.flat .pcv{color:var(--ink-3)}
+.comp.vazio{color:var(--ink-3); font-style:italic}
+
+/* tabelas dentro do card de campanha — blocos que abrem e fecham */
+.card-tabela{border-top:1px solid var(--rule); padding:0}
+.ct-titulo{
+  font-size:11px; letter-spacing:.08em; text-transform:uppercase; font-weight:700;
+  color:var(--ink-2); display:flex; gap:8px; align-items:center; flex-wrap:wrap;
+  padding:13px 18px; cursor:pointer; list-style:none; user-select:none;
+}
+.ct-titulo::-webkit-details-marker{display:none}
+.ct-titulo:hover{background:var(--surface-2)}
+.ct-titulo:focus-visible{outline:2px solid var(--accent); outline-offset:-3px}
+.ct-corpo{padding:0 18px 16px}
+.chev{
+  width:8px; height:8px; flex:none; display:inline-block; opacity:.55;
+  border-right:2px solid currentColor; border-bottom:2px solid currentColor;
+  transform:rotate(-45deg) translate(-1px,-1px); transition:transform .15s ease;
+}
+details[open] > .ct-titulo .chev{transform:rotate(45deg) translate(-1px,-1px)}
+@media (prefers-reduced-motion:reduce){ .chev{transition:none} }
+.ct-titulo em{font-style:normal; font-size:10.5px; letter-spacing:.02em; text-transform:none; color:var(--ink-3); font-weight:500}
+.tabela-box.compacta table{min-width:560px; font-size:12.5px}
+.tabela-box.compacta th,.tabela-box.compacta td{padding:7px 10px}
+.tabela-box.compacta td.txt{white-space:normal; min-width:200px; line-height:1.45}
+th.esq,td.esq,.tabela-box.compacta td.txt,.tabela-box.compacta th.txt{text-align:left}
+.tabela-box.compacta td.forte{font-weight:600}
+.ink3{color:var(--ink-3)}
+.ok{color:var(--bom); font-weight:500}
+.nok{color:var(--ruim); font-weight:500}
+.ct-diagnostico{
+  margin:10px 0 0; font-size:13px; line-height:1.6; color:var(--ink-2);
+  background:var(--surface-2); border-radius:8px; padding:11px 13px;
+}
+.ct-diagnostico b{color:var(--ink); font-weight:600}
+.ct-contexto{margin-top:12px}
+.ct-subtitulo{font-size:11.5px; color:var(--ink-3); margin-bottom:7px}
+tr.pendente td{white-space:normal; color:var(--ink-3); font-size:12.5px}
+
+/* conjuntos */
+.conjuntos{border-top:1px solid var(--rule); background:var(--surface-2)}
+.conj-rot{font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); font-weight:600; padding:11px 18px 6px}
+.conj{display:grid; grid-template-columns:minmax(140px,1.8fr) repeat(var(--cols,6),minmax(60px,1fr));
+  gap:10px; padding:8px 18px; align-items:center; font-size:13px; border-top:1px solid var(--rule)}
+.conj.cabecalho{
+  font-size:10px; letter-spacing:.05em; text-transform:uppercase; font-weight:700;
+  color:var(--ink-3); padding-top:6px; padding-bottom:6px;
+}
+.conj.cabecalho .nome{font-weight:700}
+.conj.cabecalho .num{color:var(--ink-3)}
+.conj:last-child{padding-bottom:13px}
+.conj .nome{font-weight:500; overflow-wrap:anywhere}
+.conj span.num{text-align:right; font-variant-numeric:tabular-nums; color:var(--ink-2)}
+.conj span.num b{color:var(--ink); font-weight:600}
+
+/* ---------- tabelas ---------- */
+.tabela-box{border:1px solid var(--rule); border-radius:10px; overflow-x:auto; background:var(--surface)}
+table{border-collapse:collapse; width:100%; min-width:640px; font-size:13.5px}
+th,td{padding:10px 11px; text-align:right; border-bottom:1px solid var(--rule); white-space:nowrap}
+th{font-size:10.5px; letter-spacing:.07em; text-transform:uppercase; color:var(--ink-3); font-weight:600; background:var(--surface-2); position:sticky; top:0}
+td:first-child,th:first-child{text-align:left; white-space:normal; min-width:180px}
+tbody tr:last-child td{border-bottom:0}
+td.num,th.num{font-variant-numeric:tabular-nums}
+th.ord{cursor:pointer; user-select:none; white-space:nowrap}
+th.ord:hover{color:var(--ink)}
+th.ord:focus-visible{outline:2px solid var(--accent); outline-offset:-2px}
+th.ord .seta{
+  display:inline-block; width:0; height:0; margin-left:6px; vertical-align:middle;
+  border-left:4px solid transparent; border-right:4px solid transparent; opacity:0;
+}
+th.ord:hover .seta{opacity:.35}
+th.ord.ativa{color:var(--accent)}
+th.ord.ativa .seta{opacity:1}
+th.ord.desc .seta{border-top:5px solid currentColor}
+th.ord.asc .seta{border-bottom:5px solid currentColor}
+
+.tag{display:inline-block; font-size:10.5px; font-weight:600; border-radius:4px; padding:2px 7px; margin-left:8px}
+.tag.bom{background:var(--bom-bg); color:var(--bom)}
+.tag.ruim{background:var(--ruim-bg); color:var(--ruim)}
+.tag.alerta{background:var(--alerta-bg); color:var(--alerta)}
+.sub.eficiente{color:var(--bom); font-weight:600}
+.sub.medio{color:var(--alerta); font-weight:600}
+.sub.caro{color:var(--ruim); font-weight:600}
+.sub{display:block; font-size:11.5px; color:var(--ink-3); font-weight:400; margin-top:2px}
+
+/* pílula de ROAS comparado com uma base */
+.pilula{
+  display:inline-flex; align-items:baseline; gap:6px; border-radius:6px; padding:4px 9px;
+  font-weight:600; font-variant-numeric:tabular-nums; white-space:nowrap;
+}
+.pilula em{font-style:normal; font-size:11px; font-weight:600; opacity:.85}
+.pilula.up{background:var(--bom-bg); color:var(--bom)}
+.pilula.down{background:var(--alerta-bg); color:var(--alerta)}
+
+/* tabela das três quinzenas */
+table.tempo td:first-child,table.tempo th:first-child{min-width:130px; color:var(--ink-2); font-size:13px}
+table.tempo th{vertical-align:bottom; text-transform:none; letter-spacing:0; font-size:12px; font-weight:600; color:var(--ink-2)}
+table.tempo th .sub{text-transform:none; letter-spacing:0}
+table.tempo .agora{background:var(--surface-2)}
+table.tempo th.agora{color:var(--accent); box-shadow:inset 0 -2px 0 var(--accent)}
+table.tempo tr.roas td{border-top:1px solid var(--rule-strong); font-size:15px}
+
+/* bloco de públicos em laranja */
+.card-tabela.laranja{background:var(--laranja-bg); border-top:1px solid var(--laranja-rule)}
+.card-tabela.laranja .sg-rot{color:var(--laranja)}
+.card-tabela.laranja .sg-rot span{background:color-mix(in srgb, var(--laranja-bg) 45%, var(--surface)); color:var(--laranja)}
+.card-tabela.laranja .pill{background:color-mix(in srgb, var(--laranja-bg) 55%, var(--surface)); border-color:var(--laranja-rule)}
+.card-tabela.laranja .cap{color:var(--laranja)}
+.card.publico{border-left-color:var(--laranja)}
+
+/* blocos de PMax em azul, para separar do verde do relatório */
+.card-tabela.azul{background:var(--azul-bg); border-top:1px solid var(--azul-rule)}
+.card-tabela.azul .ct-titulo{color:var(--azul)}
+.card-tabela.azul .ct-titulo em{color:var(--azul); opacity:.7}
+.card-tabela.azul .tabela-box{border-color:var(--azul-rule)}
+.card-tabela.azul th{background:color-mix(in srgb, var(--azul-bg) 55%, var(--surface)); color:var(--azul)}
+.card-tabela.azul td{border-bottom-color:var(--azul-rule)}
+.card-tabela.azul .ct-diagnostico{background:color-mix(in srgb, var(--azul-bg) 60%, var(--surface))}
+
+/* públicos e segmentação */
+.pub-grupo{margin-bottom:14px}
+.pub-grupo:last-child{margin-bottom:0}
+.pill.publico{background:var(--novo-bg); border-color:transparent; color:var(--meta-c); font-weight:500}
+.pill.excluido{background:var(--ruim-bg); border-color:transparent; color:var(--ruim); font-weight:500}
+.ct-vazio{margin:0; font-size:13px; color:var(--ink-3)}
+
+/* sinais da PMax */
+.sinais-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px}
+.sg-rot{
+  font-size:11px; letter-spacing:.06em; text-transform:uppercase; font-weight:700;
+  color:var(--ink-3); margin-bottom:8px; display:flex; gap:7px; align-items:center;
+}
+.sg-rot span{
+  background:var(--surface-2); border-radius:999px; padding:1px 8px; font-size:11px;
+  letter-spacing:0; color:var(--ink-2);
+}
+.sg-lista{display:flex; flex-wrap:wrap; gap:6px}
+.pill{
+  font-size:12px; background:var(--surface-2); border:1px solid var(--rule);
+  border-radius:999px; padding:4px 10px; color:var(--ink-2);
+}
+.pill.publico{background:var(--novo-bg); border-color:transparent; color:var(--meta-c); font-weight:500}
+
+/* destaques da quinzena */
+.destaques{display:grid; grid-template-columns:repeat(auto-fit,minmax(248px,1fr)); gap:12px}
+.destaque{
+  background:var(--surface); border:1px solid var(--rule); border-top:3px solid var(--rule-strong);
+  border-radius:10px; padding:14px 16px 15px;
+}
+.destaque.bom{border-top-color:var(--bom)}
+.destaque.ruim{border-top-color:var(--ruim)}
+.destaque.alerta{border-top-color:var(--alerta)}
+.destaque.novo{border-top-color:var(--novo)}
+.destaque h3{
+  font-family:"Archivo",sans-serif; font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+  font-weight:700; margin-bottom:7px; display:flex; gap:8px; align-items:baseline; flex-wrap:wrap;
+}
+.destaque h3 .canal{
+  font-size:10px; letter-spacing:.04em; font-weight:600; color:var(--ink-3);
+  background:var(--surface-2); border-radius:4px; padding:2px 6px;
+}
+.destaque.bom h3{color:var(--bom)} .destaque.ruim h3{color:var(--ruim)}
+.destaque.alerta h3{color:var(--alerta)} .destaque.novo h3{color:var(--novo)}
+.destaque p{margin:0; font-size:13.5px; line-height:1.55; color:var(--ink-2)}
+.destaque p b{color:var(--ink); font-weight:600}
+
+/* placar de vereditos */
+.placar{display:flex; gap:12px; flex-wrap:wrap; margin-top:12px}
+.placar-item{
+  display:flex; align-items:center; gap:12px; background:var(--surface-2);
+  border:1px solid var(--rule); border-radius:8px; padding:9px 14px;
+}
+.placar-canal{font-weight:600; font-size:13px}
+.placar-selos{font-size:13px; font-variant-numeric:tabular-nums}
+.placar-n{font-size:11.5px; color:var(--ink-3)}
+
+
+
+
+
+/* ---------- legenda / rodapé ---------- */
+.legenda{display:flex; gap:16px; flex-wrap:wrap; font-size:12px; color:var(--ink-3); margin-top:12px}
+.legenda span{display:inline-flex; align-items:center; gap:6px}
+.legenda i{width:9px; height:9px; border-radius:2px; display:inline-block; font-style:normal}
+.nota{background:var(--surface-2); border:1px solid var(--rule); border-radius:10px; padding:14px 16px; font-size:13px; color:var(--ink-2); line-height:1.6}
+.nota b{color:var(--ink)}
+footer{margin-top:44px; padding-top:18px; border-top:1px solid var(--rule); font-size:12px; color:var(--ink-3); line-height:1.7}
+
+@media (max-width:640px){
+  .conj{grid-template-columns:1fr 1fr 1fr; gap:6px 10px}
+  .conj .nome{grid-column:1/-1}
+  .card-top{gap:10px}
+}
+</style>
+
+<header class="top">
+  <div class="top-in">
+    <div>
+      <div class="eyebrow" id="eyebrow"></div>
+      <h1 id="titulo"></h1>
+      <div class="periodo" id="periodo"></div>
+    </div>
+    <div class="fontes" id="fontes"></div>
+  </div>
+  <div class="clientes-barra">
+    <div class="clientes-in" id="clientes" role="tablist" aria-label="Cliente"></div>
+  </div>
+</header>
+
+<nav class="abas">
+  <div class="abas-in" role="tablist" id="abas"></div>
+</nav>
+
+<div class="wrap">
+  <section class="painel" id="p-geral" role="tabpanel"></section>
+  <section class="painel" id="p-meta" role="tabpanel" hidden></section>
+  <section class="painel" id="p-google" role="tabpanel" hidden></section>
+
+  <footer id="rodape"></footer>
+</div>
+
+<script>
+const DADOS = {"clientes": {"bruno": {"slug": "bruno", "nome": "Dr. Bruno Ortopedista", "modo": "leads", "resultado": "Contatos", "resultado_sing": "contato", "periodo": {"inicio": "01/09/2026", "fim": "22/09/2026", "rotulo": "01 a 22 de setembro", "curto": "01–22/09", "prefixo": "set."}, "comparacao": {"inicio": "01/08/2026", "fim": "22/08/2026", "rotulo": "o mesmo período de agosto", "curto": "01–22/08", "prefixo": "ago."}, "contas": {"meta": "act_999511941078753", "google": "8521374023"}, "meta": {"kpis": {"gasto": 523.86, "cliques": 565, "impressoes": 25043, "ctr": 2.26, "compras": 114.0, "receita": 0.0, "roas": 0, "cpa": 4.6, "cpc": 0.93, "frequencia": 1.61, "deltas": {"gasto": 280.0, "cliques": 84.0, "impressoes": 368.0, "ctr": -60.6, "compras": 5600.0, "receita": null, "roas": null, "cpa": -93.3, "frequencia": 30.9}}, "base": {"gasto": 137.87, "cliques": 307, "impressoes": 5351, "ctr": 5.74, "compras": 2.0, "receita": 0.0, "roas": 0, "cpa": 68.94, "cpc": 0.45, "frequencia": 1.23}, "campanhas": [{"gasto": 523.86, "cliques": 565, "impressoes": 25043, "ctr": 2.26, "compras": 114.0, "receita": 0.0, "roas": 0, "cpa": 4.6, "cpc": 0.93, "frequencia": 1.61, "nome": "[Plus] [Engajamento] [WPP] [Novos Criativos] - 31/08/26", "objetivo": "OUTCOME_ENGAGEMENT", "anterior": null, "selo": "novo", "deltas": {}, "conjuntos": [{"gasto": 514.5, "cliques": 562, "impressoes": 24879, "ctr": 2.26, "compras": 114.0, "receita": 0.0, "roas": 0, "cpa": 4.51, "cpc": 0.92, "frequencia": 1.62, "nome": "02 - Brasília"}, {"gasto": 9.36, "cliques": 3, "impressoes": 164, "ctr": 1.83, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 3.12, "frequencia": 1.14, "nome": "03-PS-Saude/Interesses"}], "otimizacoes": [], "otimizacoes_anteriores": []}], "criativos": [{"gasto": 481.38, "cliques": 532, "impressoes": 23780, "ctr": 2.24, "compras": 105.0, "receita": 0.0, "roas": 0, "cpa": 4.58, "cpc": 0.9, "frequencia": 1.6, "nome": "Img4-Sua dor no joelho não pode", "campanha": "[Plus] [Engajamento] [WPP] [Novos Criativos] - 31/08/26", "conjunto": "02 - Brasília", "deltas": {}}, {"gasto": 21.12, "cliques": 21, "impressoes": 773, "ctr": 2.72, "compras": 7.0, "receita": 0.0, "roas": 0, "cpa": 3.02, "cpc": 1.01, "frequencia": 1.26, "nome": "Img3 - Especialista em Joelho", "campanha": "[Plus] [Engajamento] [WPP] [Novos Criativos] - 31/08/26", "conjunto": "02 - Brasília", "deltas": {}}, {"gasto": 12.0, "cliques": 9, "impressoes": 326, "ctr": 2.76, "compras": 2.0, "receita": 0.0, "roas": 0, "cpa": 6.0, "cpc": 1.33, "frequencia": 1.46, "nome": "Img2-Cuide do seu joelho", "campanha": "[Plus] [Engajamento] [WPP] [Novos Criativos] - 31/08/26", "conjunto": "02 - Brasília", "deltas": {}}, {"gasto": 8.1, "cliques": 2, "impressoes": 134, "ctr": 1.49, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 4.05, "frequencia": 1.16, "nome": "Img2-Cuide do seu joelho", "campanha": "[Plus] [Engajamento] [WPP] [Novos Criativos] - 31/08/26", "conjunto": "03-PS-Saude/Interesses", "deltas": {}}, {"gasto": 1.26, "cliques": 1, "impressoes": 30, "ctr": 3.33, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 1.26, "frequencia": 1.03, "nome": "Img2-Cuide do seu joelho", "campanha": "[Plus] [Engajamento] [WPP] [Novos Criativos] - 31/08/26", "conjunto": "03-PS-Saude/Interesses", "deltas": {}}], "publicos": [{"campanha": "[Plus] [Engajamento] [WPP] [Novos Criativos] - 31/08/26", "conjunto": "02 - Brasília", "status": "ACTIVE", "idade": "18 a 65 anos", "genero": "Todos", "locais": ["Brasília"], "advantage": true, "expansao": null, "publicos": [], "excluidos": [], "interesses": [], "cargos": [], "setores": [], "formacao": [], "empregadores": [], "posicionamentos": []}, {"campanha": "[Plus] [Engajamento] [WPP] [Novos Criativos] - 31/08/26", "conjunto": "03-PS-Saude/Interesses", "status": "PAUSED", "idade": "30 a 65 anos", "genero": "Todos", "locais": ["Brasília"], "advantage": false, "expansao": null, "publicos": [], "excluidos": [], "interesses": ["Bem Estar", "Prolongamento de vida", "Saúde e bem-estar (cuidados pessoais)", "Vida Saludable", "Vida e Saúde"], "cargos": [], "setores": [], "formacao": [], "empregadores": [], "posicionamentos": ["instagram"]}]}, "google": {"kpis": {"gasto": 1710.48, "cliques": 386, "impressoes": 4364, "ctr": 8.85, "compras": 96.0, "receita": 31.0, "roas": 0.02, "cpa": 17.82, "cpc": 4.43, "frequencia": null, "deltas": {"gasto": -13.2, "cliques": -41.4, "impressoes": -42.8, "ctr": 2.4, "compras": -12.7, "receita": -24.4, "roas": 0.0, "cpa": -0.6}}, "base": {"gasto": 1971.4, "cliques": 659, "impressoes": 7629, "ctr": 8.64, "compras": 110.0, "receita": 41.0, "roas": 0.02, "cpa": 17.92, "cpc": 2.99, "frequencia": null}, "campanhas": [{"gasto": 1560.72, "cliques": 368, "impressoes": 4282, "ctr": 8.59, "compras": 92.0, "receita": 31.0, "roas": 0.02, "cpa": 16.96, "cpc": 4.24, "frequencia": null, "nome": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25", "tipo": "SEARCH", "status": "ENABLED", "lance": "MAXIMIZE_CONVERSIONS", "anterior": {"gasto": 1523.63, "cliques": 600, "impressoes": 7250, "ctr": 8.28, "compras": 105.5, "receita": 41.0, "roas": 0.03, "cpa": 14.44, "cpc": 2.54, "frequencia": null}, "selo": "atencao", "deltas": {"gasto": 2.4, "cliques": -38.7, "impressoes": -40.9, "ctr": 3.7, "compras": -12.8, "receita": -24.4, "roas": -33.3, "cpa": 17.5}, "otimizacoes": [{"canal": "Google", "data": "23/09/2026", "tipo": "Anúncio", "prioridade": "Alta", "origem": "gestor", "feito": "Inclusão da palavra-chave <b>ortopedista Asa Sul</b> no texto do anúncio da campanha, para atacar o CTR esperado — um dos dois componentes do Índice de Qualidade que estão abaixo da média.", "porque": "Campanha em atenção: os contatos caíram 12,8% (105,5 → 92) e o custo por contato subiu 17,5%, de R$ 14,44 para R$ 16,96, com o investimento praticamente parado (+2,4%). A entrega ficou mais baixa — impressões −40,9% e cliques −38,7% — mas o CTR subiu 3,7%, para 8,59%. A campanha depende quase inteiramente de uma palavra: a <b>Ortopedista Asa Sul</b> leva 98,0% do investimento e 91 das 92 conversões, a R$ 16,81 por contato, e está com Índice de Qualidade 3. Dos três componentes, a relevância do anúncio já está acima da média; abaixo da média estão o CTR esperado e a experiência na página de destino. Os termos de pesquisa seguem alinhados com as palavras-chave: os que não converteram somam R$ 190,90, 12,2% do investimento.", "esperado": "Elevar o CTR esperado e, com ele, o Índice de Qualidade, reduzindo o custo por contato. Fica registrado que a experiência na página de destino é o outro componente abaixo da média e não é resolvida por mudança de anúncio."}], "otimizacoes_anteriores": []}, {"gasto": 149.76, "cliques": 18, "impressoes": 82, "ctr": 21.95, "compras": 4.0, "receita": 0.0, "roas": 0, "cpa": 37.44, "cpc": 8.32, "frequencia": null, "nome": "[SEARCH2] [LEAD] [INSTI. NOME] [PLUS] - 03/10/25", "tipo": "SEARCH", "status": "ENABLED", "lance": "MAXIMIZE_CONVERSIONS", "anterior": {"gasto": 447.77, "cliques": 59, "impressoes": 379, "ctr": 15.57, "compras": 4.5, "receita": 0.0, "roas": 0, "cpa": 99.51, "cpc": 7.59, "frequencia": null}, "selo": "atencao", "deltas": {"gasto": -66.6, "cliques": -69.5, "impressoes": -78.4, "ctr": 41.0, "compras": -11.1, "receita": null, "roas": null, "cpa": -62.4}, "otimizacoes": [{"canal": "Google", "data": "23/09/2026", "tipo": "— (sem alteração)", "prioridade": "Normal", "origem": "gestor", "feito": "Nenhuma alteração. A campanha ficou prejudicada no período por indisponibilidade da página do cliente, que esteve fora do ar. Seguimos acompanhando as conversões em cima do nome do Dr. Bruno.", "porque": "A entrega caiu muito: impressões −78,4% (379 → 82) e cliques −69,5% (59 → 18), com investimento 66,6% menor. É o comportamento esperado de uma campanha cuja página de destino saiu do ar. Importante ressaltar que o custo por contato <b>melhorou</b> no período, de R$ 99,51 para R$ 37,44, com 4 conversões contra 4,5 — o pouco que rodou converteu melhor. Dentro da campanha, as 4 conversões vieram todas da <b>ortopedista Dr bruno couto</b> em correspondência exata, a R$ 15,82; já a <b>dr bruno couto</b> em frase consumiu R$ 82,43, 55% do investimento, sem nenhuma conversão.", "esperado": "Com a página no ar, a entrega volta ao patamar normal. Acompanhar se o custo por contato se mantém no novo nível quando o volume voltar, e se a <b>dr bruno couto</b> em frase passa a converter."}], "otimizacoes_anteriores": []}], "pausadas": [], "keywords": [{"gasto": 1529.69, "cliques": 361, "impressoes": 4182, "ctr": 8.63, "compras": 91.0, "receita": 30.0, "roas": 0.02, "cpa": 16.81, "cpc": 4.24, "frequencia": null, "texto": "Ortopedista Asa Sul", "match": "BROAD", "qs": 3, "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 82.43, "cliques": 7, "impressoes": 44, "ctr": 15.91, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 11.78, "frequencia": null, "texto": "dr bruno couto", "match": "PHRASE", "qs": 3, "campanha": "[SEARCH2] [LEAD] [INSTI. NOME] [PLUS] - 03/10/25"}, {"gasto": 63.29, "cliques": 10, "impressoes": 32, "ctr": 31.25, "compras": 4.0, "receita": 0.0, "roas": 0, "cpa": 15.82, "cpc": 6.33, "frequencia": null, "texto": "ortopedista Dr bruno couto", "match": "EXACT", "qs": 3, "campanha": "[SEARCH2] [LEAD] [INSTI. NOME] [PLUS] - 03/10/25"}, {"gasto": 20.82, "cliques": 5, "impressoes": 75, "ctr": 6.67, "compras": 1.0, "receita": 1.0, "roas": 0.05, "cpa": 20.82, "cpc": 4.16, "frequencia": null, "texto": "Ortopedista asa norte", "match": "PHRASE", "qs": 3, "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 10.22, "cliques": 2, "impressoes": 21, "ctr": 9.52, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 5.11, "frequencia": null, "texto": "melhores ortopedistas de brasilia", "match": "PHRASE", "qs": 6, "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 4.04, "cliques": 1, "impressoes": 6, "ctr": 16.67, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 4.04, "frequencia": null, "texto": "bruno couto ortopedista", "match": "BROAD", "qs": 7, "campanha": "[SEARCH2] [LEAD] [INSTI. NOME] [PLUS] - 03/10/25"}], "termos": [{"gasto": 63.29, "cliques": 10, "impressoes": 22, "ctr": 45.45, "compras": 4.0, "receita": 0.0, "roas": 0, "cpa": 15.82, "cpc": 6.33, "frequencia": null, "termo": "dr bruno couto ortopedista", "campanha": "[SEARCH2] [LEAD] [INSTI. NOME] [PLUS] - 03/10/25"}, {"gasto": 55.02, "cliques": 7, "impressoes": 79, "ctr": 8.86, "compras": 1.0, "receita": 1.0, "roas": 0.02, "cpa": 55.02, "cpc": 7.86, "frequencia": null, "termo": "cot taguatinga", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 34.93, "cliques": 9, "impressoes": 33, "ctr": 27.27, "compras": 4.0, "receita": 1.0, "roas": 0.03, "cpa": 8.73, "cpc": 3.88, "frequencia": null, "termo": "hospital santa helena asa norte", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 27.2, "cliques": 8, "impressoes": 29, "ctr": 27.59, "compras": 1.0, "receita": 0.0, "roas": 0, "cpa": 27.2, "cpc": 3.4, "frequencia": null, "termo": "ortosul telefone", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 22.11, "cliques": 3, "impressoes": 13, "ctr": 23.08, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 7.37, "frequencia": null, "termo": "dr bruno couto", "campanha": "[SEARCH2] [LEAD] [INSTI. NOME] [PLUS] - 03/10/25"}, {"gasto": 21.98, "cliques": 5, "impressoes": 24, "ctr": 20.83, "compras": 2.0, "receita": 0.0, "roas": 0, "cpa": 10.99, "cpc": 4.4, "frequencia": null, "termo": "hospital das clinicas df", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 19.8, "cliques": 6, "impressoes": 67, "ctr": 8.96, "compras": 1.0, "receita": 1.0, "roas": 0.05, "cpa": 19.8, "cpc": 3.3, "frequencia": null, "termo": "hospital sarah brasilia", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 19.17, "cliques": 3, "impressoes": 5, "ctr": 60.0, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 6.39, "frequencia": null, "termo": "emergência ortopedia 24 horas", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 18.27, "cliques": 3, "impressoes": 70, "ctr": 4.29, "compras": 1.0, "receita": 1.0, "roas": 0.05, "cpa": 18.27, "cpc": 6.09, "frequencia": null, "termo": "cote lago sul", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 18.11, "cliques": 6, "impressoes": 16, "ctr": 37.5, "compras": 1.0, "receita": 1.0, "roas": 0.06, "cpa": 18.11, "cpc": 3.02, "frequencia": null, "termo": "telefone da ortosul", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 17.63, "cliques": 2, "impressoes": 10, "ctr": 20.0, "compras": 1.0, "receita": 0.0, "roas": 0, "cpa": 17.63, "cpc": 8.81, "frequencia": null, "termo": "ortopedista planaltina df", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 16.55, "cliques": 1, "impressoes": 1, "ctr": 100.0, "compras": 2.0, "receita": 0.0, "roas": 0, "cpa": 8.28, "cpc": 16.55, "frequencia": null, "termo": "clínica do joelho asa sul", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 16.1, "cliques": 3, "impressoes": 28, "ctr": 10.71, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 5.37, "frequencia": null, "termo": "cob ortopedia", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 15.05, "cliques": 1, "impressoes": 2, "ctr": 50.0, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 15.05, "frequencia": null, "termo": "clinica unique ortopedia", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 14.96, "cliques": 2, "impressoes": 1, "ctr": 200.0, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 7.48, "frequencia": null, "termo": "medico especialista em calcanhar", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 14.42, "cliques": 1, "impressoes": 1, "ctr": 100.0, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 14.42, "frequencia": null, "termo": "cade centro avançado da dor e especialidades águas claras df", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 14.38, "cliques": 3, "impressoes": 17, "ctr": 17.65, "compras": 2.0, "receita": 0.0, "roas": 0, "cpa": 7.19, "cpc": 4.79, "frequencia": null, "termo": "emergência ortopedia df", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 14.37, "cliques": 3, "impressoes": 7, "ctr": 42.86, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 4.79, "frequencia": null, "termo": "ortopedista especialista em joelho", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 14.3, "cliques": 4, "impressoes": 3, "ctr": 133.33, "compras": 1.0, "receita": 0.0, "roas": 0, "cpa": 14.3, "cpc": 3.58, "frequencia": null, "termo": "hospital unimed brasília", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 13.51, "cliques": 2, "impressoes": 12, "ctr": 16.67, "compras": 1.0, "receita": 1.0, "roas": 0.07, "cpa": 13.51, "cpc": 6.76, "frequencia": null, "termo": "cob brasilia", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 13.49, "cliques": 6, "impressoes": 42, "ctr": 14.29, "compras": 1.0, "receita": 0.0, "roas": 0, "cpa": 13.49, "cpc": 2.25, "frequencia": null, "termo": "hospital sarah brasília", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 13.4, "cliques": 1, "impressoes": 15, "ctr": 6.67, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 13.4, "frequencia": null, "termo": "ortopedista brasilia", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 12.82, "cliques": 3, "impressoes": 21, "ctr": 14.29, "compras": 2.0, "receita": 1.0, "roas": 0.08, "cpa": 6.41, "cpc": 4.27, "frequencia": null, "termo": "hospital alvorada asa sul", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 12.58, "cliques": 2, "impressoes": 36, "ctr": 5.56, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 6.29, "frequencia": null, "termo": "ortosul asa sul", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 11.8, "cliques": 2, "impressoes": 4, "ctr": 50.0, "compras": 2.0, "receita": 1.0, "roas": 0.08, "cpa": 5.9, "cpc": 5.9, "frequencia": null, "termo": "hospital das clínicas na ceilândia", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 11.46, "cliques": 1, "impressoes": 23, "ctr": 4.35, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 11.46, "frequencia": null, "termo": "centro ortopédico de taguatinga", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 11.31, "cliques": 4, "impressoes": 34, "ctr": 11.76, "compras": 1.0, "receita": 0.0, "roas": 0, "cpa": 11.31, "cpc": 2.83, "frequencia": null, "termo": "hospital das fraturas ceilândia", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 11.26, "cliques": 2, "impressoes": 9, "ctr": 22.22, "compras": 1.0, "receita": 1.0, "roas": 0.09, "cpa": 11.26, "cpc": 5.63, "frequencia": null, "termo": "santa helena asa norte", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 11.2, "cliques": 3, "impressoes": 14, "ctr": 21.43, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 3.73, "frequencia": null, "termo": "hospital brasília ceilândia", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 10.92, "cliques": 3, "impressoes": 5, "ctr": 60.0, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 3.64, "frequencia": null, "termo": "cot taguatinga norte", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 10.62, "cliques": 3, "impressoes": 19, "ctr": 15.79, "compras": 1.0, "receita": 1.0, "roas": 0.09, "cpa": 10.62, "cpc": 3.54, "frequencia": null, "termo": "cob ortopedia asa sul", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 10.26, "cliques": 2, "impressoes": 24, "ctr": 8.33, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 5.13, "frequencia": null, "termo": "fisiotrauma asa sul", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 9.67, "cliques": 1, "impressoes": 1, "ctr": 100.0, "compras": 1.0, "receita": 1.0, "roas": 0.1, "cpa": 9.67, "cpc": 9.67, "frequencia": null, "termo": "telefone ortosul brasília", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 9.34, "cliques": 3, "impressoes": 7, "ctr": 42.86, "compras": 1.0, "receita": 0.0, "roas": 0, "cpa": 9.34, "cpc": 3.11, "frequencia": null, "termo": "cote lago sul telefone", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 9.18, "cliques": 2, "impressoes": 3, "ctr": 66.67, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 4.59, "frequencia": null, "termo": "home hospital", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 9.07, "cliques": 1, "impressoes": 1, "ctr": 100.0, "compras": 1.0, "receita": 0.0, "roas": 0, "cpa": 9.07, "cpc": 9.07, "frequencia": null, "termo": "ortopedia emergencia", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 9.05, "cliques": 1, "impressoes": 5, "ctr": 20.0, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 9.05, "frequencia": null, "termo": "clínica sort asa sul", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 8.95, "cliques": 1, "impressoes": 1, "ctr": 100.0, "compras": 1.0, "receita": 1.0, "roas": 0.11, "cpa": 8.95, "cpc": 8.95, "frequencia": null, "termo": "ortopedista unimed nacional", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 8.91, "cliques": 2, "impressoes": 2, "ctr": 100.0, "compras": 1.0, "receita": 1.0, "roas": 0.11, "cpa": 8.91, "cpc": 4.45, "frequencia": null, "termo": "hospital das fraturas na ceilândia", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}, {"gasto": 8.78, "cliques": 2, "impressoes": 4, "ctr": 50.0, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 4.39, "frequencia": null, "termo": "cot anchieta", "campanha": "[SEARCH2] [LEAD] [MAX CLIQUES] [PLUS] - 23/05/25"}], "acoes_conversao": [{"nome": "WhatsApp Btn", "conversoes": 47.0}, {"nome": "Calls from ads", "conversoes": 31.0}, {"nome": "Lead_Leaper_Bruno_Site #19b4q", "conversoes": 18.0}]}, "consolidado": {"gasto": 2234.34, "cliques": 951, "impressoes": 29407, "ctr": 3.23, "compras": 210.0, "receita": 31.0, "roas": 0.01, "cpa": 10.64, "cpc": 2.35, "deltas": {"gasto": 5.9, "cliques": -1.6, "impressoes": 126.6, "ctr": -56.6, "compras": 87.5, "receita": -24.4, "roas": -50.0, "cpa": -43.5}}, "consolidado_base": {"gasto": 2109.27, "cliques": 966, "impressoes": 12980, "ctr": 7.44, "compras": 112.0, "receita": 41.0, "roas": 0.02, "cpa": 18.83, "cpc": 2.18}, "canais": ["meta", "google"], "titulo_comparacao": "Setembro contra agosto", "sub_comparacao": "Mesmo trecho do mês nos dois lados — 01 a 22, para o perfil de consumidor ser o mesmo"}, "cejana": {"slug": "cejana", "nome": "Dra. Cejana", "modo": "leads", "resultado": "Contatos", "resultado_sing": "contato", "periodo": {"inicio": "01/09/2026", "fim": "22/09/2026", "rotulo": "01 a 22 de setembro", "curto": "01–22/09", "prefixo": "set."}, "comparacao": {"inicio": "01/08/2026", "fim": "22/08/2026", "rotulo": "o mesmo período de agosto", "curto": "01–22/08", "prefixo": "ago."}, "contas": {"meta": "act_1258930228369219", "google": "2470198472"}, "google": {"kpis": {"gasto": 790.55, "cliques": 385, "impressoes": 5767, "ctr": 6.68, "compras": 101.0, "receita": 32.0, "roas": 0.04, "cpa": 7.83, "cpc": 2.05, "frequencia": null, "deltas": {"gasto": 14.5, "cliques": 32.3, "impressoes": 44.4, "ctr": -8.2, "compras": 13.5, "receita": 3100.0, "roas": null, "cpa": 0.9}}, "base": {"gasto": 690.36, "cliques": 291, "impressoes": 3995, "ctr": 7.28, "compras": 89.0, "receita": 1.0, "roas": 0.0, "cpa": 7.76, "cpc": 2.37, "frequencia": null}, "campanhas": [{"gasto": 790.55, "cliques": 385, "impressoes": 5767, "ctr": 6.68, "compras": 101.0, "receita": 32.0, "roas": 0.04, "cpa": 7.83, "cpc": 2.05, "frequencia": null, "nome": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024", "tipo": "SEARCH", "status": "ENABLED", "lance": "MAXIMIZE_CONVERSIONS", "anterior": {"gasto": 690.36, "cliques": 291, "impressoes": 3995, "ctr": 7.28, "compras": 89.0, "receita": 1.0, "roas": 0.0, "cpa": 7.76, "cpc": 2.37, "frequencia": null}, "selo": "melhorou", "deltas": {"gasto": 14.5, "cliques": 32.3, "impressoes": 44.4, "ctr": -8.2, "compras": 13.5, "receita": 3100.0, "roas": null, "cpa": 0.9}, "otimizacoes": [{"canal": "Google", "data": "23/09/2026", "tipo": "— (sem alteração)", "prioridade": "Normal", "origem": "gestor", "feito": "Nenhuma alteração. Campanha mantida como está — está performando e não há gargalo a corrigir no período.", "porque": "A campanha melhorou contra o mesmo período de agosto: 101 contatos contra 89, um volume 13,5% maior, com o custo por contato praticamente parado em R$ 7,83 (era R$ 7,76). Veio mais volume de mídia — cliques +32,3% e impressões +44,4%. As palavras que mais converteram foram <b>endocrinologista df</b> (43,5 contatos a R$ 6,82), <b>reposição hormonal</b> (17,5 a R$ 8,33) e <b>médico endocrinologista</b> (13,0 a R$ 10,17). Na leitura dos termos de pesquisa, o que o usuário digitou está bem alinhado com as palavras-chave: os termos que não converteram somam R$ 83,52, apenas 10,6% do investimento da campanha.", "esperado": "Sustentar o patamar de custo por contato perto de R$ 7,80 enquanto o volume cresce, e seguir acompanhando os termos para manter o alinhamento com as palavras-chave."}], "otimizacoes_anteriores": []}], "pausadas": [], "keywords": [{"gasto": 296.49, "cliques": 151, "impressoes": 1857, "ctr": 8.13, "compras": 43.5, "receita": 15.0, "roas": 0.05, "cpa": 6.82, "cpc": 1.96, "frequencia": null, "texto": "endocrinologista df", "match": "BROAD", "qs": 5, "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 145.71, "cliques": 73, "impressoes": 920, "ctr": 7.93, "compras": 17.5, "receita": 5.0, "roas": 0.03, "cpa": 8.33, "cpc": 2.0, "frequencia": null, "texto": "reposição hormonal", "match": "BROAD", "qs": 3, "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 132.23, "cliques": 58, "impressoes": 824, "ctr": 7.04, "compras": 13.0, "receita": 2.0, "roas": 0.02, "cpa": 10.17, "cpc": 2.28, "frequencia": null, "texto": "médico endocrinologista", "match": "BROAD", "qs": 3, "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 67.12, "cliques": 25, "impressoes": 444, "ctr": 5.63, "compras": 8.0, "receita": 3.0, "roas": 0.04, "cpa": 8.39, "cpc": 2.68, "frequencia": null, "texto": "consulta endocrinologista", "match": "BROAD", "qs": 3, "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 58.09, "cliques": 25, "impressoes": 461, "ctr": 5.42, "compras": 4.0, "receita": 2.0, "roas": 0.03, "cpa": 14.52, "cpc": 2.32, "frequencia": null, "texto": "Endocrinologista asa sul", "match": "BROAD", "qs": 4, "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 21.87, "cliques": 14, "impressoes": 57, "ctr": 24.56, "compras": 3.0, "receita": 0.0, "roas": 0, "cpa": 7.29, "cpc": 1.56, "frequencia": null, "texto": "dra cejana", "match": "EXACT", "qs": 5, "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 19.23, "cliques": 9, "impressoes": 175, "ctr": 5.14, "compras": 2.0, "receita": 2.0, "roas": 0.1, "cpa": 9.61, "cpc": 2.14, "frequencia": null, "texto": "medico hormonio", "match": "BROAD", "qs": null, "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 8.85, "cliques": 6, "impressoes": 189, "ctr": 3.17, "compras": 3.0, "receita": 1.0, "roas": 0.11, "cpa": 2.95, "cpc": 1.47, "frequencia": null, "texto": "endocrino df", "match": "BROAD", "qs": 2, "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 7.23, "cliques": 5, "impressoes": 131, "ctr": 3.82, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 1.45, "frequencia": null, "texto": "especialista endocrinologista", "match": "BROAD", "qs": null, "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 6.68, "cliques": 4, "impressoes": 98, "ctr": 4.08, "compras": 2.0, "receita": 1.0, "roas": 0.15, "cpa": 3.34, "cpc": 1.67, "frequencia": null, "texto": "endocrinologista brasilia", "match": "EXACT", "qs": 5, "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 6.67, "cliques": 5, "impressoes": 178, "ctr": 2.81, "compras": 1.0, "receita": 0.0, "roas": 0, "cpa": 6.67, "cpc": 1.33, "frequencia": null, "texto": "endocrinologista", "match": "PHRASE", "qs": 3, "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 6.62, "cliques": 4, "impressoes": 117, "ctr": 3.42, "compras": 1.0, "receita": 0.0, "roas": 0, "cpa": 6.62, "cpc": 1.66, "frequencia": null, "texto": "endocrinologista brasilia", "match": "BROAD", "qs": null, "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 4.38, "cliques": 1, "impressoes": 127, "ctr": 0.79, "compras": 1.0, "receita": 0.0, "roas": 0, "cpa": 4.38, "cpc": 4.38, "frequencia": null, "texto": "agendar endocrinologista", "match": "BROAD", "qs": 5, "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 4.1, "cliques": 1, "impressoes": 3, "ctr": 33.33, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 4.1, "frequencia": null, "texto": "Endocrinologista online", "match": "PHRASE", "qs": 5, "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 3.79, "cliques": 2, "impressoes": 106, "ctr": 1.89, "compras": 1.0, "receita": 1.0, "roas": 0.26, "cpa": 3.79, "cpc": 1.9, "frequencia": null, "texto": "especialista endocrinologista", "match": "BROAD", "qs": null, "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 1.33, "cliques": 1, "impressoes": 3, "ctr": 33.33, "compras": 1.0, "receita": 0.0, "roas": 0, "cpa": 1.33, "cpc": 1.33, "frequencia": null, "texto": "cejana", "match": "BROAD", "qs": 5, "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 0.17, "cliques": 1, "impressoes": 67, "ctr": 1.49, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 0.17, "frequencia": null, "texto": "especialista em hormonios", "match": "BROAD", "qs": null, "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}], "termos": [{"gasto": 13.46, "cliques": 9, "impressoes": 40, "ctr": 22.5, "compras": 1.0, "receita": 1.0, "roas": 0.07, "cpa": 13.46, "cpc": 1.5, "frequencia": null, "termo": "clínica luciana planaltina df", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 9.43, "cliques": 6, "impressoes": 21, "ctr": 28.57, "compras": 3.0, "receita": 0.0, "roas": 0, "cpa": 3.14, "cpc": 1.57, "frequencia": null, "termo": "dra cejana", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 8.85, "cliques": 4, "impressoes": 17, "ctr": 23.53, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 2.21, "frequencia": null, "termo": "clínica amor e saúde planaltina df", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 8.85, "cliques": 6, "impressoes": 107, "ctr": 5.61, "compras": 3.0, "receita": 1.0, "roas": 0.11, "cpa": 2.95, "cpc": 1.47, "frequencia": null, "termo": "endocrino df", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 8.41, "cliques": 5, "impressoes": 11, "ctr": 45.45, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 1.68, "frequencia": null, "termo": "dra cejana endocrinologista", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 8.26, "cliques": 3, "impressoes": 29, "ctr": 10.34, "compras": 1.0, "receita": 1.0, "roas": 0.12, "cpa": 8.26, "cpc": 2.75, "frequencia": null, "termo": "clinica brasilia ceilandia", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 8.17, "cliques": 2, "impressoes": 11, "ctr": 18.18, "compras": 0.5, "receita": 0.0, "roas": 0, "cpa": 16.34, "cpc": 4.08, "frequencia": null, "termo": "endocrinologista df", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 7.66, "cliques": 2, "impressoes": 1, "ctr": 200.0, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 3.83, "frequencia": null, "termo": "endocrinologista que atende pelo sulamérica", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 6.48, "cliques": 3, "impressoes": 4, "ctr": 75.0, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 2.16, "frequencia": null, "termo": "clínica em planaltina df", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 6.47, "cliques": 3, "impressoes": 4, "ctr": 75.0, "compras": 1.0, "receita": 0.0, "roas": 0, "cpa": 6.47, "cpc": 2.16, "frequencia": null, "termo": "endocrinologista brasilia amil", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 5.8, "cliques": 2, "impressoes": 29, "ctr": 6.9, "compras": 2.0, "receita": 2.0, "roas": 0.34, "cpa": 2.9, "cpc": 2.9, "frequencia": null, "termo": "endocrinologista ceilandia", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 5.55, "cliques": 2, "impressoes": 5, "ctr": 40.0, "compras": 1.0, "receita": 1.0, "roas": 0.18, "cpa": 5.55, "cpc": 2.77, "frequencia": null, "termo": "endocrinologista infantil df", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 5.2, "cliques": 2, "impressoes": 15, "ctr": 13.33, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 2.6, "frequencia": null, "termo": "avance saude e performance", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 5.15, "cliques": 1, "impressoes": 13, "ctr": 7.69, "compras": 1.0, "receita": 0.0, "roas": 0, "cpa": 5.15, "cpc": 5.15, "frequencia": null, "termo": "endocrinologista pediatrico brasilia", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 4.96, "cliques": 2, "impressoes": 5, "ctr": 40.0, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 2.48, "frequencia": null, "termo": "dra maria de fatima andrade da costa", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 4.91, "cliques": 1, "impressoes": 2, "ctr": 50.0, "compras": 1.0, "receita": 0.0, "roas": 0, "cpa": 4.91, "cpc": 4.91, "frequencia": null, "termo": "consulta endocrinologista online", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 4.81, "cliques": 1, "impressoes": 2, "ctr": 50.0, "compras": 1.0, "receita": 1.0, "roas": 0.21, "cpa": 4.81, "cpc": 4.81, "frequencia": null, "termo": "endocrino", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 4.74, "cliques": 4, "impressoes": 122, "ctr": 3.28, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 1.19, "frequencia": null, "termo": "endocrinologista", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 4.68, "cliques": 2, "impressoes": 5, "ctr": 40.0, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 2.34, "frequencia": null, "termo": "clínica bonifácio planaltina", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 4.58, "cliques": 2, "impressoes": 6, "ctr": 33.33, "compras": 1.0, "receita": 0.0, "roas": 0, "cpa": 4.58, "cpc": 2.29, "frequencia": null, "termo": "endocrinologista em planaltina df", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 4.54, "cliques": 1, "impressoes": 1, "ctr": 100.0, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 4.54, "frequencia": null, "termo": "clínica popular recanto das emas", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 4.47, "cliques": 1, "impressoes": 2, "ctr": 50.0, "compras": 1.0, "receita": 0.0, "roas": 0, "cpa": 4.47, "cpc": 4.47, "frequencia": null, "termo": "consulta endocrinologista online barato", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 4.39, "cliques": 2, "impressoes": 28, "ctr": 7.14, "compras": 2.0, "receita": 0.0, "roas": 0, "cpa": 2.19, "cpc": 2.19, "frequencia": null, "termo": "endocrinologista asa norte", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 4.3, "cliques": 2, "impressoes": 4, "ctr": 50.0, "compras": 2.0, "receita": 1.0, "roas": 0.23, "cpa": 2.15, "cpc": 2.15, "frequencia": null, "termo": "clínica digno gama", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 4.27, "cliques": 1, "impressoes": 2, "ctr": 50.0, "compras": 1.0, "receita": 0.0, "roas": 0, "cpa": 4.27, "cpc": 4.27, "frequencia": null, "termo": "endocrinologista inas df", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 4.25, "cliques": 2, "impressoes": 5, "ctr": 40.0, "compras": 1.0, "receita": 0.0, "roas": 0, "cpa": 4.25, "cpc": 2.12, "frequencia": null, "termo": "nutricionista para endometriose", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 4.2, "cliques": 2, "impressoes": 1, "ctr": 200.0, "compras": 1.0, "receita": 1.0, "roas": 0.24, "cpa": 4.2, "cpc": 2.1, "frequencia": null, "termo": "clínica bonifácio de planaltina df", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 4.12, "cliques": 2, "impressoes": 20, "ctr": 10.0, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 2.06, "frequencia": null, "termo": "clinica brasilia ceilandia", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 4.11, "cliques": 1, "impressoes": 6, "ctr": 16.67, "compras": 1.0, "receita": 0.0, "roas": 0, "cpa": 4.11, "cpc": 4.11, "frequencia": null, "termo": "endocrinologista infantil brasilia", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 4.1, "cliques": 1, "impressoes": 2, "ctr": 50.0, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 4.1, "frequencia": null, "termo": "endocrinologista online", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 3.74, "cliques": 1, "impressoes": 3, "ctr": 33.33, "compras": 1.0, "receita": 1.0, "roas": 0.27, "cpa": 3.74, "cpc": 3.74, "frequencia": null, "termo": "clinica entre lagos paranoá df", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 3.66, "cliques": 2, "impressoes": 10, "ctr": 20.0, "compras": 1.0, "receita": 1.0, "roas": 0.27, "cpa": 3.66, "cpc": 1.83, "frequencia": null, "termo": "minha clinica são sebastião df", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 3.64, "cliques": 1, "impressoes": 8, "ctr": 12.5, "compras": 1.0, "receita": 1.0, "roas": 0.27, "cpa": 3.64, "cpc": 3.64, "frequencia": null, "termo": "endocrinologista brasília", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 3.54, "cliques": 1, "impressoes": 5, "ctr": 20.0, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 3.54, "frequencia": null, "termo": "endocrinologista brasilia amil", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 3.5, "cliques": 2, "impressoes": 7, "ctr": 28.57, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 1.75, "frequencia": null, "termo": "clinigama gama df", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 3.39, "cliques": 1, "impressoes": 4, "ctr": 25.0, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 3.39, "frequencia": null, "termo": "endocrinologista ceilândia", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 3.16, "cliques": 1, "impressoes": 16, "ctr": 6.25, "compras": 1.0, "receita": 1.0, "roas": 0.32, "cpa": 3.16, "cpc": 3.16, "frequencia": null, "termo": "endocrinologista taguatinga", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 3.15, "cliques": 2, "impressoes": 20, "ctr": 10.0, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 1.57, "frequencia": null, "termo": "endocrinologista df convênios", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 3.13, "cliques": 1, "impressoes": 3, "ctr": 33.33, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 3.13, "frequencia": null, "termo": "endocrinologista infantil", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}, {"gasto": 3.07, "cliques": 2, "impressoes": 11, "ctr": 18.18, "compras": 0.0, "receita": 0.0, "roas": 0, "cpa": null, "cpc": 1.53, "frequencia": null, "termo": "endocrinologista sobradinho", "campanha": "[PLUS] [SEARCH] [LEAD MAX CLIQUES] 30.01.2024"}], "acoes_conversao": [{"nome": "BTN WHATSAPP", "conversoes": 69.0}, {"nome": "Conversation started", "conversoes": 32.0}, {"nome": "Local actions - Other engagements", "conversoes": 27.0}, {"nome": "Clicks to call", "conversoes": 9.0}, {"nome": "Local actions - Directions", "conversoes": 8.0}, {"nome": "Local actions - Website visits", "conversoes": 7.0}]}, "consolidado": {"gasto": 790.55, "cliques": 385, "impressoes": 5767, "ctr": 6.68, "compras": 101.0, "receita": 32.0, "roas": 0.04, "cpa": 7.83, "cpc": 2.05, "deltas": {"gasto": 14.5, "cliques": 32.3, "impressoes": 44.4, "ctr": -8.2, "compras": 13.5, "receita": 3100.0, "roas": null, "cpa": 0.9}}, "consolidado_base": {"gasto": 690.36, "cliques": 291, "impressoes": 3995, "ctr": 7.28, "compras": 89.0, "receita": 1.0, "roas": 0.0, "cpa": 7.76, "cpc": 2.37}, "canais": ["google"], "titulo_comparacao": "Setembro contra agosto", "sub_comparacao": "Mesmo trecho do mês nos dois lados — 01 a 22, para o perfil de consumidor ser o mesmo"}}, "ordem": ["bruno", "cejana"], "cadencia": "Relatório mensal de otimização", "gerado_em": "23/09/2026 às 14:22"};
+
+/* ---------- formatação pt-BR ---------- */
+const brl = v => v == null ? "—" : "R$ " + v.toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});
+const int = v => v == null ? "—" : Math.round(v).toLocaleString("pt-BR");
+const dec = (v,n=2) => v == null ? "—" : v.toLocaleString("pt-BR",{minimumFractionDigits:n,maximumFractionDigits:n});
+const pc  = v => v == null ? "—" : dec(v,2) + "%";
+const x   = v => v == null ? "—" : dec(v,2) + "x";
+
+/* subir é ruim / subir é neutro — o resto, subir é bom */
+const RUIM_SUBIR = new Set(["cpa","cpc","frequencia"]);
+const NEUTRO = new Set(["gasto","impressoes","cliques"]);
+function delta(campo, valor){
+  if (valor == null) return "";
+  const cls = NEUTRO.has(campo) || Math.abs(valor) < 5 ? "flat"
+            : RUIM_SUBIR.has(campo) ? (valor > 0 ? "down" : "up")
+            : (valor > 0 ? "up" : "down");
+  const seta = valor > 0 ? "▲" : valor < 0 ? "▼" : "▪";
+  return `<span class="delta ${cls}">${seta} ${dec(Math.abs(valor),1)}%</span>`;
+}
+
+/* rótulos em português para os códigos crus da API */
+const ROTULO = {
+  PERFORMANCE_MAX:"Performance Max", SEARCH:"Rede de Pesquisa", SHOPPING:"Shopping",
+  DISPLAY:"Display", VIDEO:"Vídeo", DEMAND_GEN:"Demand Gen",
+  MAXIMIZE_CONVERSIONS:"Maximizar conversões", MAXIMIZE_CONVERSION_VALUE:"Maximizar valor",
+  TARGET_CPA:"CPA desejado", TARGET_ROAS:"ROAS desejado", TARGET_SPEND:"Maximizar cliques",
+  OUTCOME_SALES:"Vendas", OUTCOME_LEADS:"Geração de leads", OUTCOME_TRAFFIC:"Tráfego",
+  OUTCOME_ENGAGEMENT:"Engajamento", OUTCOME_AWARENESS:"Reconhecimento"
+};
+const rot = v => v ? (ROTULO[v] || v) : null;
+
+/* o relatório se adapta ao que a conta mede: venda com valor (ROAS) ou lead/contato */
+const VENDAS = () => D.modo === "vendas";
+const RES   = () => D.resultado;        // "Compras" | "Leads" | "Contatos"
+const RES1  = () => D.resultado_sing;   // "compra"  | "lead"  | "contato"
+const CUSTO_RES = () => "Custo por " + RES1();
+
+const SELOS = {
+  melhorou:["🟢","Melhorou"], estavel:["🟡","Estável"],
+  atencao:["🔴","Atenção"],  novo:["🆕","1ª leitura"]
+};
+
+/* ---------- componentes ---------- */
+/* comparativo explícito: valor de agosto, seta e variação */
+function comparativo(campo, atual, base, fmt){
+  if (atual == null || base == null || !base) return `<div class="comp vazio">sem base no período anterior</div>`;
+  const v = (atual - base) / base * 100;
+  const cls = NEUTRO.has(campo) || Math.abs(v) < 5 ? "flat"
+            : RUIM_SUBIR.has(campo) ? (v > 0 ? "down" : "up")
+            : (v > 0 ? "up" : "down");
+  const seta = v > 0 ? "↗" : v < 0 ? "↘" : "→";
+  return `<div class="comp ${cls}">
+    <span class="antes">${(D.comparacao.prefixo || "base")} ${fmt(base)}</span>
+    <span class="seta" aria-hidden="true">${seta}</span>
+    <span class="pcv">${dec(Math.abs(v),1)}%</span>
+  </div>`;
+}
+
+function kpiGrid(k, campos, base){
+  return `<div class="kpis">` + campos.map(([campo,rotulo,fmt,destaque])=>{
+    const v = k[campo];
+    return `<div class="kpi${destaque?" destaque":""}">
+      <div class="rot">${rotulo}</div>
+      <div class="val">${fmt(v)}</div>
+      ${base ? comparativo(campo, v, base[campo], fmt) : delta(campo, k.deltas ? k.deltas[campo] : null)}
+    </div>`;
+  }).join("") + `</div>
+  <p class="cap">▲▼ variação contra a ${D.comparacao.rotulo} (${D.comparacao.inicio} a ${D.comparacao.fim})</p>`;
+}
+
+function cardCampanha(c, opts={}){
+  const [emoji,txt] = SELOS[c.selo] || SELOS.estavel;
+  const chips = (opts.chips||[]).filter(Boolean).map(t=>`<span class="chip">${t}</span>`).join("");
+  const mets = opts.metricas.map(([campo,rotulo,fmt,chave])=>`
+    <div class="m${chave?" chave":""}">
+      <div class="rot">${rotulo}</div>
+      <div class="val">${fmt(c[campo])}</div>
+      ${c.anterior ? comparativo(campo, c[campo], c.anterior[campo], fmt)
+                   : `<div class="comp vazio">não rodou no período base</div>`}
+    </div>`).join("");
+  const conjuntos = (c.conjuntos || []).slice().sort((a,b)=> b.compras - a.compras || b.gasto - a.gasto);
+  const conj = conjuntos.length > 1 ? `
+    <div class="conjuntos">
+      <div class="conj-rot">Conjuntos de anúncios</div>
+      ${tabelaOrdenavel(
+        ["Conjunto","Investimento","Cliques","CTR","Frequência",RES(),CUSTO_RES(),
+         ...(VENDAS() ? ["ROAS"] : [])],
+        conjuntos.map(s=>({
+          cels:[`<b>${s.nome}</b>`, brl(s.gasto), int(s.cliques), pc(s.ctr), dec(s.frequencia,2),
+                `<b>${dec(s.compras, s.compras % 1 ? 1 : 0)}</b>`,
+                s.cpa != null ? brl(s.cpa) : "—",
+                ...(VENDAS() ? [`<b>${x(s.roas)}</b>`] : [])],
+          vals:[s.nome, s.gasto, s.cliques, s.ctr, s.frequencia, s.compras,
+                s.cpa == null ? Infinity : s.cpa, s.roas]
+        })), 5, "compacta")}
+    </div>` : "";
+
+  return `<article class="card ${c.selo}">
+    <div class="card-top">
+      <div>
+        <div class="card-nome">${c.nome}</div>
+        <div class="chips">${chips}</div>
+      </div>
+      <span class="selo ${c.selo}">${emoji} ${txt}</span>
+    </div>
+    <div class="metricas">${mets}</div>
+    ${conj}
+    ${opts.tabelas === false ? "" :
+       tabelaAnalise(c, opts.unidade || "compra") + (opts.extra || "") + tabelaOtimizacoes(c)}
+  </article>`;
+}
+
+/* tabela 1 do card: o que os dados de API dizem */
+function tabelaAnalise(c, unidade){
+  const linhas = [
+    ["Investimento", "gasto", brl],
+    [RES(), "compras", v=>dec(v, v%1?1:0)],
+    VENDAS() ? ["Receita", "receita", brl] : null,
+    [CUSTO_RES(), "cpa", brl],
+    VENDAS() ? ["ROAS", "roas", x] : null,
+    ["Cliques", "cliques", int],
+    ["CTR", "ctr", pc],
+    c.frequencia != null ? ["Frequência", "frequencia", v=>dec(v,2)] : null,
+    ["Impressões", "impressoes", int]
+  ].filter(Boolean);
+
+  const leitura = (campo, atual, base) => {
+    if (base == null || !base) return "<span class='ink3'>sem base</span>";
+    const v = (atual - base) / base * 100;
+    if (Math.abs(v) < 5) return "<span class='ink3'>estável</span>";
+    const sobe = v > 0;
+    const bom = NEUTRO.has(campo) ? null : (RUIM_SUBIR.has(campo) ? !sobe : sobe);
+    /* descrição literal da variação — sem atribuir causa */
+    const palavra = {
+      gasto: sobe ? "mais verba" : "menos verba",
+      impressoes: sobe ? "mais exibições" : "menos exibições",
+      cliques: sobe ? "mais cliques" : "menos cliques",
+      compras: sobe ? "mais volume" : "menos volume",
+      receita: sobe ? "mais receita" : "menos receita",
+      cpa: sobe ? "mais caro por resultado" : "mais barato por resultado",
+      roas: sobe ? "mais receita por real" : "menos receita por real",
+      ctr: sobe ? "mais cliques por exibição" : "menos cliques por exibição",
+      frequencia: sobe ? "mais exibições por pessoa" : "menos exibições por pessoa"
+    }[campo] || (sobe ? "subiu" : "caiu");
+    const cls = bom === null ? "ink3" : bom ? "ok" : "nok";
+    return `<span class="${cls}">${palavra}</span>`;
+  };
+
+  return `<details class="card-tabela" open>
+    <summary class="ct-titulo"><i class="chev"></i>Análise dos dados <em>puxado da API no período</em></summary>
+    <div class="ct-corpo">
+    <div class="tabela-box compacta"><table>
+      <thead><tr>
+        <th class="esq">Indicador</th><th class="num">${D.periodo.curto || "Atual"}</th><th class="num">${D.comparacao.curto || "Base"}</th>
+        <th class="num">Variação</th><th class="esq">Leitura</th>
+      </tr></thead>
+      <tbody>
+        ${linhas.map(([rotulo,campo,fmt])=>{
+          const a = c[campo], b = c.anterior ? c.anterior[campo] : null;
+          const v = (b != null && b) ? (a - b) / b * 100 : null;
+          const cls = v == null ? "flat"
+                    : NEUTRO.has(campo) || Math.abs(v) < 5 ? "flat"
+                    : RUIM_SUBIR.has(campo) ? (v > 0 ? "down" : "up") : (v > 0 ? "up" : "down");
+          return `<tr>
+            <td class="esq">${rotulo}</td>
+            <td class="num forte">${fmt(a)}</td>
+            <td class="num ink3">${b != null ? fmt(b) : "—"}</td>
+            <td class="num"><span class="delta ${cls}">${v == null ? "—"
+              : `${v > 0 ? "↗" : v < 0 ? "↘" : "→"} ${dec(Math.abs(v),1)}%`}</span></td>
+            <td class="esq">${leitura(campo, a, b)}</td>
+          </tr>`;
+        }).join("")}
+      </tbody>
+    </table></div>
+  </div></details>`;
+}
+
+/* tabela 2 do card: o log de otimizações da planilha */
+function tabelaOtimizacoes(c){
+  const dentro = c.otimizacoes || [];
+  const antes = c.otimizacoes_anteriores || [];
+  const linha = o => `<tr>
+    <td class="num">${o.data}${o.origem === "gestor" ? `<span class="sub">fora da planilha</span>` : ""}</td>
+    <td class="esq">${o.tipo || "—"}<span class="sub">${o.prioridade || ""}</span></td>
+    <td class="txt">${o.feito}</td>
+    <td class="txt ink3">${o.porque}</td>
+    <td class="txt ink3">${o.esperado || "—"}</td>
+  </tr>`;
+
+  const corpo = `<div class="tabela-box compacta"><table>
+      <thead><tr><th>Data</th><th class="esq">Tipo</th><th class="txt">O que foi feito</th><th class="txt">Por que foi necessário</th><th class="txt">Resultado esperado</th></tr></thead>
+      <tbody>${dentro.length ? dentro.map(linha).join("")
+        : `<tr class="pendente"><td colspan="5">
+             <span class="tag alerta">pendente</span> A preencher pelo gestor — nada registrado nesta campanha
+             entre ${D.periodo.inicio} e ${D.periodo.fim}.</td></tr>`}</tbody>
+    </table></div>`;
+
+  const contexto = antes.length ? `
+    <div class="ct-contexto">
+      <div class="ct-subtitulo">Última ação registrada antes do período — é ela que explica o resultado desta quinzena</div>
+      <div class="tabela-box compacta"><table>
+        <thead><tr><th>Data</th><th class="esq">Tipo</th><th class="txt">O que foi feito</th><th class="txt">Por que foi necessário</th><th class="txt">Resultado esperado</th></tr></thead>
+        <tbody>${antes.map(linha).join("")}</tbody>
+      </table></div>
+    </div>` : "";
+
+  return `<details class="card-tabela">
+    <summary class="ct-titulo"><i class="chev"></i>Otimizações realizadas no período <em>${
+      dentro.some(o=>o.origem === "gestor")
+        ? "registrado nesta leitura — ainda não está na planilha"
+        : "log da planilha"}</em></summary>
+    <div class="ct-corpo">
+    ${corpo}
+    ${contexto}
+  </div></details>`;
+}
+
+/* tabela com colunas clicáveis: clique no cabeçalho ordena, a seta mostra a coluna ativa */
+function tabelaOrdenavel(colunas, linhas, ativa, extraClasse){
+  return `<div class="tabela-box ${extraClasse || ""}"><table>
+    <thead><tr>${colunas.map((rotulo,i)=>
+      `<th class="num ord${i === ativa ? " ativa desc" : ""}" data-i="${i}" tabindex="0" role="button"
+           title="Ordenar por ${rotulo}">${rotulo}<i class="seta" aria-hidden="true"></i></th>`).join("")}</tr></thead>
+    <tbody>${linhas.map(l=>`<tr>${l.cels.map((cel,i)=>
+      `<td class="num" data-v="${l.vals[i]}">${cel}</td>`).join("")}</tr>`).join("")}</tbody>
+  </table></div>`;
+}
+
+function ordenarPor(th){
+  const tab = th.closest("table");
+  const i = +th.dataset.i;
+  const desc = !th.classList.contains("desc");
+  [...tab.tHead.rows[0].cells].forEach(c=>c.classList.remove("ativa","desc","asc"));
+  th.classList.add("ativa", desc ? "desc" : "asc");
+  const corpo = tab.tBodies[0];
+  [...corpo.rows].sort((a,b)=>{
+    const va = a.cells[i].dataset.v, vb = b.cells[i].dataset.v;
+    const na = parseFloat(va), nb = parseFloat(vb);
+    const cmp = (isNaN(na) || isNaN(nb)) ? String(va).localeCompare(String(vb),"pt-BR") : na - nb;
+    return desc ? -cmp : cmp;
+  }).forEach(r=>corpo.appendChild(r));
+}
+
+document.addEventListener("click", e=>{
+  const th = e.target.closest && e.target.closest("th.ord");
+  if (th) ordenarPor(th);
+});
+document.addEventListener("keydown", e=>{
+  if ((e.key === "Enter" || e.key === " ") && e.target.matches && e.target.matches("th.ord")){
+    e.preventDefault(); ordenarPor(e.target);
+  }
+});
+
+function tabela(colunas, linhas, extraClasse){
+  return `<div class="tabela-box ${extraClasse || ""}"><table>
+    <thead><tr>${colunas.map(c=>`<th class="num">${c}</th>`).join("")}</tr></thead>
+    <tbody>${linhas.map(l=>`<tr>${l.map(c=>`<td class="num">${c}</td>`).join("")}</tr>`).join("")}</tbody>
+  </table></div>`;
+}
+
+const legendaSelos = () => `<div class="legenda">
+  <span>🟢 Melhorou</span><span>🟡 Estável (±10%)</span><span>🔴 Atenção</span><span>🆕 Sem base</span>
+  <span>Critério: ${CUSTO_RES().toLowerCase()} + volume contra ${D.comparacao.rotulo || "o período base"}.</span>
+</div>`;
+
+/* ---------- aba: visão geral ---------- */
+
+/* KPIs do consolidado: investimento e receita somados, o resto quebrado por canal */
+function kpiConsolidado(){
+  const d = D, c = d.consolidado;
+  const m = (d.meta || {}).kpis, g = (d.google || {}).kpis;
+
+  const dois = D.canais.length > 1;
+  const nKpis = () => VENDAS() ? 8 : 6;
+  const somado = (campo, rotulo, fmt, destaque) => `
+    <div class="kpi${destaque?" destaque":""}">
+      <div class="rot">${rotulo}${dois ? ` <em>soma dos canais</em>` : ""}</div>
+      <div class="val">${fmt(c[campo])}</div>
+      ${delta(campo, c.deltas ? c.deltas[campo] : null)}
+      ${dois ? `<div class="reparticao">
+        <span>Meta ${fmt(m[campo])}</span><span>Google ${fmt(g[campo])}</span>
+      </div>` : ""}
+    </div>`;
+
+  const porCanal = (campo, rotulo, fmt, rotuloGoogle) => `
+    <div class="kpi">
+      <div class="rot">${rotulo}</div>
+      <div class="split">
+        ${[["Meta",m],["Google",g]].filter(([,k])=>k).map(([canal,k])=>`
+          <div class="linha">
+            ${dois ? `<span class="canal ${canal.toLowerCase()}">${canal}</span>` : ""}
+            <span class="v">${fmt(k[campo])}</span>
+            ${delta(campo, k.deltas[campo])}
+          </div>`).join("")}
+      </div>
+      ${rotuloGoogle ? `<div class="obs">${rotuloGoogle}</div>` : ""}
+    </div>`;
+
+  return `<div class="kpis" data-n="${nKpis()}">
+    ${somado("gasto","Investimento",brl,true)}
+    ${VENDAS() ? somado("receita","Receita",brl) : ""}
+    ${VENDAS() ? porCanal("roas","ROAS",x) : ""}
+    ${porCanal("compras",RES(),v=>dec(v,v%1?1:0),
+      D.canais.includes("google") ? "Google conta conversões, que podem incluir frações de atribuição" : "")}
+    ${porCanal("cpa",CUSTO_RES(),brl)}
+    ${porCanal("cliques","Cliques",int)}
+    ${porCanal("ctr","CTR",pc)}
+    ${porCanal("impressoes","Impressões",int)}
+  </div>
+  <p class="cap">▲▼ variação contra ${D.comparacao.rotulo || "o período base"} (${D.comparacao.inicio} a ${D.comparacao.fim}).
+  ${D.canais.length > 1
+    ? `Investimento${VENDAS() ? " e receita somam" : " soma"} os dois canais; as demais métricas aparecem separadas
+       porque o Meta e o Google medem coisas diferentes e somá-las esconderia a comparação.`
+    : `Esta conta veicula só no ${D.canais[0] === "meta" ? "Meta Ads" : "Google Ads"}.`}</p>`;
+}
+
+/* pílula de ROAS de uma base de comparação: verde se o período atual superou, âmbar se ficou abaixo */
+function pilulaRoas(atual, base){
+  if (base == null || !base) return `<span style="color:var(--ink-3)">—</span>`;
+  const variacao = (atual - base) / base * 100;
+  const cls = variacao >= 0 ? "up" : "down";
+  const seta = variacao >= 0 ? "▲" : "▼";
+  return `<span class="pilula ${cls}">${x(base)} <em>${seta} ${dec(Math.abs(variacao),1)}%</em></span>`;
+}
+
+/* as duas quinzenas equivalentes, lado a lado */
+function linhaDoTempo(){
+  const d = D;
+  const cols = [
+    {rot:d.comparacao.rotulo || "Período base", per:d.comparacao, v:d.consolidado_base},
+    {rot:d.periodo.rotulo || "Período atual", per:d.periodo, v:d.consolidado, atual:true}
+  ];
+  const linhas = [
+    ["Investimento", v=>brl(v.gasto)],
+    [RES(),          v=>dec(v.compras,1)],
+    VENDAS() ? ["Receita", v=>brl(v.receita)] : null,
+    VENDAS() ? ["Ticket médio", v=>brl(v.compras ? v.receita / v.compras : 0)] : null,
+    [CUSTO_RES(),    v=>brl(v.cpa)],
+    ["Cliques",      v=>int(v.cliques)],
+    ["CTR",          v=>pc(v.ctr)]
+  ].filter(Boolean);
+  return `<div class="tabela-box"><table class="tempo">
+    <thead><tr>
+      <th></th>
+      ${cols.map(c=>`<th class="num${c.atual?" agora":""}">${c.rot}<span class="sub">${c.per.inicio} a ${c.per.fim}</span></th>`).join("")}
+    </tr></thead>
+    <tbody>
+      ${linhas.map(([rotulo,fmt])=>`<tr>
+        <td class="esq">${rotulo}</td>
+        ${cols.map((c,i)=>`<td class="num${c.atual?" agora":""}">${fmt(c.v,i)}</td>`).join("")}
+      </tr>`).join("")}
+      ${VENDAS() ? `<tr class="roas">
+        <td><b>ROAS</b></td>
+        ${cols.map(c=>`<td class="num${c.atual?" agora":""}">${
+          c.atual ? `<b style="font-size:17px">${x(c.v.roas)}</b>`
+                  : pilulaRoas(d.consolidado.roas, c.v.roas)}</td>`).join("")}
+      </tr>` : ""}
+    </tbody>
+  </table></div>
+  ${VENDAS() ? `<p class="cap">Na coluna do período base, a pílula mostra o ROAS dele e o quanto o período atual está
+  acima (<span style="color:var(--bom)">verde</span>) ou abaixo (<span style="color:var(--alerta)">âmbar</span>) dele.</p>` : ""}`;
+}
+
+/* destaques — sempre um par por canal, para nenhum dos dois sumir da leitura */
+function destaques(){
+  const itens = [];
+
+  D.canais.forEach(canal=>{
+    const nomeCanal = canal === "meta" ? "Meta Ads" : "Google Ads";
+    const cs = D[canal].campanhas;
+    const unidade = RES1();
+    const plural = RES().toLowerCase();
+
+    const comResultado = cs.filter(c=>c.compras > 0 && c.gasto >= 100);
+    const melhor = VENDAS()
+      ? comResultado.slice().sort((a,b)=>b.roas-a.roas)[0]
+      : comResultado.slice().sort((a,b)=>a.cpa-b.cpa)[0];
+    if (melhor) itens.push([VENDAS() ? "Melhor retorno" : `Menor ${CUSTO_RES().toLowerCase()}`, nomeCanal,
+      `<b>${melhor.nome}</b> — ${VENDAS() ? `${x(melhor.roas)} de ROAS` : `${brl(melhor.cpa)} por ${unidade}`}
+       com ${brl(melhor.gasto)} investidos e ${dec(melhor.compras,melhor.compras%1?1:0)} ${plural}.`, "bom"]);
+
+    /* maior perda de receita contra agosto — sem repetir a campanha já destacada como melhor retorno */
+    const perda = cs.filter(c=>c.anterior && c !== melhor)
+                    .map(c=>({c, dif: c.compras - c.anterior.compras}))
+                    .sort((a,b)=>a.dif-b.dif)[0];
+    if (perda && perda.dif < 0) itens.push(["Maior queda contra o período base", nomeCanal,
+      `<b>${perda.c.nome}</b> — ${plural} de ${dec(perda.c.anterior.compras,perda.c.anterior.compras%1?1:0)}
+       para ${dec(perda.c.compras,perda.c.compras%1?1:0)}${VENDAS()
+         ? `, ${brl(Math.abs(perda.c.receita - perda.c.anterior.receita))} de receita a menos` : ""}.`, "ruim"]);
+  });
+
+  const queimando = (D.meta ? D.meta.criativos : []).filter(c=>c.compras === 0 && c.gasto >= 50);
+  const queimado = queimando.reduce((s,c)=>s+c.gasto,0);
+  if (queimando.length) itens.push(["Verba sem resultado", "Meta Ads",
+    `${queimando.length} criativos somam <b>${brl(queimado)}</b> sem nenhum(a) ${RES1()} —
+     ${dec(queimado / D.meta.kpis.gasto * 100,0)}% do investimento do canal.`, "alerta"]);
+
+  const novas = D.canais.flatMap(c=>D[c].campanhas).filter(c=>c.selo === "novo");
+  if (novas.length) itens.push(["Sem base de comparação", novas.length > 1 ? "Meta + Google" : "",
+    `${novas.map(c=>`<b>${c.nome}</b> (${brl(c.gasto)})`).join(" e ")} não veicularam no período base,
+     então não entram na comparação — leitura real só na próxima quinzena.`, "novo"]);
+
+  const placar = D.canais.map(canal=>{
+    const cs = D[canal].campanhas;
+    const conta = s => cs.filter(c=>c.selo === s).length;
+    const partes = [["melhorou","🟢"],["estavel","🟡"],["atencao","🔴"],["novo","🆕"]]
+      .filter(([s])=>conta(s) > 0)
+      .map(([s,e])=>`${e} ${conta(s)}`).join("&nbsp;&nbsp;");
+    return `<div class="placar-item"><span class="placar-canal">${canal === "meta" ? "Meta Ads" : "Google Ads"}</span>
+      <span class="placar-selos">${partes}</span>
+      <span class="placar-n">${cs.length} ${cs.length === 1 ? "campanha" : "campanhas"}</span></div>`;
+  }).join("");
+
+  return `<div class="destaques">
+    ${itens.map(([t,canal,txt,tom])=>`<div class="destaque ${tom}">
+      <h3>${t}${canal?`<span class="canal">${canal}</span>`:""}</h3><p>${txt}</p></div>`).join("")}
+  </div>
+  <div class="placar">${placar}</div>`;
+}
+
+/* resumo do período — só descreve o que os números fizeram */
+function resumoPeriodo(){
+  const c = D.consolidado, b = D.consolidado_base;
+  if (!c || !b) return "";
+  const dif = campo => c.deltas && c.deltas[campo] != null ? c.deltas[campo] : null;
+  const sobeDesce = v => v == null ? "" : (v > 0 ? "subiu " : "caiu ") + dec(Math.abs(v),1) + "%";
+  const partes = [
+    `Investimento ${brl(b.gasto)} → <b>${brl(c.gasto)}</b> (${sobeDesce(dif("gasto"))})`,
+    `${RES()} ${dec(b.compras,1)} → <b>${dec(c.compras,1)}</b> (${sobeDesce(dif("compras"))})`,
+    b.cpa && c.cpa ? `${CUSTO_RES()} ${brl(b.cpa)} → <b>${brl(c.cpa)}</b> (${sobeDesce(dif("cpa"))})` : null,
+    VENDAS() ? `Receita ${brl(b.receita)} → <b>${brl(c.receita)}</b> (${sobeDesce(dif("receita"))})` : null,
+    VENDAS() ? `ROAS ${x(b.roas)} → <b>${x(c.roas)}</b> (${sobeDesce(dif("roas"))})` : null,
+  ].filter(Boolean);
+  return `<div class="nota" style="margin-top:14px">
+    <b>${D.periodo.inicio} a ${D.periodo.fim} contra ${D.comparacao.inicio} a ${D.comparacao.fim}.</b>
+    ${partes.join(" · ")}.
+  </div>`;
+}
+
+function abaGeral(){
+  const d = D, c = d.consolidado;
+  const linhas = [
+    ["Meta Ads", (d.meta||{}).kpis, (d.meta||{}).base],
+    ["Google Ads", (d.google||{}).kpis, (d.google||{}).base]
+  ].filter(([,k])=>k).map(([nome,k,b])=>[
+    `<b>${nome}</b>`, brl(k.gasto), int(k.cliques), int(k.impressoes), pc(k.ctr),
+    dec(k.compras,k.compras % 1 ? 1 : 0), brl(k.cpa),
+    ...(VENDAS() ? [brl(k.receita), `<b style="font-size:15px">${x(k.roas)}</b>`,
+                    pilulaRoas(k.roas, b ? b.roas : null)] : [])
+  ]);
+  return `
+  <div class="titulo-sec"><h2>Resultado consolidado</h2><p>${d.periodo.inicio} a ${d.periodo.fim}${D.canais.length > 1 ? " · investimento somado, desempenho por canal" : ""}</p></div>
+  ${kpiConsolidado()}
+
+  <div class="titulo-sec"><h2>${d.titulo_comparacao || "Período contra período"}</h2><p>${d.sub_comparacao || "Mesmo trecho do mês dos dois lados"}</p></div>
+  ${linhaDoTempo()}
+
+  ${resumoPeriodo()}
+
+  ${D.canais.length > 1 ? `
+  <div class="titulo-sec"><h2>Comparativo por canal</h2>
+    <p>${VENDAS()
+      ? `A última coluna traz o ROAS de agosto — <span style="color:var(--bom)">verde</span> quando setembro superou,
+         <span style="color:var(--alerta)">âmbar</span> quando ficou abaixo`
+      : `Meta e Google lado a lado no mesmo período`}</p></div>
+  ${tabela(["Canal","Investimento","Cliques","Impressões","CTR",RES(),CUSTO_RES(),
+            ...(VENDAS() ? ["Receita","ROAS","ROAS 1ª quinz. agosto"] : [])], linhas)}` : ""}
+
+  <div class="titulo-sec"><h2>Destaques da quinzena</h2><p>O detalhe campanha a campanha fica nas abas de cada canal</p></div>
+  ${destaques()}`;
+}
+
+/* ---------- aba: meta ---------- */
+function abaMeta(){
+  const m = D.meta;
+  const criativos = m.criativos.filter(c=>c.gasto >= 1)
+    .slice().sort((a,b)=> b.compras - a.compras || b.gasto - a.gasto);
+
+  /* eficiência = mais resultado pelo menor custo.
+     Entra na disputa quem trouxe pelo menos 10% do resultado do canal — assim um criativo
+     com 1 resultado barato não desbanca outro que sustentou o volume. */
+  const totalRes = m.kpis.compras || 0;
+  const minimo = Math.max(1, totalRes * 0.1);
+  const ranking = criativos.filter(c=>c.compras >= minimo && c.cpa != null)
+    .slice().sort((a,b)=> a.cpa - b.cpa || b.compras - a.compras);
+  const melhorC = ranking[0], piorC = ranking[ranking.length - 1];
+  const eficiencia = c => {
+    if (!ranking.includes(c)) return "";
+    if (c === melhorC) return "eficiente";
+    if (c === piorC && ranking.length > 1) return "caro";
+    return "medio";
+  };
+  const linhas = criativos.map(c=>{
+    let tag = "";
+    if (VENDAS() && c.compras > 0 && c.roas >= 10) tag = `<span class="tag bom">ROAS ≥ 10x</span>`;
+    else if (c.gasto >= 50 && c.compras === 0) tag = `<span class="tag ruim">gasto ≥ R$ 50 · 0 ${RES1()}</span>`;
+    else if (c.frequencia >= 5) tag = `<span class="tag alerta">frequência ≥ 5</span>`;
+    return {
+      cels:[
+        `<b>${c.nome}</b>${tag}<span class="sub ${eficiencia(c)}">${c.campanha}</span>`,
+        brl(c.gasto), int(c.impressoes), int(c.cliques), pc(c.ctr), dec(c.frequencia,2),
+        dec(c.compras,0), brl(c.cpa), ...(VENDAS() ? [`<b>${x(c.roas)}</b>`] : [])
+      ],
+      vals:[c.nome, c.gasto, c.impressoes, c.cliques, c.ctr, c.frequencia,
+            c.compras, c.cpa == null ? Infinity : c.cpa, c.roas]
+    };
+  });
+  return `
+  <div class="titulo-sec"><h2>Meta Ads — visão do canal</h2><p>Conta 1929564697284378 · ${D.periodo.inicio} a ${D.periodo.fim}</p></div>
+  ${kpiGrid(m.kpis,[
+    ["cliques","Cliques",int],["gasto","Custo",brl],
+    ...(VENDAS() ? [["roas","ROAS de compras",x,true]] : []),
+    ["cpa",CUSTO_RES(),brl,!VENDAS()],["ctr","CTR",pc],["frequencia","Frequência",v=>dec(v,2)],
+    ["impressoes","Impressões",int],["compras",RES(),v=>dec(v,0)]
+  ], m.base)}
+
+  <div class="titulo-sec"><h2>Campanhas</h2><p>Ordenadas por investimento · conjuntos abertos quando há mais de um</p></div>
+  ${legendaSelos()}
+  <div class="cards" style="margin-top:14px">
+    ${m.campanhas.map(c=>cardCampanha(c,{
+      chips:[rot(c.objetivo), c.conjuntos.length + (c.conjuntos.length===1?" conjunto":" conjuntos")],
+      unidade:RES1(),
+      metricas:[["cliques","Cliques",int],["gasto","Custo",brl],
+                ...(VENDAS() ? [["roas","ROAS",x,true]] : []),
+                ["compras",RES(),v=>dec(v,0)],["cpa",CUSTO_RES(),brl,!VENDAS()],
+                ["ctr","CTR",pc],["frequencia","Frequência",v=>dec(v,2)],["impressoes","Impressões",int]]
+    })).join("")}
+  </div>
+
+  <div class="titulo-sec"><h2>Criativos</h2><p>Todo anúncio com gasto no período · ordenado por ${RES().toLowerCase()} · clique em qualquer coluna para reordenar</p></div>
+  <div class="legenda" style="margin-bottom:12px">
+    <span><i style="background:var(--bom)"></i> Menor ${CUSTO_RES().toLowerCase()}</span>
+    <span><i style="background:var(--alerta)"></i> Intermediário</span>
+    <span><i style="background:var(--ruim)"></i> Maior ${CUSTO_RES().toLowerCase()}</span>
+    <span>A cor fica no nome da campanha. Entram no ranking os criativos com pelo menos
+    ${dec(minimo,1)} ${RES().toLowerCase()} no período (10% do total do canal).</span>
+  </div>
+  ${tabelaOrdenavel(["Criativo","Custo","Impressões","Cliques","CTR","Frequência",RES(),CUSTO_RES(),
+                     ...(VENDAS() ? ["ROAS"] : [])], linhas, 6)}
+  ${blocoPublicos()}`;
+}
+
+/* segmentação configurada nos conjuntos — campo `targeting` da API do Meta */
+function blocoPublicos(){
+  const lista = (D.meta || {}).publicos;
+  if (!lista || !lista.length) return "";
+
+  const grupo = (rotulo, itens, classe) => (itens && itens.length) ? `
+    <div class="pub-grupo">
+      <div class="sg-rot">${rotulo} <span>${itens.length}</span></div>
+      <div class="sg-lista">${itens.map(i=>`<span class="pill ${classe||""}">${i}</span>`).join("")}</div>
+    </div>` : "";
+
+  return `
+  <div class="titulo-sec"><h2>Públicos e segmentação</h2>
+    <p>O que está configurado em cada conjunto com veiculação no período — lido do campo de segmentação da conta</p></div>
+  <div class="cards">
+    ${lista.map(c=>`
+      <article class="card publico">
+        <div class="card-top">
+          <div>
+            <div class="card-nome">${c.conjunto}</div>
+            <div class="chips">
+              <span class="chip">${c.campanha}</span>
+              <span class="chip">${c.idade}</span>
+              <span class="chip">${c.genero}</span>
+              ${c.locais.length ? `<span class="chip">${c.locais.join(", ")}</span>` : ""}
+              ${c.posicionamentos.length ? `<span class="chip">${c.posicionamentos.join(" + ")}</span>` : ""}
+            </div>
+          </div>
+          <span class="selo ${c.advantage ? "melhorou" : "estavel"}">
+            ${c.advantage ? "Advantage+ público ativo" : "Público manual"}
+          </span>
+        </div>
+        <div class="card-tabela laranja" style="border-top:1px solid var(--laranja-rule)">
+          <div class="ct-corpo" style="padding-top:14px">
+            ${grupo("Públicos salvos e semelhantes", c.publicos, "publico")}
+            ${grupo("Excluídos", c.excluidos, "excluido")}
+            ${grupo("Interesses", c.interesses)}
+            ${grupo("Cargos", c.cargos)}
+            ${grupo("Setores", c.setores)}
+            ${grupo("Formação", c.formacao)}
+            ${grupo("Empregadores", c.empregadores)}
+            ${(!c.interesses.length && !c.cargos.length && !c.setores.length && !c.publicos.length)
+              ? `<p class="ct-vazio">Nenhuma segmentação detalhada configurada — entrega aberta.</p>` : ""}
+            ${c.expansao ? `<p class="cap" style="margin-top:10px">Expansão de público:
+              semelhantes ${c.expansao.semelhantes ? "ligada" : "desligada"} ·
+              personalizados ${c.expansao.personalizados ? "ligada" : "desligada"}</p>` : ""}
+          </div>
+        </div>
+      </article>`).join("")}
+  </div>`;
+}
+
+/* ---------- aba: google ---------- */
+
+/* palavras-chave e termos da campanha, renderizados dentro do card dela */
+function blocoPesquisa(nomeCampanha){
+  const g = D.google;
+  const kws = g.keywords.filter(k=>k.campanha === nomeCampanha);
+  const termos = g.termos.filter(t=>t.campanha === nomeCampanha);
+  if (!kws.length && !termos.length) return "";
+
+  const linhasKw = kws.map(k=>({
+    cels:[
+      `<b>${k.texto}</b><span class="sub">${k.match === "BROAD" ? "Ampla" : k.match === "EXACT" ? "Exata" : "Frase"} · Índice de qualidade ${k.qs ?? "—"}</span>`,
+      brl(k.gasto), int(k.impressoes), int(k.cliques), pc(k.ctr),
+      `<b>${dec(k.compras,1)}</b>`, k.cpa != null ? brl(k.cpa) : "—",
+      ...(VENDAS() ? [brl(k.receita), `<b>${x(k.roas)}</b>`] : [])
+    ],
+    vals:[k.texto, k.gasto, k.impressoes, k.cliques, k.ctr, k.compras,
+          k.cpa == null ? Infinity : k.cpa, k.receita, k.roas]
+  }));
+  const linhasTermos = termos.map(t=>{
+    const perde = t.compras === 0 && t.gasto >= 5;  // gastou e não trouxe resultado
+    return {
+      cels:[
+        `<b>${t.termo}</b>${perde?`<span class="tag ruim">sem ${RES1()}</span>`:""}`,
+        brl(t.gasto), int(t.cliques), `<b>${dec(t.compras,1)}</b>`,
+        ...(VENDAS() ? [brl(t.receita), t.compras ? x(t.roas) : "—"] : [])
+      ],
+      vals:[t.termo, t.gasto, t.cliques, t.compras, t.receita, t.roas]
+    };
+  });
+  const gastoSemConversao = termos.filter(t=>!t.compras).reduce((s,t)=>s+t.gasto,0);
+
+  return `
+    ${kws.length ? `<details class="card-tabela">
+      <summary class="ct-titulo"><i class="chev"></i>Palavras-chave <em>${kws.length} com gasto no período</em></summary>
+      <div class="ct-corpo">
+      ${tabelaOrdenavel(["Palavra-chave","Custo","Impressões","Cliques","CTR",RES(),CUSTO_RES(),
+                ...(VENDAS() ? ["Receita","ROAS"] : [])], linhasKw, 5, "compacta")}
+    </div></details>` : ""}
+    ${termos.length ? `<details class="card-tabela">
+      <summary class="ct-titulo"><i class="chev"></i>Termos de pesquisa <em>${termos.length} termos · o que o usuário digitou antes do clique</em></summary>
+      <div class="ct-corpo">
+      ${tabelaOrdenavel(["Termo","Custo","Cliques",RES(), ...(VENDAS() ? ["Receita","ROAS"] : [])], linhasTermos, 3, "compacta")}
+      ${gastoSemConversao > 0 ? `<p class="ct-diagnostico">
+        <b>${brl(gastoSemConversao)}</b> foram para termos sem ${RES1()}
+        (${dec(gastoSemConversao / D.google.campanhas.find(c=>c.nome === nomeCampanha).gasto * 100,1)}% do custo da campanha)
+        no período.</p>` : ""}
+    </div></details>` : ""}`;
+}
+
+/* PMax não tem palavra-chave: a API entrega categorias de termos e os sinais do grupo de recursos */
+function blocoPmax(c){
+  const p = c.pmax;
+  if (!p) return "";
+
+  const grupos = p.grupos.length ? `<details class="card-tabela">
+    <summary class="ct-titulo"><i class="chev"></i>Grupo de recursos <em>configuração atual da campanha</em></summary>
+    <div class="ct-corpo">
+    ${tabela(["Grupo","Status","Força do anúncio","Página de destino"],
+      p.grupos.map(g=>[`<b>${g.nome}</b>`, g.status,
+        `<span class="tag ${g.forca === "Excelente" || g.forca === "Boa" ? "bom" : g.forca === "Média" ? "alerta" : "ruim"}">${g.forca}</span>`,
+        `<span class="ink3">${g.url}</span>`]), "compacta")}
+  </div></details>` : "";
+
+  const termos = p.termos.length ? `<details class="card-tabela azul">
+    <summary class="ct-titulo"><i class="chev"></i>Categorias de termos de pesquisa <em>${p.termos.length} categorias · o que a PMax devolve no lugar de palavras-chave</em></summary>
+    <div class="ct-corpo">
+    ${tabelaOrdenavel(["Categoria de busca","Impressões","Cliques",RES(), ...(VENDAS() ? ["Receita"] : []), ""],
+      p.termos.slice(0,15).map(t=>({
+        cels:[`<b>${t.categoria}</b>`, int(t.impressoes), int(t.cliques), `<b>${dec(t.conversoes,1)}</b>`,
+              ...(VENDAS() ? [brl(t.valor)] : []),
+              t.conversoes ? "" : `<span class="tag ruim">0 ${RES1()}</span>`],
+        vals:[t.categoria, t.impressoes, t.cliques, t.conversoes, t.valor, 0]
+      })), 3, "compacta")}
+    <p class="ct-diagnostico">
+      ${p.termos.length > 15 ? `Mostrando as 15 categorias de maior volume, de ${p.termos.length} retornadas pela API. ` : ""}
+      ${p.sem_categoria ? `Fora da tabela, a API devolve um bloco sem rótulo de categoria com
+        <b>${int(p.sem_categoria.impressoes)}</b> impressões, ${int(p.sem_categoria.cliques)} cliques e
+        ${dec(p.sem_categoria.conversoes,1)} ${RES().toLowerCase()} — o Google não revela a busca desses casos.` : ""}
+    </p>
+  </div></details>` : "";
+
+  const sinais = (p.temas.length || p.publicos.length) ? `<details class="card-tabela azul">
+    <summary class="ct-titulo"><i class="chev"></i>Sinais configurados <em>${p.temas.length} temas · ${p.publicos.length} público(s)</em></summary>
+    <div class="ct-corpo">
+    <div class="sinais-grid">
+      <div>
+        <div class="sg-rot">Temas de pesquisa <span>${p.temas.length}</span></div>
+        <div class="sg-lista">${p.temas.map(t=>`<span class="pill">${t}</span>`).join("")}</div>
+      </div>
+      <div>
+        <div class="sg-rot">Públicos-alvo <span>${p.publicos.length}</span></div>
+        <div class="sg-lista">${p.publicos.length
+          ? p.publicos.map(t=>`<span class="pill publico">${t}</span>`).join("")
+          : `<span class="ink3">Nenhum público configurado como sinal</span>`}</div>
+      </div>
+    </div>
+  </div></details>` : "";
+
+  return grupos + termos + sinais;
+}
+
+function abaGoogle(){
+  const g = D.google;
+  const pausadas = g.pausadas.length ? `
+    <div class="nota" style="margin-top:14px">
+      <b>Fora do período.</b> ${g.pausadas.map(p=>`A campanha <b>${p.nome}</b> não gastou nesta quinzena (pausada). No período base tinha consumido ${brl(p.gasto)} com ${dec(p.compras,0)} ${RES().toLowerCase()}${VENDAS() ? ` e ROAS de ${x(p.roas)}` : ""}.`).join(" ")}
+    </div>` : "";
+  return `
+  <div class="titulo-sec"><h2>Google Ads — visão do canal</h2><p>Conta 888-218-9559 · MCC Açúcar · ${D.periodo.inicio} a ${D.periodo.fim}</p></div>
+  ${kpiGrid(g.kpis,[
+    ["cliques","Cliques",int],["gasto","Custo",brl],
+    ...(VENDAS() ? [["roas","ROAS de compras",x,true]] : []),
+    ["cpa",CUSTO_RES(),brl,!VENDAS()],["ctr","CTR",pc],["impressoes","Impressões",int],
+    ["compras",RES(),v=>dec(v,1)],
+    ...(VENDAS() ? [["receita","Receita",brl]] : [])
+  ], g.base)}
+  <div class="nota" style="margin-top:14px">
+    Frequência não existe no Google Ads — é métrica exclusiva do Meta, por isso não aparece neste bloco.
+  </div>
+
+  <div class="titulo-sec"><h2>Campanhas</h2><p>Ordenadas por investimento · palavras-chave e termos aparecem dentro da campanha a que pertencem</p></div>
+  ${legendaSelos()}
+  <div class="cards" style="margin-top:14px">
+    ${g.campanhas.map(c=>cardCampanha(c,{
+      chips:[rot(c.tipo), rot(c.lance)],
+      unidade:RES1(),
+      extra:blocoPesquisa(c.nome) + blocoPmax(c),
+      metricas:[["cliques","Cliques",int],["gasto","Custo",brl],
+                ...(VENDAS() ? [["roas","ROAS",x,true]] : []),
+                ["compras",RES(),v=>dec(v,1)],["cpa",CUSTO_RES(),brl,!VENDAS()],
+                ["ctr","CTR",pc],["impressoes","Impressões",int]]
+    })).join("")}
+  </div>
+  ${pausadas}`;
+}
+
+/* ---------- montagem ---------- */
+const ABAS = [
+  ["geral","Visão geral",abaGeral],
+  ["meta","Meta Ads",abaMeta],
+  ["google","Google Ads",abaGoogle]
+];
+
+/* cliente em exibição */
+let D = null;
+
+function lembrar(chave, valor){ try { localStorage.setItem(chave, valor); } catch(e){} }
+function lembrado(chave){ try { return localStorage.getItem(chave); } catch(e){ return null; } }
+
+function montarClientes(){
+  const barra = document.getElementById("clientes");
+  barra.innerHTML = DADOS.ordem.map(slug=>{
+    const c = DADOS.clientes[slug];
+    return `<button class="cliente" type="button" role="tab" data-slug="${slug}" aria-selected="false">
+      ${c.nome}<span class="canais">${c.canais.map(x=>x === "meta" ? "Meta" : "Google").join(" + ")}</span>
+    </button>`;
+  }).join("");
+  barra.addEventListener("click", e=>{
+    const b = e.target.closest("button.cliente");
+    if (b) trocarCliente(b.dataset.slug);
+  });
+}
+
+function trocarCliente(slug){
+  D = DADOS.clientes[slug];
+  lembrar("assucar-cliente", slug);
+
+  document.querySelectorAll("#clientes .cliente").forEach(b=>
+    b.setAttribute("aria-selected", String(b.dataset.slug === slug)));
+
+  document.getElementById("eyebrow").textContent = DADOS.cadencia || "Relatório quinzenal de otimização";
+  document.getElementById("titulo").textContent = D.nome;
+  document.getElementById("periodo").innerHTML =
+    `Período analisado <b>${D.periodo.inicio} a ${D.periodo.fim}</b> · comparado com
+     <b>${D.comparacao.rotulo || "o período anterior"}</b> (${D.comparacao.inicio} a ${D.comparacao.fim})`;
+  document.getElementById("fontes").innerHTML = D.canais.map(c=>
+    `<span class="fonte"><span class="dot"></span> ${c === "meta" ? "Meta Graph API" : "Google Ads API"}</span>`).join("");
+
+  // abas existentes para este cliente
+  const nav = document.getElementById("abas");
+  nav.innerHTML = "";
+  const visiveis = ABAS.filter(([id])=> id === "geral" || D.canais.includes(id));
+  visiveis.forEach(([id,rotulo,render])=>{
+    const b = document.createElement("button");
+    b.className = "aba"; b.id = "aba-" + id; b.type = "button";
+    b.setAttribute("role","tab");
+    b.setAttribute("aria-controls","p-" + id);
+    b.textContent = rotulo;
+    b.addEventListener("click", ()=>selecionar(id));
+    nav.appendChild(b);
+    const painel = document.getElementById("p-" + id);
+    painel.innerHTML = render();
+  });
+  ABAS.forEach(([id])=>{
+    const painel = document.getElementById("p-" + id);
+    if (!visiveis.some(([v])=>v === id)) painel.innerHTML = "";
+  });
+
+  const guardada = lembrado("assucar-aba");
+  const inicial = visiveis.some(([id])=>id === guardada) ? guardada : visiveis[0][0];
+  selecionar(inicial);
+
+  document.getElementById("rodape").innerHTML =
+    `Plus Digital Agência · ${D.nome} · dados puxados ao vivo da
+     ${D.canais.map(c=>c === "meta" ? "Meta Graph API" : "Google Ads API").join(" e da ")} em ${DADOS.gerado_em}.<br>
+     ${D.modo === "vendas"
+       ? "Compras e receita do Meta usam o evento <i>purchase</i> do pixel; conversões do Google usam as ações de conversão da conta. ROAS = receita ÷ investimento no período."
+       : `Esta conta não registra valor de conversão, então não há receita nem ROAS — o resultado é medido em ${D.resultado.toLowerCase()}, conforme as ações de conversão configuradas na própria conta.`}`;
+}
+
+function selecionar(id){
+  ABAS.forEach(([outro])=>{
+    const botao = document.getElementById("aba-" + outro);
+    const painel = document.getElementById("p-" + outro);
+    if (botao) botao.setAttribute("aria-selected", String(outro === id));
+    if (painel) painel.hidden = outro !== id;
+  });
+  lembrar("assucar-aba", id);
+}
+
+montarClientes();
+const salvo = lembrado("assucar-cliente");
+trocarCliente(DADOS.clientes[salvo] ? salvo : DADOS.ordem[0]);
+</script>
+
+</body></html>

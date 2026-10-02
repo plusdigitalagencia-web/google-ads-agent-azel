@@ -6,6 +6,7 @@ Relatórios de diagnóstico de campanhas Google Ads e Meta Ads dos clientes da M
 |---|---|---|
 | **Dra. Cejana** | Meta Ads, Google Ads, Leaper | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Plus%20Digital/Dra.%20Cejana/) |
 | **Dr. Bruno** | Meta Ads, Google Ads, Leaper | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Plus%20Digital/Dr.%20Bruno/) |
+| **Relatórios Cejana + Bruno Mensal** | Meta Ads, Google Ads | [Ver relatórios →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Plus%20Digital/Relat%C3%B3rios%20Cejana%20%2B%20Bruno%20Mensal/) |
 
 > Pasta a criar quando o próximo cliente for confirmado.
 
