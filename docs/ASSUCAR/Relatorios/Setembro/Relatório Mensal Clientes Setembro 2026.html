@@ -1,0 +1,937 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Assucar · Fechamento de Setembro</title>
+<style>
+  :root{
+    --bg:#F3F5F4; --surface:#FFFFFF; --surface-2:#F7F9F8;
+    --ink:#15201D; --ink-muted:#54625D; --ink-faint:#8B968F; --border:#D9E1DE;
+    --accent:#157567; --accent-ink:#0D4B42; --accent-soft:#DCEFE9;
+    --good:#2E7D4F; --good-soft:#E1F3E7;
+    --stable:#A8720A; --stable-soft:#FBF0DA;
+    --alert:#C0392B; --alert-soft:#FBE4E1;
+    --new:#3B6EA5; --new-soft:#E4EDF6;
+    --paused:#6B7679; --paused-soft:#EAEDED;
+    --shadow: 0 1px 2px rgba(21,32,29,.06), 0 8px 24px -16px rgba(21,32,29,.18);
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --font-mono:ui-monospace,"SF Mono","Cascadia Code","Roboto Mono",Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0B1413; --surface:#101C1A; --surface-2:#0D1716;
+      --ink:#E7F0EE; --ink-muted:#9FB3AE; --ink-faint:#6D8480; --border:#1E2C2A;
+      --accent:#37BFA8; --accent-ink:#8FE0E3; --accent-soft:#123236;
+      --good:#55B67F; --good-soft:#12281C;
+      --stable:#D9A73F; --stable-soft:#2C2312;
+      --alert:#E36E60; --alert-soft:#2E1512;
+      --new:#74A8D8; --new-soft:#131F2C;
+      --paused:#8B9799; --paused-soft:#182121;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 28px -16px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0B1413; --surface:#101C1A; --surface-2:#0D1716;
+    --ink:#E7F0EE; --ink-muted:#9FB3AE; --ink-faint:#6D8480; --border:#1E2C2A;
+    --accent:#37BFA8; --accent-ink:#8FE0E3; --accent-soft:#123236;
+    --good:#55B67F; --good-soft:#12281C;
+    --stable:#D9A73F; --stable-soft:#2C2312;
+    --alert:#E36E60; --alert-soft:#2E1512;
+    --new:#74A8D8; --new-soft:#131F2C;
+    --paused:#8B9799; --paused-soft:#182121;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 28px -16px rgba(0,0,0,.6);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-sans);line-height:1.55;}
+  ::selection{background:var(--accent-soft);color:var(--accent-ink);}
+  .mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums;}
+  a{color:var(--accent-ink);}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;}}
+
+  .banner{position:sticky;top:0;z-index:30;background:var(--accent);color:#06211f;text-align:center;font-weight:700;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase;padding:9px 14px;}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px 100px;}
+  header.masthead{padding:40px 0 28px;border-bottom:1px solid var(--border);}
+  .eyebrow{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);}
+  h1{font-size:clamp(1.9rem,4.4vw,2.6rem);margin:10px 0 8px;text-wrap:balance;}
+  .lede{color:var(--ink-muted);font-size:.98rem;max-width:66ch;}
+  .period-row{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:16px;font-family:var(--font-mono);font-size:.78rem;color:var(--ink-muted);}
+  .period-row b{color:var(--ink);}
+
+  /* client tabs */
+  .client-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:28px 0 0;}
+  input.ctab{display:none;}
+  label.ctab-label{cursor:pointer;padding:10px 16px;border-radius:8px;border:1px solid var(--border);background:var(--surface);font-weight:600;font-size:.9rem;color:var(--ink-muted);}
+  .client-panel{display:none;padding-top:28px;}
+  #c-cf:checked ~ .client-tabs label[for="c-cf"],
+  #c-dc:checked ~ .client-tabs label[for="c-dc"],
+  #c-caf:checked ~ .client-tabs label[for="c-caf"],
+  #c-sm:checked ~ .client-tabs label[for="c-sm"],
+  #c-at:checked ~ .client-tabs label[for="c-at"],
+  #c-tc:checked ~ .client-tabs label[for="c-tc"]
+  {background:var(--accent);border-color:var(--accent);color:#06211f;}
+  #c-cf:checked ~ .panels #p-cf{display:block;}
+  #c-dc:checked ~ .panels #p-dc{display:block;}
+  #c-caf:checked ~ .panels #p-caf{display:block;}
+  #c-sm:checked ~ .panels #p-sm{display:block;}
+  #c-at:checked ~ .panels #p-at{display:block;}
+  #c-tc:checked ~ .panels #p-tc{display:block;}
+
+  /* channel tabs (within a client) */
+  .ch-tabs{display:flex;gap:6px;margin-bottom:18px;}
+  input.chtab{display:none;}
+  label.chtab-label{cursor:pointer;padding:7px 14px;border-radius:999px;border:1px solid var(--border);background:var(--surface-2);font-size:.82rem;font-weight:600;color:var(--ink-muted);}
+  input.chtab:checked + label.chtab-label{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-ink);}
+  .ch-panel{display:none;}
+  #ch-cf-google:checked ~ .ch-tabs label[for="ch-cf-google"],
+  #ch-cf-meta:checked ~ .ch-tabs label[for="ch-cf-meta"],
+  #ch-sm-google:checked ~ .ch-tabs label[for="ch-sm-google"],
+  #ch-sm-meta:checked ~ .ch-tabs label[for="ch-sm-meta"],
+  #ch-tc-google:checked ~ .ch-tabs label[for="ch-tc-google"],
+  #ch-tc-br:checked ~ .ch-tabs label[for="ch-tc-br"],
+  #ch-tc-fw:checked ~ .ch-tabs label[for="ch-tc-fw"]
+  {background:var(--accent-soft);border-color:var(--accent);color:var(--accent-ink);}
+  #ch-cf-google:checked ~ #chp-cf-google{display:block;}
+  #ch-cf-meta:checked ~ #chp-cf-meta{display:block;}
+  #ch-sm-google:checked ~ #chp-sm-google{display:block;}
+  #ch-sm-meta:checked ~ #chp-sm-meta{display:block;}
+  #ch-tc-google:checked ~ #chp-tc-google{display:block;}
+  #ch-tc-br:checked ~ #chp-tc-br{display:block;}
+  #ch-tc-fw:checked ~ #chp-tc-fw{display:block;}
+
+  .client-intro{color:var(--ink-muted);font-size:.9rem;margin:0 0 20px;}
+  .client-intro b{color:var(--ink);}
+
+  /* KPI overview */
+  .kpi-head{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 10px;}
+  .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:26px;box-shadow:var(--shadow);}
+  .kpi-tile{background:var(--surface);padding:12px 14px;}
+  .kpi-tile .l{font-size:.65rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-faint);font-family:var(--font-mono);}
+  .kpi-tile .v{font-weight:700;font-size:1rem;margin-top:4px;}
+
+  /* campaign cards */
+  details.camp{background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:14px;box-shadow:var(--shadow);overflow:hidden;}
+  details.camp[open] summary{border-bottom:1px solid var(--border);}
+  summary.camp-head{cursor:pointer;list-style:none;padding:14px 18px;display:flex;align-items:center;flex-wrap:wrap;gap:10px 14px;}
+  summary.camp-head::-webkit-details-marker{display:none;}
+  summary.camp-head .arrow{margin-left:auto;transition:transform .15s;color:var(--ink-faint);flex:none;}
+  details[open] summary.camp-head .arrow{transform:rotate(180deg);}
+  .camp-name{font-family:var(--font-mono);font-weight:700;font-size:.92rem;flex:1 1 260px;min-width:200px;}
+  .chip{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.04em;text-transform:uppercase;padding:3px 8px;border-radius:3px;border:1px solid var(--border);color:var(--ink-muted);background:var(--surface-2);}
+  .badge{font-weight:700;font-size:.74rem;padding:4px 10px;border-radius:4px;display:inline-flex;align-items:center;gap:5px;white-space:nowrap;}
+  .badge.good{background:var(--good-soft);color:var(--good);}
+  .badge.stable{background:var(--stable-soft);color:var(--stable);}
+  .badge.alert{background:var(--alert-soft);color:var(--alert);}
+  .badge.new{background:var(--new-soft);color:var(--new);}
+  .badge.paused{background:var(--paused-soft);color:var(--paused);}
+  .primary-line{font-size:.82rem;color:var(--ink-muted);flex:1 1 100%;order:3;}
+  .primary-line b{color:var(--ink);font-family:var(--font-mono);}
+  .camp-body{padding:18px;}
+
+  .mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:18px;padding-bottom:18px;border-bottom:1px dashed var(--border);}
+  .mgrid > div{background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;min-width:0;}
+  .m-label{font-family:var(--font-mono);font-size:.63rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-faint);}
+  .m-val{font-weight:700;font-size:.95rem;margin-top:2px;}
+  .m-chg{display:inline-flex;align-items:center;gap:5px;margin-top:8px;padding:3px 9px;border-radius:999px;font-family:var(--font-mono);font-size:.78rem;font-weight:700;white-space:nowrap;}
+  .m-chg .arr{font-size:1rem;line-height:1;}
+  .m-chg.up{background:var(--good-soft);color:var(--good);}
+  .m-chg.down{background:var(--alert-soft);color:var(--alert);}
+  .m-chg.flat{background:var(--stable-soft);color:var(--stable);}
+  .m-chg.neutral{background:var(--paused-soft);color:var(--paused);}
+  .m-ago{font-family:var(--font-mono);font-size:.74rem;color:var(--ink-muted);margin-top:6px;}
+  .m-ago b{color:var(--ink);font-weight:600;}
+
+  .block{margin-top:14px;padding:13px 15px;border-radius:7px;font-size:.87rem;}
+  .block .lbl{display:block;font-family:var(--font-mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;font-weight:700;}
+  .block.good-b{background:var(--good-soft);}
+  .block.good-b .lbl{color:var(--good);}
+  .block.alert-b{background:var(--alert-soft);}
+  .block.alert-b .lbl{color:var(--alert);}
+  .block p{margin:0 0 6px;color:var(--ink);}
+  .block p:last-child{margin-bottom:0;}
+  .block ul{margin:0;padding-left:18px;color:var(--ink);}
+  .block li{margin-bottom:6px;}
+
+  .block.empty{background:none;border:1.5px dashed var(--ink-faint);color:var(--ink-faint);text-align:center;font-size:.82rem;}
+  .block.empty .lbl{color:var(--ink-faint);}
+  .block.fizemos-b{background:var(--accent-soft);}
+  .block.fizemos-b .lbl{color:var(--accent-ink);}
+  .block.fizemos-b .chip{background:var(--surface);}
+
+  footer.foot{margin-top:56px;padding-top:20px;border-top:1px solid var(--border);font-size:.78rem;color:var(--ink-faint);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead">
+    <span class="eyebrow">Plus Digital Agência · MCC Assucar</span>
+    <h1>Fechamento de Setembro — visão por cliente</h1>
+    <p class="lede">Fechamento mensal dos clientes da Assucar. Dado 100% ao vivo via API direta (Google Ads GAQL + Meta Graph API) — gasto bate exatamente com as plataformas em todos os 6 clientes.</p>
+    <div class="period-row">
+      <span>Período analisado <b>01–30/09/2026</b></span>
+      <span>Comparado com <b>01–31/08/2026</b></span>
+    </div>
+  </header>
+
+  <input type="radio" name="client" id="c-cf" class="ctab" checked>
+  <input type="radio" name="client" id="c-dc" class="ctab">
+  <input type="radio" name="client" id="c-caf" class="ctab">
+  <input type="radio" name="client" id="c-sm" class="ctab">
+  <input type="radio" name="client" id="c-at" class="ctab">
+  <input type="radio" name="client" id="c-tc" class="ctab">
+
+  <div class="client-tabs">
+    <label for="c-cf" class="ctab-label">Chez France</label>
+    <label for="c-dc" class="ctab-label">Decore</label>
+    <label for="c-caf" class="ctab-label">Clínica Assistência Familiar</label>
+    <label for="c-sm" class="ctab-label">SpeedMais</label>
+    <label for="c-at" class="ctab-label">Atlântico</label>
+    <label for="c-tc" class="ctab-label">True Change</label>
+  </div>
+
+  <div class="panels">
+  <!-- ============================================================ CHEZ FRANCE ============================================================ -->
+  <section class="client-panel" id="p-cf">
+    <p class="client-intro"><b>Chez France</b> — e-commerce de vinhos franceses, perfil Venda/ROAS. Google Ads 888-218-9559 + Meta Ads act_1929564697284378.</p>
+
+    <input type="radio" name="ch-cf" id="ch-cf-google" class="chtab" checked>
+    <input type="radio" name="ch-cf" id="ch-cf-meta" class="chtab">
+    <div class="ch-tabs">
+      <label for="ch-cf-google" class="chtab-label">Google Ads</label>
+      <label for="ch-cf-meta" class="chtab-label">Meta Ads</label>
+    </div>
+
+    <div class="ch-panel" id="chp-cf-google">
+    <div class="kpi-head">KPIs Overview — Google Ads (Setembro/2026)</div>
+    <div class="kpi-grid">
+      <div class="kpi-tile"><div class="l">Gasto</div><div class="v mono">R$ 3.491,25</div></div>
+      <div class="kpi-tile"><div class="l">Impressões</div><div class="v mono">67.268</div></div>
+      <div class="kpi-tile"><div class="l">Cliques</div><div class="v mono">1.657</div></div>
+      <div class="kpi-tile"><div class="l">CTR</div><div class="v mono">2,46%</div></div>
+      <div class="kpi-tile"><div class="l">Compras</div><div class="v mono">92,38</div></div>
+      <div class="kpi-tile"><div class="l">Valor conv.</div><div class="v mono">R$ 60.045,89</div></div>
+      <div class="kpi-tile"><div class="l">ROAS</div><div class="v mono">17,20x</div></div>
+      <div class="kpi-tile"><div class="l">CPA</div><div class="v mono">R$ 37,80</div></div>
+    </div>
+
+    <details class="camp" open>
+      <summary class="camp-head">
+        <span class="chip">Search</span><span class="chip">ENABLED</span>
+        <span class="camp-name">[Assucar] [Search] [Institucional] [Principais Estados]</span>
+        <span class="badge alert">🔴 Atenção</span>
+        <svg class="arrow" width="16" height="16" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        <span class="primary-line">ROAS <b>13,86x</b> (-11,7%) · ROI <b>1.286,3%</b> (-12,5%)</span>
+      </summary>
+      <div class="camp-body">
+        <div class="mgrid">
+          <div><div class="m-label">Gasto</div><div class="m-val mono">R$ 1.500,01</div><div class="m-chg neutral"><span class="arr">▲</span>+8,3%</div><div class="m-ago">Agosto: <b>R$ 1.384,96</b></div></div>
+          <div><div class="m-label">Impressões</div><div class="m-val mono">1.631</div><div class="m-chg neutral"><span class="arr">▼</span>-25,6%</div><div class="m-ago">Agosto: <b>2.191</b></div></div>
+          <div><div class="m-label">Cliques</div><div class="m-val mono">540</div><div class="m-chg flat"><span class="arr">►</span>-4,8%</div><div class="m-ago">Agosto: <b>567</b></div></div>
+          <div><div class="m-label">CTR</div><div class="m-val mono">33,11%</div><div class="m-chg up"><span class="arr">▲</span>+28,0%</div><div class="m-ago">Agosto: <b>25,88%</b></div></div>
+          <div><div class="m-label">CPC</div><div class="m-val mono">R$ 2,78</div><div class="m-chg down"><span class="arr">▲</span>+13,9%</div><div class="m-ago">Agosto: <b>R$ 2,44</b></div></div>
+          <div><div class="m-label">CPA</div><div class="m-val mono">R$ 42,01</div><div class="m-chg down"><span class="arr">▲</span>+16,1%</div><div class="m-ago">Agosto: <b>R$ 36,19</b></div></div>
+          <div><div class="m-label">Conversões</div><div class="m-val mono">35,71</div><div class="m-chg flat"><span class="arr">►</span>-6,7%</div><div class="m-ago">Agosto: <b>38,28</b></div></div>
+          <div><div class="m-label">Ticket médio</div><div class="m-val mono">R$ 582,37</div><div class="m-chg flat"><span class="arr">►</span>+2,6%</div><div class="m-ago">Agosto: <b>R$ 567,87</b></div></div>
+        </div>
+        <div class="block good-b"><span class="lbl">✅ O que melhorou — efeito da otimização registrada</span>
+          <p>CTR subiu de 25,88% para 33,11% (+7,2pp) e impressões caíram 25,6% enquanto cliques caíram só 4,8% — efeito direto dos 8 termos negativados em 18/08: o tráfego removido era majoritariamente irrelevante.</p>
+        </div>
+        <div class="block alert-b"><span class="lbl">❌ O que não deu certo</span>
+          <p>A única coisa que não deu certo foi uma queda baixa, de 6,7%, no número de conversões (35,7 contra 38,3 em agosto). O ticket médio ficou praticamente estável (R$ 582,37 contra R$ 567,87) — ou seja, quem comprou em setembro gastou o mesmo que em agosto.</p>
+        </div>
+        <div class="block fizemos-b"><span class="lbl">🚀 O que fizemos para melhorar</span>
+          <p>Adicionada a palavra-chave <b>Chez France</b> em correspondência <b>exata</b>, para testar se o ROAS melhora. Até aqui a marca rodava só em correspondência ampla. <span class="chip" style="margin-left:4px;">17/09</span></p>
+        </div>
+      </div>
+    </details>
+
+    <details class="camp">
+      <summary class="camp-head">
+        <span class="chip">Performance Max</span><span class="chip">ENABLED</span>
+        <span class="camp-name">[P.Max] França_Merchant Center</span>
+        <span class="badge good">🟢 Melhorou</span>
+        <svg class="arrow" width="16" height="16" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        <span class="primary-line">ROAS <b>24,67x</b> (+234,3%) · ROI <b>2.368,7%</b> (+271,5%)</span>
+      </summary>
+      <div class="camp-body">
+        <div class="mgrid">
+          <div><div class="m-label">Gasto</div><div class="m-val mono">R$ 1.061,93</div><div class="m-chg neutral"><span class="arr">▲</span>+30,8%</div><div class="m-ago">Agosto: <b>R$ 811,83</b></div></div>
+          <div><div class="m-label">Impressões</div><div class="m-val mono">29.383</div><div class="m-chg neutral"><span class="arr">▼</span>-25,6%</div><div class="m-ago">Agosto: <b>39.513</b></div></div>
+          <div><div class="m-label">Cliques</div><div class="m-val mono">635</div><div class="m-chg flat"><span class="arr">►</span>+7,8%</div><div class="m-ago">Agosto: <b>589</b></div></div>
+          <div><div class="m-label">CTR</div><div class="m-val mono">2,16%</div><div class="m-chg up"><span class="arr">▲</span>+45,0%</div><div class="m-ago">Agosto: <b>1,49%</b></div></div>
+          <div><div class="m-label">CPC</div><div class="m-val mono">R$ 1,67</div><div class="m-chg down"><span class="arr">▲</span>+21,0%</div><div class="m-ago">Agosto: <b>R$ 1,38</b></div></div>
+          <div><div class="m-label">CPA</div><div class="m-val mono">R$ 26,66</div><div class="m-chg up"><span class="arr">▼</span>-56,1%</div><div class="m-ago">Agosto: <b>R$ 60,67</b></div></div>
+          <div><div class="m-label">Conversões</div><div class="m-val mono">39,83</div><div class="m-chg up"><span class="arr">▲</span>+197,6%</div><div class="m-ago">Agosto: <b>13,38</b></div></div>
+          <div><div class="m-label">Ticket médio</div><div class="m-val mono">R$ 657,86</div><div class="m-chg up"><span class="arr">▲</span>+47,0%</div><div class="m-ago">Agosto: <b>R$ 447,51</b></div></div>
+        </div>
+        <div class="block good-b"><span class="lbl">✅ O que melhorou</span>
+          <p>Crescimento super positivo nessa campanha. O CPA ficou muito mais baixo — caiu de R$ 60,67 em agosto pra R$ 26,66 em setembro (−56,1%) — e o número de conversões foi extraordinário: de 13 pra 39,8. O ROAS também foi muito positivo, 24,67x. Vale lembrar que em agosto a campanha ainda estava em fase de teste, mas um CPA de R$ 26,66 é muito bom. É a melhor campanha dos últimos 6 meses da conta.</p>
+        </div>
+        <div class="block alert-b"><span class="lbl">❌ O que não deu certo</span>
+          <p>Nada a apontar — a campanha foi 100% positiva em tudo.</p>
+        </div>
+        <div class="block fizemos-b"><span class="lbl">🚀 O que fizemos para melhorar</span>
+          <p>Campanha reativada depois de alguns meses desligada, para cobrir a lacuna deixada pela campanha promocional que não estava funcionando. Solicitados novos criativos ao Mauro. <span class="chip" style="margin-left:4px;">17/09</span></p>
+        </div>
+      </div>
+    </details>
+
+    <details class="camp">
+      <summary class="camp-head">
+        <span class="chip">Performance Max</span><span class="chip">ENABLED</span>
+        <span class="camp-name">[BR] [PMax] Le Club</span>
+        <span class="badge good">🟢 Melhorou</span>
+        <svg class="arrow" width="16" height="16" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        <span class="primary-line">ROAS <b>14,04x</b> (+48,3%) · ROI <b>1.304,5%</b> (+54,0%)</span>
+      </summary>
+      <div class="camp-body">
+        <div class="mgrid">
+          <div><div class="m-label">Gasto</div><div class="m-val mono">R$ 929,31</div><div class="m-chg neutral"><span class="arr">▼</span>-40,6%</div><div class="m-ago">Agosto: <b>R$ 1.563,92</b></div></div>
+          <div><div class="m-label">Impressões</div><div class="m-val mono">36.254</div><div class="m-chg neutral"><span class="arr">▼</span>-54,9%</div><div class="m-ago">Agosto: <b>80.412</b></div></div>
+          <div><div class="m-label">Cliques</div><div class="m-val mono">482</div><div class="m-chg down"><span class="arr">▼</span>-29,5%</div><div class="m-ago">Agosto: <b>684</b></div></div>
+          <div><div class="m-label">CTR</div><div class="m-val mono">1,33%</div><div class="m-chg up"><span class="arr">▲</span>+56,5%</div><div class="m-ago">Agosto: <b>0,85%</b></div></div>
+          <div><div class="m-label">CPC</div><div class="m-val mono">R$ 1,93</div><div class="m-chg up"><span class="arr">▼</span>-15,7%</div><div class="m-ago">Agosto: <b>R$ 2,29</b></div></div>
+          <div><div class="m-label">CPA</div><div class="m-val mono">R$ 55,17</div><div class="m-chg flat"><span class="arr">►</span>-5,8%</div><div class="m-ago">Agosto: <b>R$ 58,57</b></div></div>
+          <div><div class="m-label">Conversões</div><div class="m-val mono">16,84</div><div class="m-chg down"><span class="arr">▼</span>-36,9%</div><div class="m-ago">Agosto: <b>26,70</b></div></div>
+          <div><div class="m-label">Ticket médio</div><div class="m-val mono">R$ 774,90</div><div class="m-chg up"><span class="arr">▲</span>+39,7%</div><div class="m-ago">Agosto: <b>R$ 554,72</b></div></div>
+        </div>
+        <div class="block good-b"><span class="lbl">✅ O que melhorou</span>
+          <p>A troca de criativo deu certo: o ticket médio subiu 39,7% (R$ 774,90 contra R$ 554,72 em agosto).</p>
+        </div>
+        <div class="block alert-b"><span class="lbl">❌ O que não deu certo</span>
+          <p>Nada a apontar nesse período.</p>
+        </div>
+        <div class="block fizemos-b"><span class="lbl">🚀 O que fizemos para melhorar</span>
+          <p>Nenhuma alteração. Campanha em observação. <span class="chip" style="margin-left:4px;">17/09</span></p>
+        </div>
+      </div>
+    </details>
+    </div>
+
+    <div class="ch-panel" id="chp-cf-meta">
+    <div class="kpi-head">KPIs Overview — Meta Ads (Setembro/2026)</div>
+    <div class="kpi-grid">
+      <div class="kpi-tile"><div class="l">Gasto</div><div class="v mono">R$ 4.460,87</div></div>
+      <div class="kpi-tile"><div class="l">Impressões</div><div class="v mono">134.380</div></div>
+      <div class="kpi-tile"><div class="l">Cliques</div><div class="v mono">3.627</div></div>
+      <div class="kpi-tile"><div class="l">CTR</div><div class="v mono">2,70%</div></div>
+      <div class="kpi-tile"><div class="l">Compras</div><div class="v mono">69</div></div>
+      <div class="kpi-tile"><div class="l">Valor conv.</div><div class="v mono">R$ 43.988,61</div></div>
+      <div class="kpi-tile"><div class="l">ROAS</div><div class="v mono">9,86x</div></div>
+      <div class="kpi-tile"><div class="l">CPA</div><div class="v mono">R$ 64,65</div></div>
+      <div class="kpi-tile"><div class="l">Frequência</div><div class="v mono">3,55</div></div>
+      <div class="kpi-tile"><div class="l">Engaj. publicação</div><div class="v mono">12.780</div></div>
+      <div class="kpi-tile"><div class="l">Visitas no site</div><div class="v mono">2.438</div></div>
+    </div>
+
+    <details class="camp" open>
+      <summary class="camp-head">
+        <span class="chip">Conversão (PURCHASE)</span><span class="chip">ACTIVE</span>
+        <span class="camp-name">[Assucar] [RMKT] [Cupons] [MAI25]</span>
+        <span class="badge good">🟢 Melhorou</span>
+        <svg class="arrow" width="16" height="16" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        <span class="primary-line">ROAS <b>17,40x</b> (+44,3%) · ROI <b>1.640,0%</b> (+48,3%)</span>
+      </summary>
+      <div class="camp-body">
+        <div class="mgrid">
+          <div><div class="m-label">Gasto</div><div class="m-val mono">R$ 1.361,13</div><div class="m-chg neutral"><span class="arr">▲</span>+117,7%</div><div class="m-ago">Agosto: <b>R$ 625,12</b></div></div>
+          <div><div class="m-label">Impressões</div><div class="m-val mono">31.656</div><div class="m-chg neutral"><span class="arr">▲</span>+45,7%</div><div class="m-ago">Agosto: <b>21.727</b></div></div>
+          <div><div class="m-label">Cliques</div><div class="m-val mono">1.412</div><div class="m-chg up"><span class="arr">▲</span>+97,5%</div><div class="m-ago">Agosto: <b>715</b></div></div>
+          <div><div class="m-label">CTR</div><div class="m-val mono">4,46%</div><div class="m-chg up"><span class="arr">▲</span>+35,6%</div><div class="m-ago">Agosto: <b>3,29%</b></div></div>
+          <div><div class="m-label">CPA</div><div class="m-val mono">R$ 40,03</div><div class="m-chg up"><span class="arr">▼</span>-16,8%</div><div class="m-ago">Agosto: <b>R$ 48,09</b></div></div>
+          <div><div class="m-label">Compras</div><div class="m-val mono">34</div><div class="m-chg up"><span class="arr">▲</span>+161,5%</div><div class="m-ago">Agosto: <b>13</b></div></div>
+          <div><div class="m-label">Ticket médio</div><div class="m-val mono">R$ 696,58</div><div class="m-chg up"><span class="arr">▲</span>+20,2%</div><div class="m-ago">Agosto: <b>R$ 579,76</b></div></div>
+          <div><div class="m-label">Frequência</div><div class="m-val mono">3,85</div><div class="m-chg up"><span class="arr">▼</span>-34,3%</div><div class="m-ago">Agosto: <b>5,86</b></div></div>
+        </div>
+        <div class="block good-b"><span class="lbl">✅ O que melhorou</span>
+          <p>Essa campanha foi muito positiva. As compras cresceram 161,5% — em agosto foram 13, em setembro 34 — e o CPA caiu de R$ 48,09 pra R$ 40,03. CTR e cliques aumentaram, a frequência ficou excelente (caiu de 5,86 pra 3,85) e o ticket médio também subiu 20,2%. Resultado: ROAS de 17,40x — campanha perfeita no período.</p>
+        </div>
+        <div class="block alert-b"><span class="lbl">❌ O que não deu certo</span>
+          <p>Nada a apontar.</p>
+        </div>
+        <div class="block fizemos-b"><span class="lbl">🚀 O que fizemos para melhorar</span>
+          <p>Nenhuma alteração na estrutura. A campanha passou a receber a verba que saiu da Promocional. <span class="chip" style="margin-left:4px;">17/09</span></p>
+        </div>
+      </div>
+    </details>
+
+    <details class="camp">
+      <summary class="camp-head">
+        <span class="chip">Conversão (PURCHASE)</span><span class="chip">PAUSED</span>
+        <span class="camp-name">[Assucar] [Brindes + Exclusivos] - MAI26</span>
+        <span class="badge alert">🔴 Atenção</span>
+        <svg class="arrow" width="16" height="16" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        <span class="primary-line">ROAS <b>7,23x</b> (-24,9%) · ROI <b>623,2%</b> (-27,8%)</span>
+      </summary>
+      <div class="camp-body">
+        <div class="mgrid">
+          <div><div class="m-label">Gasto</div><div class="m-val mono">R$ 1.297,69</div><div class="m-chg neutral"><span class="arr">▼</span>-18,9%</div><div class="m-ago">Agosto: <b>R$ 1.600,19</b></div></div>
+          <div><div class="m-label">Impressões</div><div class="m-val mono">41.279</div><div class="m-chg neutral"><span class="arr">▼</span>-13,3%</div><div class="m-ago">Agosto: <b>47.620</b></div></div>
+          <div><div class="m-label">Cliques</div><div class="m-val mono">989</div><div class="m-chg up"><span class="arr">▲</span>+10,5%</div><div class="m-ago">Agosto: <b>895</b></div></div>
+          <div><div class="m-label">CTR</div><div class="m-val mono">2,40%</div><div class="m-chg up"><span class="arr">▲</span>+27,7%</div><div class="m-ago">Agosto: <b>1,88%</b></div></div>
+          <div><div class="m-label">CPA</div><div class="m-val mono">R$ 86,51</div><div class="m-chg down"><span class="arr">▲</span>+83,8%</div><div class="m-ago">Agosto: <b>R$ 47,06</b></div></div>
+          <div><div class="m-label">Compras</div><div class="m-val mono">15</div><div class="m-chg down"><span class="arr">▼</span>-55,9%</div><div class="m-ago">Agosto: <b>34</b></div></div>
+          <div><div class="m-label">Ticket médio</div><div class="m-val mono">R$ 625,56</div><div class="m-chg up"><span class="arr">▲</span>+38,0%</div><div class="m-ago">Agosto: <b>R$ 453,18</b></div></div>
+          <div><div class="m-label">Frequência</div><div class="m-val mono">4,23</div><div class="m-chg up"><span class="arr">▼</span>-51,9%</div><div class="m-ago">Agosto: <b>8,80</b></div></div>
+        </div>
+        <div class="block empty"><span class="lbl">✅ O que melhorou</span>aguardando o gestor</div>
+        <div class="block alert-b"><span class="lbl">❌ O que não deu certo</span>
+          <p>Essa campanha teve uma queda muito brusca nas compras — −55,9% (15 contra 34 em agosto) — e o CPA subiu muito: de R$ 47,06 pra R$ 86,51 (+83,8%). Por mais que a campanha tenha entregue mais cliques, CTR melhor, frequência melhor e um ticket médio maior, a queda no número de compras foi muito agressiva.</p>
+        </div>
+        <div class="block fizemos-b"><span class="lbl">🚀 O que fizemos para melhorar</span>
+          <p>Adicionados novos vídeos ao conjunto, para testar se a campanha reage. <span class="chip" style="margin-left:4px;">17/09</span></p>
+        </div>
+      </div>
+    </details>
+
+    <details class="camp">
+      <summary class="camp-head">
+        <span class="chip">Conversão (PURCHASE)</span><span class="chip">PAUSED</span>
+        <span class="camp-name">[Assucar] [Promocional] 02/06/26</span>
+        <span class="badge alert">🔴 Atenção — maior queda do fechamento</span>
+        <svg class="arrow" width="16" height="16" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        <span class="primary-line">ROAS <b>2,83x</b> (-46,1%) · ROI <b>182,5%</b> (-57,0%)</span>
+      </summary>
+      <div class="camp-body">
+        <div class="mgrid">
+          <div><div class="m-label">Gasto</div><div class="m-val mono">R$ 498,40</div><div class="m-chg neutral"><span class="arr">▼</span>-42,3%</div><div class="m-ago">Agosto: <b>R$ 864,05</b></div></div>
+          <div><div class="m-label">Impressões</div><div class="m-val mono">18.681</div><div class="m-chg neutral"><span class="arr">▼</span>-29,0%</div><div class="m-ago">Agosto: <b>26.313</b></div></div>
+          <div><div class="m-label">Cliques</div><div class="m-val mono">387</div><div class="m-chg down"><span class="arr">▼</span>-50,8%</div><div class="m-ago">Agosto: <b>786</b></div></div>
+          <div><div class="m-label">CTR</div><div class="m-val mono">2,07%</div><div class="m-chg down"><span class="arr">▼</span>-30,8%</div><div class="m-ago">Agosto: <b>2,99%</b></div></div>
+          <div><div class="m-label">CPA</div><div class="m-val mono">R$ 498,40</div><div class="m-chg down"><span class="arr">▲</span>+707,5%</div><div class="m-ago">Agosto: <b>R$ 61,72</b></div></div>
+          <div><div class="m-label">Compras</div><div class="m-val mono">1</div><div class="m-chg down"><span class="arr">▼</span>-92,9%</div><div class="m-ago">Agosto: <b>14</b></div></div>
+          <div><div class="m-label">Frequência</div><div class="m-val mono">2,20</div><div class="m-chg up"><span class="arr">▼</span>-52,8%</div><div class="m-ago">Agosto: <b>4,66</b></div></div>
+        </div>
+        <div class="block alert-b"><span class="lbl">❌ O que não deu certo</span>
+          <p>Essa campanha teve a pior queda histórica da conta: apenas 1 compra no período. Ainda bem que ela foi desativada — gastou R$ 498,40. A gente acredita que o principal motivo foram os criativos de produto (vinhos): a campanha promocional é muito focada no tipo de vinho e na promoção de cada mês, então é hora de repensar esse formato.</p>
+        </div>
+        <div class="block fizemos-b"><span class="lbl">🚀 O que fizemos para melhorar</span>
+          <p>Campanha pausada e verba redirecionada integralmente para a campanha de remarketing <b>[Assucar] [RMKT] [Cupons] [MAI25]</b>. <span class="chip" style="margin-left:4px;">17/09</span></p>
+        </div>
+      </div>
+    </details>
+
+    <details class="camp">
+      <summary class="camp-head">
+        <span class="chip">Conversão (PURCHASE)</span><span class="chip">ACTIVE</span>
+        <span class="camp-name">[Assucar] [Chez Experience Vendas] 14/09/2026</span>
+        <span class="badge new">🆕 Primeira leitura</span>
+        <svg class="arrow" width="16" height="16" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        <span class="primary-line">ROAS <b>7,30x</b> · ROI <b>629,7%</b> — campanha nova (14–30/09), sem período anterior de comparação</span>
+      </summary>
+      <div class="camp-body">
+        <div class="mgrid">
+          <div><div class="m-label">Gasto</div><div class="m-val mono">R$ 1.303,65</div></div>
+          <div><div class="m-label">Impressões</div><div class="m-val mono">42.764</div></div>
+          <div><div class="m-label">Cliques</div><div class="m-val mono">839</div></div>
+          <div><div class="m-label">CTR</div><div class="m-val mono">1,96%</div></div>
+          <div><div class="m-label">CPA</div><div class="m-val mono">R$ 68,61</div></div>
+          <div><div class="m-label">Compras</div><div class="m-val mono">19</div></div>
+          <div><div class="m-label">Ticket médio</div><div class="m-val mono">R$ 500,70</div></div>
+          <div><div class="m-label">Frequência</div><div class="m-val mono">2,36</div></div>
+        </div>
+        <div class="block empty"><span class="lbl">❌ O que não deu certo</span>aguardando o gestor</div>
+        <div class="block fizemos-b"><span class="lbl">🚀 O que fizemos para melhorar</span>
+          <p>Campanha nova, com foco na venda de ingressos. Sem alteração — em acompanhamento. <span class="chip" style="margin-left:4px;">17/09</span></p>
+        </div>
+      </div>
+    </details>
+    </div>
+  </section>
+
+  <!-- ============================================================ DECORE ============================================================ -->
+  <section class="client-panel" id="p-dc">
+    <p class="client-intro"><b>Decore</b> — B2B revendedores, perfil Lead. Meta Ads act_386946248899004 (sem Google Ads). <span style="color:var(--alert);">Nota operacional: <code class="mono">account_status</code> da conta retornou <b>3 (UNSETTLED/pendência de cobrança)</b> — não impediu a coleta, mas vale confirmar no Gerenciador de Pagamentos, pode afetar veiculação futura.</span></p>
+
+    <div class="kpi-head">KPIs Overview — Meta Ads (Setembro/2026)</div>
+    <div class="kpi-grid">
+      <div class="kpi-tile"><div class="l">Gasto</div><div class="v mono">R$ 1.963,03</div></div>
+      <div class="kpi-tile"><div class="l">Impressões</div><div class="v mono">35.083</div></div>
+      <div class="kpi-tile"><div class="l">Cliques</div><div class="v mono">902</div></div>
+      <div class="kpi-tile"><div class="l">CTR</div><div class="v mono">2,57%</div></div>
+      <div class="kpi-tile"><div class="l">Leads</div><div class="v mono">68</div></div>
+      <div class="kpi-tile"><div class="l">Custo/Lead</div><div class="v mono">R$ 28,87</div></div>
+      <div class="kpi-tile"><div class="l">Frequência</div><div class="v mono">2,89</div></div>
+      <div class="kpi-tile"><div class="l">Engaj. publicação</div><div class="v mono">5.315</div></div>
+      <div class="kpi-tile"><div class="l">Visitas no site</div><div class="v mono">360</div></div>
+    </div>
+
+    <details class="camp" open>
+      <summary class="camp-head">
+        <span class="chip">Lead</span><span class="chip">ACTIVE</span>
+        <span class="camp-name">[Assucar] [Revendedor] [Lead] Melhores públicos Histórico] [Pernambuco] - 07/07/25</span>
+        <span class="badge alert">🔴 Atenção</span>
+        <svg class="arrow" width="16" height="16" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        <span class="primary-line">CPL <b>R$ 31,48</b> (+13,8%) · Leads <b>54</b> (+25,6%)</span>
+      </summary>
+      <div class="camp-body">
+        <div class="mgrid">
+          <div><div class="m-label">Gasto</div><div class="m-val mono">R$ 1.699,69</div><div class="m-chg neutral"><span class="arr">▲</span>+42,9%</div><div class="m-ago">Agosto: <b>R$ 1.189,60</b></div></div>
+          <div><div class="m-label">Impressões</div><div class="m-val mono">29.462</div><div class="m-chg neutral"><span class="arr">▲</span>+28,7%</div><div class="m-ago">Agosto: <b>22.893</b></div></div>
+          <div><div class="m-label">Cliques</div><div class="m-val mono">737</div><div class="m-chg up"><span class="arr">▲</span>+39,9%</div><div class="m-ago">Agosto: <b>527</b></div></div>
+          <div><div class="m-label">CTR</div><div class="m-val mono">2,50%</div><div class="m-chg flat"><span class="arr">►</span>+8,7%</div><div class="m-ago">Agosto: <b>2,30%</b></div></div>
+          <div><div class="m-label">CPC</div><div class="m-val mono">R$ 2,31</div><div class="m-chg flat"><span class="arr">►</span>+2,2%</div><div class="m-ago">Agosto: <b>R$ 2,26</b></div></div>
+          <div><div class="m-label">CPM</div><div class="m-val mono">R$ 57,69</div><div class="m-chg down"><span class="arr">▲</span>+11,0%</div><div class="m-ago">Agosto: <b>R$ 51,96</b></div></div>
+          <div><div class="m-label">Frequência</div><div class="m-val mono">3,04</div><div class="m-chg down"><span class="arr">▲</span>+12,7%</div><div class="m-ago">Agosto: <b>2,70</b></div></div>
+          <div><div class="m-label">Leads</div><div class="m-val mono">54</div><div class="m-chg up"><span class="arr">▲</span>+25,6%</div><div class="m-ago">Agosto: <b>43</b></div></div>
+          <div><div class="m-label">CPA</div><div class="m-val mono">R$ 31,48</div><div class="m-chg down"><span class="arr">▲</span>+13,8%</div><div class="m-ago">Agosto: <b>R$ 27,67</b></div></div>
+        </div>
+        <div class="block good-b"><span class="lbl">✅ O que melhorou</span>
+          <p>Em setembro a gente teve uma melhora de 25,6% no número de leads — 54 contra 43 em agosto — e os cliques também subiram bastante (+39,9%). CTR e CPC ficaram estáveis no período.</p>
+        </div>
+        <div class="block alert-b"><span class="lbl">❌ O que não deu certo</span>
+          <p>Ponto de atenção: o CPA ficou mais alto — fechou o mês em R$ 31,48, contra R$ 27,67 em agosto (+13,8%).</p>
+        </div>
+        <div class="block fizemos-b"><span class="lbl">🚀 O que fizemos para melhorar</span>
+          <p>Subida do vídeo <b>briefing 2</b> no conjunto 03/ Advantage + Sugestão Novos Criativos e desativação do <b>vd showrooms</b>, para teste até o fim do mês. <span class="chip" style="margin-left:4px;">15/09</span></p>
+          <p>Ao longo de agosto a gente subiu novos conjuntos com criativos novos e, em setembro, percebeu que alguns estavam com CPA muito alto. A gente desativou esses anúncios, pausou o conjunto mais caro e redistribuiu a verba pros conjuntos com melhor resultado. Pra outubro, já entramos com os criativos novos que a agência produziu — o resultado aparece no próximo relatório. <span class="chip" style="margin-left:4px;">05/10</span></p>
+        </div>
+      </div>
+    </details>
+
+    <details class="camp">
+      <summary class="camp-head">
+        <span class="chip">Lead</span><span class="chip">ACTIVE</span>
+        <span class="camp-name">[Assucar] [Revendedor] [Lead] Cidades Bahia - 07/08/25</span>
+        <span class="badge alert">🔴 Atenção</span>
+        <svg class="arrow" width="16" height="16" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        <span class="primary-line">CPL <b>R$ 18,81</b> (+19,1%) · Leads <b>14</b> (-26,3%)</span>
+      </summary>
+      <div class="camp-body">
+        <div class="mgrid">
+          <div><div class="m-label">Gasto</div><div class="m-val mono">R$ 263,34</div><div class="m-chg neutral"><span class="arr">▼</span>-12,3%</div><div class="m-ago">Agosto: <b>R$ 300,16</b></div></div>
+          <div><div class="m-label">Impressões</div><div class="m-val mono">5.621</div><div class="m-chg neutral"><span class="arr">▼</span>-8,4%</div><div class="m-ago">Agosto: <b>6.135</b></div></div>
+          <div><div class="m-label">Cliques</div><div class="m-val mono">165</div><div class="m-chg down"><span class="arr">▼</span>-10,8%</div><div class="m-ago">Agosto: <b>185</b></div></div>
+          <div><div class="m-label">CTR</div><div class="m-val mono">2,94%</div><div class="m-chg flat"><span class="arr">►</span>-2,7%</div><div class="m-ago">Agosto: <b>3,02%</b></div></div>
+          <div><div class="m-label">CPC</div><div class="m-val mono">R$ 1,60</div><div class="m-chg flat"><span class="arr">►</span>-1,6%</div><div class="m-ago">Agosto: <b>R$ 1,62</b></div></div>
+          <div><div class="m-label">CPM</div><div class="m-val mono">R$ 46,85</div><div class="m-chg flat"><span class="arr">►</span>-4,2%</div><div class="m-ago">Agosto: <b>R$ 48,93</b></div></div>
+          <div><div class="m-label">Frequência</div><div class="m-val mono">2,25</div><div class="m-chg up"><span class="arr">▼</span>-11,6%</div><div class="m-ago">Agosto: <b>2,55</b></div></div>
+          <div><div class="m-label">Leads</div><div class="m-val mono">14</div><div class="m-chg down"><span class="arr">▼</span>-26,3%</div><div class="m-ago">Agosto: <b>19</b></div></div>
+          <div><div class="m-label">CPA</div><div class="m-val mono">R$ 18,81</div><div class="m-chg down"><span class="arr">▲</span>+19,1%</div><div class="m-ago">Agosto: <b>R$ 15,80</b></div></div>
+        </div>
+        <div class="block empty"><span class="lbl">✅ O que melhorou</span>aguardando o gestor</div>
+        <div class="block alert-b"><span class="lbl">❌ O que não deu certo</span>
+          <p>Setembro foi um mês difícil pra essa campanha: os leads caíram 26,3% (14 contra 19 em agosto), o CPA subiu pra R$ 18,81 (+19,1%) e os cliques caíram 10,8%. CTR, CPC e CPM ficaram estáveis. Importante ressaltar que a campanha já passou por vários testes de criativos e de públicos nos últimos meses, e a gente ainda tem dificuldade de entender se o problema é criativo ou qualificação do lead.</p>
+        </div>
+        <div class="block fizemos-b"><span class="lbl">🚀 O que fizemos para melhorar</span>
+          <p>Nenhuma alteração. Campanha mantida como está até o fechamento do mês. <span class="chip" style="margin-left:4px;">15/09</span></p>
+          <p>Desde agosto a gente vem testando criativos novos, mas o que segue dando mais resultado é o "quer ser um revendedor decore" — mesmo com carrossel e vídeo no conjunto, a Meta insiste em entregar esse anúncio. Pra outubro, a gente vai duplicar o conjunto e subir um novo só com esse criativo rodando, pra ver o retorno isolado dele. <span class="chip" style="margin-left:4px;">05/10</span></p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============================================================ CLÍNICA ASSISTÊNCIA FAMILIAR ============================================================ -->
+  <section class="client-panel" id="p-caf">
+    <p class="client-intro"><b>Clínica Assistência Familiar</b> — perfil Lead. Google Ads 371-547-1664 (sem Meta Ads). Primeiro fechamento consolidado neste formato pra este cliente.</p>
+
+    <div class="kpi-head">KPIs Overview — Google Ads (Setembro/2026)</div>
+    <div class="kpi-grid">
+      <div class="kpi-tile"><div class="l">Gasto</div><div class="v mono">R$ 1.500,19</div></div>
+      <div class="kpi-tile"><div class="l">Impressões</div><div class="v mono">9.451</div></div>
+      <div class="kpi-tile"><div class="l">Cliques</div><div class="v mono">797</div></div>
+      <div class="kpi-tile"><div class="l">CTR</div><div class="v mono">8,43%</div></div>
+      <div class="kpi-tile"><div class="l">Leads</div><div class="v mono">131,0</div></div>
+      <div class="kpi-tile"><div class="l">Custo/Lead</div><div class="v mono">R$ 11,45</div></div>
+      <div class="kpi-tile"><div class="l">CPA</div><div class="v mono">R$ 11,45</div></div>
+    </div>
+
+    <details class="camp" open>
+      <summary class="camp-head">
+        <span class="chip">Search</span><span class="chip">ENABLED</span>
+        <span class="camp-name">[Assucar] [Search] [Lead] - 31/10/2025</span>
+        <span class="badge alert">🔴 Atenção</span>
+        <svg class="arrow" width="16" height="16" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        <span class="primary-line">CPL <b>R$ 11,45</b> (+60,2%) · Leads <b>131,0</b> (-1,5%, estável)</span>
+      </summary>
+      <div class="camp-body">
+        <div class="mgrid">
+          <div><div class="m-label">Gasto</div><div class="m-val mono">R$ 1.500,19</div><div class="m-chg neutral"><span class="arr">▲</span>+57,8%</div><div class="m-ago">Agosto: <b>R$ 950,98</b></div></div>
+          <div><div class="m-label">Impressões</div><div class="m-val mono">9.451</div><div class="m-chg neutral"><span class="arr">▲</span>+77,9%</div><div class="m-ago">Agosto: <b>5.314</b></div></div>
+          <div><div class="m-label">Cliques</div><div class="m-val mono">797</div><div class="m-chg up"><span class="arr">▲</span>+51,2%</div><div class="m-ago">Agosto: <b>527</b></div></div>
+          <div><div class="m-label">CTR</div><div class="m-val mono">8,43%</div><div class="m-chg down"><span class="arr">▼</span>-15,0%</div><div class="m-ago">Agosto: <b>9,92%</b></div></div>
+          <div><div class="m-label">CPC</div><div class="m-val mono">R$ 1,88</div><div class="m-chg flat"><span class="arr">►</span>+4,4%</div><div class="m-ago">Agosto: <b>R$ 1,80</b></div></div>
+          <div><div class="m-label">Share impressão</div><div class="m-val mono">14,1%</div><div class="m-chg flat"><span class="arr">►</span>-4,1%</div><div class="m-ago">Agosto: <b>14,7%</b></div></div>
+          <div><div class="m-label">Leads</div><div class="m-val mono">131,0</div><div class="m-chg flat"><span class="arr">►</span>-1,5%</div><div class="m-ago">Agosto: <b>133,0</b></div></div>
+          <div><div class="m-label">Custo por Lead</div><div class="m-val mono">R$ 11,45</div><div class="m-chg down"><span class="arr">▲</span>+60,2%</div><div class="m-ago">Agosto: <b>R$ 7,15</b></div></div>
+        </div>
+        <div class="block good-b"><span class="lbl">✅ O que melhorou</span>
+          <p>O ponto positivo do mês foi o número de cliques, que subiu 51,2% — 797 contra 527 em agosto.</p>
+        </div>
+        <div class="block alert-b"><span class="lbl">❌ O que não deu certo</span>
+          <p>Essa campanha teve uma piora muito grande no custo por lead: subiu 60,2% em relação a agosto, de R$ 7,15 pra R$ 11,45 — um crescimento bem considerável. Importante ressaltar que a gente aumentou a verba nesse período — o investimento do mês chegou a R$ 1.500 (contra R$ 950,98 em agosto). Mesmo com todas as otimizações que a gente fez, a gente entende que pode ter sido um efeito sazonal, ou o leilão que ficou mais caro junto com o aumento de verba.</p>
+          <p>Outro ponto importante: das palavras-chave que a gente está comprando, "Psiquiatra" continua sendo a que mais traz leads — no mês foram 99,5 conversões a R$ 12,01 cada.</p>
+        </div>
+        <div class="block fizemos-b"><span class="lbl">🚀 O que fizemos para melhorar</span>
+          <p>Negativação dos termos de pesquisa que contêm a palavra <b>gratuito</b>: psiquiatra gratuito recife, psiquiatra recife gratuito, hospital psiquiátrico recife gratuito, atendimento psiquiatra gratuito e clínica de internação psiquiátrica gratuita. <span class="chip" style="margin-left:4px;">16/09</span></p>
+        </div>
+      </div>
+    </details>
+
+  </section>
+
+  <!-- ============================================================ SPEEDMAIS ============================================================ -->
+  <section class="client-panel" id="p-sm">
+    <p class="client-intro"><b>SpeedMais Gráfica Nova</b> — B2B gráfica, perfil Lead. Google Ads 608-141-8993 + Meta Ads act_870928146781077. Primeiro fechamento consolidado neste formato.</p>
+
+    <input type="radio" name="ch-sm" id="ch-sm-google" class="chtab" checked>
+    <input type="radio" name="ch-sm" id="ch-sm-meta" class="chtab">
+    <div class="ch-tabs">
+      <label for="ch-sm-google" class="chtab-label">Google Ads</label>
+      <label for="ch-sm-meta" class="chtab-label">Meta Ads</label>
+    </div>
+
+    <div class="ch-panel" id="chp-sm-google">
+    <div class="kpi-head">KPIs Overview — Google Ads (Setembro/2026)</div>
+    <div class="kpi-grid">
+      <div class="kpi-tile"><div class="l">Gasto</div><div class="v mono">R$ 3.818,66</div></div>
+      <div class="kpi-tile"><div class="l">Impressões</div><div class="v mono">79.022</div></div>
+      <div class="kpi-tile"><div class="l">Cliques</div><div class="v mono">8.792</div></div>
+      <div class="kpi-tile"><div class="l">CTR</div><div class="v mono">11,13%</div></div>
+      <div class="kpi-tile"><div class="l">Leads</div><div class="v mono">472,0</div></div>
+      <div class="kpi-tile"><div class="l">Custo/Lead</div><div class="v mono">R$ 8,09</div></div>
+      <div class="kpi-tile"><div class="l">CPA</div><div class="v mono">R$ 8,09</div></div>
+    </div>
+
+    <details class="camp" open>
+      <summary class="camp-head">
+        <span class="chip">Performance Max</span><span class="chip">ENABLED</span>
+        <span class="camp-name">[Assucar] [Pmax] [Lead] - 25/06/25</span>
+        <span class="badge stable">🟡 Estável</span>
+        <svg class="arrow" width="16" height="16" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        <span class="primary-line">CPA <b>R$ 4,86</b> (-2,0%) · Leads <b>395,0</b> (+5,2%)</span>
+      </summary>
+      <div class="camp-body">
+        <div class="mgrid">
+          <div><div class="m-label">Gasto</div><div class="m-val mono">R$ 1.917,66</div><div class="m-chg neutral"><span class="arr">▲</span>+2,9%</div><div class="m-ago">Agosto: <b>R$ 1.863,84</b></div></div>
+          <div><div class="m-label">Impressões</div><div class="m-val mono">73.540</div><div class="m-chg neutral"><span class="arr">▲</span>+25,2%</div><div class="m-ago">Agosto: <b>58.718</b></div></div>
+          <div><div class="m-label">Cliques</div><div class="m-val mono">8.176</div><div class="m-chg up"><span class="arr">▲</span>+29,8%</div><div class="m-ago">Agosto: <b>6.297</b></div></div>
+          <div><div class="m-label">CTR</div><div class="m-val mono">11,12%</div><div class="m-chg flat"><span class="arr">►</span>+3,7%</div><div class="m-ago">Agosto: <b>10,72%</b></div></div>
+          <div><div class="m-label">CPC</div><div class="m-val mono">R$ 0,23</div><div class="m-chg up"><span class="arr">▼</span>-23,3%</div><div class="m-ago">Agosto: <b>R$ 0,30</b></div></div>
+          <div><div class="m-label">Share impressão</div><div class="m-val mono">15,7%</div><div class="m-chg up"><span class="arr">▲</span>+57%</div><div class="m-ago">Agosto: <b>10,0%</b></div></div>
+          <div><div class="m-label">Leads</div><div class="m-val mono">395,0</div><div class="m-chg flat"><span class="arr">►</span>+5,2%</div><div class="m-ago">Agosto: <b>375,6</b></div></div>
+          <div><div class="m-label">Custo por Lead</div><div class="m-val mono">R$ 4,86</div><div class="m-chg flat"><span class="arr">►</span>-2,0%</div><div class="m-ago">Agosto: <b>R$ 4,96</b></div></div>
+        </div>
+        <div class="block good-b"><span class="lbl">✅ O que melhorou</span>
+          <p>A campanha ficou estável em setembro, assim como todas as campanhas do Google da Speed. O destaque positivo foi o share de impressão, que subiu 57% — de 10,0% pra 15,7%.</p>
+          <p>Importante ressaltar o que isso significa: o share de impressão é a porcentagem de vezes que o anúncio foi exibido em comparação com o total de vezes que ele poderia ter sido exibido — ou seja, a fatia de mercado dos nossos anúncios frente aos concorrentes. Com 15,7%, a cada 100 buscas do público da Speed o anúncio apareceu em cerca de 16.</p>
+          <p>Outro ponto importante: no meio do mês a campanha estava em atenção — tinha caído bastante (na leitura de 15/09, leads −19,7% e custo por lead +33,3%) — mas se recuperou ao longo dos 30 dias de setembro.</p>
+        </div>
+        <div class="block alert-b"><span class="lbl">❌ O que não deu certo</span>
+          <p>Na verdade, nada que preocupe nesse período: o número de leads ficou estável (395 contra 375,6 em agosto, +5,2%) e o custo por lead caiu só 2,0% (R$ 4,86 contra R$ 4,96).</p>
+        </div>
+        <div class="block fizemos-b"><span class="lbl">🚀 O que fizemos para melhorar</span>
+          <p>Nenhuma alteração. Ficaram pendentes duas análises com o Mauro: termos de pesquisa que possam virar novas entradas e revisão dos sinais configurados no grupo de recursos. <span class="chip" style="margin-left:4px;">16/09</span></p>
+        </div>
+      </div>
+    </details>
+
+    <details class="camp">
+      <summary class="camp-head">
+        <span class="chip">Search</span><span class="chip">ENABLED</span>
+        <span class="camp-name">[Assucar] [Search] [Embalagens]- 02/07</span>
+        <span class="badge stable">🟡 Estável</span>
+        <svg class="arrow" width="16" height="16" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        <span class="primary-line">CPA <b>R$ 24,69</b> (-3,5%) · Leads <b>77,0</b> (+5,5%)</span>
+      </summary>
+      <div class="camp-body">
+        <div class="mgrid">
+          <div><div class="m-label">Gasto</div><div class="m-val mono">R$ 1.901,00</div><div class="m-chg neutral"><span class="arr">▲</span>+1,8%</div><div class="m-ago">Agosto: <b>R$ 1.867,26</b></div></div>
+          <div><div class="m-label">Impressões</div><div class="m-val mono">5.482</div><div class="m-chg neutral"><span class="arr">▼</span>-4,7%</div><div class="m-ago">Agosto: <b>5.750</b></div></div>
+          <div><div class="m-label">Cliques</div><div class="m-val mono">616</div><div class="m-chg flat"><span class="arr">►</span>+3,0%</div><div class="m-ago">Agosto: <b>598</b></div></div>
+          <div><div class="m-label">CTR</div><div class="m-val mono">11,24%</div><div class="m-chg flat"><span class="arr">►</span>+8,1%</div><div class="m-ago">Agosto: <b>10,40%</b></div></div>
+          <div><div class="m-label">CPC</div><div class="m-val mono">R$ 3,09</div><div class="m-chg flat"><span class="arr">►</span>-1,0%</div><div class="m-ago">Agosto: <b>R$ 3,12</b></div></div>
+          <div><div class="m-label">Share impressão</div><div class="m-val mono">52,6%</div><div class="m-chg flat"><span class="arr">►</span>+4,2pp</div><div class="m-ago">Agosto: <b>48,4%</b></div></div>
+          <div><div class="m-label">Leads</div><div class="m-val mono">77,0</div><div class="m-chg flat"><span class="arr">►</span>+5,5%</div><div class="m-ago">Agosto: <b>73,0</b></div></div>
+          <div><div class="m-label">Custo por Lead</div><div class="m-val mono">R$ 24,69</div><div class="m-chg flat"><span class="arr">►</span>-3,5%</div><div class="m-ago">Agosto: <b>R$ 25,58</b></div></div>
+        </div>
+        <div class="block good-b"><span class="lbl">✅ O que melhorou</span>
+          <p>A campanha segue estável nos últimos meses. Em setembro, leads (77 contra 73 em agosto, +5,5%) e custo por lead (R$ 24,69 contra R$ 25,58, −3,5%) ficaram estáveis, assim como CTR e CPC.</p>
+        </div>
+        <div class="block empty"><span class="lbl">❌ O que não deu certo</span>aguardando o gestor</div>
+        <div class="block fizemos-b"><span class="lbl">🚀 O que fizemos para melhorar</span>
+          <p>Nenhuma alteração na campanha. Ficou pendente analisar os termos de pesquisa com o Mauro para identificar palavras que valem entrar como palavra-chave. <span class="chip" style="margin-left:4px;">16/09</span></p>
+        </div>
+      </div>
+    </details>
+    </div>
+
+    <div class="ch-panel" id="chp-sm-meta">
+    <div class="kpi-head">KPIs Overview — Meta Ads (Setembro/2026)</div>
+    <div class="kpi-grid">
+      <div class="kpi-tile"><div class="l">Gasto</div><div class="v mono">R$ 2.534,34</div></div>
+      <div class="kpi-tile"><div class="l">Impressões</div><div class="v mono">78.336</div></div>
+      <div class="kpi-tile"><div class="l">Cliques</div><div class="v mono">5.311</div></div>
+      <div class="kpi-tile"><div class="l">CTR</div><div class="v mono">6,78%</div></div>
+      <div class="kpi-tile"><div class="l">Leads</div><div class="v mono">359</div></div>
+      <div class="kpi-tile"><div class="l">Custo/Lead</div><div class="v mono">R$ 7,06</div></div>
+      <div class="kpi-tile"><div class="l">Frequência</div><div class="v mono">2,50</div></div>
+      <div class="kpi-tile"><div class="l">Engaj. publicação</div><div class="v mono">31.873</div></div>
+      <div class="kpi-tile"><div class="l">Visitas no site</div><div class="v mono">3.193</div></div>
+    </div>
+
+    <details class="camp" open>
+      <summary class="camp-head">
+        <span class="chip">Lead</span><span class="chip">ACTIVE</span>
+        <span class="camp-name">[Assucar] [Lead LP] | Início JUL26</span>
+        <span class="badge alert">🔴 Atenção</span>
+        <svg class="arrow" width="16" height="16" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        <span class="primary-line">CPL <b>R$ 7,06</b> (+14,1%) · Leads <b>359</b> (-16,7%)</span>
+      </summary>
+      <div class="camp-body">
+        <div class="mgrid">
+          <div><div class="m-label">Gasto</div><div class="m-val mono">R$ 2.534,34</div><div class="m-chg neutral"><span class="arr">▼</span>-5,0%</div><div class="m-ago">Agosto: <b>R$ 2.666,65</b></div></div>
+          <div><div class="m-label">Impressões</div><div class="m-val mono">78.336</div><div class="m-chg neutral"><span class="arr">▲</span>+5,8%</div><div class="m-ago">Agosto: <b>74.055</b></div></div>
+          <div><div class="m-label">Cliques</div><div class="m-val mono">5.311</div><div class="m-chg up"><span class="arr">▲</span>+79,9%</div><div class="m-ago">Agosto: <b>2.953</b></div></div>
+          <div><div class="m-label">CTR</div><div class="m-val mono">6,78%</div><div class="m-chg up"><span class="arr">▲</span>+70,0%</div><div class="m-ago">Agosto: <b>3,99%</b></div></div>
+          <div><div class="m-label">CPM</div><div class="m-val mono">R$ 32,35</div><div class="m-chg up"><span class="arr">▼</span>-10,2%</div><div class="m-ago">Agosto: <b>R$ 36,01</b></div></div>
+          <div><div class="m-label">Frequência</div><div class="m-val mono">2,50</div><div class="m-chg flat"><span class="arr">►</span>-9,1%</div><div class="m-ago">Agosto: <b>2,75</b></div></div>
+          <div><div class="m-label">Leads</div><div class="m-val mono">359</div><div class="m-chg down"><span class="arr">▼</span>-16,7%</div><div class="m-ago">Agosto: <b>431</b></div></div>
+          <div><div class="m-label">Custo por Lead</div><div class="m-val mono">R$ 7,06</div><div class="m-chg down"><span class="arr">▲</span>+14,1%</div><div class="m-ago">Agosto: <b>R$ 6,19</b></div></div>
+        </div>
+        <div class="block good-b"><span class="lbl">✅ O que melhorou</span>
+          <p>O ponto positivo do mês foi o conjunto novo "04_Advantages/Depoimentos", que a gente começou a testar em setembro — junto com o conjunto de Sacolas, foi o que gerou o menor custo por lead da campanha: R$ 5,06 nos Depoimentos e R$ 5,87 em Sacolas. Em Sacolas, o criativo "01_a SpeedMais, sua embalagem tem personalidade!" segue como o motor do conjunto: concentrou 96% do gasto e 148 dos 155 leads — na prática, a Meta só está entregando ele.</p>
+          <p>Outro ponto importante: os criativos que mostram a estrutura da empresa, a fábrica e o processo de produção foram os que mais trouxeram retorno em conjuntos diferentes — "06_reels processo de produção" (54 leads) e "02_estrutura speedmais" (46 leads, CPL R$ 6,65). Vale o time de design produzir mais criativos nessa mesma linha de comunicação.</p>
+        </div>
+        <div class="block alert-b"><span class="lbl">❌ O que não deu certo</span>
+          <p>Ponto de atenção nesse mês: o número de leads caiu 16,7% (359 contra 431 em agosto) e o custo por lead subiu 14,1% (R$ 7,06 contra R$ 6,19). Não é uma queda brusca, mas é um ponto que a gente precisa entender bem.</p>
+          <p>A gente identificou de onde veio boa parte disso: no conjunto de Embalagens, em agosto, praticamente todo o resultado vinha de um único criativo — o vídeo "06_reels processo de produção" (144 leads a R$ 5,55). No meio de setembro a gente tirou esse anúncio de circulação pra Meta entregar os outros criativos, e o CPA subiu: os reels de Pernambuco e Casa dos Frios assumiram a verba com custo por lead de R$ 11,34 e R$ 9,73. No Misto aconteceu algo parecido: o anúncio "05 - muito antes do seu projeto chegar" entrou no ar em 16/09 com CPA alto (R$ 10,20).</p>
+        </div>
+        <div class="block fizemos-b"><span class="lbl">🚀 O que fizemos para melhorar</span>
+          <p>Desativado o <b>06_reels processo de produção</b> no conjunto 02_Advantages/Embalagens, subido o anúncio novo <b>05 - muito antes do seu projeto</b> no conjunto 03_Advantage/Misto e criado o conjunto <b>04_Advantages/Depoimentos</b> para testar vídeos de depoimento de clientes. <span class="chip" style="margin-left:4px;">16/09</span></p>
+          <p>A gente desativou os anúncios que estavam mais caros — os reels de Pernambuco e Casa dos Frios, no conjunto de Embalagens, e o "05 - muito antes do seu projeto chegar", no Misto — e voltou com o anúncio que performou melhor em agosto, o "06_reels processo de produção". O efeito aparece no relatório de outubro. <span class="chip" style="margin-left:4px;">05/10</span></p>
+        </div>
+      </div>
+    </details>
+    </div>
+  </section>
+
+  <!-- ============================================================ ATLÂNTICO ============================================================ -->
+  <section class="client-panel" id="p-at">
+    <p class="client-intro"><b>Atlântico</b> — hospedagem (bangalôs/studios), perfil Lead/Mensagem via WhatsApp. Meta Ads act_1096417259179541 (sem Google Ads). Primeira leitura consolidada deste cliente.</p>
+
+    <div class="kpi-head">KPIs Overview — Meta Ads (Setembro/2026)</div>
+    <div class="kpi-grid">
+      <div class="kpi-tile"><div class="l">Gasto</div><div class="v mono">R$ 400,33</div></div>
+      <div class="kpi-tile"><div class="l">Impressões</div><div class="v mono">18.488</div></div>
+      <div class="kpi-tile"><div class="l">Cliques</div><div class="v mono">664</div></div>
+      <div class="kpi-tile"><div class="l">CTR</div><div class="v mono">3,59%</div></div>
+      <div class="kpi-tile"><div class="l">CPM</div><div class="v mono">R$ 21,65</div></div>
+      <div class="kpi-tile"><div class="l">Conversas</div><div class="v mono">185</div></div>
+      <div class="kpi-tile"><div class="l">Custo/Conversa</div><div class="v mono">R$ 2,16</div></div>
+      <div class="kpi-tile"><div class="l">Frequência</div><div class="v mono">1,86</div></div>
+    </div>
+
+    <details class="camp" open>
+      <summary class="camp-head">
+        <span class="chip">Conversas no WhatsApp</span><span class="chip">ACTIVE</span>
+        <span class="camp-name">[Assucar] Tráfego Advantage+ Whatsapp</span>
+        <span class="badge good">🟢 Melhorou</span>
+        <svg class="arrow" width="16" height="16" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        <span class="primary-line">Custo/Conversa <b>R$ 2,16</b> (-54,0%) · Conversas <b>185</b> (+340,5%)</span>
+      </summary>
+      <div class="camp-body">
+        <div class="mgrid">
+          <div><div class="m-label">Gasto</div><div class="m-val mono">R$ 400,33</div><div class="m-chg neutral"><span class="arr">▲</span>+102,5%</div><div class="m-ago">Agosto: <b>R$ 197,65</b></div></div>
+          <div><div class="m-label">Impressões</div><div class="m-val mono">18.488</div><div class="m-chg neutral"><span class="arr">▲</span>+163,9%</div><div class="m-ago">Agosto: <b>7.006</b></div></div>
+          <div><div class="m-label">Alcance</div><div class="m-val mono">9.943</div><div class="m-chg neutral"><span class="arr">▲</span>+120,3%</div><div class="m-ago">Agosto: <b>4.513</b></div></div>
+          <div><div class="m-label">Cliques</div><div class="m-val mono">664</div><div class="m-chg up"><span class="arr">▲</span>+233,7%</div><div class="m-ago">Agosto: <b>199</b></div></div>
+          <div><div class="m-label">CTR</div><div class="m-val mono">3,59%</div><div class="m-chg up"><span class="arr">▲</span>+26,4%</div><div class="m-ago">Agosto: <b>2,84%</b></div></div>
+          <div><div class="m-label">CPM</div><div class="m-val mono">R$ 21,65</div><div class="m-chg up"><span class="arr">▼</span>-23,3%</div><div class="m-ago">Agosto: <b>R$ 28,21</b></div></div>
+          <div><div class="m-label">Frequência</div><div class="m-val mono">1,86</div><div class="m-chg down"><span class="arr">▲</span>+19,8%</div><div class="m-ago">Agosto: <b>1,55</b></div></div>
+          <div><div class="m-label">Conversas</div><div class="m-val mono">185</div><div class="m-chg up"><span class="arr">▲</span>+340,5%</div><div class="m-ago">Agosto: <b>42</b></div></div>
+          <div><div class="m-label">Custo por Conversa</div><div class="m-val mono">R$ 2,16</div><div class="m-chg up"><span class="arr">▼</span>-54,0%</div><div class="m-ago">Agosto: <b>R$ 4,71</b></div></div>
+        </div>
+        <div class="block good-b"><span class="lbl">✅ O que melhorou</span>
+          <p>Esse é o primeiro relatório da Atlântico com a gente — até aqui, quem administrava a conta era o Mauro. Comparando setembro com agosto, a campanha melhorou muito: o número de conversas no WhatsApp foi de 42 pra 185 (+340,5%), e o custo por conversa caiu 54%, de R$ 4,71 pra R$ 2,16.</p>
+        </div>
+        <div class="block empty"><span class="lbl">❌ O que não deu certo</span>aguardando o gestor</div>
+        <div class="block fizemos-b"><span class="lbl">🚀 O que fizemos para melhorar</span>
+          <p>A gente retornou agora com uma campanha nova — "[Assucar] [WhatsApp +Vendas] [Bangalôs e Studios]", no ar desde 02/10 — pra ver qual vai ser o resultado. <span class="chip" style="margin-left:4px;">02/10</span></p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============================================================ TRUE CHANGE ============================================================ -->
+  <section class="client-panel" id="p-tc">
+    <p class="client-intro"><b>True Change Tecnologia</b> — SaaS/low-code, perfil Lead. Google Ads 906-358-2846 + Meta Ads act_3203351376597888 (2 centros de custo: True Change BR e Freshworks — nunca somados).</p>
+
+    <input type="radio" name="ch-tc" id="ch-tc-google" class="chtab" checked>
+    <input type="radio" name="ch-tc" id="ch-tc-br" class="chtab">
+    <input type="radio" name="ch-tc" id="ch-tc-fw" class="chtab">
+    <div class="ch-tabs">
+      <label for="ch-tc-google" class="chtab-label">Google Ads</label>
+      <label for="ch-tc-br" class="chtab-label">Meta — True Change BR</label>
+      <label for="ch-tc-fw" class="chtab-label">Meta — Freshworks</label>
+    </div>
+
+    <div class="ch-panel" id="chp-tc-google">
+    <div class="kpi-head">KPIs Overview — Google Ads (Setembro/2026)</div>
+    <div class="kpi-grid">
+      <div class="kpi-tile"><div class="l">Gasto</div><div class="v mono">R$ 6.326,38</div></div>
+      <div class="kpi-tile"><div class="l">Impressões</div><div class="v mono">20.129</div></div>
+      <div class="kpi-tile"><div class="l">Cliques</div><div class="v mono">1.840</div></div>
+      <div class="kpi-tile"><div class="l">CTR</div><div class="v mono">9,14%</div></div>
+      <div class="kpi-tile"><div class="l">Leads</div><div class="v mono">77</div></div>
+      <div class="kpi-tile"><div class="l">Custo/Lead</div><div class="v mono">R$ 82,16</div></div>
+      <div class="kpi-tile"><div class="l">CPA</div><div class="v mono">R$ 82,16</div></div>
+    </div>
+
+    <details class="camp" open>
+      <summary class="camp-head">
+        <span class="chip">Search</span><span class="chip">ENABLED</span>
+        <span class="camp-name">[Assucar] [Search] [Leads] [Max Conv] [BR] - 21/08</span>
+        <span class="badge alert">🔴 Atenção</span>
+        <svg class="arrow" width="16" height="16" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        <span class="primary-line">CPL <b>R$ 68,72</b> (+16,0%) · Leads <b>50</b> (-13,8%)</span>
+      </summary>
+      <div class="camp-body">
+        <div class="mgrid">
+          <div><div class="m-label">Gasto</div><div class="m-val mono">R$ 3.436,11</div><div class="m-chg neutral"><span class="arr">▲</span>+0,02%</div><div class="m-ago">Agosto: <b>R$ 3.435,44</b></div></div>
+          <div><div class="m-label">Impressões</div><div class="m-val mono">7.914</div><div class="m-chg neutral"><span class="arr">▲</span>+10,5%</div><div class="m-ago">Agosto: <b>7.160</b></div></div>
+          <div><div class="m-label">Cliques</div><div class="m-val mono">705</div><div class="m-chg down"><span class="arr">▼</span>-12,7%</div><div class="m-ago">Agosto: <b>808</b></div></div>
+          <div><div class="m-label">CTR</div><div class="m-val mono">8,91%</div><div class="m-chg down"><span class="arr">▼</span>-21,0%</div><div class="m-ago">Agosto: <b>11,28%</b></div></div>
+          <div><div class="m-label">CPC</div><div class="m-val mono">R$ 4,87</div><div class="m-chg down"><span class="arr">▲</span>+14,6%</div><div class="m-ago">Agosto: <b>R$ 4,25</b></div></div>
+          <div><div class="m-label">Leads</div><div class="m-val mono">50</div><div class="m-chg down"><span class="arr">▼</span>-13,8%</div><div class="m-ago">Agosto: <b>58</b></div></div>
+          <div><div class="m-label">Custo por Lead</div><div class="m-val mono">R$ 68,72</div><div class="m-chg down"><span class="arr">▲</span>+16,0%</div><div class="m-ago">Agosto: <b>R$ 59,23</b></div></div>
+        </div>
+        <div class="block empty"><span class="lbl">✅ O que melhorou</span>aguardando o gestor</div>
+        <div class="block alert-b"><span class="lbl">❌ O que não deu certo</span>
+          <p>A campanha teve uma queda significativa esse mês: o custo por lead subiu 16% (R$ 68,72 contra R$ 59,23) e o volume de leads caiu 13,8% (50 contra 58). Ao longo dos últimos dois meses ela vinha se mantendo estável; nesse mês, a queda veio principalmente do CTR menor (−21,0%), de menos cliques (−12,7%) e do CPC maior (+14,6%). Mesmo assim, com 50 leads no mês, ela gerou bons resultados.</p>
+        </div>
+        <div class="block fizemos-b"><span class="lbl">🚀 O que fizemos para melhorar</span>
+          <p>No meio de setembro, a campanha estava com resultado estável em comparação com agosto, por isso não foi diagnosticado nada importante pra otimizar — a mudança foi mais no final do mês.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="camp">
+      <summary class="camp-head">
+        <span class="chip">Lead</span><span class="chip">ENABLED</span>
+        <span class="camp-name">[Assucar] [Lead] [Atualização] 07/04/26</span>
+        <span class="badge good">🟢 Melhorou</span>
+        <svg class="arrow" width="16" height="16" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        <span class="primary-line">CPL <b>R$ 107,05</b> (-47,2%) · Leads <b>27</b> (+80,0%)</span>
+      </summary>
+      <div class="camp-body">
+        <div class="mgrid">
+          <div><div class="m-label">Gasto</div><div class="m-val mono">R$ 2.890,27</div><div class="m-chg neutral"><span class="arr">▼</span>-4,9%</div><div class="m-ago">Agosto: <b>R$ 3.039,19</b></div></div>
+          <div><div class="m-label">Impressões</div><div class="m-val mono">12.215</div><div class="m-chg neutral"><span class="arr">▲</span>+2,3%</div><div class="m-ago">Agosto: <b>11.937</b></div></div>
+          <div><div class="m-label">Cliques</div><div class="m-val mono">1.135</div><div class="m-chg flat"><span class="arr">►</span>-8,6%</div><div class="m-ago">Agosto: <b>1.242</b></div></div>
+          <div><div class="m-label">CTR</div><div class="m-val mono">9,29%</div><div class="m-chg down"><span class="arr">▼</span>-10,7%</div><div class="m-ago">Agosto: <b>10,40%</b></div></div>
+          <div><div class="m-label">CPC</div><div class="m-val mono">R$ 2,55</div><div class="m-chg flat"><span class="arr">►</span>+4,1%</div><div class="m-ago">Agosto: <b>R$ 2,45</b></div></div>
+          <div><div class="m-label">Leads</div><div class="m-val mono">27</div><div class="m-chg up"><span class="arr">▲</span>+80,0%</div><div class="m-ago">Agosto: <b>15</b></div></div>
+          <div><div class="m-label">Custo por Lead</div><div class="m-val mono">R$ 107,05</div><div class="m-chg up"><span class="arr">▼</span>-47,2%</div><div class="m-ago">Agosto: <b>R$ 202,61</b></div></div>
+        </div>
+        <div class="block good-b"><span class="lbl">✅ O que melhorou</span>
+          <p>Essa é a campanha de atualização, e ela melhorou bastante em relação a agosto. É aquilo que a gente tem falado das campanhas do Google: um mês ela vai melhor, outro mês pior. Esse mês ela cresceu 80% no número de leads — de 15 pra 27 — e o custo por lead também caiu consideravelmente: fechou a média de R$ 107,05 (contra R$ 202,61 em agosto). Então sim, ela teve muitos pontos positivos.</p>
+        </div>
+        <div class="block empty"><span class="lbl">❌ O que não deu certo</span>aguardando o gestor</div>
+        <div class="block fizemos-b"><span class="lbl">🚀 O que fizemos para melhorar</span>
+          <p>Negativação de palavras-chave que estavam desalinhadas, identificadas via termos de pesquisa, e melhoria na pontuação de otimização da campanha.</p>
+        </div>
+      </div>
+    </details>
+    </div>
+
+    <div class="ch-panel" id="chp-tc-br">
+    <div class="kpi-head">KPIs Overview — Meta / True Change BR (Setembro/2026)</div>
+    <div class="kpi-grid">
+      <div class="kpi-tile"><div class="l">Gasto</div><div class="v mono">R$ 3.913,78</div></div>
+      <div class="kpi-tile"><div class="l">Impressões</div><div class="v mono">9.716</div></div>
+      <div class="kpi-tile"><div class="l">Cliques</div><div class="v mono">1.036</div></div>
+      <div class="kpi-tile"><div class="l">CTR</div><div class="v mono">10,66%</div></div>
+      <div class="kpi-tile"><div class="l">Leads</div><div class="v mono">18</div></div>
+      <div class="kpi-tile"><div class="l">Custo/Lead</div><div class="v mono">R$ 217,43</div></div>
+      <div class="kpi-tile"><div class="l">Frequência</div><div class="v mono">1,78</div></div>
+      <div class="kpi-tile"><div class="l">Engaj. publicação</div><div class="v mono">1.322</div></div>
+      <div class="kpi-tile"><div class="l">Visitas no site</div><div class="v mono">363</div></div>
+    </div>
+
+    <details class="camp" open>
+      <summary class="camp-head">
+        <span class="chip">Lead</span><span class="chip">ACTIVE</span>
+        <span class="camp-name">[Assucar] [Lead] [Lp] Teste Andromeda 23/06/26</span>
+        <span class="badge alert">🔴 Atenção</span>
+        <svg class="arrow" width="16" height="16" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        <span class="primary-line">CPL <b>R$ 217,43</b> (+20,2%) · Leads <b>18</b> (-21,7%)</span>
+      </summary>
+      <div class="camp-body">
+        <div class="mgrid">
+          <div><div class="m-label">Gasto</div><div class="m-val mono">R$ 3.913,78</div><div class="m-chg neutral"><span class="arr">▼</span>-5,9%</div><div class="m-ago">Agosto: <b>R$ 4.161,32</b></div></div>
+          <div><div class="m-label">Impressões</div><div class="m-val mono">9.716</div><div class="m-chg neutral"><span class="arr">▼</span>-30,4%</div><div class="m-ago">Agosto: <b>13.956</b></div></div>
+          <div><div class="m-label">Cliques</div><div class="m-val mono">1.036</div><div class="m-chg flat"><span class="arr">►</span>+12,9%</div><div class="m-ago">Agosto: <b>918</b></div></div>
+          <div><div class="m-label">CTR</div><div class="m-val mono">10,66%</div><div class="m-chg up"><span class="arr">▲</span>+62,1%</div><div class="m-ago">Agosto: <b>6,58%</b></div></div>
+          <div><div class="m-label">CPC</div><div class="m-val mono">R$ 3,78</div><div class="m-chg up"><span class="arr">▼</span>-16,6%</div><div class="m-ago">Agosto: <b>R$ 4,53</b></div></div>
+          <div><div class="m-label">Frequência</div><div class="m-val mono">1,78</div><div class="m-chg up"><span class="arr">▼</span>-30,9%</div><div class="m-ago">Agosto: <b>2,58</b></div></div>
+          <div><div class="m-label">Leads</div><div class="m-val mono">18</div><div class="m-chg down"><span class="arr">▼</span>-21,7%</div><div class="m-ago">Agosto: <b>23</b></div></div>
+          <div><div class="m-label">Custo por Lead</div><div class="m-val mono">R$ 217,43</div><div class="m-chg down"><span class="arr">▲</span>+20,2%</div><div class="m-ago">Agosto: <b>R$ 180,93</b></div></div>
+        </div>
+        <div class="block empty"><span class="lbl">✅ O que melhorou</span>aguardando o gestor</div>
+        <div class="block alert-b"><span class="lbl">❌ O que não deu certo</span>
+          <p>Os leads caíram de 23 pra 18 em relação a agosto (−21,7%), e o custo por lead subiu 20,2% (R$ 217,43 contra R$ 180,93). Essa campanha sempre teve altos e baixos nos últimos três meses — um mês bom, outro mês ruim — e isso está muito ligado aos criativos. A gente já diversificou os criativos, mas precisa também de criativos em vídeo pra continuar testando.</p>
+        </div>
+        <div class="block fizemos-b"><span class="lbl">🚀 O que fizemos para melhorar</span>
+          <p>Desativado o anúncio <b>img - end-to-end</b>, que consumiu R$ 395,70 no período sem gerar nenhum lead. <span class="chip" style="margin-left:4px;">16/09</span></p>
+        </div>
+      </div>
+    </details>
+    </div>
+
+    <div class="ch-panel" id="chp-tc-fw">
+    <div class="kpi-head">KPIs Overview — Meta / Freshworks (Setembro/2026)</div>
+    <div class="kpi-grid">
+      <div class="kpi-tile"><div class="l">Gasto</div><div class="v mono">R$ 2.985,39</div></div>
+      <div class="kpi-tile"><div class="l">Impressões</div><div class="v mono">10.574</div></div>
+      <div class="kpi-tile"><div class="l">Cliques</div><div class="v mono">672</div></div>
+      <div class="kpi-tile"><div class="l">CTR</div><div class="v mono">6,36%</div></div>
+      <div class="kpi-tile"><div class="l">Leads</div><div class="v mono">18</div></div>
+      <div class="kpi-tile"><div class="l">Custo/Lead</div><div class="v mono">R$ 165,86</div></div>
+      <div class="kpi-tile"><div class="l">Frequência</div><div class="v mono">1,90</div></div>
+      <div class="kpi-tile"><div class="l">Engaj. publicação</div><div class="v mono">911</div></div>
+      <div class="kpi-tile"><div class="l">Visitas no site</div><div class="v mono">181</div></div>
+    </div>
+
+    <details class="camp" open>
+      <summary class="camp-head">
+        <span class="chip">Lead</span><span class="chip">ACTIVE</span>
+        <span class="camp-name">[Assucar] [Freshworks] [Lead Lp] - 12/03/26</span>
+        <span class="badge good">🟢 Melhorou</span>
+        <svg class="arrow" width="16" height="16" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        <span class="primary-line">CPL <b>R$ 165,86</b> (-52,1%) · Leads <b>18</b> (+100,0%)</span>
+      </summary>
+      <div class="camp-body">
+        <div class="mgrid">
+          <div><div class="m-label">Gasto</div><div class="m-val mono">R$ 2.985,39</div><div class="m-chg neutral"><span class="arr">▼</span>-4,2%</div><div class="m-ago">Agosto: <b>R$ 3.117,47</b></div></div>
+          <div><div class="m-label">Impressões</div><div class="m-val mono">10.574</div><div class="m-chg neutral"><span class="arr">▼</span>-22,3%</div><div class="m-ago">Agosto: <b>13.609</b></div></div>
+          <div><div class="m-label">Cliques</div><div class="m-val mono">672</div><div class="m-chg up"><span class="arr">▲</span>+18,3%</div><div class="m-ago">Agosto: <b>568</b></div></div>
+          <div><div class="m-label">CTR</div><div class="m-val mono">6,36%</div><div class="m-chg up"><span class="arr">▲</span>+52,3%</div><div class="m-ago">Agosto: <b>4,17%</b></div></div>
+          <div><div class="m-label">CPC</div><div class="m-val mono">R$ 4,44</div><div class="m-chg up"><span class="arr">▼</span>-19,1%</div><div class="m-ago">Agosto: <b>R$ 5,49</b></div></div>
+          <div><div class="m-label">Frequência</div><div class="m-val mono">1,90</div><div class="m-chg up"><span class="arr">▼</span>-19,7%</div><div class="m-ago">Agosto: <b>2,37</b></div></div>
+          <div><div class="m-label">Leads</div><div class="m-val mono">18</div><div class="m-chg up"><span class="arr">▲</span>+100,0%</div><div class="m-ago">Agosto: <b>9</b></div></div>
+          <div><div class="m-label">Custo por Lead</div><div class="m-val mono">R$ 165,86</div><div class="m-chg up"><span class="arr">▼</span>-52,1%</div><div class="m-ago">Agosto: <b>R$ 346,39</b></div></div>
+        </div>
+        <div class="block good-b"><span class="lbl">✅ O que melhorou</span>
+          <p>Essa campanha passou um bom tempo com dificuldade de performar, e nesse mês teve um desempenho excelente — magnífico. Todas as métricas foram positivas: cliques (+18,3%), CTR (+52,3%), CPC (−19,1%) e frequência melhoraram. Os leads cresceram 100% — de 9 em agosto pra 18 em setembro — e o custo por lead caiu 52,1%, de R$ 346,39 pra R$ 165,86. <b>Vale ressaltar: é o custo por lead mais barato dos últimos três meses e de todo o histórico da campanha, desde março.</b></p>
+        </div>
+        <div class="block empty"><span class="lbl">❌ O que não deu certo</span>aguardando o gestor</div>
+        <div class="block fizemos-b"><span class="lbl">🚀 O que fizemos para melhorar</span>
+          <p>Nenhuma alteração estrutural. Escala do criativo <b>Img6 - implante Freshworks com a truechange</b>, que passou a concentrar a entrega do conjunto. Próximo passo definido: testar vídeos e motions. <span class="chip" style="margin-left:4px;">16/09</span></p>
+        </div>
+      </div>
+    </details>
+    </div>
+  </section>
+  </div>
+
+  <footer class="foot">
+    <p>Todo número desta página foi puxado ao vivo via API direta em 05/10/2026 — Google Ads via GAQL direto, Meta via Graph API direta. Gasto conferido batendo exatamente com o total de conta em cada plataforma. Nada foi estimado, arredondado por conveniência ou reaproveitado de relatório publicado anteriormente.</p>
+    <p style="margin-top:8px;">Publicado em: plusdigitalagencia-web/google-ads-agent-azel → docs/ASSUCAR/Relatorios/Setembro/ (público, GitHub Pages).</p>
+  </footer>
+</div>
+
+
+</body>
+</html>
