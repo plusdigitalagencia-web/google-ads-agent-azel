@@ -1,0 +1,438 @@
+{
+  "periodo": "01/10/2026 a 25/10/2026",
+  "total_leads": 232,
+  "origem_distribution": {
+    "Sem Rastreio": 120,
+    "Meta Ads": 100,
+    "Google Ads": 11,
+    "Orgânico": 1
+  },
+  "status_distribution": {
+    "Novo Lead": 10,
+    "Finalizado - Perdido": 163,
+    "Contato Iniciado": 5,
+    "Qualificação": 3,
+    "Finalizado - Convertido": 49,
+    "Negociação": 2
+  },
+  "daily_series": [
+    {
+      "day": "01/10/2026",
+      "Sem Rastreio": 15,
+      "Meta Ads": 1,
+      "Google Ads": 1,
+      "Orgânico": 0,
+      "Outro": 0
+    },
+    {
+      "day": "02/10/2026",
+      "Sem Rastreio": 6,
+      "Meta Ads": 2,
+      "Google Ads": 0,
+      "Orgânico": 0,
+      "Outro": 0
+    },
+    {
+      "day": "03/10/2026",
+      "Sem Rastreio": 2,
+      "Meta Ads": 6,
+      "Google Ads": 0,
+      "Orgânico": 0,
+      "Outro": 0
+    },
+    {
+      "day": "04/10/2026",
+      "Sem Rastreio": 0,
+      "Meta Ads": 0,
+      "Google Ads": 0,
+      "Orgânico": 0,
+      "Outro": 0
+    },
+    {
+      "day": "05/10/2026",
+      "Sem Rastreio": 12,
+      "Meta Ads": 5,
+      "Google Ads": 0,
+      "Orgânico": 0,
+      "Outro": 0
+    },
+    {
+      "day": "06/10/2026",
+      "Sem Rastreio": 10,
+      "Meta Ads": 5,
+      "Google Ads": 0,
+      "Orgânico": 0,
+      "Outro": 0
+    },
+    {
+      "day": "07/10/2026",
+      "Sem Rastreio": 4,
+      "Meta Ads": 9,
+      "Google Ads": 0,
+      "Orgânico": 0,
+      "Outro": 0
+    },
+    {
+      "day": "08/10/2026",
+      "Sem Rastreio": 1,
+      "Meta Ads": 4,
+      "Google Ads": 0,
+      "Orgânico": 1,
+      "Outro": 0
+    },
+    {
+      "day": "09/10/2026",
+      "Sem Rastreio": 3,
+      "Meta Ads": 2,
+      "Google Ads": 0,
+      "Orgânico": 0,
+      "Outro": 0
+    },
+    {
+      "day": "10/10/2026",
+      "Sem Rastreio": 1,
+      "Meta Ads": 0,
+      "Google Ads": 0,
+      "Orgânico": 0,
+      "Outro": 0
+    },
+    {
+      "day": "11/10/2026",
+      "Sem Rastreio": 0,
+      "Meta Ads": 6,
+      "Google Ads": 0,
+      "Orgânico": 0,
+      "Outro": 0
+    },
+    {
+      "day": "12/10/2026",
+      "Sem Rastreio": 0,
+      "Meta Ads": 3,
+      "Google Ads": 0,
+      "Orgânico": 0,
+      "Outro": 0
+    },
+    {
+      "day": "13/10/2026",
+      "Sem Rastreio": 6,
+      "Meta Ads": 2,
+      "Google Ads": 0,
+      "Orgânico": 0,
+      "Outro": 0
+    },
+    {
+      "day": "14/10/2026",
+      "Sem Rastreio": 3,
+      "Meta Ads": 5,
+      "Google Ads": 0,
+      "Orgânico": 0,
+      "Outro": 0
+    },
+    {
+      "day": "15/10/2026",
+      "Sem Rastreio": 5,
+      "Meta Ads": 4,
+      "Google Ads": 0,
+      "Orgânico": 0,
+      "Outro": 0
+    },
+    {
+      "day": "16/10/2026",
+      "Sem Rastreio": 3,
+      "Meta Ads": 3,
+      "Google Ads": 0,
+      "Orgânico": 0,
+      "Outro": 0
+    },
+    {
+      "day": "17/10/2026",
+      "Sem Rastreio": 1,
+      "Meta Ads": 4,
+      "Google Ads": 0,
+      "Orgânico": 0,
+      "Outro": 0
+    },
+    {
+      "day": "18/10/2026",
+      "Sem Rastreio": 0,
+      "Meta Ads": 5,
+      "Google Ads": 0,
+      "Orgânico": 0,
+      "Outro": 0
+    },
+    {
+      "day": "19/10/2026",
+      "Sem Rastreio": 11,
+      "Meta Ads": 4,
+      "Google Ads": 3,
+      "Orgânico": 0,
+      "Outro": 0
+    },
+    {
+      "day": "20/10/2026",
+      "Sem Rastreio": 11,
+      "Meta Ads": 8,
+      "Google Ads": 1,
+      "Orgânico": 0,
+      "Outro": 0
+    },
+    {
+      "day": "21/10/2026",
+      "Sem Rastreio": 9,
+      "Meta Ads": 7,
+      "Google Ads": 2,
+      "Orgânico": 0,
+      "Outro": 0
+    },
+    {
+      "day": "22/10/2026",
+      "Sem Rastreio": 5,
+      "Meta Ads": 6,
+      "Google Ads": 3,
+      "Orgânico": 0,
+      "Outro": 0
+    },
+    {
+      "day": "23/10/2026",
+      "Sem Rastreio": 2,
+      "Meta Ads": 2,
+      "Google Ads": 1,
+      "Orgânico": 0,
+      "Outro": 0
+    },
+    {
+      "day": "24/10/2026",
+      "Sem Rastreio": 5,
+      "Meta Ads": 6,
+      "Google Ads": 0,
+      "Orgânico": 0,
+      "Outro": 0
+    },
+    {
+      "day": "25/10/2026",
+      "Sem Rastreio": 5,
+      "Meta Ads": 1,
+      "Google Ads": 0,
+      "Orgânico": 0,
+      "Outro": 0
+    }
+  ],
+  "campanha_rank": [
+    {
+      "name": "[Plus] [Engajamento] [WPP] [Novos Criativos] - 31/08/26",
+      "leads": 56,
+      "convertidos": 2
+    },
+    {
+      "name": "[Plus] [Engajamento] [Wpp] [Vídeos Ytb] - 03/09/26",
+      "leads": 40,
+      "convertidos": 2
+    },
+    {
+      "name": "(vazio)",
+      "leads": 3,
+      "convertidos": 1
+    },
+    {
+      "name": "Post do Instagram: OSTEOTOMIA: QUANDO ESSE...",
+      "leads": 1,
+      "convertidos": 0
+    }
+  ],
+  "conjunto_rank": [
+    {
+      "name": "02 - Brasília",
+      "leads": 56,
+      "convertidos": 2
+    },
+    {
+      "name": "Adv_Brasília_vídeos_youtube_vds3-4",
+      "leads": 29,
+      "convertidos": 0
+    },
+    {
+      "name": "Adv_Brasília_vídeos_youtube_vds1-2",
+      "leads": 11,
+      "convertidos": 2
+    },
+    {
+      "name": "(vazio)",
+      "leads": 3,
+      "convertidos": 1
+    },
+    {
+      "name": "Post do Instagram: OSTEOTOMIA: QUANDO ESSE...",
+      "leads": 1,
+      "convertidos": 0
+    }
+  ],
+  "anuncio_rank": [
+    {
+      "name": "vd - muita dor no joelho",
+      "leads": 31,
+      "convertidos": 1
+    },
+    {
+      "name": "vd_acido_hialuronico",
+      "leads": 29,
+      "convertidos": 0
+    },
+    {
+      "name": "Img4-Sua dor no joelho não pode",
+      "leads": 18,
+      "convertidos": 1
+    },
+    {
+      "name": "vd_fracasso_sucesso",
+      "leads": 6,
+      "convertidos": 2
+    },
+    {
+      "name": "vd_sua_patela_saiu_do_lugar",
+      "leads": 5,
+      "convertidos": 0
+    },
+    {
+      "name": "Img3 - Especialista em Joelho",
+      "leads": 5,
+      "convertidos": 0
+    },
+    {
+      "name": "(vazio)",
+      "leads": 3,
+      "convertidos": 1
+    },
+    {
+      "name": "Img2-Cuide do seu joelho",
+      "leads": 2,
+      "convertidos": 0
+    },
+    {
+      "name": "Post do Instagram: OSTEOTOMIA: QUANDO ESSE...",
+      "leads": 1,
+      "convertidos": 0
+    }
+  ],
+  "keyword_rank": [
+    {
+      "name": "consulta ortopedista",
+      "leads": 6,
+      "convertidos": 0
+    },
+    {
+      "name": "ortopedista asa sul",
+      "leads": 5,
+      "convertidos": 0
+    }
+  ],
+  "google_campaign_rank": [
+    {
+      "name": "22597376374",
+      "leads": 11,
+      "convertidos": 0
+    }
+  ],
+  "ad_creatives": {
+    "vd_sua_patela_saiu_do_lugar": "ads/vd_sua_patela_saiu_do_lugar.png",
+    "Post do Instagram: OSTEOTOMIA: QUANDO ESSE...": "ads/Post_do_Instagram__OSTEOTOMIA__QUANDO_ESSE___.png",
+    "vd - muita dor no joelho": "ads/vd___muita_dor_no_joelho.png",
+    "vd_acido_hialuronico": "ads/vd_acido_hialuronico.png",
+    "Img3 - Especialista em Joelho": "ads/Img3___Especialista_em_Joelho.png",
+    "vd_fracasso_sucesso": "ads/vd_fracasso_sucesso.png",
+    "Img4-Sua dor no joelho não pode": "ads/Img4_Sua_dor_no_joelho_não_pode.png",
+    "Img2-Cuide do seu joelho": "ads/Img2_Cuide_do_seu_joelho.png"
+  },
+  "perda_analise": {
+    "total_perdidos": 163,
+    "motivos": [
+      {
+        "categoria": "Sumiu sem dizer motivo",
+        "qtd": 88,
+        "pct": 54.0
+      },
+      {
+        "categoria": "Queria usar convênio não aceito",
+        "qtd": 39,
+        "pct": 23.9
+      },
+      {
+        "categoria": "Já virou paciente / teve consulta ou cirurgia marcada",
+        "qtd": 12,
+        "pct": 7.4
+      },
+      {
+        "categoria": "Não deu pra identificar",
+        "qtd": 9,
+        "pct": 5.5
+      },
+      {
+        "categoria": "Distância — não quer/não dá teleconsulta",
+        "qtd": 4,
+        "pct": 2.5
+      },
+      {
+        "categoria": "Fora do escopo (não é joelho / criança)",
+        "qtd": 4,
+        "pct": 2.5
+      },
+      {
+        "categoria": "Não é lead — conversa interna (hospital/convênio)",
+        "qtd": 3,
+        "pct": 1.8
+      },
+      {
+        "categoria": "Disse não ter condições de pagar",
+        "qtd": 2,
+        "pct": 1.2
+      },
+      {
+        "categoria": "Não era paciente (prospecção/spam)",
+        "qtd": 2,
+        "pct": 1.2
+      }
+    ],
+    "ghost_detalhe": {
+      "total": 88,
+      "itens": [
+        {
+          "n": 30,
+          "l": "só mandaram o texto padrão do botão do anúncio (\"Posso ter mais informações sobre isso?\") e nunca mais responderam nada — não é desistência, é quase-robô: clicou no anúncio e não engajou de verdade"
+        },
+        {
+          "n": 18,
+          "l": "receberam o valor da consulta (R$ 600,00) e mesmo assim sumiram — provável objeção de preço não verbalizada"
+        },
+        {
+          "n": 40,
+          "l": "sumiram em outro ponto da conversa, sem padrão único identificado"
+        }
+      ]
+    },
+    "ja_paciente_detalhe": {
+      "qtd": 12,
+      "nota": "Consultas confirmadas, remarcadas ou até cirurgia em andamento (autorização de convênio, agendamento no hospital) — o CRM marcou como \"perdido\" por inatividade da conversa, não porque o paciente desistiu. O número real de leads perdidos é 151, não 163."
+    },
+    "exemplos_anonimos": [
+      {
+        "categoria": "Queria usar convênio não aceito",
+        "texto": "Aceita Porto Seguro?"
+      },
+      {
+        "categoria": "Queria usar convênio não aceito",
+        "texto": "Tudo certo. Quanto é a consulta no particular? — (perguntou só depois de saber que o convênio não era aceito)"
+      },
+      {
+        "categoria": "Disse não ter condições de pagar",
+        "texto": "Uma consulta online por este valor é muito mas muito caro. Agradeço, vou para o SUS mesmo."
+      },
+      {
+        "categoria": "Distância — não quer/não dá teleconsulta",
+        "texto": "Moro em Palmas... não vale a pena, 3 condições de ir pra aí eu não tenho."
+      },
+      {
+        "categoria": "Sumiu sem dizer motivo",
+        "texto": "Olá! Posso ter mais informações sobre isso? (e nunca mais respondeu nada — texto padrão do botão do anúncio)"
+      }
+    ]
+  }
+}
