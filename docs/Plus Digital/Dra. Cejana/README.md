@@ -18,6 +18,7 @@ Relatórios de diagnóstico de campanhas da Dra. Cejana Hamu (Endocrinologista),
 
 | Mês | Relatórios |
 |---|---|
+| **Outubro/2026** (01–25) | [Origem dos leads no WhatsApp + diagnóstico de perdidos →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Plus%20Digital/Dra.%20Cejana/Leaper/Outubro%202026/origem-leads-outubro-26.html) |
 | **Julho/2026** | [Origem dos leads no WhatsApp →](https://plusdigitalagencia-web.github.io/google-ads-agent-azel/Plus%20Digital/Dra.%20Cejana/Leaper/Julho%202026/origem-leads-julho-26.html) |
 
 ---
